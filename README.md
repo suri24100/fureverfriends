@@ -1,4 +1,4 @@
-# FureverFriends
+# Furever Friends
 
 Furever Friends is a web application built to help match people with their perfect pets. Browse local listings for the pets that are available, list pets that need to find their furever friends, and take the personality quiz to find the pets that best match your personality and lifestyle. 
 
