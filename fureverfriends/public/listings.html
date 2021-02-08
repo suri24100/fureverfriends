@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listings</title>
+    <script src="home.js"></script>
+    <link rel="stylesheet" href="listings.css">
+
+    <!--jQuery-->
+    <script
+        src="http://code.jquery.com/jquery-3.5.1.min.js"
+        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+        crossorigin="anonymous"></script>
+    <!-- link header.html and footer.html -->
+    <script>
+        $.ajax({
+            url: 'header.html',
+            dataType: 'html',
+            success: function(html) { $('#header').html(html); }
+        });
+        $.ajax({
+            url: 'footer.html',
+            dataType: 'html',
+            success: function(html) { $('#footer').html(html); }
+        });
+    </script>
+
+</head>
+<body>
+    <div class="banner-wrap">
+        <div id="header" class="header"></div>
+        <div class="banner-img-wrap">
+            <!--<img class="banner-img" src="listings-banner.png"> -->
+        </div>
+        <div class="heading">
+            <span>Listing your potential new friend</span>
+        </div>
+        <div class="subheading">
+            <span>Filter below for better results!</span>
+        </div>
+    </div>
+
+    <div class="additional-filters-wrap">
+        <div class="top">
+            <div class="heading">
+                <h3>Additional Filters</h3>
+            </div>
+            <div class="apply-btn-wrap default">
+                <button class="apply-btn"><span>Apply Filters</span></button>
+            </div>
+        </div>
+        <div class="forms">
+        <div class="row1">
+            <form action="#" method="post" class="search-form" id="search-form">
+                <div class="wrap">
+                <label for="type-of-pet">Type of Pet:</label>
+                <select id="type-of-pet" name="type-of-pet" onchange="populate(this.id,'breed')">
+                    <option value=""></option>
+                    <option value="Cat">Cat</option>
+                    <option value="Dog">Dog</option>
+                    <option value="HamsterGuinea">Small Furbabies</option>
+                    <option value="Rabbit">Rabbit</option>
+                    <option value="Fish">Fish</option>
+                    <option value="ReptileAmphibians">Reptile & Amphibian</option>
+                    <option value="Bird">Bird</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+                
+                <div class="wrap">
+                  <label for="age">Age:</label>
+                  <select id="age" name="age">
+                    <option value="No Preference">No Preference</option>
+                    <option value="Young">Young</option>
+                    <option value="Teen">Teen</option>
+                    <option value="Adult">Adult</option>
+                  </select>
+                </div>
+
+                <div class="wrap">
+                  <label for="breed">Breed:</label>
+                  <select id="breed" name="breed" class="breed">
+                    <!-- populated using JavaScript -->
+                  </select>
+                </div>
+
+                <div class="wrap">
+                  <label for="zip-code">Zip Code:</label>
+                  <input type="number" id="zip-code" name="zip-code" class="zip-code">
+                </div>
+
+                <div class="wrap">
+                  <label for="distance">Distance:</label>
+                  <select id="distance" name="distance">
+                    <option value="25 miles">25 miles</option>
+                    <option value="50 miles">50 miles</option>
+                    <option value="100 miles">100 miles</option>
+                  </select>
+                </div>
+            </form>
+        </div>
+        <div class="row2">
+            <form class="row2form">
+                <div class="wrap">
+                <label for="gender">Gender:</label>
+                <select id="gender" name="gender">
+                    <option value="No Preference">No Preference</option>
+                    <option value="Female">Female</option>
+                    <option value="Male">Male</option>
+                </select>
+            </div>
+
+            <div class="wrap">
+                <label for="fur length">Fur Length:</label>
+                <select id="fur length" name="fur length">
+                    <option value="No Preference">No Preference</option>
+                    <option value="Short Hair">Short Hair</option>
+                    <option value="Medium Hair">Medium Hair</option>
+                    <option value="Long Hair">Long Hair</option>
+                </select>
+            </div>
+
+            <div class="wrap">
+                <label for="caregiver">Current Caregiver:</label>
+                <select id="caregiver" name="caregiver">
+                    <option value="No Preference">No Preference</option>
+                    <option value="Private Owner">Private Owner</option>
+                    <option value="Rescue/Shelter">Rescue/Shelter</option>
+                </select>
+            </div>
+
+            <div class="wrap">
+                <label for="personality">Personality:</label>
+                <select id="personality" name="personality">
+                    <option value="No Preference">No Preference</option>
+                    <option value="Social">Social</option>
+                    <option value="Independent">Independent</option>
+                    <option value="Talkative">Talkative</option>
+                    <option value="Quiet">Quit</option>
+                    <option value="Playful">Playful</option>
+                    <option value="Shy">Shy</option>
+                    <option value="Adaptable">Adaptable</option>
+                </select>
+            </div>
+            </form>
+        </div>
+
+        <div class="row3">
+            <div class="wrap">
+            <input type="checkbox" id="good with other pets" name="good with other pets" value="good with other pets">
+            <label for="good with other pets"> Good with other pets</label>
+        </div>
+        <div class="wrap">
+            <input type="checkbox" id="kid friendly" name="kid friendly" value="kid friendly">
+            <label for="kid friendly"> Kid Friendly</label>
+        </div>
+        <div class="wrap">
+            <input type="checkbox" id="vaccinated" name="vaccinated" value="vaccinated">
+            <label for="vaccinated"> Vaccinated</label>
+        </div>
+        <div class="wrap">
+            <input type="checkbox" id="neutered/spayed" name="neutered/spayed" value="neutered/spayed">
+            <label for="neutered/spayed">Neutered/Spayed</label>
+        </div>
+        <div class="wrap">
+            <input type="checkbox" id="bonded pair" name="bonded pair" value="bonded pair">
+            <label for="bonded pair">Bonded Pair</label>
+        </div>
+        <div class="wrap">
+            <input type="checkbox" id="allergy friendly" name="allergy friendly" value="allergy friendly">
+            <label for="allergy friendly">Allergy Friendly</label>
+        </div>
+        </div>
+        </div>
+    </div>
+    <hr class="line-break">
+    <div class="results-wrap">
+        <div class="sort-wrap">
+            <form class="sort-by-form">
+                <label for="caregiver">Sort By:</label>
+                <select id="caregiver" name="caregiver">
+                    <option value="Newest">Newest</option>
+                    <option value="Oldest">Oldest</option>
+                    <option value="Adoption Fee (asc)">Adoption Fee (asc)</option>
+                    <option value="Adoption Fee (desc)">Adoption Fee (desc)</option>
+                </select>
+            </form>
+        </div>
+        <div class="results-grid-container">
+            <div class="pet-container">
+                <div class="overlay"></div>
+                <div class="button"><a href="petprofileadopter.html"> View Profile </a></div>
+                <div class="img-wrap">
+                    <img src="/images/petProfiles/FinnProfile.png">
+                </div>
+                <div class="info-wrap">
+                    <a class="name">Finn</a>
+                    <a>Mechanicsburg, PA</a>
+                </div>
+            </div>
+
+            <div class="pet-container">
+                <div class="overlay"></div>
+                <div class="button"><a href="petprofileadopter.html"> View Profile </a></div>
+                <div class="img-wrap">
+                    <img src="/images/petProfiles/DustyProfile.png">
+                </div>
+                <div class="info-wrap">
+                    <a class="name">Dusty</a>
+                    <a>Mechanicsburg, PA</a>
+                </div>
+            </div>
+
+            <div class="pet-container">
+                <div class="overlay"></div>
+                <div class="button"><a href="petprofileadopter.html"> View Profile </a></div>
+                <div class="img-wrap">
+                    <img src="/images/petProfiles/EmilyProfile.png">
+                </div>
+                <div class="info-wrap">
+                    <a class="name">Emily</a>
+                    <a>Camp Hill, PA</a>
+                </div>
+            </div>
+
+            <div class="pet-container">
+                <div class="overlay"></div>
+                <div class="button"><a href="petprofileadopter.html"> View Profile </a></div>
+                <div class="img-wrap">
+                    <img src="/images/petProfiles/MikeyProfile.png">
+                </div>
+                <div class="info-wrap">
+                    <a class="name">Mikey</a>
+                    <a>Carlisle, PA</a>
+                </div>
+            </div>
+
+            <div class="pet-container">
+                <div class="overlay"></div>
+                <div class="button"><a href="petprofileadopter.html"> View Profile </a></div>
+                <div class="img-wrap">
+                    <img src="/images/petProfiles/TaitoProfile.png">
+                </div>
+                <div class="info-wrap">
+                    <a class="name">Taito</a>
+                    <a>Harrisburg, PA</a>
+                </div>
+            </div>
+
+            <div class="pet-container">
+                <div class="overlay"></div>
+                <div class="button"><a href="petprofileadopter.html"> View Profile </a></div>
+                <div class="img-wrap">
+                    <img src="/images/petProfiles/MariposaProfile.png">
+                </div>
+                <div class="info-wrap">
+                    <a class="name">Mariposa</a>
+                    <a>Harrisburg, PA</a>
+                </div>
+            </div>
+
+            <div class="pet-container">
+                <div class="overlay"></div>
+                <div class="button"><a href="petprofileadopter.html"> View Profile </a></div>
+                <div class="img-wrap">
+                    <img src="/images/petProfiles/ElvisProfile.png">
+                </div>
+                <div class="info-wrap">
+                    <a class="name">Elvis</a>
+                    <a>York, PA</a>
+                </div>
+            </div>
+
+            <div class="pet-container">
+                <div class="overlay"></div>
+                <div class="button"><a href="petprofileadopter.html"> View Profile </a></div>
+                <div class="img-wrap">
+                    <img src="/images/petProfiles/RiddleProfile.png">
+                </div>
+                <div class="info-wrap">
+                    <a class="name">Riddle</a>
+                    <a>York, PA</a>
+                </div>
+            </div>
+
+            <div class="pet-container">
+                <div class="overlay"></div>
+                <div class="button"><a href="petprofileadopter.html"> View Profile </a></div>
+                <div class="img-wrap">
+                    <img src="/images/petProfiles/RudyProfile.png">
+                </div>
+                <div class="info-wrap">
+                    <a class="name">Rudy</a>
+                    <a>Mechanicsburg, PA</a>
+                </div>
+            </div>
+
+            <div class="pet-container">
+                <div class="overlay"></div>
+                <div class="button"><a href="petprofileadopter.html"> View Profile </a></div>
+                <div class="img-wrap">
+                    <img src="/images/petProfiles/HugoProfile.jpg" class="hugo">
+                </div>
+                <div class="info-wrap">
+                    <a class="name">Hugo</a>
+                    <a>Middletown, PA</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="footer"></div>
+</body>
+<script type="text/javascript" src="home.js">
+</script>
+</html>
