@@ -5,36 +5,19 @@
     <title>Pet Profile</title>
     <!-- need to import navbar-->
     <link rel = "stylesheet" href="stylesheet.css">
-    <style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-        .actionlist{
-            columns:2;
-            -webkit-columns:2;
-            -moz-columns:2;
-        }
-
-        /*.section3{*/
-        /*    columns:2;*/
-        /*    -webkit-columns:2;*/
-        /*    -moz-columns:2;*/
-        /*}*/
-        .titles{
-            columns:2;
-            -webkit-columns:2;
-            -moz-columns:2;
-            display: inline-flex;
-        }
-    </style>
 </head>
 
 <body>
 <nav>
     <div class="navbar" id="navigation">
-        <a href="#"> HOME </a>
-        <a href="#"> ADPOT </a>
-        <a href="#"> REHOME </a>
-        <a href="#"> PETCARE </a>
+        <a href = "#" style="float: left"> FUREVER FRIENDS</a>
         <a href="#"> LOGIN </a>
+        <a href="#"> PETCARE </a>
+        <a href="#"> REHOME </a>
+        <a href="#"> ADPOT </a>
+        <a href="#"> HOME </a>
     </div>
 </nav>
 
@@ -146,6 +129,22 @@
             <ul><label>ZIP CODE:</label>
                 <input type="text" id="zcode" name="zcode">
             </ul>
+
+            <h5> PET Attributes (Check all that apply)</h5>
+            <form action="/action_page">
+                <input type="checkbox" id="Vac">
+                <label for="Vac"> Vaccinated</label><br>
+                <input type="checkbox" id="Net">
+                <label for="Net"> Neutered</label><br>
+                <input type="checkbox" id="good">
+                <label for="good"> Good with other pets</label><br>
+                <input type="checkbox" id="Kids">
+                <label for="Kids"> Kid Friendly</label><br>
+                <input type="checkbox" id="allergy">
+                <label for="allergy"> Allergy Friendly</label><br>
+                <input type="checkbox" id="Bonded">
+                <label for="Bonded"> Bonded Pair</label><br>
+            </form>
     </ul>
 
     </div>
@@ -160,7 +159,7 @@ Enter text here...</textarea>
 
 <div class="section3">
     <h3 style="color: #379683; margin-left: 200px"> CONTACT INFORMATION</h3>
-<div class="contactinfo" style="margin-left: 110px; float: left">
+    <div class="contactinfo" style="margin-left: 110px; float: left">
     <ul>
     <ul style="margin-top: 0px;"><label>NAME:</label>
         <input type="text" id="nname" name="fname">
@@ -180,7 +179,7 @@ Enter text here...</textarea>
         <br>
 
     </ul>
-</div>
+    </div>
 
     <div class="rightcolumn"><h3 style="color: #379683;margin-left: 530px "> CONTACT INFORMATION</h3>
         <ul STYLE=" margin-left: 500px ">
@@ -188,8 +187,41 @@ Enter text here...</textarea>
             <input type="text" id="fname" name="fname">
         </ul>
 
-        <button type ="button" style="color: #ffff; background-color: #379683; border-radius: 10px; margin-bottom: 20px; margin-left: 150px " > PUBLISH </button></div>
+        <button type ="button" style="color: #ffff; background-color: #379683; border-radius: 10px; margin-bottom: 20px; margin-left: 120px " > PUBLISH </button>
+    </div>
 
+</div>
+
+<div class="footer" style="margin-top: 100px; width: 100%">
+    <h4 style="text-align: center"> FUREVER FRIENDS </h4>
+   <div class="ft">
+    <div class="column left" style="text-align: left;">
+        <h5 style="text-align: center; "> PETS</h5>
+        <p style="text-align: center"> Find a pet</p>
+        <p style="text-align: center"> Find a home</p>
+        <p style="text-align: center"> Take the quiz</p>
+        <p style="text-align: center"> Lost and Found</p>
+    </div>
+
+    <div class="column middle" style="text-align: center; margin-bottom: 100px;">
+        <h5 style="text-align: center"> INFORMATION </h5>
+        <p style="text-align: center"> About Us</p>
+        <p style="text-align: center"> Contact Us</p>
+        <p style="text-align: center"> Terms and conditions</p>
+        <p style="text-align: center"> Privacy Policy</p>
+
+        <a href="#" style="background: #ffffff; color: #379683; border-radius: 100px" class="fa fa-facebook"></a>
+        <a href="#" class="fa fa-instagram" style="background: #ffffff; color: #379683;border-radius: 100px"></a>
+        <a href="#" class="fa fa-twitter" style="background: #ffffff; color: #379683;border-radius: 100px"></a>
+    </div>
+    <div class="column right" style="text-align: right; margin-right: 50px">
+        <h5 style="text-align: center">USER EXPERIENCE</h5>
+        <p style="text-align: center"> Sign Up</p>
+        <p style="text-align: center"> Log In</p>
+        <p style="text-align: center"> Share your Experience</p>
+        <p style="text-align: center"> News Letter</p>
+    </div>
+   </div>
 
 </div>
 
