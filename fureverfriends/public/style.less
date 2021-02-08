@@ -1,0 +1,107 @@
+body {
+    font-family: 'Calibri';
+}
+
+a {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.hdr-wrap {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 6vw;
+    margin-right: 2vw;
+    background: transparent;
+
+    position: absolute;
+    top: 0%;
+
+    .logo {
+        h2 {
+            font-family: 'Segoe Script';
+            font-size: 3vw;
+            text-align: center;
+            margin: 1vw 0vw .25vw -1vw;
+        }
+    }
+
+    .primary-menu {
+        margin-left: 15vw;
+        a, img {
+            margin: 0 1vw 0 1vw;
+            font-size: 1.5vw;
+            text-transform: uppercase;
+            font-weight: bold;
+            margin-top: 2vw;
+        }
+        img {
+            width: 1.25vw;
+            margin-top: 2vw;
+        }
+        a:hover, a:active {
+            border: 0.20vw solid #ffffff;
+            padding: 0.25vw;
+            cursor: pointer;
+        }
+        img:hover, img:active {
+            cursor: pointer;
+        }
+    }
+}
+
+.ftr-wrap {
+    display: flex;
+    flex-direction: column;
+    color: #ffffff;
+    background-color: #379683;
+    padding-bottom: 2vw;
+    margin-top: -0.25vw;
+    .logo {
+        h2 {
+            font-family: 'Segoe Script';
+            font-size: 3vw;
+            text-align: center;
+            margin: 1vw 0vw -2vw -2vw;
+        }
+    }
+    .footer-menu {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: flex-start;
+
+        .pets-menu, .info-menu, .user-xp-menu {
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            align-items: center;
+            h3 {
+                font-size: 1.5vw;
+                text-transform: uppercase;
+                margin-bottom: .25vw;
+            }
+            a {
+                font-size: 1.1vw;
+                line-height: 1.75vw;
+
+                &:hover {
+                    text-decoration: underline;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+    .social-wrap {
+        display: flex;
+        align-self: center;
+        margin-left: -4vw;
+        img {
+            width: 2.5vw;
+            padding: 0.5vw;
+            color: #ffffff;
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+}

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <script src="home.js"></script>
+    <link rel="stylesheet" href="home.css">
+
+    <!--jQuery-->
+    <script
+        src="http://code.jquery.com/jquery-3.5.1.min.js"
+        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+        crossorigin="anonymous"></script>
+    <!-- link header.html and footer.html -->
+    <script>
+        $.ajax({
+            url: 'header.html',
+            dataType: 'html',
+            success: function(html) { $('#header').html(html); }
+        });
+        $.ajax({
+            url: 'footer.html',
+            dataType: 'html',
+            success: function(html) { $('#footer').html(html); }
+        });
+    </script>
+
+</head>
+<body>
+    <div class="banner-wrap">
+        <div id="header" class="header"></div>
+        <div class="banner-img-wrap">
+            <!--<img class="banner-img" src="home-banner.png">-->
+        </div>
+        <div class="heading">
+            <span>Let us help you find your best friend</span>
+        </div>
+        <div class="subheading">
+            <span>Simply search below or take our quiz</span>
+        </div>
+    </div>
+    <div class="search-or-quiz-wrap">
+        <div class="quiz-wrap">
+            <div class="quiz-img-wrap">
+                <img class="quiz-img" src="\images\Group 78.png">
+            </div>
+            <div class="quiz-button default">
+                <button class="q-btn">Take the quiz</button>
+            </div>
+        </div>
+        <div class="search-wrap">
+            <div class="form-wrap">
+                <form action="#" method="post" class="search-form" id="search-form">
+                    <label for="type-of-pet">Type of Pet</label>
+                    <select id="type-of-pet" name="type-of-pet" onchange="populate(this.id,'breed')">
+                        <option value=""></option>
+                        <option value="Cat">Cat</option>
+                        <option value="Dog">Dog</option>
+                        <option value="HamsterGuinea">Small Furbabies</option>
+                        <option value="Rabbit">Rabbit</option>
+                        <option value="Fish">Fish</option>
+                        <option value="ReptileAmphibians">Reptile & Amphibian</option>
+                        <option value="Bird">Bird</option>
+                        <option value="Other">Other</option>
+                      </select>
+
+                      <label for="age">Age</label>
+                      <select id="age" name="age">
+                        <option value="No Preference">No Preference</option>
+                        <option value="Young">Young</option>
+                        <option value="Teen">Teen</option>
+                        <option value="Adult">Adult</option>
+                      </select>
+
+                      <label for="breed">Breed</label>
+                      <select id="breed" name="breed">
+                        <!-- populated using JavaScript -->
+                      </select>
+
+                      <label for="zip-code">Zip Code</label>
+                      <input type="number" id="zip-code" name="zip-code">
+                </form>
+            </div>
+            <div class="search-button">
+                <button class="s-btn"><a href="listings.html">Search</a></button>
+            </div>
+        </div>
+    </div>
+    <div class="testimonial-wrap">
+        <div class="testimonial-background">
+            <img class="test-img" src="\images\Group 77.png">
+        </div>
+        <div class="testimonial">
+            <div class="quotes">
+                <q>I was very lucky to find Finn, he is a part of our little family now.
+                    Taking the quiz lead me to a variety of choices tailored just for me 
+                    and made the adoption process so much easier.
+                </q>
+            </div>
+            
+            <div class="quotes">
+                <q>Everyday I wake up to my new beloved cat snuggling up to me.
+                    I am so glad I found my furever friend. I will cherish her forever.
+                    Thank you Furever Friends!
+                </q>
+            </div>
+            
+            <div class="quotes">
+                <q>I was a bit skeptical about adopting through a website at first.
+                    I am glad that the Safe Spawts feature exists. It helps me feel safe
+                    about meeting strangers in public, pet friendly places.
+                </q>
+            </div>
+
+            <div class="quotes">
+                <q>I love the recommendations that Furever Friends gives me! They really
+                    know what kind of pets I like! I get both email and account notifications.
+                </q>
+            </div>
+
+            <div class="dot-container">
+                <span class="dot" onclick="currentSlide(1)"></span>
+                <span class="dot" onclick="currentSlide(2)"></span>
+                <span class="dot" onclick="currentSlide(3)"></span>
+                <span class="dot" onclick="currentSlide(4)"></span>
+            </div>
+
+        </div>
+        <div class="share-your-xp-btn default">
+            <button class="xp-button"><span>Share your experience</span></button>
+        </div>
+    </div>
+    <div class="newsletters-wrap">
+        <div class="news-img-wrap">
+            <!--<img class="news-img" src="pexels-jayden-burdick-3397935.png">-->
+        </div>
+        <div class="heading">
+            <p>Sign up for newsletters</p>
+        </div>
+        <div class="subheading">
+            <p>Get information regarding training tips and more!</p>
+        </div>
+        <div class="newsletter-form">
+            <input type="email" class="newsletter-email" placeholder="example@email.com">
+        </div>
+    </div>
+    <div class="lost-and-found-wrap">
+        <div class="lost-and-found-img">
+            <img class="ls-img" src="\images\lost-and-found.png">
+        </div>
+        <div class="heading">
+            <p>Lost your furever friend?</p>
+        </div>
+        <div class="subheading">
+            <p>Let us help you reunite! Fill out information regarding your pet to file a missing pet or
+                help others by being on a lookout for posted pets
+            </p>
+        </div>
+        <div class="lost-and-found-button default">
+            <button class="ls-btn"><span>Lost and found</span></button>
+        </div>
+    </div>
+    <div id="footer"></div>
+</body>
+<script type="text/javascript" src="home.js">
+</script>
+</html>
