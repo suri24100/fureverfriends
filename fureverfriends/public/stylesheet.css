@@ -46,3 +46,6 @@ img{
     /*position: center;*/
     display: block;
 }
+
+.setpic {
+    display: inline-block;}

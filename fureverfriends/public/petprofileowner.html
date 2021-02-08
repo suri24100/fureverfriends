@@ -2,9 +2,152 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Pet Profile Owner</title>
+    <title>Pet Profile</title>
+    <!-- need to import navbar-->
+    <link rel = "stylesheet" href="stylesheet.css">
+    <style>
+        ul{
+            columns:2;
+            -webkit-columns:2;
+            -moz-columns:2;
+        }
+    </style>
 </head>
-<body>
 
+<body>
+<nav>
+    <div class="navbar" id="navigation">
+        <a href="#"> HOME </a>
+        <a href="#"> ADPOT </a>
+        <a href="#"> REHOME </a>
+        <a href="#"> PETCARE </a>
+        <a href="#"> LOGIN </a>
+    </div>
+</nav>
+
+
+<img src="images/img.png" alt="dog" style="width: 100%;">
+<h3 style="text-align: center"> CREATE A PROFILE FOR YOUR PET </h3>
+
+<div class="setpic" style="text-align: center">
+    <h5 style="color: #379683; float: left"> SET PROFILE PICTURE</h5>
+    <h5 style="color: #379683; margin-left: inherit"> ADD ADDITIONAL PICTURES</h5>
+    <img src="images/img_3.png" height="278" width="1036"/></div>
+
+<div class="petinfoowner" style="margin-left: 200px">
+    <div class="dropdown"> <!-- supposed to be a dropdown-->
+        <h5 style="color: #379683"> PET INFORMATION</h5>
+
+        <ul>
+                <li><label>SPECIES:</label>
+                    <select>
+                        <option>
+                        <option value> Cat
+                        <option value> Dog
+                    </select></li>
+
+                <li><label>NAME:</label>
+                    <input type="text" id="name" name="name"></li>
+
+
+                 <li>
+                    <label>AGE:</label>
+                    <select>
+                <option>
+                <optgroup label="DOGS">
+                    <option>Puppies
+                    <option>Dogs
+                </optgroup>
+                <optgroup label="CATS">
+                    <option>Kitten
+                    <option>Cat
+                </optgroup>
+            </select>
+            </li>
+
+            <li>
+            <label>GENDER:</label>
+            <select>
+                    <option>
+                    <option value> Male
+                    <option value> Female
+            </select>
+            </li>
+
+            <li>
+                <label>CARED BY:</label>
+                <select>
+                    <option>
+                    <option value> Private Owner
+                    <option value> Shelter
+                </select>
+            </li>
+
+            <li>
+                <label>FUR LENGTH:</label>
+                <select>
+                    <option>
+                    <option value> Long
+                    <option value> Short
+                </select>
+            </li >
+
+            <li><label>ADOPTION FEE:</label>
+                <input type="text" id="adpt" name="adpt"></li>
+
+            <li><label>CITY:</label>
+                <input type="text" id="city" name="city"></li>
+
+            <li>
+                <label>PERSONALITY:</label>
+                <select>
+                    <option>
+                    <option value> Social
+                    <option value> AntiSocial
+                </select>
+            </li>
+
+            <li>
+                <label>STATE:</label>
+                <select>
+                    <option>
+                    <option value> PA
+                    <option value> NJ
+                    <option value> NY
+                </select>
+            </li>
+
+            <li><label>ZIP CODE:</label>
+                <input type="text" id="zcode" name="zcode">
+            </li>
+    </ul>
+
+    </div>
+</div>
+
+<div class="contactinfo" style="margin-left: 150px">
+    <ul><label>NAME:</label>
+        <input type="text" id="nname" name="fname">
+    </ul>
+
+    <ul><label>EMAIL:</label>
+        <input type="text" id="email" name="email">
+    </ul>
+
+    <ul><label>PHONE:</label>
+        <input type="text" id="num" name="num">
+    </ul>
+
+    <ul><label>WEBSITE:</label>
+        <input type="text" id="site" name="site">
+    </ul>
+</div>
+
+<div>
+    <ul><label>UPLOAD FILE:</label>
+        <input type="text" id="fname" name="fname">
+    </ul>
+    <button type ="button" style="color: #ffff; background-color: #379683; border-radius: 10px; position: inherit" > PUBLISH </button>
+</div>
 </body>
 </html>
