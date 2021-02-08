@@ -6,10 +6,23 @@
     <!-- need to import navbar-->
     <link rel = "stylesheet" href="stylesheet.css">
     <style>
-        ul{
+
+        .actionlist{
             columns:2;
             -webkit-columns:2;
             -moz-columns:2;
+        }
+
+        /*.section3{*/
+        /*    columns:2;*/
+        /*    -webkit-columns:2;*/
+        /*    -moz-columns:2;*/
+        /*}*/
+        .titles{
+            columns:2;
+            -webkit-columns:2;
+            -moz-columns:2;
+            display: inline-flex;
         }
     </style>
 </head>
@@ -29,28 +42,41 @@
 <img src="images/img.png" alt="dog" style="width: 100%;">
 <h3 style="text-align: center"> CREATE A PROFILE FOR YOUR PET </h3>
 
-<div class="setpic" style="text-align: center">
-    <h5 style="color: #379683; float: left"> SET PROFILE PICTURE</h5>
-    <h5 style="color: #379683; margin-left: inherit"> ADD ADDITIONAL PICTURES</h5>
-    <img src="images/img_3.png" height="278" width="1036"/></div>
+<!--
+<div class="setpic" style="margin-left: 200px;">
+    <h3 style="color: #379683; "> SET PROFILE PICTURE</h3>
+    <form action="/action_page.php">
+    <input type="file" id="myFile" name="filename">
+    </form>
+</div>-->
+<div class= "titles">
+<h3 style=" text-indent: 2em; color: #379683"> SET PET PROFILE </h3>
+    <br>
+<h3 style=" text-indent: 20em; color: #379683"> ADD ADDITIONAL PICTURES </h3>
+</div>
+<img src="images/img_3.png" height="175" width="150"/>
+
+
+
 
 <div class="petinfoowner" style="margin-left: 200px">
     <div class="dropdown"> <!-- supposed to be a dropdown-->
-        <h5 style="color: #379683"> PET INFORMATION</h5>
+        <h3 style="color: #379683"> PET INFORMATION</h3>
 
-        <ul>
-                <li><label>SPECIES:</label>
+        <ul class="actionlist">
+                <ul><label>SPECIES:</label>
                     <select>
                         <option>
                         <option value> Cat
                         <option value> Dog
-                    </select></li>
+                    </select></ul>
 
-                <li><label>NAME:</label>
-                    <input type="text" id="name" name="name"></li>
+            <br>
+                <ul><label>NAME:</label>
+                    <input type="text" id="name" name="name"></ul>
 
-
-                 <li>
+            <br>
+                 <ul>
                     <label>AGE:</label>
                     <select>
                 <option>
@@ -63,51 +89,51 @@
                     <option>Cat
                 </optgroup>
             </select>
-            </li>
-
-            <li>
+            </ul>
+            <br>
+            <ul>
             <label>GENDER:</label>
             <select>
                     <option>
                     <option value> Male
                     <option value> Female
             </select>
-            </li>
-
-            <li>
+            </ul>
+            <br>
+            <ul>
                 <label>CARED BY:</label>
                 <select>
                     <option>
                     <option value> Private Owner
                     <option value> Shelter
                 </select>
-            </li>
-
-            <li>
+            </ul>
+            <br>
+            <ul>
                 <label>FUR LENGTH:</label>
                 <select>
                     <option>
                     <option value> Long
                     <option value> Short
                 </select>
-            </li >
-
-            <li><label>ADOPTION FEE:</label>
-                <input type="text" id="adpt" name="adpt"></li>
-
-            <li><label>CITY:</label>
-                <input type="text" id="city" name="city"></li>
-
-            <li>
+            </ul >
+            <br>
+            <ul><label>ADOPTION FEE:</label>
+                <input type="text" id="adpt" name="adpt"></ul>
+            <br>
+            <ul><label>CITY:</label>
+                <input type="text" id="city" name="city"></ul>
+            <br>
+            <ul>
                 <label>PERSONALITY:</label>
                 <select>
                     <option>
                     <option value> Social
                     <option value> AntiSocial
                 </select>
-            </li>
-
-            <li>
+            </ul>
+            <br>
+            <ul>
                 <label>STATE:</label>
                 <select>
                     <option>
@@ -115,39 +141,57 @@
                     <option value> NJ
                     <option value> NY
                 </select>
-            </li>
-
-            <li><label>ZIP CODE:</label>
+            </ul>
+            <br>
+            <ul><label>ZIP CODE:</label>
                 <input type="text" id="zcode" name="zcode">
-            </li>
+            </ul>
     </ul>
 
     </div>
 </div>
 
-<div class="contactinfo" style="margin-left: 150px">
-    <ul><label>NAME:</label>
+
+<h3 style="color: #379683; margin-left: 200px"> ABOUT ME</h3>
+<textarea rows="4" cols="50" name="comment" form="usrform" style="margin-left: 200px">
+Enter text here...</textarea>
+  <br>
+
+
+<div class="section3">
+    <h3 style="color: #379683; margin-left: 200px"> CONTACT INFORMATION</h3>
+<div class="contactinfo" style="margin-left: 110px; float: left">
+    <ul>
+    <ul style="margin-top: 0px;"><label>NAME:</label>
         <input type="text" id="nname" name="fname">
     </ul>
-
+        <br>
     <ul><label>EMAIL:</label>
         <input type="text" id="email" name="email">
     </ul>
-
+        <br>
     <ul><label>PHONE:</label>
         <input type="text" id="num" name="num">
     </ul>
-
+        <br>
     <ul><label>WEBSITE:</label>
         <input type="text" id="site" name="site">
     </ul>
+        <br>
+
+    </ul>
 </div>
 
-<div>
-    <ul><label>UPLOAD FILE:</label>
-        <input type="text" id="fname" name="fname">
-    </ul>
-    <button type ="button" style="color: #ffff; background-color: #379683; border-radius: 10px; position: inherit" > PUBLISH </button>
+    <div class="rightcolumn"><h3 style="color: #379683;margin-left: 530px "> CONTACT INFORMATION</h3>
+        <ul STYLE=" margin-left: 500px ">
+            <label>UPLOAD FILE:</label>
+            <input type="text" id="fname" name="fname">
+        </ul>
+
+        <button type ="button" style="color: #ffff; background-color: #379683; border-radius: 10px; margin-bottom: 20px; margin-left: 150px " > PUBLISH </button></div>
+
+
 </div>
+
 </body>
 </html>
