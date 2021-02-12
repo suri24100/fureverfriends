@@ -1,6 +1,9 @@
 import React from "react";
 
+
 export default function Home() {
+
+    return (
     <div>
         <div className="banner-wrap">
         <div id="header" className="header"></div>
@@ -17,7 +20,7 @@ export default function Home() {
     <div className="search-or-quiz-wrap">
         <div className="quiz-wrap">
             <div className="quiz-img-wrap">
-                <img className="quiz-img" src="\images\Group 78.png"/>
+                <img className="quiz-img" src="/images/Group 78.png"/>
             </div>
             <div className="quiz-button default">
                 <button className="q-btn">Take the quiz</button>
@@ -63,7 +66,7 @@ export default function Home() {
     </div>
     <div className="testimonial-wrap">
         <div className="testimonial-background">
-            <img className="test-img" src="\images\Group 77.png"/>
+            <img className="test-img" src="./images/Group 77.png"/>
         </div>
         <div className="testimonial">
             <div className="quotes">
@@ -121,7 +124,7 @@ export default function Home() {
     </div>
     <div className="lost-and-found-wrap">
         <div className="lost-and-found-img">
-            <img className="ls-img" src="\images\lost-and-found.png"/>
+            <img className="ls-img" src="./images/lost-and-found.png"/>
         </div>
         <div className="heading">
             <p>Lost your furever friend?</p>
@@ -136,4 +139,5 @@ export default function Home() {
         </div>
     </div>
     </div>
+    )
 }

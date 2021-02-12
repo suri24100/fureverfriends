@@ -28,7 +28,7 @@ img {
   position: relative;
   width: 100%;
   height: 38.5vw;
-  /*background-image: url(./home-banner-full.jpg);*/
+  background-image: url(./home-banner-full.jpg);
   background-size: 100%;
   background-attachment: fixed;
 }

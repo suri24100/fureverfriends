@@ -5,6 +5,7 @@ import Home from "./Home";
 import './css/style.css';
 import './css/home.css';
 
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -49,6 +50,7 @@ export default function App() {
   return (
     <div>      
       <Header/>
+      <Home />
       <Footer/>
     </div>
   );
