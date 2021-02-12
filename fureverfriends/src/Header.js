@@ -1,6 +1,7 @@
 import React, {useEffect, useState, Component} from 'react';
 import {Link} from "react-router-dom";
 import notification_icon from "./images/svg/notification.svg";
+import messages_icon from "./images/svg/message.svg";
 import './css/style.css';
 //need this for changing log in to log out in nav
 
@@ -31,6 +32,7 @@ export default function Header() {
             <Link to="/petcare">Pet Care</Link>
             <a onClick={handleUserState}>{userState.logged_in ? <Link to="/logout">Log Out</Link> : <Link to="/login">Log In</Link> }</a>
             <img src={notification_icon} alt="Notifications"/>
+            <img src={messages_icon} alt="Messages"/>
         </div>
         </div>
     )

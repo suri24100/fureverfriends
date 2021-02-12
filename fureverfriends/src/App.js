@@ -33,13 +33,10 @@ export default function App() {
                 <Listings />
             </Route>
             <Route path="/findahome">
-                <Topics />
+                <FindHome />
             </Route>
             <Route path="/petcare">
                 <PetCare />
-            </Route>
-            <Route path="/findahome">
-                <FindHome />
             </Route>
             <Route path="/login">
                 <Login />
