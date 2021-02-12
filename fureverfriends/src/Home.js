@@ -1,4 +1,7 @@
 import React from "react";
+import Header from "./Header";
+import './css/style.css';
+import './css/home.css';
 
 
 export default function Home() {
@@ -6,7 +9,7 @@ export default function Home() {
     return (
     <div>
         <div className="banner-wrap">
-        <div id="header" className="header"></div>
+            <Header/>
         <div className="banner-img-wrap">
             {/*<img className="banner-img" src="home-banner.png">*/}
         </div>
@@ -97,10 +100,10 @@ export default function Home() {
             </div>
 
             <div className="dot-container">
-                <span className="dot" onclick="currentSlide(1)"></span>
-                <span className="dot" onclick="currentSlide(2)"></span>
-                <span className="dot" onclick="currentSlide(3)"></span>
-                <span className="dot" onclick="currentSlide(4)"></span>
+                <span className="dot" onClick="currentSlide(1)"></span>
+                <span className="dot" onClick="currentSlide(2)"></span>
+                <span className="dot" onClick="currentSlide(3)"></span>
+                <span className="dot" onClick="currentSlide(4)"></span>
             </div>
 
         </div>
@@ -110,7 +113,7 @@ export default function Home() {
     </div>
     <div className="newsletters-wrap">
         <div className="news-img-wrap">
-            {/*<img className="news-img" src="pexels-jayden-burdick-3397935.png">*/}
+            {/*<img className="news-img" src="./pexels-jayden-burdick-3397935.png" />*/}
         </div>
         <div className="heading">
             <p>Sign up for newsletters</p>

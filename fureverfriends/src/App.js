@@ -2,8 +2,6 @@ import React from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import Home from "./Home";
-import './css/style.css';
-import './css/home.css';
 
 
 import {
@@ -48,8 +46,7 @@ export default function App() {
       </Router>
   */
   return (
-    <div>      
-      <Header/>
+    <div>
       <Home />
       <Footer/>
     </div>

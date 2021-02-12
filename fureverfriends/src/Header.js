@@ -1,4 +1,5 @@
 import React, {useEffect, useState, Component} from 'react';
+import './css/style.css';
 //need this for changing log in to log out in nav
 
 export default function Header() {
