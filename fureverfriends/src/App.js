@@ -17,7 +17,8 @@ import PetCare from "./PetCare";
 * - Note that routes ARE implemented top down, so if /profile:id is needed, you'd want that
 *   above /profile.
 *
-* Additional types of links:
+* Types of Links:
+* <Link to="/path">Link Text</Link> : Changes the url and triggers Switch to find a matching path
 * <NavLink to="/path" activeClassName="class">Link Text</Navlink> : Can add styles to the active link
 * <Redirect to="/path" /> : Can be used to change path when needed. For example, maybe when a user clicks logout
 */
