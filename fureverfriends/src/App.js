@@ -49,7 +49,6 @@ export default function App() {
   return (
     <div>      
       <Header/>
-      <Home/>
       <Footer/>
     </div>
   );
