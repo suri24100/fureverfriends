@@ -49,3 +49,68 @@ img{
 
 .setpic {
     display: inline-block;}
+
+
+.actionlist{
+    columns:3;
+    -webkit-columns:3;
+    -moz-columns:3;
+}
+
+/*.section3{*/
+/*    columns:2;*/
+/*    -webkit-columns:2;*/
+/*    -moz-columns:2;*/
+/*}*/
+.titles{
+    columns:2;
+    -webkit-columns:2;
+    -moz-columns:2;
+    display: inline-flex;
+}
+
+.footer {
+    width: 100%;
+    background-color: #379683;
+    color: white;
+}
+
+.column {
+    float: left;
+    padding: 10px;
+}
+
+.left{
+    width: 25%;
+}
+.right{
+    float: right;
+    width: 25%;
+
+}
+.middle{
+    width: 25%;
+    margin-left: 125px;
+}
+
+/* Clear floats after the columns */
+.ft:after {
+    content: " ";
+    display: table;
+    clear: both;
+}
+
+
+/* ICONS*/
+.fa {
+    padding: 20px;
+    font-size: 30px;
+    width: 50px;
+    text-align: center;
+    text-decoration: none;
+    margin: 5px 2px;
+}
+
+.fa:hover {
+    opacity: 0.7;
+}
