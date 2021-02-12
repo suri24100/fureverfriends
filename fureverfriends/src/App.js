@@ -1,4 +1,10 @@
 import React from "react";
+import Header from "./Header";
+import Footer from "./Footer";
+import Home from "./Home";
+import './css/style.css';
+import './css/home.css';
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -9,9 +15,10 @@ import {
 } from "react-router-dom";
 
 export default function App() {
-  return (
-      <Router>
+  /*
+  <Router>
         <div>
+          <Header/>
           <ul>
             <li>
               <Link to="/">Home</Link>
@@ -23,6 +30,7 @@ export default function App() {
               <Link to="/topics">Topics</Link>
             </li>
           </ul>
+          <Footer/>
 
           <Switch>
             <Route path="/about">
@@ -37,12 +45,19 @@ export default function App() {
           </Switch>
         </div>
       </Router>
+  */
+  return (
+    <div>      
+      <Header/>
+      <Home/>
+      <Footer/>
+    </div>
   );
 }
 
-function Home() {
+/*function Home() {
   return <h2>Home</h2>;
-}
+}*/
 
 function About() {
   return <h2>About</h2>;

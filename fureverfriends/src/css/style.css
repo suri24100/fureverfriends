@@ -1,0 +1,110 @@
+
+
+body {
+  font-family: 'Calibri';
+  background-color: red;
+}
+a {
+  text-decoration: none;
+  color: #ffffff;
+}
+.hdr-wrap {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 6vw;
+  margin-right: 2vw;
+  background: transparent;
+  position: absolute;
+  top: 0%;
+}
+.hdr-wrap .logo h2 {
+  font-family: 'Segoe Script';
+  font-size: 3vw;
+  text-align: center;
+  color: white;
+  margin: 1vw 0vw 0.25vw -1vw;
+}
+.hdr-wrap .primary-menu {
+  margin-left: 15vw;
+}
+.hdr-wrap .primary-menu a,
+.hdr-wrap .primary-menu img {
+  margin: 0 1vw 0 1vw;
+  font-size: 1.5vw;
+  text-transform: uppercase;
+  font-weight: bold;
+  margin-top: 2vw;
+}
+.hdr-wrap .primary-menu img {
+  width: 1.25vw;
+  margin-top: 2vw;
+}
+.hdr-wrap .primary-menu a:hover,
+.hdr-wrap .primary-menu a:active {
+  border: 0.2vw solid #ffffff;
+  padding: 0.25vw;
+  cursor: pointer;
+}
+.hdr-wrap .primary-menu img:hover,
+.hdr-wrap .primary-menu img:active {
+  cursor: pointer;
+}
+.ftr-wrap {
+  display: flex;
+  flex-direction: column;
+  color: #ffffff;
+  background-color: #379683;
+  padding-bottom: 2vw;
+  margin-top: -0.25vw;
+}
+.ftr-wrap .logo h2 {
+  font-family: 'Segoe Script';
+  font-size: 3vw;
+  text-align: center;
+  margin: 1vw 0vw -2vw -2vw;
+}
+.ftr-wrap .footer-menu {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: flex-start;
+}
+.ftr-wrap .footer-menu .pets-menu,
+.ftr-wrap .footer-menu .info-menu,
+.ftr-wrap .footer-menu .user-xp-menu {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+}
+.ftr-wrap .footer-menu .pets-menu h3,
+.ftr-wrap .footer-menu .info-menu h3,
+.ftr-wrap .footer-menu .user-xp-menu h3 {
+  font-size: 1.5vw;
+  text-transform: uppercase;
+  margin-bottom: 0.25vw;
+}
+.ftr-wrap .footer-menu .pets-menu a,
+.ftr-wrap .footer-menu .info-menu a,
+.ftr-wrap .footer-menu .user-xp-menu a {
+  font-size: 1.1vw;
+  line-height: 1.75vw;
+}
+.ftr-wrap .footer-menu .pets-menu a:hover,
+.ftr-wrap .footer-menu .info-menu a:hover,
+.ftr-wrap .footer-menu .user-xp-menu a:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+.ftr-wrap .social-wrap {
+  display: flex;
+  align-self: center;
+  margin-left: -4vw;
+}
+.ftr-wrap .social-wrap img {
+  width: 2.5vw;
+  padding: 0.5vw;
+  color: #ffffff;
+}
+.ftr-wrap .social-wrap img:hover {
+  cursor: pointer;
+}
