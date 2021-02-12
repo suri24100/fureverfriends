@@ -1,66 +1,58 @@
 import React from "react";
+// React router components
+import {Switch, Route, Link, useRouteMatch, useParams} from "react-router-dom";
+// our components
 import Header from "./Header";
 import Footer from "./Footer";
 import Home from "./Home";
+import FindHome from "./FindHome";
+import Listings from "./Listings";
+import Login from "./Login";
+import PetCare from "./PetCare";
 
 
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  useRouteMatch,
-  useParams
-} from "react-router-dom";
+/* This should load the header and footer on each page
+* - Links to these routes can be created on any component using the format in Header.js
+* - Then those links have a corresponding route below. All routes should be defined together
+* - Note that routes ARE implemented top down, so if /profile:id is needed, you'd want that
+*   above /profile.
+*
+* Additional types of links:
+* <NavLink to="/path" activeClassName="class">Link Text</Navlink> : Can add styles to the active link
+* <Redirect to="/path" /> : Can be used to change path when needed. For example, maybe when a user clicks logout
+*/
+
 
 export default function App() {
-  /*
-  <Router>
-        <div>
-          <Header/>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/about">About</Link>
-            </li>
-            <li>
-              <Link to="/topics">Topics</Link>
-            </li>
-          </ul>
-          <Footer/>
-
-          <Switch>
-            <Route path="/about">
-              <About />
-            </Route>
-            <Route path="/topics">
-              <Topics />
-            </Route>
-            <Route path="/">
-              <Home />
-            </Route>
-          </Switch>
-        </div>
-      </Router>
-  */
   return (
     <div>
-      <Home />
-      <Footer/>
+        <Header />
+        <Switch>
+            <Route path="/listings">
+                <Listings />
+            </Route>
+            <Route path="/findahome">
+                <Topics />
+            </Route>
+            <Route path="/petcare">
+                <PetCare />
+            </Route>
+            <Route path="/findahome">
+                <FindHome />
+            </Route>
+            <Route path="/login">
+                <Login />
+            </Route>
+            <Route path="/">
+                <Home />
+            </Route>
+        </Switch>
+        <Footer />
     </div>
   );
 }
 
-/*function Home() {
-  return <h2>Home</h2>;
-}*/
-
-function About() {
-  return <h2>About</h2>;
-}
-
+// example nested routing
 function Topics() {
   let match = useRouteMatch();
 
