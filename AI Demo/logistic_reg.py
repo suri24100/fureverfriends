@@ -28,6 +28,7 @@ import matplotlib.pyplot as plt
 if __name__ == '__main__':
     file = open("data.txt", "r")
 
+    converged = False
     data = []
     x = []
     y = []
@@ -44,14 +45,27 @@ if __name__ == '__main__':
         x.append(num[0])
         y.append(num[1])
 
-    for i in range(10000):
-        for j in range(len(x)):
-            index = np.random.randint(len(x))
+    b0_deriv = 0.0
+    b1_deriv = 0.0
+    ep = 0
+
+    while not converged:
+        x_len = list(range(len(x)))
+        np.random.shuffle(x_len)
+        for index in x_len:
             b0_temp = Beta_0
             b1_temp = Beta_1
             y_hat = 1.0 / (1.0 + np.exp(-(b0_temp + b1_temp * x[index])))
-            Beta_0 = b0_temp - alpha * (y_hat - y[index]) * y_hat * (1.0 - y_hat)
-            Beta_1 = b1_temp - alpha * (y_hat - y[index]) * y_hat * (1.0 - y_hat) * x[index]
+
+            b0_deriv = (y_hat - y[index]) * y_hat * (1.0 - y_hat)
+            Beta_0 = b0_temp - alpha * b0_deriv
+
+            b1_deriv = (y_hat - y[index]) * y_hat * (1.0 - y_hat) * x[index]
+            Beta_1 = b1_temp - alpha * b1_deriv
+
+        ep += 1
+        if (b0_deriv >= -0.00001 and b0_deriv < 0.00001 and b1_deriv >= -0.00001 and b1_deriv < 0.00001) or ep > 100000:
+            converged = True
 
     b = sorted([random() for i in range(100)])
     j_b = [Beta_0 + Beta_1 * i for i in b]
