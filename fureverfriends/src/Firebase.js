@@ -1,37 +1,142 @@
-// // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-// import firebase from "firebase/app";
-// import "firebase/firestore";
-//
-//    // const firebaseConfig = {
-//    //      projectId: "fureverfriends-66bae",
-//    //      messagingSenderId: "1029056317935",
-//    //      appId: "1:1029056317935:web:27e3df2335d7074bbd0e1a",
-//    //      measurementId: "G-1XM6V6EB86"
-//    //    };
-//
-// // Set the configuration for your app
-// // TODO: Replace with your project's config object
-// var config = {
-//     apiKey: "AIzaSyCbirB-vp_FHR0dZXE7C9G_wBgew3WbfVg",
-//     authDomain: "fureverfriends-66bae.firebaseapp.com",
-//     // For databases not in the us-central1 location, databaseURL will be of the
-//     // form https://[databaseName].[region].firebasedatabase.app.
-//     // For example, https://your-database-123.europe-west1.firebasedatabase.app
-//     databaseURL: "https://fureverfriends-66bae-default-rtdb.firebaseio.com/",
-//     storageBucket: "fureverfriends-66bae.appspot.com",
-// };
-// firebase.initializeApp(config);
-//
-// // Get a reference to the database service
-// var database = firebase.database();
-//
-// var petname, petage, pettype, furlength, gender, personality;
-// function PetInfo(){
-//     petname = document.getElementById().value;
-//     petage = document.getElementById().value;
-//     pettype = document.getElementById().value;
-//     furlength = document.getElementById().value;
-//     gender = document.getElementById().value;
-//     personality = document.getElementById().value;
-// }
-// export default firebase;
+
+    //Firebase ID's to connect to firebase
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    import firebase from "firebase";
+
+    // If you enabled Analytics in your project, add the Firebase SDK for Analytics
+    import "firebase/analytics";
+
+    // Add the Firebase products that you want to use
+    import "firebase/auth";
+    import "firebase/firestore";
+
+    const firebaseConfig = {
+    apiKey: "AIzaSyCbirB-vp_FHR0dZXE7C9G_wBgew3WbfVg",
+    authDomain: "fureverfriends-66bae.firebaseapp.com",
+    projectId: "fureverfriends-66bae",
+    storageBucket: "fureverfriends-66bae.appspot.com",
+    messagingSenderId: "1029056317935",
+    appId: "1:1029056317935:web:27e3df2335d7074bbd0e1a",
+    measurementId: "G-1XM6V6EB86"
+};
+    firebase.initializeApp(firebaseConfig);
+
+    var firestore = firebase.firestore();
+     const docRef = firestore.collection("PetInfo").doc("pettype").doc("petage").doc("breed").collection("zipcode").collection("number")
+
+    //query selector
+const outputPetType = document.querySelector("#type-of-pet");
+const petagee = document.querySelector("#age");
+const breed = document.querySelector("#breed");
+const zipcode = document.querySelector("#zipcode");
+const number = document.querySelector("#number");
+
+//eventlister for the search pet option
+    searchButton.addEventListner("click", function(){
+      const textToSave = inputTextField.value;
+      console.log("Save" + textToSave + "to firefore")
+        docRef.set({
+            PetInfo: textToSave
+
+        }).then(function(){
+            console.log("Saved");
+        }).catch(function(error){
+            console.log("Error",error)
+        })
+    })
+
+
+    //initialize variables
+    var petname, petage, pettype, furlength, gender, personality;
+    function PetInfo(){
+    petname = document.getElementById(name).value;
+    petage = document.getElementById(age).value;
+    pettype = document.getElementById(type-of-pet).value;
+    furlength = document.getElementById(furlength).value;
+    gender = document.getElementById(gender).value;
+    personality = document.getElementById(personality).value;
+}
+
+    //data -pet
+    document.getElementById('insert').onclick =function (){
+    PetInfo();
+    firebase.database().ref().set({  // add a reference value
+    NameOfPet: petname,
+    PetAge: petage,
+    PetType: pettype,
+    Fur : furlength,
+    Gender: gender,
+    PetPersonality : personality
+});
+}
+
+    //selection -pet
+    document.getElementById("select").onclick = function(){
+    PetInfo();
+    firebase.data().ref().on('value', function(snapshot){
+    document.getElementById().value = snapshot.val().NameOfPet;
+    document.getElementById().value = snapshot.val().PetAge;
+    document.getElementById().value = snapshot.val().PetType;
+    document.getElementById().value = snapshot.val().Fur;
+    document.getElementById().value = snapshot.val().Gender;
+    document.getElementById().value = snapshot.val().PetPersonality;
+})
+}
+    //update - pet
+    document.getElementById('insert').onclick =function (){
+    PetInfo();
+    firebase.database().ref().set({  // add a reference value
+    NameOfPet: petname,
+    PetAge: petage,
+    PetType: pettype,
+    Fur : furlength,
+    Gender: gender,
+    PetPersonality : personality
+});
+}
+
+
+
+    //initialize variables
+    //datat-pet
+    var username, adopter, adoptee, lostandfound;
+    function UserInfo(){
+    username = document.getElementById().value;
+    adopter = document.getElementById().value;
+    adoptee = document.getElementById().value;
+    lostandfound = document.getElementById().value;
+}
+
+    //data -pet
+    document.getElementById('insert').onclick =function (){
+    PetInfo();
+    firebase.database().ref().set({  // add a reference value
+    username: username,
+    owner: adopter,
+    adoptee: adoptee,
+    lstfnd : lostandfound
+});
+}
+
+    //selection -pet
+    document.getElementById("select").onclick = function(){
+    PetInfo();
+    firebase.data().ref().on('value', function(snapshot){
+    document.getElementById(usernmae).value = snapshot.val().username;
+    document.getElementById(owner).value = snapshot.val().owner;
+    document.getElementById(adoptee).value = snapshot.val().adoptee;
+    document.getElementById(lostandfound).value = snapshot.val().lstfnd;
+
+})
+}
+    //update - pet
+    document.getElementById('insert').onclick =function (){
+    PetInfo();
+    firebase.database().ref().set({  // add a reference value
+    username: username,
+    owner: adopter,
+    adoptee: adoptee,
+    lstfnd : lostandfound
+});
+}
+
