@@ -78,7 +78,7 @@
         personality = document.getElementById().value;
       }
 
-      //data
+      //data -pet
       document.getElementById('insert').onclick =function (){
           PetInfo();
           firebase.database().ref().set({  // add a reference value
@@ -91,7 +91,7 @@
         });
       }
 
-      //selection
+      //selection -pet
       document.getElementById("select").onclick = function(){
         PetInfo();
         firebase.data().ref().on('value', function(snapshot){
@@ -103,7 +103,23 @@
           document.getElementById().value = snapshot.val().PetPersonality;
         })
       }
+      //update - pet
+      document.getElementById('insert').onclick =function (){
+        PetInfo();
+        firebase.database().ref().set({  // add a reference value
+          NameOfPet: petname,
+          PetAge: petage,
+          PetType: pettype,
+          Fur : furlength,
+          Gender: gender,
+          PetPersonality : personality
+        });
+      }
 
+
+
+      //initialize variables
+      //datat-pet
       var username, adopter, adoptee, lostandfound;
       function UserInfo(){
         username = document.getElementById().value;
@@ -111,16 +127,40 @@
         adoptee = document.getElementById().value;
         lostandfound = document.getElementById().value;
       }
-//update
+
+      //data -pet
       document.getElementById('insert').onclick =function (){
         PetInfo();
         firebase.database().ref().set({  // add a reference value
           username: username,
-          adopter: adopter,
-          owner: adoptee,
-          lostandfound : lostandfound
+          owner: adopter,
+          adoptee: adoptee,
+         lstfnd : lostandfound
         });
       }
+
+      //selection -pet
+      document.getElementById("select").onclick = function(){
+        PetInfo();
+        firebase.data().ref().on('value', function(snapshot){
+          document.getElementById().value = snapshot.val().username;
+          document.getElementById().value = snapshot.val().owner;
+          document.getElementById().value = snapshot.val().adoptee;
+          document.getElementById().value = snapshot.val().lstfnd;
+
+        })
+      }
+      //update - pet
+      document.getElementById('insert').onclick =function (){
+        PetInfo();
+        firebase.database().ref().set({  // add a reference value
+          username: username,
+          owner: adopter,
+          adoptee: adoptee,
+          lstfnd : lostandfound
+        });
+      }
+
     </script>
 
   </body>
