@@ -119,13 +119,13 @@ def testing_graphs(SAMPLE_SIZE):
     plt.subplot(2, 2, 1)
     plt.scatter(correlated1[0, :], correlated1[1, :], c='blue')
     plt.title('PCA 1')
-    plt.xlabel('long hair')
+    plt.xlabel('long fur')
     plt.ylabel('dog')
 
     plt.subplot(2, 2, 2)
     plt.scatter(correlated2[0, :], correlated2[1, :], c='blue')
     plt.title('PCA 2')
-    plt.xlabel('short hair')
+    plt.xlabel('short fur')
     plt.ylabel('cat')
 
     plt.subplot(2, 2, 3)
