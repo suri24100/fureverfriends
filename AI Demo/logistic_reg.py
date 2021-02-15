@@ -68,7 +68,7 @@ if __name__ == '__main__':
             converged = True
 
     b = sorted([random() for i in range(100)])
-    j_b = [Beta_0 + Beta_1 * i for i in b]
+    j_b = [(1.0 /(1 + math.exp(-(Beta_0 + Beta_1 * i)))) for i in b]
     # Create the plot
     plt.plot(x, y, 'o')
     plt.plot(b, j_b, label='Logistic Regression')
@@ -83,7 +83,7 @@ if __name__ == '__main__':
 
     x_f = float(input("Percentage of long fur animals in the profile? "))
 
-    y_f = Beta_0 + Beta_1 * x_f
+    y_f = 1.0 /(1 + math.exp(-(Beta_0 + Beta_1 * x_f)))
     perc = y_f * 100.0
     print("Should show {:.2f}% in feed".format(perc))
 
