@@ -9,6 +9,7 @@ import FindHome from "./FindHome";
 import Listings from "./Listings";
 import Login from "./Login";
 import PetCare from "./PetCare";
+import SignUp from "./SignUp";
 
 
 
@@ -30,7 +31,9 @@ export default function App() {
     <div>
         <Header />
         <Switch>
-
+            <Route path ="/Signup">
+                <SignUp/>
+            </Route>
             <Route path="/listings">
                 <Listings />
             </Route>
