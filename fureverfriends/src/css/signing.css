@@ -1,7 +1,7 @@
 body {
   font-family: 'Calibri';
   color: #ffffff;
-  background-image: url(./signing-background2.jpg);
+  background-image: url("signing-background2.jpg");
   background-repeat: no-repeat;
   background-size: cover;
 }
