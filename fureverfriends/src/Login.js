@@ -18,7 +18,7 @@ export default function Login(){
                     <h3 className="subH">Log In</h3>
                     <div className="form-wrap" id="log-in-form">
                         <form className="account-form">
-                            <h2 style="color:  #379683;">Welcome Back!</h2>
+                            <h2 className="welcome-back-heading">Welcome Back!</h2>
 
                             <label for="email">Enter Your Email Address:</label>
                             <input type="email" id="email" name="email"/>
