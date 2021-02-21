@@ -10,6 +10,7 @@ import Listings from "./Listings";
 import Login from "./Login";
 import PetCare from "./PetCare";
 import SignUp from "./SignUp";
+import CreateAccount from "./CreateAccount";
 
 
 
@@ -48,6 +49,10 @@ export default function App() {
             </Route>
             <Route path="/">
                 <Home />
+            </Route>
+            {/*temporary!!*/}
+            <Route path ="/CreateAccount">
+                <CreateAccount />
             </Route>
         </Switch>
         <Footer />
