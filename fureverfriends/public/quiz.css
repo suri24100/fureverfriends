@@ -54,6 +54,13 @@ img {
 .info-wrap h3 {
   color: #379683;
 }
+.info-wrap h3 input {
+  border-style: none none solid none;
+  border-color: #379683;
+  width: 3vw;
+  text-align: center;
+  font-size: 1.25vw;
+}
 .info-wrap .question-wrap {
   display: flex;
   flex-direction: column;
