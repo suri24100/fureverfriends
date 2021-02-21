@@ -9,6 +9,7 @@ import FindHome from "./FindHome";
 import Listings from "./Listings";
 import Login from "./Login";
 import PetCare from "./PetCare";
+import React from "react";
 
 
 /* This should load the header and footer on each page
@@ -46,6 +47,12 @@ export default function App() {
             </Route>
         </Switch>
         <Footer />
+
+        <code>
+            <pre>
+                {JSON.stringify(firebaseApp.option, null, 2)}
+            </pre>
+        </code>
     </div>
   );
 }
