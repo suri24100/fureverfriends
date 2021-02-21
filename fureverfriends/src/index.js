@@ -7,7 +7,7 @@ import {BrowserRouter} from "react-router-dom";
 import firebase from "firebase";
 
 
-firebase.initializeApp ({
+const app = firebase.initializeApp ({
     apiKey: "AIzaSyCbirB-vp_FHR0dZXE7C9G_wBgew3WbfVg",
     authDomain: "fureverfriends-66bae.firebaseapp.com",
     // databaseURl: '';
@@ -24,6 +24,9 @@ ReactDOM.render(
   </BrowserRouter>,
   document.getElementById('root')
 );
+
+export const auth = app.auth()
+export default app
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
