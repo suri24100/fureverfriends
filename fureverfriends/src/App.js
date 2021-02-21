@@ -30,6 +30,7 @@ export default function App() {
     <div>
         <Header />
         <Switch>
+
             <Route path="/listings">
                 <Listings />
             </Route>
