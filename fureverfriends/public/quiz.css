@@ -53,6 +53,7 @@ img {
 }
 .info-wrap h3 {
   color: #379683;
+  margin-bottom: 0.5vw;
 }
 .info-wrap h3 input {
   border-style: none none solid none;
@@ -69,6 +70,18 @@ img {
   padding: 0 2vw 1vw 2vw;
   margin-bottom: 2vw;
 }
+.info-wrap .question-wrap input::placeholder {
+  opacity: 0.8;
+  font-style: italic;
+}
 .info-wrap .option-wrap {
   margin-left: 2vw;
+}
+.info-wrap .option-wrap input[type=checkbox] input[type=radio] {
+  width: 1vw;
+  border-radius: 0;
+}
+.info-wrap .submit {
+  margin-left: 40%;
+  margin-right: 40%;
 }

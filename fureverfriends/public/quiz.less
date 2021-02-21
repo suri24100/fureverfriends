@@ -54,6 +54,7 @@ img {
 
     h3 {
         color:  #379683;
+        margin-bottom: 0.5vw;
         input {
             border-style: none none solid none;
             border-color: #379683;
@@ -70,8 +71,23 @@ img {
         border-radius: 1vw;
         padding: 0 2vw 1vw 2vw;
         margin-bottom: 2vw;
+
+        input::placeholder {
+            opacity: 0.8;
+            font-style: italic;
+        }
     }
     .option-wrap {
         margin-left: 2vw;
+
+        input[type=checkbox] input[type=radio]{
+            width: 1vw;
+            border-radius: 0;
+        }
+    }
+
+    .submit {
+        margin-left: 40%;
+        margin-right: 40%;
     }
 }
