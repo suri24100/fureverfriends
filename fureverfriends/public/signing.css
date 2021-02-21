@@ -1,7 +1,7 @@
 body {
   font-family: 'Calibri';
   color: #ffffff;
-  background-image: url(./signing-background2.jpg);
+  background-image: url("signing-background2.jpg");
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -124,7 +124,4 @@ body {
 #bottom-acct-confirm .subheading a {
   text-decoration: underline;
   margin-left: 0.25vw;
-}
-.welcome-back-heading {
-  color:  #379683;
 }

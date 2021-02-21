@@ -5,13 +5,12 @@ import './css/signing.css';
 
 export default function Login(){
     return (
-        <div classNameName="banner-wrap">
-            <Header/>
-            <div className="banner-img-wrap"></div>
+        <div className="signing-banner-wrap">
+            <div className="signing-banner-img-wrap"></div>
             <div className="invis-wrap">
                 <div className="info-wrap">
                     <div className="logo-wrap">
-                        <img src="./images/svg/paw-green.svg"/>
+                        <img src="paw-green.svg"/>
                         <h3>Furever Friends</h3>
                         <img src="paw-green.svg"/>
                     </div>
@@ -31,7 +30,7 @@ export default function Login(){
                         <div className="btn-wrap default">
                             <button className="signing-btn">Log In</button>
                         </div>
-                        <div className="subheading">
+                        <div className="belowbutton-subheading">
                             <span>Need to create an account?<a href="signing.html">Sign Up</a></span>
                         </div>
                     </div>

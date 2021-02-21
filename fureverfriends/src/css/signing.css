@@ -26,53 +26,53 @@ body {
 .bottom-info {
   margin-bottom: 4vw;
 }
-.bottom-info .subheading {
+.bottom-info .belowbutton-subheading {
   width: 100%;
 }
-.bottom-info .subheading span,
-.bottom-info .subheading a {
+.bottom-info .belowbutton-subheading span,
+.bottom-info .belowbutton-subheading a {
   color: #379683;
   font-size: 1vw;
 }
-.bottom-info .subheading span {
+.bottom-info .belowbutton-subheading span {
   margin-left: 7vw;
 }
-.bottom-info .subheading a {
+.bottom-info .belowbutton-subheading a {
   text-decoration: underline;
   margin-left: 0.25vw;
 }
-.banner-wrap .invis-wrap {
+.signing-banner-wrap .invis-wrap {
   width: 100%;
 }
-.banner-wrap .invis-wrap .info-wrap {
+.signing-banner-wrap .invis-wrap .info-wrap {
   background: #ffffff;
   border: 0.75vw solid #379683;
   border-radius: 0.5vw;
   width: 28%;
   margin: 12vw 10vw 10vw 58vw;
 }
-.banner-wrap .invis-wrap .info-wrap .subH {
+.signing-banner-wrap .invis-wrap .info-wrap .subH {
   text-align: center;
   color: #707070;
   font-weight: bold;
   text-transform: uppercase;
   margin: -2.5vw 0 2vw 0;
 }
-.banner-wrap .invis-wrap .info-wrap .logo-wrap {
+.signing-banner-wrap .invis-wrap .info-wrap .logo-wrap {
   display: flex;
   justify-content: center;
 }
-.banner-wrap .invis-wrap .info-wrap .logo-wrap img {
+.signing-banner-wrap .invis-wrap .info-wrap .logo-wrap img {
   width: 10%;
 }
-.banner-wrap .invis-wrap .info-wrap .logo-wrap h3 {
+.signing-banner-wrap .invis-wrap .info-wrap .logo-wrap h3 {
   color: #379683;
   font-size: 2vw;
   font-family: 'Segoe Script';
   margin-top: 2.5vw;
   padding: 0 0.5vw 0 0.5vw;
 }
-.banner-wrap .invis-wrap .info-wrap .account-form {
+.signing-banner-wrap .invis-wrap .info-wrap .account-form {
   display: flex;
   flex-direction: column;
   width: 60%;
@@ -80,15 +80,15 @@ body {
   color: #707070;
   font-size: 1vw;
 }
-.banner-wrap .invis-wrap .info-wrap .account-form label {
+.signing-banner-wrap .invis-wrap .info-wrap .account-form label {
   text-transform: uppercase;
   font-weight: bold;
   margin-bottom: 0.5vw;
 }
-.banner-wrap .invis-wrap .info-wrap .account-form input {
+.signing-banner-wrap .invis-wrap .info-wrap .account-form input {
   margin-bottom: 0.75vw;
 }
-.banner-wrap .invis-wrap .info-wrap .account-form select {
+.signing-banner-wrap .invis-wrap .info-wrap .account-form select {
   color: #379683;
   text-transform: uppercase;
   margin-bottom: 0.75vw;
