@@ -1,0 +1,127 @@
+body {
+  font-family: 'Calibri';
+  color: #ffffff;
+  background-image: url("signing-background2.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.default button {
+  background-color: #379683;
+  border: none;
+  color: #ffffff;
+  font-size: 1vw;
+  padding: 1vw 1.5vw 1vw 1.5vw;
+  text-transform: uppercase;
+  font-weight: bold;
+  border-radius: 1.25vw;
+  box-shadow: 0 0.25vw 0.5vw 0 rgba(0, 0, 0, 0.2), 0 0.25vw 0.5vw 0 rgba(0, 0, 0, 0.19);
+  transition: all 0.5s;
+  margin: 1vw 0 0.25vw 36%;
+}
+.default button:hover {
+  background-color: #2a7364;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.bottom-info {
+  margin-bottom: 4vw;
+}
+.bottom-info .belowbutton-subheading {
+  width: 100%;
+}
+.bottom-info .belowbutton-subheading span,
+.bottom-info .belowbutton-subheading a {
+  color: #379683;
+  font-size: 1vw;
+}
+.bottom-info .belowbutton-subheading span {
+  margin-left: 7vw;
+}
+.bottom-info .belowbutton-subheading a {
+  text-decoration: underline;
+  margin-left: 0.25vw;
+}
+.signing-banner-wrap .invis-wrap {
+  width: 100%;
+}
+.signing-banner-wrap .invis-wrap .info-wrap {
+  background: #ffffff;
+  border: 0.75vw solid #379683;
+  border-radius: 0.5vw;
+  width: 28%;
+  margin: 12vw 10vw 10vw 58vw;
+}
+.signing-banner-wrap .invis-wrap .info-wrap .subH {
+  text-align: center;
+  color: #707070;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin: -2.5vw 0 2vw 0;
+}
+.signing-banner-wrap .invis-wrap .info-wrap .logo-wrap {
+  display: flex;
+  justify-content: center;
+}
+.signing-banner-wrap .invis-wrap .info-wrap .logo-wrap img {
+  width: 10%;
+}
+.signing-banner-wrap .invis-wrap .info-wrap .logo-wrap h3 {
+  color: #379683;
+  font-size: 2vw;
+  font-family: 'Segoe Script';
+  margin-top: 2.5vw;
+  padding: 0 0.5vw 0 0.5vw;
+}
+.signing-banner-wrap .invis-wrap .info-wrap .account-form {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  margin-left: 20%;
+  color: #707070;
+  font-size: 1vw;
+}
+.signing-banner-wrap .invis-wrap .info-wrap .account-form label {
+  text-transform: uppercase;
+  font-weight: bold;
+  margin-bottom: 0.5vw;
+}
+.signing-banner-wrap .invis-wrap .info-wrap .account-form input {
+  margin-bottom: 0.75vw;
+}
+.signing-banner-wrap .invis-wrap .info-wrap .account-form select {
+  color: #379683;
+  text-transform: uppercase;
+  margin-bottom: 0.75vw;
+  padding: 0.25vw 0 0.25vw 0;
+}
+#log-in-form {
+  padding-top: 1vw;
+  padding-bottom: 11.5vw;
+}
+#confirm-form {
+  padding-top: 1vw;
+  padding-bottom: 7.25vw;
+  text-align: center;
+}
+#confirm-form h1 {
+  margin-bottom: -1vw;
+  font-size: 2vw;
+}
+#confirm-form h2 {
+  font-size: 1.25vw;
+}
+#bottom-acct-confirm .subheading {
+  width: 100%;
+}
+#bottom-acct-confirm .subheading span,
+#bottom-acct-confirm .subheading a {
+  color: #379683;
+  font-size: 1vw;
+}
+#bottom-acct-confirm .subheading span {
+  margin-left: 8.75vw;
+}
+#bottom-acct-confirm .subheading a {
+  text-decoration: underline;
+  margin-left: 0.25vw;
+}

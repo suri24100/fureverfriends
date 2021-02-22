@@ -10,6 +10,7 @@ import Listings from "./Listings";
 import Login from "./Login";
 import PetCare from "./PetCare";
 import SignUp from "./SignUp";
+import CreateAccount from "./CreateAccount";
 
 
 
@@ -34,6 +35,9 @@ export default function App() {
             <Route path ="/Signup">
                 <SignUp/>
             </Route>
+            <Route path ="/CreateAccount">
+                <CreateAccount />
+            </Route>
             <Route path="/listings">
                 <Listings />
             </Route>
@@ -49,6 +53,7 @@ export default function App() {
             <Route path="/">
                 <Home />
             </Route>
+            {/*temporary!!*/}
         </Switch>
         <Footer />
 

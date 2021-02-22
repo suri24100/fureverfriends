@@ -1,0 +1,8 @@
+<svg id="pets-24px" xmlns="http://www.w3.org/2000/svg" width="58.377" height="58.377" viewBox="0 0 58.377 58.377">
+  <path id="Path_1" data-name="Path 1" d="M0,0H58.377V58.377H0Z" transform="translate(0 0)" fill="none"/>
+  <ellipse id="Ellipse_5" data-name="Ellipse 5" cx="5.507" cy="6.333" rx="5.507" ry="6.333" transform="translate(5.507 16.522)" fill="#379683"/>
+  <circle id="Ellipse_6" data-name="Ellipse 6" cx="6.081" cy="6.081" r="6.081" transform="translate(15.811 7.297)" fill="#379683"/>
+  <circle id="Ellipse_7" data-name="Ellipse 7" cx="6.081" cy="6.081" r="6.081" transform="translate(30.405 7.297)" fill="#379683"/>
+  <ellipse id="Ellipse_8" data-name="Ellipse 8" cx="5.783" cy="6.333" rx="5.783" ry="6.333" transform="translate(41.856 16.522)" fill="#379683"/>
+  <path id="Path_2" data-name="Path 2" d="M32.464,10.605c-2.116-2.481-3.892-4.6-6.032-7.078A10.32,10.32,0,0,0,22.175.316a4.924,4.924,0,0,0-.8-.219,12.242,12.242,0,0,0-1.9-.1,10.2,10.2,0,0,0-1.922.122,4.925,4.925,0,0,0-.8.219,10.478,10.478,0,0,0-4.257,3.211C10.378,6.032,8.6,8.149,6.462,10.63,3.275,13.816-.641,17.343.089,22.281a7.637,7.637,0,0,0,5.667,5.643c1.776.365,7.443-1.07,13.475-1.07h.438c6.032,0,11.7,1.411,13.475,1.07a7.674,7.674,0,0,0,5.667-5.643C39.567,17.319,35.65,13.792,32.464,10.605Z" transform="translate(9.714 25.54)" fill="#379683"/>
+</svg>

@@ -3,7 +3,7 @@ import Header from "./Header";
 import './css/style.css';
 import './css/signing.css';
 
-export default function Login(){
+export default function CreateAccount(){
     return (
         <div className="signing-banner-wrap">
             <div className="signing-banner-img-wrap"></div>
@@ -31,7 +31,7 @@ export default function Login(){
                             <button className="signing-btn">Log In</button>
                         </div>
                         <div className="belowbutton-subheading">
-                            <span>Need to create an account?<a href="/CreateAccount">Sign Up</a></span>
+                            <span>Need to create an account?<a href="signing.html">Sign Up</a></span>
                         </div>
                     </div>
                 </div>

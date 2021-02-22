@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <link rel="stylesheet" href="./quiz.css">
+
+    <!--jQuery-->
+    <script
+        src="http://code.jquery.com/jquery-3.5.1.min.js"
+        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+        crossorigin="anonymous"></script>
+    <!-- link header.html and footer.html -->
+    <script>
+        $.ajax({
+            url: 'header.html',
+            dataType: 'html',
+            success: function(html) { $('#header').html(html); }
+        });
+        $.ajax({
+            url: 'footer.html',
+            dataType: 'html',
+            success: function(html) { $('#footer').html(html); }
+        });
+    </script>
+
+</head>
+<body>
+    <div class="quiz-banner-wrap">
+        <div id="header" class="header"></div>
+        <div class="quiz-banner-img-wrap"></div>
+        <div class="heading">
+            <span>Purrsonality Quiz</span>
+        </div>
+        <div class="subheading">
+            <span>Take the quiz to get matched with your potential friend</span>
+        </div>
+    </div>
+    <div class="info-wrap">
+        <div class="question-wrap">
+            <h3>1. It’s your day off, what will you be doing? (Pick your top 3)</h3>
+            <!-- q1a1 = question 1 answer 1, used as a reference if needed -->
+            <div class=option-wrap>
+                <input type="checkbox" id="q1a1" name="q1a1" value="q1a1">
+                <label for="q1a1"> Outside, enjoying a run, walk, or hike.</label>
+            </div>
+            
+            <div class=option-wrap>
+                <input type="checkbox" id="q1a2" name="q1a2" value="q1a2">
+                <label for="q1a2"> Snuggled up in bed to sleep in.</label>
+            </div>
+
+            <div class=option-wrap>
+                <input type="checkbox" id="q1a3" name="q1a3" value="q1a3">
+                <label for="q1a3"> On the couch, time for some TV!</label>
+            </div>
+            
+            <div class=option-wrap>
+                <input type="checkbox" id="q1a4" name="q1a4" value="q1a4">
+                <label for="q1a1"> Enjoying some hobby time.</label>
+            </div>
+            
+            <div class=option-wrap>
+                <input type="checkbox" id="q1a5" name="q1a5" value="q1a5">
+                <label for="q1a5"> Shopping and exploring downtown.</label>
+            </div>
+            
+            <div class=option-wrap>
+                <input type="checkbox" id="q1a6" name="q1a6" value="q1a6">
+                <label for="q1a6"> Hanging out with my friends and family.</label>
+            </div>
+            
+            <div class=option-wrap>
+                <input type="checkbox" id="q1a7" name="q1a7" value="q1a7">
+                <label for="q1a7"> Cleaning and prepping for the week ahead.</label>
+            </div>
+            
+            <div class=option-wrap>
+                <input type="checkbox" id="q1a8" name="q1a8" value="q1a8">
+                <label for="q1a8"> Working. What is a “day off?”</label>
+            </div>
+        </div>
+
+        <div class="question-wrap">
+            <h3>2. What would your ideal pet be like? (Select all that apply)</h3>
+            <!-- q3a1 = question 1 answer 1, used as a reference if needed -->
+            <div class=option-wrap>
+            <input type="checkbox" id="q2a1" name="q2a1" value="q2a1">
+            <label for="q2a1">Quiet</label>
+            
+            <div class=option-wrap></div>
+                <input type="checkbox" id="q2a2" name="q2a2" value="q2a2">
+                <label for="q2a2">Talkative</label>
+            </div>
+
+            <div class=option-wrap>
+                <input type="checkbox" id="q2a3" name="q2a3" value="q2a3">
+                <label for="q2a3">Social</label>
+            </div>
+            
+            <div class=option-wrap>
+                <input type="checkbox" id="q2a4" name="q2a4" value="q2a4">
+                <label for="q2a1">Playful</label>
+            </div>
+            
+            <div class=option-wrap>
+                <input type="checkbox" id="q2a5" name="q2a5" value="q2a5">
+                <label for="q2a5">Independent</label>
+            </div>
+            
+            <div class=option-wrap>
+                <input type="checkbox" id="q2a6" name="q2a6" value="q2a6">
+                <label for="q2a6">Curious/Adventurous</label>
+            </div>
+            
+            <div class=option-wrap>
+                <input type="checkbox" id="q2a7" name="q2a7" value="q2a7">
+                <label for="q2a7">Trainable</label>
+            </div>
+            
+            <div class=option-wrap>
+                <input type="checkbox" id="q2a8" name="q2a8" value="q2a8">
+                <label for="q2a8">Loves to snuggle</label>
+            </div>
+
+            <div class=option-wrap>
+                <input type="checkbox" id="q2a9" name="q2a9" value="q2a9">
+                <label for="q2a9">Protective</label>
+            </div>
+
+            <div class=option-wrap>
+                <input type="checkbox" id="q2a10" name="q2a10" value="q2a10">
+                <label for="q2a10">Energetic</label>
+            </div>
+        </div>
+
+        <div class="question-wrap">
+            <h3>3. How clean do you like things?</h3>
+            <!-- q3a1 = question 1 answer 1, used as a reference if needed -->
+            <div class=option-wrap>
+            <input type="radio" id="q3a1" name="q3a1" value="q3a1">
+            <label for="q3a1"> Sparkly and shiny! Dust is no match for me</label>
+            
+            <div class=option-wrap></div>
+                <input type="radio" id="q3a2" name="q3a2" value="q3a2">
+                <label for="q3a2"> Relatively tidy, enough to be comfortable and lived-in.</label>
+            </div>
+
+            <div class=option-wrap>
+                <input type="radio" id="q3a3" name="q3a3" value="q3a3">
+                <label for="q3a3"> Clean? I have better things to do with my time.</label>
+            </div>
+        </div>
+
+        <div class="question-wrap">
+            <h3>4. In general, you prefer to be:</h3>
+            <!-- q3a1 = question 1 answer 1, used as a reference if needed -->
+            <div class=option-wrap>
+            <input type="radio" id="q4a1" name="q4a1" value="q4a1">
+            <label for="q4a1"> Indoors </label>
+            
+            <div class=option-wrap></div>
+                <input type="radio" id="q4a2" name="q4a2" value="q4a2">
+                <label for="q4a2"> Outdoors </label>
+            </div>
+
+            <div class=option-wrap>
+                <input type="radio" id="q4a3" name="q4a3" value="q4a3">
+                <label for="q4a3"> No Preference </label>
+            </div>
+        </div>
+
+        <div class="question-wrap">
+            <h3>5. You are typically home
+                <input type="number" id="q5a" class="hours-option" placeholder="60">
+                hours per week
+            </h3>
+        </div>
+
+        <div class="question-wrap">
+            <h3>6. What is your relationship status?</h3>
+            <!-- q6a1 = question 1 answer 1, used as a reference if needed -->
+            <div class=option-wrap>
+            <input type="radio" id="q6a1" name="q6a1" value="q6a1">
+            <label for="q6a1"> Living with a partner, no kids.</label>
+            
+            <div class=option-wrap></div>
+                <input type="radio" id="q6a2" name="q6a2" value="q6a2">
+                <label for="q6a2"> Living with a partner, kids.</label>
+            </div>
+
+            <div class=option-wrap>
+                <input type="radio" id="q6a3" name="q6a3" value="q6a3">
+                <label for="q6a3"> Living alone.</label>
+            </div>
+
+            <div class=option-wrap>
+                <input type="radio" id="q6a4" name="q6a4" value="q6a4">
+                <label for="q6a4"> Living with friends or family.</label>
+            </div>
+        </div>
+
+        <div class="question-wrap">
+            <h3>7. You have
+                <input type="number" id="q7a" placeholder="0">
+                kids in your household
+            </h3>
+        </div>
+
+        <div class="question-wrap">
+            <h3>8. You have
+                <input type="number" id="q8a" placeholder="0">
+                kids in your household that are 5 and younger
+            </h3>
+        </div>
+
+        <div class="question-wrap">
+            <h3>9. The number of pets in your household is
+                <input type="number" id="q8a" placeholder="0">
+                including:
+            </h3>
+            <!-- q9a1 = question 1 answer 1, used as a reference if needed -->
+            <div class=option-wrap>
+            <input type="checkbox" id="q9a1" name="q9a1" value="q9a1">
+            <label for="q9a1"> No pets (only if previous blank is 0) </label>
+            
+            <div class=option-wrap></div>
+                <input type="checkbox" id="q9a2" name="q9a2" value="q9a2">
+                <label for="q9a2"> Cat</label>
+            </div>
+
+            <div class=option-wrap>
+                <input type="checkbox" id="q9a3" name="q9a3" value="q9a3">
+                <label for="q9a3"> Dog </label>
+            </div>
+            
+            <div class=option-wrap>
+                <input type="checkbox" id="q9a4" name="q9a4" value="q9a4">
+                <label for="q9a1"> Small furry animals (hamsters, rabbits, etc) </label>
+            </div>
+            
+            <div class=option-wrap>
+                <input type="checkbox" id="q9a5" name="q9a5" value="q9a5">
+                <label for="q9a5"> Bird </label>
+            </div>
+            
+            <div class=option-wrap>
+                <input type="checkbox" id="q9a6" name="q9a6" value="q9a6">
+                <label for="q9a6"> Fish </label>
+            </div>
+            
+            <div class=option-wrap>
+                <input type="checkbox" id="q9a7" name="q9a7" value="q9a7">
+                <label for="q9a7"> Other </label>
+            </div>
+        </div>
+
+        <div class="question-wrap">
+            <h3>10. How big is your home?</h3>
+            <!-- q10a1 = question 1 answer 1, used as a reference if needed -->
+            <div class=option-wrap>
+            <input type="radio" id="q10a1" name="q10a1" value="q10a1">
+            <label for="q10a1"> Small, 1000 sqft or less</label>
+            
+            <div class=option-wrap></div>
+                <input type="radio" id="q10a2" name="q10a2" value="q10a2">
+                <label for="q10a2"> Medium, 1000-2000 sqft</label>
+            </div>
+
+            <div class=option-wrap>
+                <input type="radio" id="q10a3" name="q10a3" value="q10a3">
+                <label for="q10a3"> Large, More than 2000sqft </label>
+            </div>
+        </div>
+
+        <div class="question-wrap">
+            <h3>11. Do you have a yard?</h3>
+            <!-- q11a1 = question 1 answer 1, used as a reference if needed -->
+            <div class=option-wrap>
+            <input type="radio" id="q11a1" name="q11a1" value="q11a1">
+            <label for="q11a1"> Yes </label>
+            
+            <div class=option-wrap></div>
+                <input type="radio" id="q11a2" name="q11a2" value="q11a2">
+                <label for="q11a2"> No </label>
+            </div>
+        </div>
+
+        <div class="question-wrap">
+            <h3>12. Do you have any pet-related allergies? Select all that apply</h3>
+            <!-- q120a1 = question 1 answer 1, used as a reference if needed -->
+            <div class=option-wrap>
+                <input type="checkbox" id="q12a1" name="q12a1" value="q12a1">
+                <label for="q12a1"> Cats </label>
+            </div>
+            
+            <div class=option-wrap>
+                <input type="checkbox" id="q12a2" name="q12a2" value="q12a2">
+                <label for="q12a2"> Dogs </label>
+            </div>
+
+            <div class=option-wrap>
+                <input type="checkbox" id="q12a3" name="q12a3" value="q12a3">
+                <label for="q12a3"> Anything with fur, unless it’s hypoallergenic.</label>
+            </div>
+            
+            <div class=option-wrap>
+                <input type="checkbox" id="q12a4" name="q12a4" value="q12a4">
+                <label for="q12a4"> Anything with fur, <i>including</i> hypoallergenic animals.</label>
+            </div>
+            
+            <div class=option-wrap>
+                <input type="checkbox" id="q122a5" name="q12a5" value="q12a5">
+                <label for="q12a5"> Other, please specify: 
+                    <input type="text" id="q12a5a">
+                </label>
+            </div>
+        </div>
+
+        <div class="submit default">
+            <button>Submit</button>
+        </div>
+
+    </div>   
+    
+    <div id="footer"></div>
+</body>
+<script type="text/javascript" src="home.js">
+</script>
+</html>
