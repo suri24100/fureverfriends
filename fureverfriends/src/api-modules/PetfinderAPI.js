@@ -15,7 +15,7 @@ const KEY = "RsPfXnm5hAVCghknjJjCOyxFp4jwh0cHHgAZ8eUD";
 let token = {};
 
 // used for all api queries
-const BASE_URL = "https://api.petfinder.com/";
+const BASE_URL = "https://api.petfinder.com";
 export const TYPE_URLS = {
     dog: "/v2/types/dog/",
     cat: "/v2/types/cat/",
@@ -40,12 +40,12 @@ const BREED_URLS = {
 // For full breakdown of PetFinder params, refer to consts declared toward end of file
 
 // get new token for access
-export function getToken(){
+async function getToken(){
     const token_string = "grant_type=client_credentials&client_id=" +
                             CLIENT_ID + "&client_secret=" + KEY;
     const token_url = "https://api.petfinder.com/v2/oauth2/token";
 
-    axios.post(
+    await axios.post(
         token_url,
         token_string)
         .then(function (response) {
@@ -57,7 +57,8 @@ export function getToken(){
             // store current token with expiry date for verification
             token = {
                 access_token: response.data.access_token,
-                valid_to: d
+                valid_to: d,
+                h: {headers: {'Authorization': 'Bearer ' + response.data.access_token}}
             }
         })
         .catch(function (error) {
@@ -65,51 +66,31 @@ export function getToken(){
         });
 }
 
-// test connection, generic async function for getting date from PetFinder
-export async function getData(){
-    const query_url = "https://api.petfinder.com/v2/types";
-    const headers = {
-        'Authorization': 'Bearer ' + token.access_token
-    };
-
-    // check if token as expired, if so, get new token
-    let curr = new Date();
-    if(curr > token.valid_to){
-         await getToken()
-    }
-    axios.get(
-        query_url,
-        {headers: headers}
-        ).then(function (response) {
-        console.log(response)
+// handles a request to the API given the specified url
+async function getData(dataURL){
+    await getToken();
+    await axios.get(
+        dataURL,
+        token.h
+    ).then(function (response) {
+         console.log(response.data)
     })
-    .catch(function (error) {
-        console.log(error);
-    });
+     .catch(function (error) {
+         console.log(error);
+     });
 }
 
-// // get JSON of all animal breeds
-// export async function getBreeds(){
-//     const query_url_start = "https://api.petfinder.com/";
-//     const headers = {
-//         'Authorization': 'Bearer ' + token.access_token
-//     };
-//
-//     // check if token as expired, if so, get new token
-//     let curr = new Date();
-//     if(curr > token.valid_to){
-//         await getToken()
-//     }
-//     axios.get(
-//         query_url,
-//         {headers: headers}
-//     ).then(function (response) {
-//         console.log(JSON.stringify(response))
-//     })
-//         .catch(function (error) {
-//             console.log(error);
-//         });
-// }
+// get breeds of a specific animal type
+export async function getBreeds(animalType){
+    let breedURL = BASE_URL + BREED_URLS[animalType];
+    await getData(breedURL);
+}
+
+// get first 20 listings of a specific animal type
+export async function getTypeListing(animalType, numListings){
+    let typeURL = BASE_URL + "/v2/animals?type=" + animalType + "&limit=" + numListings;
+    await getData(typeURL);
+}
 
 
 // parameters for queries, can be combined

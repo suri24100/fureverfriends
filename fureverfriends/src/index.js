@@ -4,9 +4,16 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from "react-router-dom";
-import {getToken, getData} from "./api-modules/PetfinderAPI";
+import {getBreeds, getTypeListing} from "./api-modules/PetfinderAPI";
 
-let p = getData();
+
+// for example purposes
+let d = getBreeds("dog");
+let c = getBreeds("cat");
+let r = getBreeds("rabbit");
+
+let dl = getTypeListing("dog", 10);
+let cl = getTypeListing("cat", 10);
 
 
 //import firebase from "firebase";
