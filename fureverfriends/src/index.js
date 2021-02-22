@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from "react-router-dom";
 import {getToken, getData} from "./api-modules/PetfinderAPI";
 
-getToken();
+let p = getData();
 
 
 //import firebase from "firebase";

@@ -14,6 +14,31 @@ const CLIENT_ID = "ygcuWhnebW0MHgMwxny1ThmJ3OeJzIzMUaF9b3IeviUmOJVsYy";
 const KEY = "RsPfXnm5hAVCghknjJjCOyxFp4jwh0cHHgAZ8eUD";
 let token = {};
 
+// used for all api queries
+const BASE_URL = "https://api.petfinder.com/";
+export const TYPE_URLS = {
+    dog: "/v2/types/dog/",
+    cat: "/v2/types/cat/",
+    rabbit: "/v2/types/rabbit/",
+    small_furry: "/v2/types/small-furry/",
+    horse: "/v2/types/horse/",
+    bird: "/v2/types/bird/",
+    scales_fins_other: "/v2/types/scales-fins-other/",
+    barnyard: "/v2/types/barnyard/"
+}
+const BREED_URLS = {
+    dog: "/v2/types/dog/breeds",
+    cat: "/v2/types/cat/breeds",
+    rabbit: "/v2/types/rabbit/breeds",
+    small_furry: "/v2/types/small-furry/breeds",
+    horse: "/v2/types/horse/breeds",
+    bird: "/v2/types/bird/breeds",
+    scales_fins_other: "/v2/types/scales-fins-other/breeds",
+    barnyard: "/v2/types/barnyard/breeds"
+}
+
+// For full breakdown of PetFinder params, refer to consts declared toward end of file
+
 // get new token for access
 export function getToken(){
     const token_string = "grant_type=client_credentials&client_id=" +
@@ -34,21 +59,24 @@ export function getToken(){
                 access_token: response.data.access_token,
                 valid_to: d
             }
-            getData();
         })
         .catch(function (error) {
             console.log(error);
         });
 }
 
-// test connection
-
-export function getData() {
+// test connection, generic async function for getting date from PetFinder
+export async function getData(){
     const query_url = "https://api.petfinder.com/v2/types";
     const headers = {
         'Authorization': 'Bearer ' + token.access_token
     };
 
+    // check if token as expired, if so, get new token
+    let curr = new Date();
+    if(curr > token.valid_to){
+         await getToken()
+    }
     axios.get(
         query_url,
         {headers: headers}
@@ -58,4 +86,348 @@ export function getData() {
     .catch(function (error) {
         console.log(error);
     });
+}
+
+// // get JSON of all animal breeds
+// export async function getBreeds(){
+//     const query_url_start = "https://api.petfinder.com/";
+//     const headers = {
+//         'Authorization': 'Bearer ' + token.access_token
+//     };
+//
+//     // check if token as expired, if so, get new token
+//     let curr = new Date();
+//     if(curr > token.valid_to){
+//         await getToken()
+//     }
+//     axios.get(
+//         query_url,
+//         {headers: headers}
+//     ).then(function (response) {
+//         console.log(JSON.stringify(response))
+//     })
+//         .catch(function (error) {
+//             console.log(error);
+//         });
+// }
+
+
+// parameters for queries, can be combined
+const TYPES = ["dog", "cat", "rabbit", "small_furry", "horse", "bird", "scales_fins_other", "barnyard"];
+const GENDERS = ["male", "female", "unknown"];
+const SIZE = ["small", "medium", "large", "xlarge"];
+const AGE = ["baby", "young", "adult", "senior"];
+const COAT = ["short", "medium", "long", "wire", "hairless", "curly"];
+const STATUS = ["adoptable", "adopted", "found"];
+
+// full option breakdown for each type
+const DOG =  {
+    "name":"Dog",
+    "coats":[
+        "Hairless",
+        "Short",
+        "Medium",
+        "Long",
+        "Wire",
+        "Curly"
+    ],
+    "colors":[
+        "Apricot / Beige",
+        "Bicolor",
+        "Black",
+        "Brindle",
+        "Brown / Chocolate",
+        "Golden",
+        "Gray / Blue / Silver",
+        "Harlequin",
+        "Merle (Blue)",
+        "Merle (Red)",
+        "Red / Chestnut / Orange",
+        "Sable",
+        "Tricolor (Brown, Black, & White)",
+        "White / Cream",
+        "Yellow / Tan / Blond / Fawn"
+    ],
+    "genders":[
+        "Male",
+        "Female"
+    ],
+    "_links":{
+        "self":{
+            "href":"/v2/types/dog"
+        },
+        "breeds":{
+            "href":"/v2/types/dog/breeds"
+        }
+    }
+}
+const CAT = {
+    "name":"Cat",
+    "coats":[
+        "Hairless",
+        "Short",
+        "Medium",
+        "Long"
+    ],
+    "colors":[
+        "Black",
+        "Black & White / Tuxedo",
+        "Blue Cream",
+        "Blue Point",
+        "Brown / Chocolate",
+        "Buff & White",
+        "Buff / Tan / Fawn",
+        "Calico",
+        "Chocolate Point",
+        "Cream / Ivory",
+        "Cream Point",
+        "Dilute Calico",
+        "Dilute Tortoiseshell",
+        "Flame Point",
+        "Gray & White",
+        "Gray / Blue / Silver",
+        "Lilac Point",
+        "Orange & White",
+        "Orange / Red",
+        "Seal Point",
+        "Smoke",
+        "Tabby (Brown / Chocolate)",
+        "Tabby (Buff / Tan / Fawn)",
+        "Tabby (Gray / Blue / Silver)",
+        "Tabby (Leopard / Spotted)",
+        "Tabby (Orange / Red)",
+        "Tabby (Tiger Striped)",
+        "Torbie",
+        "Tortoiseshell",
+        "White"
+    ],
+    "genders":[
+        "Male",
+        "Female"
+    ],
+    "_links":{
+        "self":{
+            "href":"/v2/types/cat"
+        },
+        "breeds":{
+            "href":"/v2/types/cat/breeds"
+        }
+    }
+}
+const RABBIT = {
+    "name":"Rabbit",
+    "coats":[
+        "Short",
+        "Long"
+    ],
+    "colors":[
+        "Agouti",
+        "Black",
+        "Blue / Gray",
+        "Brown / Chocolate",
+        "Cream",
+        "Lilac",
+        "Orange / Red",
+        "Sable",
+        "Silver Marten",
+        "Tan",
+        "Tortoiseshell",
+        "White"
+    ],
+    "genders":[
+        "Male",
+        "Female"
+    ],
+    "_links":{
+        "self":{
+            "href":"/v2/types/rabbit"
+        },
+        "breeds":{
+            "href":"/v2/types/rabbit/breeds"
+        }
+    }
+}
+const SMALL_FURRY = {
+    "name":"Small & Furry",
+    "coats":[
+        "Hairless",
+        "Short",
+        "Long"
+    ],
+    "colors":[
+        "Agouti",
+        "Albino",
+        "Black",
+        "Black Sable",
+        "Blue / Gray",
+        "Brown / Chocolate",
+        "Calico",
+        "Champagne",
+        "Cinnamon",
+        "Cream",
+        "Orange / Red",
+        "Sable",
+        "Tan",
+        "Tortoiseshell",
+        "White",
+        "White (Dark-Eyed)"
+    ],
+    "genders":[
+        "Male",
+        "Female"
+    ],
+    "_links":{
+        "self":{
+            "href":"/v2/types/small-furry"
+        },
+        "breeds":{
+            "href":"/v2/types/small-furry/breeds"
+        }
+    }
+}
+const HORSE = {
+    "name":"Horse",
+    "coats":[
+
+    ],
+    "colors":[
+        "Appaloosa",
+        "Bay",
+        "Bay Roan",
+        "Black",
+        "Blue Roan",
+        "Brown",
+        "Buckskin",
+        "Champagne",
+        "Chestnut / Sorrel",
+        "Cremello",
+        "Dapple Gray",
+        "Dun",
+        "Gray",
+        "Grullo",
+        "Liver",
+        "Paint",
+        "Palomino",
+        "Perlino",
+        "Piebald",
+        "Pinto",
+        "Red Roan",
+        "Silver Bay",
+        "Silver Buckskin",
+        "Silver Dapple",
+        "White"
+    ],
+    "genders":[
+        "Male",
+        "Female"
+    ],
+    "_links":{
+        "self":{
+            "href":"/v2/types/horse"
+        },
+        "breeds":{
+            "href":"/v2/types/horse/breeds"
+        }
+    }
+}
+const BIRD = {
+    "name":"Bird",
+    "coats":[
+    ],
+    "colors":[
+        "Black",
+        "Blue",
+        "Brown",
+        "Buff",
+        "Gray",
+        "Green",
+        "Olive",
+        "Orange",
+        "Pink",
+        "Purple / Violet",
+        "Red",
+        "Rust / Rufous",
+        "Tan",
+        "White",
+        "Yellow"
+    ],
+    "genders":[
+        "Male",
+        "Female",
+        "Unknown"
+    ],
+    "_links":{
+        "self":{
+            "href":"/v2/types/bird"
+        },
+        "breeds":{
+            "href":"/v2/types/bird/breeds"
+        }
+    }
+}
+const SCALES_FINS_OTHER = {
+    "name":"Scales, Fins & Other",
+    "coats":[
+
+    ],
+    "colors":[
+        "Black",
+        "Blue",
+        "Brown",
+        "Gray",
+        "Green",
+        "Iridescent",
+        "Orange",
+        "Purple",
+        "Red",
+        "Tan",
+        "White",
+        "Yellow"
+    ],
+    "genders":[
+        "Male",
+        "Female",
+        "Unknown"
+    ],
+    "_links":{
+        "self":{
+            "href":"/v2/types/scales-fins-other"
+        },
+        "breeds":{
+            "href":"/v2/types/scales-fins-other/breeds"
+        }
+    }
+}
+const BARNYARD = {
+    "name":"Barnyard",
+    "coats":[
+        "Short",
+        "Long"
+    ],
+    "colors":[
+        "Agouti",
+        "Black",
+        "Black & White",
+        "Brindle",
+        "Brown",
+        "Gray",
+        "Pink",
+        "Red",
+        "Roan",
+        "Spotted",
+        "Tan",
+        "White"
+    ],
+    "genders":[
+        "Male",
+        "Female"
+    ],
+    "_links":{
+        "self":{
+            "href":"/v2/types/barnyard"
+        },
+        "breeds":{
+            "href":"/v2/types/barnyard/breeds"
+        }
+    }
 }
