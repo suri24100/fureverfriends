@@ -35,6 +35,9 @@ export default function App() {
             <Route path ="/Signup">
                 <SignUp/>
             </Route>
+            <Route path ="/CreateAccount">
+                <CreateAccount />
+            </Route>
             <Route path="/listings">
                 <Listings />
             </Route>
@@ -51,9 +54,6 @@ export default function App() {
                 <Home />
             </Route>
             {/*temporary!!*/}
-            <Route path ="/CreateAccount">
-                <CreateAccount />
-            </Route>
         </Switch>
         <Footer />
 
