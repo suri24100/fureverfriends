@@ -35,7 +35,7 @@ mc = ModelCheckpoint("best_checkpoint.h5", monitor="val_acc" , save_best_only=Tr
 
 model.fit(X_train,y_train,validation_data=(X_val,y_val), epochs= 20, batch_size=20, callbacks=[mc])
 
-model.load_weights("best_checkpoint.h5")
+# model.load_weights("best_checkpoint.h5")
 
 y_test_pred = model.predict(X_test)
 y_test_pred = [1 if pred > 0.5 else 0 for pred in y_test_pred ]
