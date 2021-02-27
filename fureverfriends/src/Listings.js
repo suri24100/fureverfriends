@@ -3,12 +3,15 @@ import Header from "./Header";
 import './css/style.css';
 import './css/listings.css';
 import {getTypeListing} from "./api-modules/PetfinderAPI";
+import {forEach} from "react-bootstrap/ElementChildren";
 
-function PetCard(){
+function PetCard(props){
+    console.log(props.petInfo);
+    const petInfo = props.petInfo;
     const [petDetails, setPetDetails] = useState({
-        petfinder_listing: false,       // check whether from petfinder or not
-        id: "",
-        name:"",
+        petfinder_listing: true,       // check whether from petfinder or not
+        id: petInfo.id,
+        name: petInfo.name,
         photo_url: "",
         profile_url: "",
         type: "",
@@ -61,7 +64,7 @@ export default function Listings(){
 
     useEffect(() => {
         if(!petListings){
-            //getListingData();
+            getListingData();
             console.log(petListings);
         }
         else{
@@ -75,11 +78,9 @@ export default function Listings(){
     }
 
     function generateCards(){
+        let cardList = petListings.map(pet => <PetCard petInfo={pet} />);
         return(
-            <>
-                <PetCard />
-                <PetCard />
-            </>
+            <>{cardList}</>
         )
     }
 
