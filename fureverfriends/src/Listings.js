@@ -12,24 +12,24 @@ function PetCard(props){
         petfinder_listing: true,       // check whether from petfinder or not
         id: petInfo.id,
         name: petInfo.name,
-        photo_url: "",
-        profile_url: "",
-        type: "",
-        age: "",
-        breed: "",
+        photo_url: (petInfo.photos[0]) ? petInfo.photos[0].large : "./images/petProfiles/default-placeholder-image.png",
+        profile_url: petInfo.url,
+        type: petInfo.type,
+        age: petInfo.age,
+        breed: petInfo.breed,
         location: {
-            zipcode: "",
-            city: "",
-            state: ""
+            zipcode: petInfo.contact.address.postcode,
+            city: petInfo.contact.address.city,
+            state: petInfo.contact.address.state
         },
         cared_by: "",
-        gender: "",
-        fur_length: "",
-        personality: "",
+        gender: petInfo.gender,
+        fur_length: petInfo.coat,
+        personality: petInfo.tags,
         good_with_pets: "",
         kid_friendly: "",
-        vaccinated: "",
-        neutered: "",
+        vaccinated: petInfo.attributes.shots_current,
+        neutered: petInfo.attributes.spayed_neutered,
         bonded_pair: "",
         allergy_friendly: ""
     });
@@ -43,15 +43,15 @@ function PetCard(props){
             <div className="card">
                 <div className="card-image">
                     <a href="#" className="profile-link-overlay">
-                        <img src="./images/petProfiles/HugoProfile.jpg" />
+                        <img src={petDetails.photo_url} />
                     </a>
                     <a className="btn-floating halfway-fab waves-effect waves-light">
                         <i className="material-icons">favorite_border</i>
                     </a>
                 </div>
                 <div className="card-content">
-                    <span className="name">Hugo</span>
-                    <span className="location">Middletown, PA</span>
+                    <span className="name">{petDetails.name}</span>
+                    <span className="location">{petDetails.location.city}, {petDetails.location.state}</span>
                 </div>
             </div>
         </div>

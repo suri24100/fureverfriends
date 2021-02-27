@@ -10,6 +10,11 @@
   font-weight: bold;
 }
 
+.listings-page .listing-card .card-image img{
+  height:200px;
+  object-fit:cover;
+}
+
 .listings-page .listing-card .card-content{
   color: #fff;
   background: #379683;
