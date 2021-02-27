@@ -37,17 +37,17 @@
         </div>
     </div>
     <div class="listings-heading container">
-        <h5 class="center-align">Create a profile for your pet</h5>
+        <h4 class="center-align">Create a profile for your pet</h4>
     </div>
     <div class="listings-images-wrap container">
         <div class="listings-profile-pic-wrap col m4 l4 x4">
-            <h6>Set Profile Picture</h6>
+            <h5>Set Profile Picture</h5>
             <a href="#">
                 <i class="material-icons add_photo">add_photo_alternate</i>
             </a>
         </div>
         <div class="listings-additional-pic-wrap col m8 l8 x8">
-            <h6>Add Additional Pictures</h6>
+            <h5>Add Additional Pictures</h5>
             <a href="#">
                 <i class="material-icons add_photo">add_photo_alternate</i>
             </a>
@@ -60,7 +60,7 @@
         </div>
     </div>
     <div class="listings-pet-info container">
-        <h6>Pet Information</h6>
+        <h5>Pet Information</h5>
         <form class="row">
             <div class="left-filter col s12 m6 l6 x6">
 
@@ -181,11 +181,56 @@
 
             </div>
         </form>
+    </div>
+    <div class="listings-about-me container">
+        <h5>About me section</h5>
+        <form class="row">
+            <div class="input-field col s12">
+                <label for="textarea1">Please fill out this section regarding any additional info (such as a backstory!)</label>
+                <textarea id="textarea1" class="materialize-textarea"></textarea>
+            </div>
+        </form>
+    </div>
+
+    <div class="listings-contact-info container">
+        <h5>Contact Information</h5>
+        <form class="listings-contact-form">
+            <div class="row">
+                <div class="left-filter col s12 m6 l6 x6">
+                    <div class="input-field contact-input-wrap">
+                        <i class="material-icons prefix">account_circle</i>
+                        <input id="icon_prefix" type="text" class="validate">
+                        <label for="icon_prefix">Name </label>
+                    </div>
+                    <div class="input-field contact-input-wrap">
+                        <i class="material-icons prefix">phone</i>
+                        <input id="icon_prefix" type="text" class="validate">
+                        <label for="icon_prefix">Phone </label>
+                    </div>
+                </div>
+                <div class="right-filter col s12 m6 l6 x6">
+                    <div class="input-field contact-input-wrap">
+                        <i class="material-icons prefix">mail</i>
+                        <input id="icon_prefix" type="text" class="validate">
+                        <label for="icon_prefix">Email </label>
+                    </div>
+                    <div class="input-field contact-input-wrap">
+                        <i class="material-icons prefix">language</i>
+                        <input id="icon_prefix" type="text" class="validate">
+                        <label for="icon_prefix">Website </label>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
 </body>
 <script>
   $(document).ready(function(){
     $('select').material_select();
   });
+
+  M.textareaAutoResize($('#textarea1'));
+
 </script>
 <script src= "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
 </html>

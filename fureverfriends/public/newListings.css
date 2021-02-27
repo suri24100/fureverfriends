@@ -14,21 +14,21 @@ img {
   background-size: 100%;
   background-attachment: fixed;
 }
-.listings-heading h5 {
+.listings-heading h4 {
   text-transform: uppercase;
   color: #4C4C4C;
-  font-size: 2vw;
   font-weight: bold;
+  font-size: 1.5rem;
 }
 .listings-images-wrap {
   display: flex;
   justify-content: space-between;
 }
-.listings-images-wrap .listings-profile-pic-wrap h6 {
+.listings-images-wrap .listings-profile-pic-wrap h5 {
   text-transform: uppercase;
   color: #379683;
-  font-size: 1.5vw;
   font-weight: bold;
+  font-size: 1rem;
 }
 .listings-images-wrap .listings-profile-pic-wrap .add_photo {
   font-size: 10vw;
@@ -37,11 +37,11 @@ img {
   border: 0.25vw solid #7E7C7C;
   border-radius: 1vw;
 }
-.listings-images-wrap .listings-additional-pic-wrap h6 {
+.listings-images-wrap .listings-additional-pic-wrap h5 {
   text-transform: uppercase;
   color: #379683;
-  font-size: 1.5vw;
   font-weight: bold;
+  font-size: 1rem;
 }
 .listings-images-wrap .listings-additional-pic-wrap .add_photo {
   font-size: 10vw;
@@ -50,9 +50,11 @@ img {
   border: 0.25vw solid #7E7C7C;
   border-radius: 1vw;
 }
-.listings-pet-info h6 {
+.listings-pet-info h5,
+.listings-about-me h5,
+.listings-contact-info h5 {
   text-transform: uppercase;
   color: #379683;
-  font-size: 1.5vw;
   font-weight: bold;
+  font-size: 1rem;
 }
