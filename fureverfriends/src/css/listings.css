@@ -1,7 +1,32 @@
-body {
+.listings-page body {
   font-family: 'Calibri';
+  color: #ffffff;
+  background-image: none;
 }
-.banner-wrap {
+
+.listings-page .pet-listing-nav button{
+  margin-right: 1rem;
+  margin-left: 1rem;
+  font-weight: bold;
+}
+
+.listings-page .listing-card .card-content{
+  color: #fff;
+  background: #379683;
+}
+
+.listings-page .listing-card .card-content .name{
+  display: block;
+  font-size: 1.3rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.listings-page .listing-card .card-content .location{
+  display: block;
+}
+
+.listings-page.banner-wrap {
   text-align: center;
   color: #ffffff;
   position: relative;
@@ -11,7 +36,7 @@ body {
   background-size: 100%;
   background-attachment: fixed;
 }
-.banner-wrap .heading {
+.listings-page.banner-wrap .heading {
   font-size: 2.5vw;
   text-transform: uppercase;
   font-weight: bold;
@@ -19,13 +44,13 @@ body {
   left: 30%;
   top: 77%;
 }
-.banner-wrap .subheading {
+.listings-page.banner-wrap .subheading {
   font-size: 1.5vw;
   position: absolute;
   left: 40%;
   top: 87%;
 }
-.default button {
+.listings-page .default button {
   background-color: #379683;
   border: none;
   color: #ffffff;
@@ -37,18 +62,18 @@ body {
   /*box-shadow: 0 0.25vw 0.5vw 0 rgba(0, 0, 0, 0.2), 0 0.25vw 0.5vw 0 rgba(0, 0, 0, 0.19);*/
   transition: all 0.5s;
 }
-.default button:hover {
+.listings-page .default button:hover {
   background-color: #2a7364;
   text-decoration: underline;
   cursor: pointer;
 }
-.line-break {
+.listings-page .line-break {
   margin-left: 12%;
   margin-right: 12%;
   margin-bottom: 2vw;
   border-top: 0.25vw solid #379683;
 }
-.additional-filters-wrap {
+.listings-page .additional-filters-wrap {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -56,100 +81,100 @@ body {
   margin-right: 12%;
   margin-bottom: 2vw;
 }
-.additional-filters-wrap .top {
+.listings-page .additional-filters-wrap .top {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: baseline;
 }
-.additional-filters-wrap .top .heading h3 {
+.listings-page .additional-filters-wrap .top .heading h3 {
   font-size: 1.75vw;
   color: #379683;
   text-transform: uppercase;
 }
-.additional-filters-wrap .top .apply-btn-wrap {
+.listings-page .additional-filters-wrap .top .apply-btn-wrap {
   margin-right: 2.75vw;
 }
-.additional-filters-wrap .forms {
+.listings-page .additional-filters-wrap .forms {
   display: flex;
   justify-content: space-between;
 }
-.additional-filters-wrap .forms .row1,
-.additional-filters-wrap .forms .row2,
-.additional-filters-wrap .forms .row3 {
+.listings-page .additional-filters-wrap .forms .row1,
+.listings-page .additional-filters-wrap .forms .row2,
+.listings-page .additional-filters-wrap .forms .row3 {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   font-size: 1.25vw;
 }
-.additional-filters-wrap .forms .row1 form,
-.additional-filters-wrap .forms .row2 form,
-.additional-filters-wrap .forms .row3 form {
+.listings-page .additional-filters-wrap .forms .row1 form,
+.listings-page .additional-filters-wrap .forms .row2 form,
+.listings-page .additional-filters-wrap .forms .row3 form {
   display: flex;
   flex-direction: column;
 }
-.additional-filters-wrap .forms .row1 form select,
-.additional-filters-wrap .forms .row2 form select,
-.additional-filters-wrap .forms .row3 form select,
-.additional-filters-wrap .forms .row1 form option,
-.additional-filters-wrap .forms .row2 form option,
-.additional-filters-wrap .forms .row3 form option,
-.additional-filters-wrap .forms .row1 form input,
-.additional-filters-wrap .forms .row2 form input,
-.additional-filters-wrap .forms .row3 form input {
+.listings-page .additional-filters-wrap .forms .row1 form select,
+.listings-page .additional-filters-wrap .forms .row2 form select,
+.listings-page .additional-filters-wrap .forms .row3 form select,
+.listings-page .additional-filters-wrap .forms .row1 form option,
+.listings-page .additional-filters-wrap .forms .row2 form option,
+.listings-page .additional-filters-wrap .forms .row3 form option,
+.listings-page .additional-filters-wrap .forms .row1 form input,
+.listings-page .additional-filters-wrap .forms .row2 form input,
+.listings-page .additional-filters-wrap .forms .row3 form input {
   font-size: 1.25vw;
 }
-.additional-filters-wrap .forms .row1 input[type=checkbox],
-.additional-filters-wrap .forms .row2 input[type=checkbox],
-.additional-filters-wrap .forms .row3 input[type=checkbox] {
+.listings-page .additional-filters-wrap .forms .row1 input[type=checkbox],
+.listings-page .additional-filters-wrap .forms .row2 input[type=checkbox],
+.listings-page .additional-filters-wrap .forms .row3 input[type=checkbox] {
   width: 1.25vw;
 }
-.additional-filters-wrap .forms .row1 .wrap,
-.additional-filters-wrap .forms .row2 .wrap {
+.listings-page .additional-filters-wrap .forms .row1 .wrap,
+.listings-page .additional-filters-wrap .forms .row2 .wrap {
   display: flex;
   margin-bottom: 0.5vw;
 }
-.additional-filters-wrap .forms .row1 .wrap label,
-.additional-filters-wrap .forms .row2 .wrap label {
+.listings-page .additional-filters-wrap .forms .row1 .wrap label,
+.listings-page .additional-filters-wrap .forms .row2 .wrap label {
   margin-right: 0.5vw;
   font-weight: bold;
   color: #4c4c4c;
 }
-.additional-filters-wrap .forms .row1 .zip-code,
-.additional-filters-wrap .forms .row2 .zip-code {
+.listings-page .additional-filters-wrap .forms .row1 .zip-code,
+.listings-page .additional-filters-wrap .forms .row2 .zip-code {
   width: 30%;
 }
-.additional-filters-wrap .forms .row1 .breed,
-.additional-filters-wrap .forms .row2 .breed {
+.listings-page .additional-filters-wrap .forms .row1 .breed,
+.listings-page .additional-filters-wrap .forms .row2 .breed {
   width: 50%;
 }
-.results-wrap {
+.listings-page .results-wrap {
   margin-left: 12%;
   margin-right: 12%;
 }
-.results-wrap .sort-wrap {
+.listings-page .results-wrap .sort-wrap {
   margin-bottom: 1.5vw;
 }
-.results-wrap .sort-wrap label {
+.listings-page .results-wrap .sort-wrap label {
   margin-right: 0.5vw;
   font-weight: bold;
   color: #4c4c4c;
   font-size: 1.25vw;
 }
-.results-wrap .sort-wrap select,
-.results-wrap .sort-wrap option {
+.listings-page .results-wrap .sort-wrap select,
+.listings-page .results-wrap .sort-wrap option {
   font-size: 1.25vw;
 }
-.results-wrap .results-grid-container {
+.listings-page .results-wrap .results-grid-container {
   display: grid;
   grid-template-columns: 18vw 18vw 18vw 18vw;
   gap: 2vh 1.5vw;
   margin-bottom: 4vw;
 }
-.results-wrap .results-grid-container .pet-container {
+.listings-page .results-wrap .pet-container {
   position: relative;
 }
-.results-wrap .results-grid-container .pet-container .overlay {
+.listings-page .overlay {
   position: absolute;
   top: 0;
   left: 0;
@@ -158,11 +183,11 @@ body {
   background: rgba(0, 0, 0, 0);
   transition: background 0.5s ease;
 }
-.results-wrap .results-grid-container .pet-container:hover .overlay {
+.listings-page .results-wrap .pet-container:hover .overlay {
   display: block;
   background: rgba(0, 0, 0, 0.45);
 }
-.results-wrap .results-grid-container .pet-container .button {
+.listings-page .results-wrap .pet-container .button {
   position: absolute;
   width: 10vw;
   left: 20%;
@@ -171,7 +196,7 @@ body {
   opacity: 0;
   transition: opacity 0.35s ease;
 }
-.results-wrap .results-grid-container .pet-container .button a {
+.listings-page .results-wrap .pet-container .button a {
   /*width: 200px;*/
   padding: 1vh 1vw 1vh 1vw;
   text-align: center;
@@ -181,18 +206,18 @@ body {
   border-radius: 1vw;
   z-index: 1;
 }
-.results-wrap .results-grid-container .pet-container:hover .button {
+.listings-page .results-wrap .pet-container:hover .button {
   opacity: 1;
 }
-.results-wrap .results-grid-container .pet-container img {
+.listings-page .results-wrap .pet-container img {
   width: 19.1vw;
 }
-.results-wrap .results-grid-container .pet-container .hugo {
+.listings-page .results-wrap .pet-container .hugo {
   width: 18vw;
   max-width: 100%;
   margin-top: 1.52vh;
 }
-.results-wrap .results-grid-container .pet-container .info-wrap {
+.listings-page .results-wrap .pet-container .info-wrap {
   background-color: #379683;
   color: #ffffff;
   text-align: center;
@@ -202,11 +227,11 @@ body {
   padding: 2vw;
   margin-top: -1vw;
 }
-.results-wrap .results-grid-container .pet-container .info-wrap .name {
+.listings-page .results-wrap .pet-container .info-wrap .name {
   text-transform: uppercase;
   font-size: 1.5vw;
   font-weight: bold;
 }
-.results-wrap .results-grid-container .pet-container .info-wrap .name:hover {
+.listings-page .results-wrap .pet-container .info-wrap .name:hover {
   cursor: pointer;
 }

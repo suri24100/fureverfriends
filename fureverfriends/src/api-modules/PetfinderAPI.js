@@ -9,10 +9,15 @@
 */
 
 import axios from "axios";
+import { saveAs } from 'file-saver';
 
 const CLIENT_ID = "ygcuWhnebW0MHgMwxny1ThmJ3OeJzIzMUaF9b3IeviUmOJVsYy";
 const KEY = "RsPfXnm5hAVCghknjJjCOyxFp4jwh0cHHgAZ8eUD";
-let token = {};
+let token = {
+    access_token: "",
+    valid_to: null,
+    h: {}
+}
 
 // used for all api queries
 const BASE_URL = "https://api.petfinder.com";
@@ -40,7 +45,7 @@ const BREED_URLS = {
 // For full breakdown of PetFinder params, refer to consts declared toward end of file
 
 // get new token for access
-async function getToken(){
+export async function getToken(){
     const token_string = "grant_type=client_credentials&client_id=" +
                             CLIENT_ID + "&client_secret=" + KEY;
     const token_url = "https://api.petfinder.com/v2/oauth2/token";
@@ -60,6 +65,7 @@ async function getToken(){
                 valid_to: d,
                 h: {headers: {'Authorization': 'Bearer ' + response.data.access_token}}
             }
+            console.log(token);
         })
         .catch(function (error) {
             console.log(error);
@@ -68,16 +74,20 @@ async function getToken(){
 
 // handles a request to the API given the specified url
 async function getData(dataURL){
-    await getToken();
+    if(token.access_token === "" || token.valid_to < new Date()){
+        await getToken();
+    }
+    let listingData = [];
     await axios.get(
         dataURL,
         token.h
     ).then(function (response) {
-         console.log(response.data)
+        listingData = response.data;
     })
      .catch(function (error) {
          console.log(error);
      });
+    return listingData;
 }
 
 // get breeds of a specific animal type
@@ -89,7 +99,56 @@ export async function getBreeds(animalType){
 // get first 20 listings of a specific animal type
 export async function getTypeListing(animalType, numListings){
     let typeURL = BASE_URL + "/v2/animals?type=" + animalType + "&limit=" + numListings;
-    await getData(typeURL);
+    let listingResults = await getData(typeURL);
+    return listingResults.animals;
+}
+
+// query for training data
+export async function callTrainingData(){
+    let startFrom = 101;
+    let numPages = 200;
+    let animal = "dog";
+    let formattedData = "pet_id|type|species|description|tags\n";
+    for(let index = startFrom; index <= numPages; index++){
+        let mainDataURL = BASE_URL + "/v2/animals?type=" + animal + "&limit=100&page=" + index;
+        let mainData = await getTrainingData(mainDataURL);
+        for(let pet = 0; pet < mainData.length; pet++){
+            if(mainData[pet].tags.length > 0 && mainData[pet].description){
+                formattedData += mainData[pet].id + "|"
+                    + mainData[pet].type + "|"
+                    + mainData[pet].species + "|"
+                    + mainData[pet].description.replace(/\n/g, " ").replace(/\r/g, "") + "|"
+                    + mainData[pet].tags.join("|") + "|"
+                    + mainData[pet].gender + "|"
+                    + mainData[pet].age + "|"
+                    + mainData[pet].size + "|"
+                    + mainData[pet].breeds.primary + "|"
+                    + mainData[pet].coat + "\n";
+            }
+        }
+    }
+    const dataBlob = await new Blob([formattedData], {type: 'text/csv'});
+    console.log(dataBlob);
+    await saveAs(dataBlob, "petfinder-profiledata.csv");
+}
+
+// get training data
+async function getTrainingData(dataURL){
+    // check if need new token
+    if(token.access_token === "" || token.valid_to < new Date()){
+        await getToken();
+    }
+    let listingresults = [];
+    await axios.get(
+        dataURL,
+        token.h
+    ).then(function (response) {
+        listingresults = response.data.animals;
+    }
+    ).catch(function (error) {
+        console.log(error);
+    });
+    return listingresults;
 }
 
 

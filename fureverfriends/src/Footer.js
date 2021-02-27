@@ -31,9 +31,9 @@ export default function Footer() {
             </div>
         </div>
         <div className="social-wrap">
-            <img src="\images\svg\facebook.svg"></img>
-            <img src="\images\svg\instagram_test.svg"></img>
-            <img src="\images\svg\twitter.svg"></img>
+            <img src="./images/svg/facebook.svg"></img>
+            <img src="./images/svg/instagram_test.svg"></img>
+            <img src="./images/svg/twitter.svg"></img>
         </div>
     </div>
     )

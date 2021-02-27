@@ -101,10 +101,10 @@ export default function Home() {
             </div>
 
             <div className="dot-container">
-                <span className="dot" onClick="currentSlide(1)"></span>
-                <span className="dot" onClick="currentSlide(2)"></span>
-                <span className="dot" onClick="currentSlide(3)"></span>
-                <span className="dot" onClick="currentSlide(4)"></span>
+                <span className="dot" onClick="currentSlide(1)"/>
+                <span className="dot" onClick="currentSlide(2)"/>
+                <span className="dot" onClick="currentSlide(3)"/>
+                <span className="dot" onClick="currentSlide(4)"/>
             </div>
 
         </div>

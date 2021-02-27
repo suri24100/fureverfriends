@@ -2,6 +2,7 @@ import React, {useEffect, useState, Component} from 'react';
 import Header from "./Header";
 import './css/style.css';
 import './css/signing.css';
+import {Link} from "react-router-dom";
 
 export default function Login(){
     return (
@@ -31,7 +32,7 @@ export default function Login(){
                             <button className="signing-btn">Log In</button>
                         </div>
                         <div className="belowbutton-subheading">
-                            <span>Need to create an account?<a href="/CreateAccount">Sign Up</a></span>
+                            <span>Need to create an account?<Link to="/CreateAccount">Sign Up</Link></span>
                         </div>
                     </div>
                 </div>

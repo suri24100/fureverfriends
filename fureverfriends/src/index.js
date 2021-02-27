@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from "react-router-dom";
-import {getBreeds, getTypeListing} from "./api-modules/PetfinderAPI";
+import {getBreeds, getTypeListing, callTrainingData} from "./api-modules/PetfinderAPI";
 
 
 import firebase from "./Firebase";
@@ -24,12 +24,15 @@ const app = firebase.initializeApp ({
 import {getToken, getData} from "./api-modules/PetfinderAPI";
 
 // for example purposes
-let d = getBreeds("dog");
-let c = getBreeds("cat");
-let r = getBreeds("rabbit");
+// let d = getBreeds("dog");
+// let c = getBreeds("cat");
+// let r = getBreeds("rabbit");
+//
+// let dl = getTypeListing("dog", 10);
+// let cl = getTypeListing("cat", 10);
 
-let dl = getTypeListing("dog", 10);
-let cl = getTypeListing("cat", 10);
+// let t = getToken();
+//let test = callTrainingData();
 
 
 //import firebase from "firebase";

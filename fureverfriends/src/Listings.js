@@ -2,10 +2,110 @@ import React, {useEffect, useState, Component} from 'react';
 import Header from "./Header";
 import './css/style.css';
 import './css/listings.css';
+import {getTypeListing} from "./api-modules/PetfinderAPI";
+
+function PetCard(){
+    const [petDetails, setPetDetails] = useState({
+        petfinder_listing: false,       // check whether from petfinder or not
+        id: "",
+        name:"",
+        photo_url: "",
+        profile_url: "",
+        type: "",
+        age: "",
+        breed: "",
+        location: {
+            zipcode: "",
+            city: "",
+            state: ""
+        },
+        cared_by: "",
+        gender: "",
+        fur_length: "",
+        personality: "",
+        good_with_pets: "",
+        kid_friendly: "",
+        vaccinated: "",
+        neutered: "",
+        bonded_pair: "",
+        allergy_friendly: ""
+    });
+
+    function calculateDistance(){
+        // TODO: to be filled in later when we have Maps api setup
+    }
+
+    return (
+        <div className="listing-card col s12 m4 l3">
+            <div className="card">
+                <div className="card-image">
+                    <a href="#" className="profile-link-overlay">
+                        <img src="./images/petProfiles/HugoProfile.jpg" />
+                    </a>
+                    <a className="btn-floating halfway-fab waves-effect waves-light">
+                        <i className="material-icons">favorite_border</i>
+                    </a>
+                </div>
+                <div className="card-content">
+                    <span className="name">Hugo</span>
+                    <span className="location">Middletown, PA</span>
+                </div>
+            </div>
+        </div>
+    )
+}
 
 export default function Listings(){
+
+    const [petListings, setPetListings] = useState( null);
+
+    useEffect(() => {
+        if(!petListings){
+            //getListingData();
+            console.log(petListings);
+        }
+        else{
+            console.log(petListings);
+        }
+    });
+
+    async function getListingData(){
+        let newPetListings = await getTypeListing("cat", 100);
+        setPetListings(newPetListings);
+    }
+
+    function generateCards(){
+        return(
+            <>
+                <PetCard />
+                <PetCard />
+            </>
+        )
+    }
+
+    // displays a loading circle while listings are fetched asynchronously
+    function showLoading(){
+        return(
+            <div className="col s12 center">
+                <div className="preloader-wrapper big active">
+                    <div className="spinner-layer spinner-green-only">
+                        <div className="circle-clipper left">
+                            <div className="circle"></div>
+                        </div>
+                        <div className="gap-patch">
+                            <div className="circle"></div>
+                        </div>
+                        <div className="circle-clipper right">
+                            <div className="circle"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+
     return (
-    <div>
+    <div className="listings-page">
         <div className="banner-wrap">
             <Header/>
             <div className="banner-img-wrap"></div>
@@ -17,7 +117,7 @@ export default function Listings(){
             </div>
         </div>
 
-        <div className="additional-filters-wrap">
+        <div className="additional-filters-wrap row">
             <div className="top">
                 <div className="heading">
                     <h3>Additional Filters</h3>
@@ -151,7 +251,7 @@ export default function Listings(){
             </div>
         </div>
         <hr className="line-break"/>
-        <div className="results-wrap">
+        <div className="results-wrap ">
             <div className="sort-wrap">
                 <form className="sort-by-form">
                     <label for="caregiver">Sort By:</label>
@@ -163,125 +263,24 @@ export default function Listings(){
                     </select>
                 </form>
             </div>
-            <div className="results-grid-container">
-                <div className="pet-container">
-                    <div className="overlay"></div>
-                    <div className="button"><a href="petprofileadopter.html"> View Profile </a></div>
-                    <div className="img-wrap">
-                        <img src="./images/petProfiles/FinnProfile.png"/>
-                    </div>
-                    <div className="info-wrap">
-                        <a className="name">Finn</a>
-                        <a>Mechanicsburg, PA</a>
-                    </div>
-                </div>
-
-                <div className="pet-container">
-                    <div className="overlay"></div>
-                    <div className="button"><a href="petprofileadopter.html"> View Profile </a></div>
-                    <div className="img-wrap">
-                        <img src="./images/petProfiles/DustyProfile.png"/>
-                    </div>
-                    <div className="info-wrap">
-                        <a className="name">Dusty</a>
-                        <a>Mechanicsburg, PA</a>
-                    </div>
-                </div>
-
-                <div className="pet-container">
-                    <div className="overlay"></div>
-                    <div className="button"><a href="petprofileadopter.html"> View Profile </a></div>
-                    <div className="img-wrap">
-                        <img src="./images/petProfiles/EmilyProfile.png"/>
-                    </div>
-                    <div className="info-wrap">
-                        <a className="name">Emily</a>
-                        <a>Camp Hill, PA</a>
-                    </div>
-                </div>
-
-                <div className="pet-container">
-                    <div className="overlay"></div>
-                    <div className="button"><a href="petprofileadopter.html"> View Profile </a></div>
-                    <div className="img-wrap">
-                        <img src="./images/petProfiles/MikeyProfile.png"/>
-                    </div>
-                    <div className="info-wrap">
-                        <a className="name">Mikey</a>
-                        <a>Carlisle, PA</a>
-                    </div>
-                </div>
-
-                <div className="pet-container">
-                    <div className="overlay"></div>
-                    <div className="button"><a href="petprofileadopter.html"> View Profile </a></div>
-                    <div className="img-wrap">
-                        <img src="./images/petProfiles/TaitoProfile.png"/>
-                    </div>
-                    <div className="info-wrap">
-                        <a className="name">Taito</a>
-                        <a>Harrisburg, PA</a>
-                    </div>
-                </div>
-
-                <div className="pet-container">
-                    <div className="overlay"></div>
-                    <div className="button"><a href="petprofileadopter.html"> View Profile </a></div>
-                    <div className="img-wrap">
-                        <img src="./images/petProfiles/MariposaProfile.png"/>
-                    </div>
-                    <div className="info-wrap">
-                        <a className="name">Mariposa</a>
-                        <a>Harrisburg, PA</a>
-                    </div>
-                </div>
-
-                <div className="pet-container">
-                    <div className="overlay"></div>
-                    <div className="button"><a href="petprofileadopter.html"> View Profile </a></div>
-                    <div className="img-wrap">
-                        <img src="./images/petProfiles/ElvisProfile.png"/>
-                    </div>
-                    <div className="info-wrap">
-                        <a className="name">Elvis</a>
-                        <a>York, PA</a>
-                    </div>
-                </div>
-
-                <div className="pet-container">
-                    <div className="overlay"></div>
-                    <div className="button"><a href="petprofileadopter.html"> View Profile </a></div>
-                    <div className="img-wrap">
-                        <img src="./images/petProfiles/RiddleProfile.png"/>
-                    </div>
-                    <div className="info-wrap">
-                        <a className="name">Riddle</a>
-                        <a>York, PA</a>
-                    </div>
-                </div>
-
-                <div className="pet-container">
-                    <div className="overlay"></div>
-                    <div className="button"><a href="petprofileadopter.html"> View Profile </a></div>
-                    <div className="img-wrap">
-                        <img src="./images/petProfiles/RudyProfile.png"/>
-                    </div>
-                    <div className="info-wrap">
-                        <a className="name">Rudy</a>
-                        <a>Mechanicsburg, PA</a>
-                    </div>
-                </div>
-
-                <div className="pet-container">
-                    <div className="overlay"></div>
-                    <div className="button"><a href="petprofileadopter.html"> View Profile </a></div>
-                    <div className="img-wrap">
-                        <img src="./images/petProfiles/HugoProfile.jpg" className="hugo"/>
-                    </div>
-                    <div className="info-wrap">
-                        <a className="name">Hugo</a>
-                        <a>Middletown, PA</a>
-                    </div>
+        </div>
+        <div className="container">
+            <div className="row">
+                {(!petListings) ?
+                    showLoading() :
+                    generateCards()
+                }
+            </div>
+            <div className="row pet-listing-nav">
+                <div className="col s12 center">
+                    <button className="btn waves-effect waves-light" type="button" name="action" disabled>
+                        Prev
+                        <i className="material-icons left">navigate_before</i>
+                    </button>
+                    <button className="btn waves-effect waves-light" type="button" name="action">
+                        Next
+                        <i className="material-icons right">navigate_next</i>
+                    </button>
                 </div>
             </div>
         </div>
