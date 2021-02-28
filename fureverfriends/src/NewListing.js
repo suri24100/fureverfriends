@@ -3,7 +3,6 @@ import Header from "./Header";
 import './css/style.css';
 import './css/newListings.css';
 
-
 export default function NewListing() {
 
     return (
