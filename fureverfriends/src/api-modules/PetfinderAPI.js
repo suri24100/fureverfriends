@@ -370,7 +370,7 @@ const HORSE = {
         }
     }
 }
-const BIRD = {
+export const BIRD = {
     "name":"Bird",
     "coats":[
     ],

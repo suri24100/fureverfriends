@@ -4,6 +4,9 @@ import './css/style.css';
 import './css/listings.css';
 import {getTypeListing} from "./api-modules/PetfinderAPI";
 import {forEach} from "react-bootstrap/ElementChildren";
+import {BIRD} from "./api-modules/PetfinderAPI";
+
+console.log(BIRD);
 
 function PetCard(props){
     console.log(props.petInfo);
