@@ -2,6 +2,59 @@ import React from "react";
 import Header from "./Header";
 import './css/style.css';
 import './css/newListings.css';
+import ReactDOM from 'react-dom';
+import $ from 'jquery';
+
+function processFormContents() {
+    var petProfileImg = (document.getElementById('pet-profile-img')).value;
+    var petAddImg = (document.getElementById('pet-add-img')).value;
+    var petname = (document.getElementById('petname')).value;
+    var pettype = (document.getElementById('type-of-pet')).value;
+    var age = (document.getElementById('age')).value;
+    var gender = (document.getElementById('gender')).value;
+    var breed = (document.getElementById('breed')).value;
+    var color = (document.getElementById('color')).value;
+    var caredBy = (document.getElementById('cared-by')).value;
+    var furLength = (document.getElementById('furLength')).value;
+    var personality = (document.getElementById('age')).value;
+    var adoptionFee = (document.getElementById('adoptionFee')).value;
+    var city = (document.getElementById('city')).value;
+    var state = (document.getElementById('state')).value;
+    var zip = (document.getElementById('zip')).value;
+    var attributes = (document.getElementById('attributes')).value;
+    var aboutMe = (document.getElementById('about-me')).value;
+    var contactName = (document.getElementById('contact-name')).value;
+    var contactPhone = (document.getElementById('contact-phone')).value;
+    var contactEmail = (document.getElementById('contact-email')).value;
+    var contactWebsite = (document.getElementById('contact-website')).value;
+    var applicationForm = (document.getElementById('pet-app-form')).value;
+
+    const newPetProfile = {
+        pet_profile_img: petProfileImg,
+        pet_name : petname,
+        pet_type : pettype,
+        age : age,
+        gender : gender,
+        breed : breed, 
+        color : color,
+        caredBy : caredBy,
+        furLength : furLength,
+        personality : personality,
+        adoptionFee : adoptionFee,
+        city : city,
+        state : state,
+        zip : zip,
+        attributes : attributes,
+        about_me : aboutMe,
+        contact_name : contactName,
+        contact_phone : contactPhone,
+        contact_email : contactEmail,
+        contact_website : contactWebsite,
+        application_form: applicationForm,
+    };
+
+    console.log(newPetProfile);
+}
 
 export default function NewListing() {
 
@@ -225,7 +278,7 @@ export default function NewListing() {
             </div>
 
             <div className="listings-submit-button-wrap container center-align">
-                <button className="btn waves-effect waves-light btn-large" type="submit" name="action" onclick="processFormContents()">Create Profile
+                <button className="btn waves-effect waves-light btn-large" type="submit" name="action" onClick={processFormContents}>Create Profile
                     <i className="material-icons right">send</i>
                 </button>
             </div>
