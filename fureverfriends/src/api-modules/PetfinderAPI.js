@@ -153,7 +153,7 @@ async function getTrainingData(dataURL){
 
 
 // parameters for queries, can be combined
-const TYPES = ["dog", "cat", "rabbit", "small_furry", "horse", "bird", "scales_fins_other", "barnyard"];
+export const TYPES = ["dog", "cat", "rabbit", "small_furry", "horse", "bird", "scales_fins_other", "barnyard"];
 const GENDERS = ["male", "female", "unknown"];
 const SIZE = ["small", "medium", "large", "xlarge"];
 const AGE = ["baby", "young", "adult", "senior"];

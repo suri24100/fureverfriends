@@ -6,6 +6,10 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import M from "materialize-css";
 
+//all the data from PetFinderAPI
+import test from "./api-modules/constants.js";
+console.log("types test: " + test.TYPES.length);
+
 function processFormContents() {
     var petProfileImg = (document.getElementById('pet-profile-img')).value;
     var petAddImg = (document.getElementById('pet-add-img')).value;
@@ -32,6 +36,7 @@ function processFormContents() {
 
     const newPetProfile = {
         pet_profile_img: petProfileImg,
+        pet_add_img: petAddImg,
         pet_name : petname,
         pet_type : pettype,
         age : age,
