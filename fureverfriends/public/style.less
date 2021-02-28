@@ -1,10 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Grand+Hotel&display=swap');
 body {
-    font-family: 'Calibri';
+    font-family: 'Calibri', sans-serif;
 }
 
 a {
     text-decoration: none;
-    color: #ffffff;
+    color: #ffffff !important;
 }
 
 .hdr-wrap {
@@ -19,7 +20,8 @@ a {
 
     .logo {
         h2 {
-            font-family: 'Segoe Script';
+            font-family: 'Grand Hotel', cursive;
+            font-style: italic;
             font-size: 3vw;
             text-align: center;
             margin: 1vw 0vw .25vw -1vw;
@@ -34,6 +36,7 @@ a {
             text-transform: uppercase;
             font-weight: bold;
             margin-top: 2vw;
+            color: white;
         }
         img {
             width: 1.25vw;
@@ -49,7 +52,38 @@ a {
         }
     }
 }
-
+.mobile-ftr-wrap {
+    display: flex;
+    flex-direction: column;
+    color: #ffffff;
+    background-color: #379683;
+    padding-bottom: 2vw;
+    margin-top: -0.25vw;
+    .logo {
+        h2 {
+            font-family: 'Grand Hotel', cursive;
+            font-style: italic;
+            font-size: 3rem;
+            text-align: center;
+            margin: 2vw 0vw 0vw 0vw;
+        }
+    }
+    .all-accordion {
+       .collapsible {
+           /*text-align: center;*/
+           .collapsible-header {
+            background-color: #379683; 
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            font-weight: bold;
+            /*text-align: center;*/
+           }
+           .collapsible-body {
+               font-size: 1.15rem;
+           }
+       }
+    }
+}
 .ftr-wrap {
     display: flex;
     flex-direction: column;
@@ -59,17 +93,14 @@ a {
     margin-top: -0.25vw;
     .logo {
         h2 {
-            font-family: 'Segoe Script';
-            font-size: 3vw;
+            font-family: 'Grand Hotel', cursive;
+            font-style: italic;
+            font-size: 3rem;
             text-align: center;
-            margin: 1vw 0vw -2vw -2vw;
+            margin: 2vw 0vw 0vw 0vw;
         }
     }
     .footer-menu {
-        display: flex;
-        justify-content: space-evenly;
-        align-items: flex-start;
-
         .pets-menu, .info-menu, .user-xp-menu {
             display: flex;
             flex-direction: column;
@@ -79,6 +110,7 @@ a {
                 font-size: 1.5vw;
                 text-transform: uppercase;
                 margin-bottom: .25vw;
+                font-weight:bold;
             }
             a {
                 font-size: 1.1vw;
@@ -94,7 +126,6 @@ a {
     .social-wrap {
         display: flex;
         align-self: center;
-        margin-left: -4vw;
         img {
             width: 2.5vw;
             padding: 0.5vw;
