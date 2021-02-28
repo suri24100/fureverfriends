@@ -2,6 +2,9 @@ import React from "react";
 // React router components
 import {Switch, Route, Link, useRouteMatch, useParams} from "react-router-dom";
 
+//Materialize
+import 'materialize-css/dist/css/materialize.min.css';
+
 // our components
 import Header from "./Header";
 import Footer from "./Footer";

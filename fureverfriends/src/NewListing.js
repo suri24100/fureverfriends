@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from 'react';
 import Header from "./Header";
 import './css/style.css';
 import './css/newListings.css';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
+import M from "materialize-css";
 
 function processFormContents() {
     var petProfileImg = (document.getElementById('pet-profile-img')).value;
@@ -57,6 +58,15 @@ function processFormContents() {
 }
 
 export default function NewListing() {
+
+    useEffect(() => {
+        M.AutoInit();
+        $(document).ready(function(){
+            $('select').select();
+          });
+        
+          M.textareaAutoResize($('#about-me'));
+      });
 
     return (
         <div>
