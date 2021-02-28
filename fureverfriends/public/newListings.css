@@ -72,6 +72,11 @@ img {
   font-weight: bold;
   font-size: 1.25rem;
 }
-.listings-section.container {
+.listings-section.container,
+.listings-submit-button-wrap.container {
   margin-bottom: 4rem;
+}
+.listings-section.container button,
+.listings-submit-button-wrap.container button {
+  font-weight: bold;
 }
