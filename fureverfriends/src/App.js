@@ -11,6 +11,7 @@ import Login from "./Login";
 import PetCare from "./PetCare";
 import SignUp from "./SignUp";
 import CreateAccount from "./CreateAccount";
+import NewListing from "./NewListing";
 
 
 
@@ -33,6 +34,9 @@ export default function App() {
         <Switch>
             <Route path ="/Signup">
                 <SignUp/>
+            </Route>
+            <Route path ="/NewListing">
+                <NewListing/>
             </Route>
             <Route path ="/CreateAccount">
                 <CreateAccount />
