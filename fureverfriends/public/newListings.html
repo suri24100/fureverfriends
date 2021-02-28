@@ -46,7 +46,7 @@
             <div class="file-field input-field">
               <div class="btn">
                 <i class="material-icons">perm_media</i>
-                <input type="file" accept=".gif,.jpg,.jpeg,.png">
+                <input type="file" accept=".gif,.jpg,.jpeg,.png" id="pet-profile-img">
               </div>
               <div class="file-path-wrapper">
                 <input class="file-path validate" type="text" placeholder="Upload an image (.gif,.jpg,.jpeg,.png)">
@@ -61,7 +61,7 @@
             <div class="file-field input-field">
               <div class="btn">
                 <i class="material-icons">perm_media</i>
-                <input type="file" accept=".gif,.jpg,.jpeg,.png" multiple>
+                <input type="file" accept=".gif,.jpg,.jpeg,.png" id="pet-add-img" multiple>
               </div>
               <div class="file-path-wrapper">
                 <input class="file-path validate" type="text" placeholder="Upload additional image(s) (.gif,.jpg,.jpeg,.png)">
@@ -241,7 +241,7 @@
             <div class="file-field input-field">
               <div class="btn">
                 <i class="material-icons">file_present</i>
-                <input type="file" accept=".doc,.docx,.txt,.zip,.pdf ">
+                <input type="file" accept=".doc,.docx,.txt,.zip,.pdf" id="pet-app-form">
               </div>
               <div class="file-path-wrapper">
                 <input class="file-path validate" type="text" placeholder="Upload application form">
@@ -269,6 +269,8 @@
 </script>
 <script>
     function processFormContents() {
+        var petProfileImg = (document.getElementById('pet-profile-img')).value;
+        var petAddImg = (document.getElementById('pet-add-img')).value;
         var petname = (document.getElementById('petname')).value;
         var pettype = (document.getElementById('type-of-pet')).value;
         var age = (document.getElementById('age')).value;
@@ -288,10 +290,10 @@
         var contactPhone = (document.getElementById('contact-phone')).value;
         var contactEmail = (document.getElementById('contact-email')).value;
         var contactWebsite = (document.getElementById('contact-website')).value;
-
-        console.log(petname + pettype);
+        var applicationForm = (document.getElementById('pet-app-form')).value;
 
         const newPetProfile = {
+            pet_profile_img: petProfileImg,
             pet_name : petname,
             pet_type : pettype,
             age : age,
@@ -311,6 +313,7 @@
             contact_phone : contactPhone,
             contact_email : contactEmail,
             contact_website : contactWebsite,
+            application_form: applicationForm,
         };
 
         console.log(newPetProfile);
