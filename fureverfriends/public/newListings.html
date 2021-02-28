@@ -39,27 +39,37 @@
     <div class="listings-heading container">
         <h4 class="center-align">Create a profile for your pet</h4>
     </div>
-    <div class="listings-images-wrap container">
-        <div class="listings-profile-pic-wrap col m4 l4 x4">
-            <h5>Set Profile Picture</h5>
-            <a href="#">
-                <i class="material-icons add_photo">add_photo_alternate</i>
-            </a>
-        </div>
-        <div class="listings-additional-pic-wrap col m8 l8 x8">
-            <h5>Add Additional Pictures</h5>
-            <a href="#">
-                <i class="material-icons add_photo">add_photo_alternate</i>
-            </a>
-            <a href="#">
-                <i class="material-icons add_photo">add_photo_alternate</i>
-            </a>
-            <a href="#">
-                <i class="material-icons add_photo">add_photo_alternate</i>
-            </a>
-        </div>
+    <div class="listings-profile-pic-wrap listings-section container">
+        <h5>Set Profile Picture</h5>
+        <h6>This picture will be the main image for your pet and will be seen in the listings page</h6>
+        <form action="#">
+            <div class="file-field input-field">
+              <div class="btn">
+                <i class="material-icons">perm_media</i>
+                <input type="file" accept=".gif,.jpg,.jpeg,.png">
+              </div>
+              <div class="file-path-wrapper">
+                <input class="file-path validate" type="text" placeholder="Upload an image (.gif,.jpg,.jpeg,.png)">
+              </div>
+            </div>
+        </form>
     </div>
-    <div class="listings-pet-info container">
+    <div class="listings-add-pic-wrap listings-section container">
+        <h5>Set Profile Picture</h5>
+        <h6>These are any additional pictures of your pet and can be seen in the pet profile page</h6>
+        <form action="#">
+            <div class="file-field input-field">
+              <div class="btn">
+                <i class="material-icons">perm_media</i>
+                <input type="file" accept=".gif,.jpg,.jpeg,.png" multiple>
+              </div>
+              <div class="file-path-wrapper">
+                <input class="file-path validate" type="text" placeholder="Upload additional image(s) (.gif,.jpg,.jpeg,.png)">
+              </div>
+            </div>
+        </form>
+    </div>
+    <div class="listings-pet-info listings-section container">
         <h5>Pet Information</h5>
         <form class="row">
             <div class="left-filter col s12 m6 l6 x6">
@@ -182,7 +192,7 @@
             </div>
         </form>
     </div>
-    <div class="listings-about-me container">
+    <div class="listings-about-me listings-section container">
         <h5>About me section</h5>
         <form class="row">
             <div class="input-field col s12">
@@ -192,7 +202,7 @@
         </form>
     </div>
 
-    <div class="listings-contact-info container">
+    <div class="listings-contact-info listings-section container">
         <h5>Contact Information</h5>
         <form class="listings-contact-form">
             <div class="row">
@@ -222,6 +232,22 @@
                 </div>
             </div>
         </form>
+    </div>
+
+    <div class="listings-application-info listings-section container">
+        <h5>Application Information</h5>
+        <h6>Upload the file that the applicant will be filling out</h6>
+        <form action="#">
+            <div class="file-field input-field">
+              <div class="btn">
+                <i class="material-icons">file_present</i>
+                <input type="file" accept=".doc,.docx,.txt,.zip,.pdf ">
+              </div>
+              <div class="file-path-wrapper">
+                <input class="file-path validate" type="text" placeholder="Upload application form">
+              </div>
+            </div>
+          </form>
     </div>
 </body>
 <script>

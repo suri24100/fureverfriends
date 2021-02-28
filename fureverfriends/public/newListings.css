@@ -14,7 +14,10 @@ img {
   background-size: 100%;
   background-attachment: fixed;
 }
-.listings-heading h4 {
+.listings-heading.container {
+  margin-bottom: 3rem;
+}
+.listings-heading.container h4 {
   text-transform: uppercase;
   color: #4C4C4C;
   font-weight: bold;
@@ -50,11 +53,25 @@ img {
   border: 0.25vw solid #7E7C7C;
   border-radius: 1vw;
 }
+.listings-profile-pic-wrap,
+.listings-add-pic-wrap,
+.listings-application-info,
+.listings-pet-info,
+.listings-about-me,
+.listings-contact-info {
+  margin-bottom: 10rem;
+}
+.listings-profile-pic-wrap h5,
+.listings-add-pic-wrap h5,
+.listings-application-info h5,
 .listings-pet-info h5,
 .listings-about-me h5,
 .listings-contact-info h5 {
   text-transform: uppercase;
   color: #379683;
   font-weight: bold;
-  font-size: 1rem;
+  font-size: 1.25rem;
+}
+.listings-section.container {
+  margin-bottom: 4rem;
 }
