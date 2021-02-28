@@ -96,7 +96,15 @@ export async function getBreeds(animalType){
     await getData(breedURL);
 }
 
-// get first 20 listings of a specific animal type
+// get profile info for a specific pet by id
+export async function getProfileInfo(petID){
+    let typeURL = BASE_URL + "/v2/animals/" + petID;
+    console.log(typeURL);
+    let listingResults = await getData(typeURL);
+    return listingResults.animal;
+}
+
+// get first __ listings of a specific animal type
 export async function getTypeListing(animalType, numListings){
     let typeURL = BASE_URL + "/v2/animals?type=" + animalType + "&limit=" + numListings;
     let listingResults = await getData(typeURL);

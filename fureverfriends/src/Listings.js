@@ -4,9 +4,8 @@ import './css/style.css';
 import './css/listings.css';
 import {getTypeListing} from "./api-modules/PetfinderAPI";
 import {forEach} from "react-bootstrap/ElementChildren";
-import {BIRD} from "./api-modules/PetfinderAPI";
+import {Link, useRouteMatch} from "react-router-dom";
 
-console.log(BIRD);
 
 function PetCard(props){
     console.log(props.petInfo);
@@ -41,13 +40,15 @@ function PetCard(props){
         // TODO: to be filled in later when we have Maps api setup
     }
 
+    let match = useRouteMatch();
+
     return (
         <div className="listing-card col s12 m4 l3">
             <div className="card">
                 <div className="card-image">
-                    <a href="#" className="profile-link-overlay">
+                    <Link to={`${match.url}/` + petDetails.name + "-" + petDetails.id} className="profile-link-overlay">
                         <img src={petDetails.photo_url} />
-                    </a>
+                    </Link>
                     <a className="btn-floating halfway-fab waves-effect waves-light">
                         <i className="material-icons">favorite_border</i>
                     </a>

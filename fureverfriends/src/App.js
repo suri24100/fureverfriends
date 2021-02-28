@@ -16,6 +16,7 @@ import PetCare from "./PetCare";
 import SignUp from "./SignUp";
 import CreateAccount from "./CreateAccount";
 import NewListing from "./NewListing";
+import PetProfile from "./PetProfile";
 
 
 
@@ -33,8 +34,11 @@ import NewListing from "./NewListing";
 
 
 export default function App() {
+    let match = useRouteMatch();
+
   return (
     <div>
+        <Header />
         <Switch>
             <Route path ="/Signup">
                 <SignUp/>
@@ -44,6 +48,9 @@ export default function App() {
             </Route>
             <Route path ="/CreateAccount">
                 <CreateAccount />
+            </Route>
+            <Route path="/listings/:name-:id">
+                <PetProfile />
             </Route>
             <Route path="/listings">
                 <Listings />
