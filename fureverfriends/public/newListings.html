@@ -75,8 +75,8 @@
             <div class="left-filter col s12 m6 l6 x6">
 
                 <div class="listings-form-row">
-                    <label for="name">Name: </label>
-                    <input type="text" id="name" name="name">
+                    <label for="petname">Name: </label>
+                    <input type="text" id="petname" name="petname">
                 </div>
 
                 <div class="listings-form-row">
@@ -127,8 +127,8 @@
                 <div class="listings-form-row">
                     <label for="cared-by">Cared By</label>
                     <select id="cared-by" name="cared-by">
-                        <option value="No Preference">Private Owner</option>
-                        <option value="Female">Organization</option>
+                        <option value="Private Owner">Private Owner</option>
+                        <option value="Organization/Rescue">Organization/Rescue</option>
                     </select>
                 </div>
             </div>
@@ -197,7 +197,7 @@
         <form class="row">
             <div class="input-field col s12">
                 <label for="textarea1">Please fill out this section regarding any additional info (such as a backstory!)</label>
-                <textarea id="textarea1" class="materialize-textarea"></textarea>
+                <textarea id="about-me" class="materialize-textarea"></textarea>
             </div>
         </form>
     </div>
@@ -209,25 +209,25 @@
                 <div class="left-filter col s12 m6 l6 x6">
                     <div class="input-field contact-input-wrap">
                         <i class="material-icons prefix">account_circle</i>
-                        <input id="icon_prefix" type="text" class="validate">
-                        <label for="icon_prefix">Name </label>
+                        <input id="contact-name" type="text" class="validate">
+                        <label for="contact-name">Name </label>
                     </div>
                     <div class="input-field contact-input-wrap">
                         <i class="material-icons prefix">phone</i>
-                        <input id="icon_prefix" type="text" class="validate">
-                        <label for="icon_prefix">Phone </label>
+                        <input id="contact-phone" type="text" class="validate">
+                        <label for="contact-phone">Phone </label>
                     </div>
                 </div>
                 <div class="right-filter col s12 m6 l6 x6">
                     <div class="input-field contact-input-wrap">
                         <i class="material-icons prefix">mail</i>
-                        <input id="icon_prefix" type="text" class="validate">
-                        <label for="icon_prefix">Email </label>
+                        <input id="contact-email" type="text" class="validate">
+                        <label for="contact-email">Email </label>
                     </div>
                     <div class="input-field contact-input-wrap">
                         <i class="material-icons prefix">language</i>
-                        <input id="icon_prefix" type="text" class="validate">
-                        <label for="icon_prefix">Website </label>
+                        <input id="contact-website" type="text" class="validate">
+                        <label for="contact-website">Website </label>
                     </div>
                 </div>
             </div>
@@ -251,18 +251,70 @@
     </div>
 
     <div class="listings-submit-button-wrap container center-align">
-        <button class="btn waves-effect waves-light btn-large" type="submit" name="action">Create Profile
+        <button class="btn waves-effect waves-light btn-large" type="submit" name="action" onclick="processFormContents()">Create Profile
             <i class="material-icons right">send</i>
           </button>
     </div>
+
+    <div id="footer"></div>
+
 </body>
 <script>
+
   $(document).ready(function(){
     $('select').material_select();
   });
 
-  M.textareaAutoResize($('#textarea1'));
+  M.textareaAutoResize($('#about-me'));
+</script>
+<script>
+    function processFormContents() {
+        var petname = (document.getElementById('petname')).value;
+        var pettype = (document.getElementById('type-of-pet')).value;
+        var age = (document.getElementById('age')).value;
+        var gender = (document.getElementById('gender')).value;
+        var breed = (document.getElementById('breed')).value;
+        var color = (document.getElementById('color')).value;
+        var caredBy = (document.getElementById('cared-by')).value;
+        var furLength = (document.getElementById('furLength')).value;
+        var personality = (document.getElementById('age')).value;
+        var adoptionFee = (document.getElementById('adoptionFee')).value;
+        var city = (document.getElementById('city')).value;
+        var state = (document.getElementById('state')).value;
+        var zip = (document.getElementById('zip')).value;
+        var attributes = (document.getElementById('attributes')).value;
+        var aboutMe = (document.getElementById('about-me')).value;
+        var contactName = (document.getElementById('contact-name')).value;
+        var contactPhone = (document.getElementById('contact-phone')).value;
+        var contactEmail = (document.getElementById('contact-email')).value;
+        var contactWebsite = (document.getElementById('contact-website')).value;
 
+        console.log(petname + pettype);
+
+        const newPetProfile = {
+            pet_name : petname,
+            pet_type : pettype,
+            age : age,
+            gender : gender,
+            breed : breed, 
+            color : color,
+            caredBy : caredBy,
+            furLength : furLength,
+            personality : personality,
+            adoptionFee : adoptionFee,
+            city : city,
+            state : state,
+            zip : zip,
+            attributes : attributes,
+            about_me : aboutMe,
+            contact_name : contactName,
+            contact_phone : contactPhone,
+            contact_email : contactEmail,
+            contact_website : contactWebsite,
+        };
+
+        console.log(newPetProfile);
+    }
 </script>
 <script src= "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
 </html>
