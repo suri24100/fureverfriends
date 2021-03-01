@@ -1,9 +1,10 @@
-import React from "react";
+import React, {useEffect} from "react";
 // React router components
 import {Switch, Route, Link, useRouteMatch, useParams} from "react-router-dom";
 
 //Materialize
 import 'materialize-css/dist/css/materialize.min.css';
+import M from "materialize-css";
 
 // our components
 import Header from "./Header";
@@ -38,7 +39,6 @@ export default function App() {
 
   return (
     <div>
-        <Header />
         <Switch>
             <Route path ="/Signup">
                 <SignUp/>
@@ -49,7 +49,7 @@ export default function App() {
             <Route path ="/CreateAccount">
                 <CreateAccount />
             </Route>
-            <Route path="/listings/:name-:id">
+            <Route path="/listings/:id">
                 <PetProfile />
             </Route>
             <Route path="/listings">
