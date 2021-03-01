@@ -1,3 +1,14 @@
+########################################################
+#
+# CMPSC 488: FureverFriends AI Demo
+#     Multi Class Text Classification with Bert
+#
+########################################################
+
+
+########################################################
+# Import
+########################################################
 # from google.colab import drive
 # drive.mount("/GD")
 
@@ -7,6 +18,7 @@ import tensorflow_hub as hub
 from datetime import datetime
 from sklearn.model_selection import train_test_split
 import os
+import shutil
 
 print("tensorflow version : ", tf.__version__)
 print("tensorflow_hub version : ", hub.__version__)
@@ -20,11 +32,19 @@ from official.modeling import tf_utils
 from official import nlp
 from official.nlp import bert
 
+from tensorflow.keras.models import Model
+from bert.tokenization.bert_tokenization import FullTokenizer
+
 
 #Importing BERT modules
 import official.nlp.bert.run_classifier
 import official.nlp.optimization
 import official.nlp.bert.tokenization
+
+########################################################
+# Set Up
+########################################################
+
 
 # Set the output directory for saving model file
 OUTPUT_DIR = 'BERT/bert_petfinder_category'
@@ -41,56 +61,124 @@ if DO_DELETE:
 tf.compat.v1.gfile.MakeDirs(OUTPUT_DIR)
 print('***** Model output directory: {} *****'.format(OUTPUT_DIR))
 
-train = pd.read_excel("Data_Train.xlsx")
-test = pd.read_excel("Data_Test.xlsx")
+########################################################
+# Import Dataset
+########################################################
 
-from sklearn.model_selection import train_test_split
+#dataset = tf.keras.utils.get_file('petfinder-sampledata')
 
-train, val =  train_test_split(train, test_size = 0.2, random_state = 100)
+AUTOTUNE = tf.data.AUTOTUNE
+batch_size = 32
+seed = 42
+
+raw_train_ds = tf.keras.preprocessing.text_dataset_from_directory(
+    'petfinder-sampledata',
+    batch_size=batch_size,
+    validation_split=0.2,
+    subset='training',
+    seed=seed)
+
+class_names = raw_train_ds.class_names
+train_ds = raw_train_ds.cache().prefetch(buffer_size=AUTOTUNE)
+
+val_ds = tf.keras.preprocessing.text_dataset_from_directory(
+    'petfinder-sampledata',
+    batch_size=batch_size,
+    validation_split=0.2,
+    subset='validation',
+    seed=seed)
+
+val_ds = val_ds.cache().prefetch(buffer_size=AUTOTUNE)
+
+test_ds = tf.keras.preprocessing.text_dataset_from_directory(
+    'petfinder-sampledata',
+    batch_size=batch_size)
+
+test_ds = test_ds.cache().prefetch(buffer_size=AUTOTUNE)
+
+for text_batch, label_batch in train_ds.take(1):
+  for i in range(3):
+    print(f'description: {text_batch.numpy()[i]}')
+    label = label_batch.numpy()[i]
+    print(f'tag : {label} ({class_names[label]})')
+
+# train = pd.read_excel("Data_Train.xlsx")
+# test = pd.read_excel("Data_Test.xlsx")
+
+# from sklearn.model_selection import train_test_split
+#
+# train, val =  train_test_split(train, test_size = 0.2, random_state = 100)
+
+# #Training set sample
+# train.head(5)
+#
+# #Test set sample
+# test.head()
+#
+# print("Training Set Shape :", train.shape)
+# print("Validation Set Shape :", val.shape)
+# print("Test Set Shape :", test.shape)
+#
+# #Features in the dataset
+# print(train.columns)
+#
+# #unique classes
+# train['tags'].unique()
+#
+# #Distribution of classes
+# train['tags'].value_counts().plot(kind = 'bar')
+#
+# DATA_COLUMN = 'description'
+# LABEL_COLUMN = 'tags'
+# # The list containing all the classes (train['SECTION'].unique())
+# label_list = [0, 1, 2, 3]
+#
+# train_InputExamples = train.apply(lambda x: bert.run_classifier.InputExample(guid=None,
+#                                                                    text_a = x[DATA_COLUMN],
+#                                                                    text_b = None,
+#                                                                    label = x[LABEL_COLUMN]), axis = 1)
+#
+# val_InputExamples = val.apply(lambda x: bert.run_classifier.InputExample(guid=None,
+#                                                                    text_a = x[DATA_COLUMN],
+#                                                                    text_b = None,
+#                                                                    label = x[LABEL_COLUMN]), axis = 1)
+#
+# print(train_InputExamples)
+#
+# print("Row 0 - guid of training set : ", train_InputExamples.iloc[0].guid)
+# print("\n__________\nRow 0 - text_a of training set : ", train_InputExamples.iloc[0].text_a)
+# print("\n__________\nRow 0 - text_b of training set : ", train_InputExamples.iloc[0].text_b)
+# print("\n__________\nRow 0 - label of training set : ", train_InputExamples.iloc[0].label)
 
 #Training set sample
-train.head(5)
+train_ds.head(5)
 
 #Test set sample
-test.head()
+test_ds.head()
 
-print("Training Set Shape :", train.shape)
-print("Validation Set Shape :", val.shape)
-print("Test Set Shape :", test.shape)
+print("Training Set Shape :", train_ds.shape)
+print("Validation Set Shape :", val_ds.shape)
+print("Test Set Shape :", test_ds.shape)
 
 #Features in the dataset
-print(train.columns)
+print(train_ds.columns)
 
 #unique classes
-train['tags'].unique()
+train_ds['tags'].unique()
 
 #Distribution of classes
-train['tags'].value_counts().plot(kind = 'bar')
+train_ds['tags'].value_counts().plot(kind = 'bar')
 
 DATA_COLUMN = 'description'
 LABEL_COLUMN = 'tags'
 # The list containing all the classes (train['SECTION'].unique())
 label_list = [0, 1, 2, 3]
 
-train_InputExamples = train.apply(lambda x: bert.run_classifier.InputExample(guid=None,
-                                                                   text_a = x[DATA_COLUMN],
-                                                                   text_b = None,
-                                                                   label = x[LABEL_COLUMN]), axis = 1)
-
-val_InputExamples = val.apply(lambda x: bert.run_classifier.InputExample(guid=None,
-                                                                   text_a = x[DATA_COLUMN],
-                                                                   text_b = None,
-                                                                   label = x[LABEL_COLUMN]), axis = 1)
-
-print(train_InputExamples)
-
-print("Row 0 - guid of training set : ", train_InputExamples.iloc[0].guid)
-print("\n__________\nRow 0 - text_a of training set : ", train_InputExamples.iloc[0].text_a)
-print("\n__________\nRow 0 - text_b of training set : ", train_InputExamples.iloc[0].text_b)
-print("\n__________\nRow 0 - label of training set : ", train_InputExamples.iloc[0].label)
+# # This is a path to an uncased (all lowercase) version of BERT
+# BERT_MODEL_HUB = "https://tfhub.dev/google/bert_uncased_L-12_H-768_A-12/1"
 
 # This is a path to an uncased (all lowercase) version of BERT
-BERT_MODEL_HUB = "https://tfhub.dev/google/bert_uncased_L-12_H-768_A-12/1"
+BERT_MODEL_HUB = "https://tfhub.dev/tensorflow/bert_en_uncased_L-12_H-768_A-12/3"
 
 
 def create_tokenizer_from_hub_module():
@@ -109,16 +197,16 @@ def create_tokenizer_from_hub_module():
 tokenizer = create_tokenizer_from_hub_module()
 
 #Here is what the tokenised sample of the first training set observation looks like
-print(tokenizer.tokenize(train_InputExamples.iloc[0].text_a))
+print(tokenizer.tokenize(train_ds.iloc[0].text_a))
 
 
 # We'll set sequences to be at most 128 tokens long.
 MAX_SEQ_LENGTH = 128
 
 # Convert our train and validation features to InputFeatures that BERT understands.
-train_features = bert.run_classifier.convert_examples_to_features(train_InputExamples, label_list, MAX_SEQ_LENGTH, tokenizer)
+train_features = bert.run_classifier.convert_examples_to_features(train_ds, label_list, MAX_SEQ_LENGTH, tokenizer)
 
-val_features = bert.run_classifier.convert_examples_to_features(val_InputExamples, label_list, MAX_SEQ_LENGTH, tokenizer)
+val_features = bert.run_classifier.convert_examples_to_features(val_ds, label_list, MAX_SEQ_LENGTH, tokenizer)
 
 
 def create_model(is_predicting, input_ids, input_mask, segment_ids, labels,
@@ -266,12 +354,6 @@ run_config = tf.estimator.RunConfig(
     save_summary_steps=SAVE_SUMMARY_STEPS,
     save_checkpoints_steps=SAVE_CHECKPOINTS_STEPS)
 
-# Specify output directory and number of checkpoint steps to save
-run_config = tf.estimator.RunConfig(
-    model_dir=OUTPUT_DIR,
-    save_summary_steps=SAVE_SUMMARY_STEPS,
-    save_checkpoints_steps=SAVE_CHECKPOINTS_STEPS)
-
 #Initializing the model and the estimator
 model_fn = model_fn_builder(
   num_labels=len(label_list),
@@ -310,16 +392,16 @@ print("Training took time ", datetime.now() - current_time)
 #Evaluating the model with Validation set
 estimator.evaluate(input_fn=val_input_fn, steps=None)
 
-"""Politics: 0
-Technology: 1
-Entertainment: 2
-Business: 3"""
+"""playful: 0
+quiet: 1
+trainable: 2
+social: 3"""
 
 
 # A method to get predictions
 def getPrediction(in_sentences):
     # A list to map the actual labels to the predictions
-    labels = ["Politics", "Technology", "Entertainment", "Business"]
+    labels = ["playful", "quiet", "trainable", "social"]
 
     # Transforming the test data into BERT accepted form
     input_examples = [run_classifier.InputExample(guid="", text_a=x, text_b=None, label=0) for x in in_sentences]
