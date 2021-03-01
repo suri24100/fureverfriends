@@ -78,44 +78,92 @@ db.collection('petinformation').get().then((snapshot) => {
   );
 }
 
-// example nested routing
-// function Topics() {
-//   let match = useRouteMatch();
+// const App =() => {
+//     const [user, setUser] = useState('');
+//     const [email, setEmail] = useState('');
+//     const [password, setPassword] = useState('');
+//     const [emailError, setEmailError] = useState('');
+//     const [passwordError, setPasswordError] = useState('');
+//     const [hasAccount, setHasAccount] = useState(false);
 //
-//   return (
-//       <div>
-//         <h2>Topics</h2>
+//     const clearInputs = () =>{
+//         setEmail('');
+//         setPassword('');
+//     }
+//     const clearErrors = () => {
+//         setEmailError('');
+//         setPasswordError('');
+//     }
+//     const handleLogin = () => {
+//         clearErrors();
 //
-//         <ul>
-//           <li>
-//             <Link to={`${match.url}/components`}>Components</Link>
-//           </li>
-//           <li>
-//             <Link to={`${match.url}/props-v-state`}>
-//               Props v. State
-//             </Link>
-//           </li>
-//         </ul>
+//         fire
+//             .auth()
+//             .signInWithEmailAndPassword(email, password)
+//             .catch((err) => {
+//                 if (err.code === "auth/invalid-email" || err.code === "auth/user-disabled" || err.code === "auth/user-not-found") {
+//                     setEmailError(err.message);
+//                 } else if (err.code === "auth/wrong-password") {
+//                     setPasswordError(err.message);
+//                 }
+//             });
+//     };
+//     const handleSignUp = () => {
+//         fire
+//             .auth()
+//             .createUserWithEmailAndPassword(email, password)
+//             .catch((err) => {
+//                 if (err.code === "auth/email-already-in-use" || err.code === "auth/invalid-email") {
+//                     setEmailError(err.message);
+//                 } else if (err.code === "auth/weak-password") {
+//                     setPasswordError(err.message);
+//                 }
+//             });
+//     };
 //
-//         {/* The Topics page has its own <Switch> with more routes
-//           that build on the /topics URL path. You can think of the
-//           2nd <Route> here as an "index" page for all topics, or
-//           the page that is shown when no topic is selected */}
-//         <Switch>
-//           // Specific
-//           <Route path={`${match.path}/:topicId`}>
-//             <Topic />
-//           </Route>
-//           // Default render
-//           <Route path={match.path}>
-//             <h3>Please select a topic.</h3>
-//           </Route>
-//         </Switch>
-//       </div>
-//   );
-// }
+//     const handleLogOut = () => {
+//         return fire.auth().signOut();
+//     };
 //
-// function Topic() {
-//   let {topicId} = useParams();
-//   return <h3>Requested topic ID: {topicId}</h3>;
-// }
+//     const authListener = () => {
+//         fire.auth().onAuthStateChanged(user =>{
+//             if(user) {
+//                 clearInputs();
+//                 console.log("The user is logged in")
+//             }
+//             else{
+//                 console.log("The user is not logged in")
+//             }
+//         })
+//     }
+//
+//     useEffect(() =>{
+//         authListener();
+//     }, []);
+//
+//     return (
+//         <div className="App">
+//             {user ? (
+//                 <Stuff handleLogOut = {handleLogOut}/>
+//             ):(
+//                 <Login
+//                     email = {email}
+//                     setEmail = {setEmail}
+//                     password = {password}
+//                     setPassword ={setPassword}
+//                     handleLogin = {handleLogin}
+//                     handleSignup = {handleSignUp}
+//                     hasAccount = {hasAccount}
+//                     setHasAccount = {setHasAccount}
+//                     emailError = {emailError}
+//                     passwordError = {passwordError} />
+//             )}
+//
+//
+//         </div>
+//     );
+// };
+//
+//
+//
+// export default App
