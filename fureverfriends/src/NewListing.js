@@ -78,7 +78,7 @@ function petType() {
     }
 }
 
-function petColor(petTypeSelected) {
+function petColor(petColorArray) {
     //var petColorSelect = document.getElementById('color');
     //var petTypeSelected = ((document.getElementById('petTypeOption')).value).toUpperCase;
     /*var petTypeSelected = 'DOG';
@@ -94,34 +94,8 @@ function petColor(petTypeSelected) {
         }
     }*/
     //var petTypeSelected = (document.getElementById('petTypeOption')).value;
-    var petColorArray = [];
 
-    if (petTypeSelected == "dog") {
-        petColorArray = PFdata.DOG.colors;
-    }
-    else if (petTypeSelected == "cat") {
-        petColorArray = PFdata.CAT.colors;
-    }
-    else if (petTypeSelected == "rabbit") {
-        petColorArray = PFdata.RABBIT.colors;
-    }
-    else if (petTypeSelected == "small_furry") {
-        petColorArray = PFdata.SMALL_FURRY.colors;
-    }
-    else if (petTypeSelected == "horse") {
-        petColorArray = PFdata.HORSE.colors;
-    }
-    else if (petTypeSelected == "bird") {
-        petColorArray = PFdata.BIRD.colors;
-    }
-    else if (petTypeSelected == "scales_fins_other") {
-        petColorArray = PFdata.SCALES_FINS_OTHER.colors;
-    }
-    else if (petTypeSelected == "barnyard") {
-        petColorArray = PFdata.BARNYARD.colors;
-    }
-
-    var petColorSelect = document.getElementById('color');
+    /*var petColorSelect = document.getElementById('color');
     for (var i = 0; i < petColorArray.length; i++) {
         console.log(petColorArray[i]);
         var petOption = document.createElement('option');
@@ -130,7 +104,8 @@ function petColor(petTypeSelected) {
         petOption.value = petColorArray[i];
         petOption.setAttribute("id", "petTypeOption");
         petColorSelect.appendChild(petOption);
-    }
+    }*/
+    //console.log(petColorArray[0].length);
 }
 
 
@@ -163,7 +138,27 @@ export default function NewListing() {
         else if (petTypeSelected == "barnyard") { petColorArray = PFdata.BARNYARD.colors; furLengthArray = PFdata.BARNYARD.coats;}
         console.log("petColorArray: " + petColorArray); //shows the CORRECT colors array but need to display this in options
         console.log("furLengthArray: " + furLengthArray); //shows the CORRECT fur length array but need to display this in options
+        //console.log(petColorArray.length);
 
+        var petColorSelect = document.getElementById('color');
+        for (var i = 0; i < petColorArray.length; i++) {
+            console.log(petColorArray[i]);
+            var petOption = document.createElement('option');
+            petOption.innerHTML = capitalize(petColorArray[i]);
+            petOption.value = petColorArray[i];
+            petOption.setAttribute("id", "petTypeOption");
+            petColorSelect.appendChild(petOption);
+        }
+
+        var petFurSelect = document.getElementById('furLength');
+        for (var i = 0; i < furLengthArray.length; i++) {
+            console.log(furLengthArray[i]);
+            var petOption = document.createElement('option');
+            petOption.innerHTML = capitalize(furLengthArray[i]);
+            petOption.value = petColorArray[i];
+            petOption.setAttribute("id", "petTypeOption");
+            petFurSelect.appendChild(petOption);
+        }
     
       }
 
