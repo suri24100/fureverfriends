@@ -14,7 +14,7 @@ import Listings from "./Listings";
 import Login from "./Login";
 import PetCare from "./PetCare";
 import SignUp from "./SignUp";
-import CreateAccount from "./CreateAccount";
+import {db} from "./ffdb";
 import NewListing from "./NewListing";
 import PetProfile from "./PetProfile";
 
@@ -36,7 +36,10 @@ import PetProfile from "./PetProfile";
 export default function App() {
     let match = useRouteMatch();
 
-  return (
+db.collection('petinformation').get().then((snapshot) => {
+    console.log(snapshot.docs)
+} )
+    return (
     <div>
         <Header />
         <Switch>
@@ -67,16 +70,11 @@ export default function App() {
             <Route path="/">
                 <Home />
             </Route>
-            {/*temporary!!*/}
         </Switch>
         <Footer />
 
-        {/*<code>*/}
-        {/*    <pre>*/}
-        {/*        {JSON.stringify(firebaseApp.option, null, 2)}*/}
-        {/*    </pre>*/}
-        {/*</code>*/}
     </div>
+
   );
 }
 
