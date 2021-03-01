@@ -133,12 +133,8 @@ function petColor(petTypeSelected) {
     }
 }
 
-function callAllFunctions(petType) {
-    petColor(petType);
-}
+
 export default function NewListing() {
-
-
     useEffect(() => {
         M.AutoInit();
         $(document).ready(function(){
@@ -224,9 +220,7 @@ export default function NewListing() {
                             <label for="type-of-pet">Type of Pet</label>
                             <select id="type-of-pet" name="type-of-pet" onChange={e => handleChange(e)}>
                                 {/*populated using JavaScript (see function petType()*/}
-                                {
-        type.map((address, key) => <option value={key}>{address}</option>)
-      }
+                                {type.map((address, key) => <option value={key}>{address}</option>)}
                             </select>
                         </div>
 
