@@ -6,6 +6,9 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import M from "materialize-css";
 
+//all the data from PetFinderAPI
+import PFdata from "./api-modules/constants.js";
+
 function processFormContents() {
     var petProfileImg = (document.getElementById('pet-profile-img')).value;
     var petAddImg = (document.getElementById('pet-add-img')).value;
@@ -32,6 +35,7 @@ function processFormContents() {
 
     const newPetProfile = {
         pet_profile_img: petProfileImg,
+        pet_add_img: petAddImg,
         pet_name : petname,
         pet_type : pettype,
         age : age,
@@ -57,8 +61,55 @@ function processFormContents() {
     console.log(newPetProfile);
 }
 
-export default function NewListing() {
+function capitalize(word) {
+    return word.charAt(0).toUpperCase() + word.slice(1);
+}
 
+function petType() {
+    var petTypeSelect = document.getElementById('type-of-pet');
+    var petTypesArray = PFdata.TYPES;
+    for (var i = 0; i < petTypesArray.length; i++) {
+        var petOption = document.createElement('option');
+        //petOption.innerHTML = (petTypesArray[i]).charAt(0).toUpperCase() + (petTypesArray[i]).slice(1);
+        petOption.innerHTML = capitalize(petTypesArray[i]);
+        petOption.value = petTypesArray[i];
+        petOption.setAttribute("id", "petTypeOption");
+        petTypeSelect.appendChild(petOption);
+    }
+}
+
+function petColor(petColorArray) {
+    //var petColorSelect = document.getElementById('color');
+    //var petTypeSelected = ((document.getElementById('petTypeOption')).value).toUpperCase;
+    /*var petTypeSelected = 'DOG';
+    if (petTypeSelected != '') {
+        var petColorArray = PFdata.DOG.colors;
+        for (var i =0; i < petColorArray.length; i++) {
+            console.log("Color for dog " + petColorArray[i]);
+            var petOption = document.createElement('option');
+            petOption.innerHTML = capitalize(petColorArray[i]);
+            petOption.value = petColorArray[i];
+            petOption.setAttribute("id", "petTypeOption");
+            petColorSelect.appendChild(petOption);
+        }
+    }*/
+    //var petTypeSelected = (document.getElementById('petTypeOption')).value;
+
+    /*var petColorSelect = document.getElementById('color');
+    for (var i = 0; i < petColorArray.length; i++) {
+        console.log(petColorArray[i]);
+        var petOption = document.createElement('option');
+        //petOption.innerHTML = (petTypesArray[i]).charAt(0).toUpperCase() + (petTypesArray[i]).slice(1);
+        petOption.innerHTML = capitalize(petColorArray[i]);
+        petOption.value = petColorArray[i];
+        petOption.setAttribute("id", "petTypeOption");
+        petColorSelect.appendChild(petOption);
+    }*/
+    //console.log(petColorArray[0].length);
+}
+
+
+export default function NewListing() {
     useEffect(() => {
         M.AutoInit();
         $(document).ready(function(){
@@ -66,7 +117,50 @@ export default function NewListing() {
           });
         
           M.textareaAutoResize($('#about-me'));
+          //petType();
+          petColor();
       });
+
+      const [petType, setPetType] = useState(PFdata.TYPES)
+      const type = petType.map(type => type)
+      const handleChange = (e) => {
+          //petColor(petType[e.target.value])
+        var petTypeSelected = petType[e.target.value]
+        var petColorArray = [];
+        var furLengthArray = [];
+        if (petTypeSelected == "dog") { petColorArray = PFdata.DOG.colors; furLengthArray = PFdata.DOG.coats; }
+        else if (petTypeSelected == "cat") { petColorArray = PFdata.CAT.colors; furLengthArray = PFdata.CAT.coats;}
+        else if (petTypeSelected == "rabbit") { petColorArray = PFdata.RABBIT.colors; furLengthArray = PFdata.RABBIT.coats;}
+        else if (petTypeSelected == "small_furry") { petColorArray = PFdata.SMALL_FURRY.colors; furLengthArray = PFdata.SMALL_FURRY.coats;}
+        else if (petTypeSelected == "horse") { petColorArray = PFdata.HORSE.colors; furLengthArray = PFdata.HORSE.coats;}
+        else if (petTypeSelected == "bird") { petColorArray = PFdata.BIRD.colors; furLengthArray = PFdata.BIRD.coats;}
+        else if (petTypeSelected == "scales_fins_other") { petColorArray = PFdata.SCALES_FINS_OTHER.colors; furLengthArray = PFdata.SCALES_FINS_OTHER.coats;}
+        else if (petTypeSelected == "barnyard") { petColorArray = PFdata.BARNYARD.colors; furLengthArray = PFdata.BARNYARD.coats;}
+        console.log("petColorArray: " + petColorArray); //shows the CORRECT colors array but need to display this in options
+        console.log("furLengthArray: " + furLengthArray); //shows the CORRECT fur length array but need to display this in options
+        //console.log(petColorArray.length);
+
+        var petColorSelect = document.getElementById('color');
+        for (var i = 0; i < petColorArray.length; i++) {
+            console.log(petColorArray[i]);
+            var petOption = document.createElement('option');
+            petOption.innerHTML = capitalize(petColorArray[i]);
+            petOption.value = petColorArray[i];
+            petOption.setAttribute("id", "petTypeOption");
+            petColorSelect.appendChild(petOption);
+        }
+
+        var petFurSelect = document.getElementById('furLength');
+        for (var i = 0; i < furLengthArray.length; i++) {
+            console.log(furLengthArray[i]);
+            var petOption = document.createElement('option');
+            petOption.innerHTML = capitalize(furLengthArray[i]);
+            petOption.value = petColorArray[i];
+            petOption.setAttribute("id", "petTypeOption");
+            petFurSelect.appendChild(petOption);
+        }
+    
+      }
 
     return (
         <div>
@@ -114,20 +208,14 @@ export default function NewListing() {
 
                         <div className="listings-form-row">
                             <label for="petname">Name: </label>
-                            <input type="text" id="petname" name="petname"/>
+                            <input type="text" id="petname" name="petname" onChange={e => handleChange(e)}/>
                         </div>
 
                         <div className="listings-form-row">
                             <label for="type-of-pet">Type of Pet</label>
-                            <select id="type-of-pet" name="type-of-pet">
-                                <option value="Cat">Cat</option>
-                                <option value="Dog">Dog</option>
-                                <option value="HamsterGuinea">Small Furbabies</option>
-                                <option value="Rabbit">Rabbit</option>
-                                <option value="Fish">Fish</option>
-                                <option value="ReptileAmphibians">Reptile and Amphibian</option>
-                                <option value="Bird">Bird</option>
-                                <option value="Other">Other</option>
+                            <select id="type-of-pet" name="type-of-pet" onChange={e => handleChange(e)}>
+                                {/*populated using JavaScript (see function petType()*/}
+                                {type.map((address, key) => <option value={key}>{address}</option>)}
                             </select>
                         </div>
 
