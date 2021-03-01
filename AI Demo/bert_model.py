@@ -22,31 +22,24 @@ from official.nlp import bert
 
 
 #Importing BERT modules
-from bert import run_classifier
-from bert import optimization
-from bert import tokenization
+import official.nlp.bert.run_classifier
+import official.nlp.optimization
+import official.nlp.bert.tokenization
 
-# # Set the output directory for saving model file
-# OUTPUT_DIR = '/GD/My Drive/Colab Notebooks/BERT/bert_news_category'
-#
-# #@markdown Whether or not to clear/delete the directory and create a new one
-# DO_DELETE = False #@param {type:"boolean"}
-#
-# if DO_DELETE:
-#   try:
-#     tf.gfile.DeleteRecursively(OUTPUT_DIR)
-#   except:
-#     pass
-#
-# tf.gfile.MakeDirs(OUTPUT_DIR)
-# print('***** Model output directory: {} *****'.format(OUTPUT_DIR))
+# Set the output directory for saving model file
+OUTPUT_DIR = 'BERT/bert_petfinder_category'
 
-# train = pd.read_excel("/GD/My Drive/Colab Notebooks/News_category/Datasets/Data_Train.xlsx")
-# test = pd.read_excel("/GD/My Drive/Colab Notebooks/News_category/Datasets/Data_Test.xlsx")
-#
-# from sklearn.model_selection import train_test_split
-#
-# train, val =  train_test_split(train, test_size = 0.2, random_state = 100)
+#@markdown Whether or not to clear/delete the directory and create a new one
+DO_DELETE = False #@param {type:"boolean"}
+
+if DO_DELETE:
+  try:
+    tf.compat.v1.gfile.DeleteRecursively(OUTPUT_DIR)
+  except:
+    pass
+
+tf.compat.v1.gfile.MakeDirs(OUTPUT_DIR)
+print('***** Model output directory: {} *****'.format(OUTPUT_DIR))
 
 train = pd.read_excel("Data_Train.xlsx")
 test = pd.read_excel("Data_Test.xlsx")
@@ -66,16 +59,16 @@ print("Validation Set Shape :", val.shape)
 print("Test Set Shape :", test.shape)
 
 #Features in the dataset
-train.columns
+print(train.columns)
 
 #unique classes
-train['SECTION'].unique()
+train['tags'].unique()
 
 #Distribution of classes
-train['SECTION'].value_counts().plot(kind = 'bar')
+train['tags'].value_counts().plot(kind = 'bar')
 
-DATA_COLUMN = 'STORY'
-LABEL_COLUMN = 'SECTION'
+DATA_COLUMN = 'description'
+LABEL_COLUMN = 'tags'
 # The list containing all the classes (train['SECTION'].unique())
 label_list = [0, 1, 2, 3]
 
@@ -89,7 +82,7 @@ val_InputExamples = val.apply(lambda x: bert.run_classifier.InputExample(guid=No
                                                                    text_b = None,
                                                                    label = x[LABEL_COLUMN]), axis = 1)
 
-train_InputExamples
+print(train_InputExamples)
 
 print("Row 0 - guid of training set : ", train_InputExamples.iloc[0].guid)
 print("\n__________\nRow 0 - text_a of training set : ", train_InputExamples.iloc[0].text_a)
@@ -105,7 +98,7 @@ def create_tokenizer_from_hub_module():
     with tf.Graph().as_default():
         bert_module = hub.Module(BERT_MODEL_HUB)
         tokenization_info = bert_module(signature="tokenization_info", as_dict=True)
-        with tf.Session() as sess:
+        with tf.compat.v1.Session as sess:
             vocab_file, do_lower_case = sess.run([tokenization_info["vocab_file"],
                                                   tokenization_info["do_lower_case"]])
 
