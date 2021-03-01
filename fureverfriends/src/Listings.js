@@ -46,7 +46,7 @@ function PetCard(props){
         <div className="listing-card col s12 m4 l3">
             <div className="card">
                 <div className="card-image">
-                    <Link to={`${match.url}/` + petDetails.id} className="profile-link-overlay">
+                    <Link to={`${match.url}/profile/` + "PF-" + petDetails.id} className="profile-link-overlay">
                         <img src={petDetails.photo_url} />
                     </Link>
                     <a className="btn-floating halfway-fab waves-effect waves-light">

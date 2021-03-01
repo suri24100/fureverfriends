@@ -3,14 +3,14 @@ import Header from "./Header";
 import './css/pet-profile.css';
 import {useParams} from "react-router-dom";
 import {getProfileInfo, getTypeListing} from "./api-modules/PetfinderAPI";
+import placeholder_image from "./images/petProfiles/default-placeholder-image.png";
 
 export default function PetProfile(){
-    let { name } = useParams();
     let { id } = useParams();
 
     const [petDetails, setPetDetails] = useState(null);
     const [isFavorite, setIsFavorite] = useState(false);
-    const [profileFound, setProfileFound] = useState(false);
+    const [profileFound, setProfileFound] = useState("loading");
 
     useEffect(() => {
         if(!petDetails){
@@ -25,7 +25,7 @@ export default function PetProfile(){
                 petfinder_listing: true,       // check whether from petfinder or not
                 id: petData.id,
                 name: petData.name,
-                photo_url: (petData.primary_photo_cropped) ? petData.primary_photo_cropped.medium : "./images/petProfiles/default-placeholder-image.png",
+                photo_url: (petData.primary_photo_cropped) ? petData.primary_photo_cropped.medium : placeholder_image,
                 additional_photos: petData.photos,
                 profile_url: petData.url,
                 type: petData.type,
@@ -55,8 +55,9 @@ export default function PetProfile(){
                 description: petData.description
             });
             console.log(petData)
+            setProfileFound("success");
         } else{
-            // pet not found, display error message
+            setProfileFound("failed");
         }
     }
 
@@ -147,7 +148,7 @@ export default function PetProfile(){
     function ProfileSlider(){
         return(
             <div className="image-slider">
-                {petDetails ? <img src={petDetails.photo_url} /> : ""}
+                {petDetails ? <img src={petDetails.photo_url} /> : <img src={placeholder_image} />}
             </div>
         )
     }
@@ -157,7 +158,7 @@ export default function PetProfile(){
             <div className="row">
                 <div className="col s12">
                     <h2>404: Pet Not Found</h2>
-                    <p>Sorry!</p>
+                    <h4>We're sorry, but the profile for this pet cannot be found right now.</h4>
                 </div>
             </div>
         )
@@ -170,11 +171,8 @@ export default function PetProfile(){
                 <ProfileSlider />
             </div>
             <div className="container">
-                {petDetails ?
-                    <ProfileContents />
-                    :
-                    <PageNotFound />
-                }
+                {(profileFound === "success") && <ProfileContents />}
+                {(profileFound === "failed") && <PageNotFound />}
             </div>
         </div>
     )
