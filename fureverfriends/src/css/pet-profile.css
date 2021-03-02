@@ -1,0 +1,75 @@
+.profile-page .container {
+    margin-top: 5% !important;
+    margin-bottom: 5% !important;
+}
+
+.profile-page .container a.text-link{
+    color: #00acc1;
+}
+
+.profile-page .banner-wrap{
+    background-image: none;
+    background-color: black;
+    overflow: hidden;
+}
+
+.profile-page .hdr-wrap{
+    background-color: #379683;
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    padding: 1% 3% 2% 5%;
+    position: relative;
+}
+
+.profile-page .image-slider{
+    position: relative;
+    height: inherit;
+}
+
+.profile-page .image-slider img{
+    width: auto;
+    height: inherit;
+}
+
+.profile-page .title{
+    font-weight: bold;
+    margin-right: 1%;
+}
+
+.profile-page h3{
+    text-transform: uppercase;
+    font-size: 2em;
+    font-weight: bold;
+    color: #379683;
+}
+
+.profile-page .btn-large{
+    font-weight: bold;
+    font-size: 14pt!important;
+    margin-top: 8%;
+}
+
+.profile-page .submit-button a{
+    margin-top: 8%;
+    font-size: 14pt!important;
+}
+
+.profile-page .scan-button{
+    margin-left: 5%;
+}
+
+.profile-page .main-photo {
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+    display: block;
+    border-radius: 100px;
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+}
+
+.profile-page .side-info{
+}

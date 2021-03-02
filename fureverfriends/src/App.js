@@ -1,9 +1,10 @@
-import React from "react";
+import React, {useEffect} from "react";
 // React router components
 import {Switch, Route, Link, useRouteMatch, useParams} from "react-router-dom";
 
 //Materialize
 import 'materialize-css/dist/css/materialize.min.css';
+import M from "materialize-css";
 
 // our components
 import Header from "./Header";
@@ -41,7 +42,6 @@ db.collection('petinformation').get().then((snapshot) => {
 } )
     return (
     <div>
-        <Header />
         <Switch>
             <Route path ="/Signup">
                 <SignUp/>
@@ -52,7 +52,7 @@ db.collection('petinformation').get().then((snapshot) => {
             <Route path ="/CreateAccount">
                 <CreateAccount />
             </Route>
-            <Route path="/listings/:name-:id">
+            <Route path="/listings/profile/:prefix-:id">
                 <PetProfile />
             </Route>
             <Route path="/listings">
