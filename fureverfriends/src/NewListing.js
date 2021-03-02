@@ -110,6 +110,7 @@ function petColor(petColorArray) {
 
 
 export default function NewListing() {
+
     useEffect(() => {
         M.AutoInit();
         $(document).ready(function(){
@@ -120,17 +121,28 @@ export default function NewListing() {
           //petType();
           petColor();
       });
-
-      const [petType, setPetType] = useState(PFdata.TYPES)
+      const [petType, setPetType] = useState(PFdata.TYPES);
+      const [formData, setFormData] = useState({
+       name: "",
+        fur_length: "",
+        color: "",
+        }); 
+      const handleName = (e) => {
+          setFormData({
+			...formData,
+			name: e.target.value
+		});
+        console.log(formData.name);
+      }
       const type = petType.map(type => type)
       const handleChange = (e) => {
           //petColor(petType[e.target.value])
-        var petTypeSelected = petType[e.target.value]
+        var petTypeSelected = petType[e.target.value];
         var petColorArray = [];
         var furLengthArray = [];
         if (petTypeSelected == "dog") { petColorArray = PFdata.DOG.colors; furLengthArray = PFdata.DOG.coats; }
         else if (petTypeSelected == "cat") { petColorArray = PFdata.CAT.colors; furLengthArray = PFdata.CAT.coats;}
-        else if (petTypeSelected == "rabbit") { petColorArray = PFdata.RABBIT.colors; furLengthArray = PFdata.RABBIT.coats;}
+        else if (petTypeSelected == "rabbit") { petColorArray = PFdata.RABBIT.colors; /*furLengthArray = PFdata.RABBIT.coats;*/ furLengthArray = ["TEst"];}
         else if (petTypeSelected == "small_furry") { petColorArray = PFdata.SMALL_FURRY.colors; furLengthArray = PFdata.SMALL_FURRY.coats;}
         else if (petTypeSelected == "horse") { petColorArray = PFdata.HORSE.colors; furLengthArray = PFdata.HORSE.coats;}
         else if (petTypeSelected == "bird") { petColorArray = PFdata.BIRD.colors; furLengthArray = PFdata.BIRD.coats;}
@@ -159,7 +171,7 @@ export default function NewListing() {
             petOption.setAttribute("id", "petTypeOption");
             petFurSelect.appendChild(petOption);
         }
-    
+        M.AutoInit();
       }
 
     return (
@@ -208,7 +220,7 @@ export default function NewListing() {
 
                         <div className="listings-form-row">
                             <label for="petname">Name: </label>
-                            <input type="text" id="petname" name="petname" onChange={e => handleChange(e)}/>
+                            <input type="text" id="petname" name="petname" onChange={e => handleName(e)}/>
                         </div>
 
                         <div className="listings-form-row">
