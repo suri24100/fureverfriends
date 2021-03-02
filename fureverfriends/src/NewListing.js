@@ -142,7 +142,7 @@ export default function NewListing() {
         var furLengthArray = [];
         if (petTypeSelected == "dog") { petColorArray = PFdata.DOG.colors; furLengthArray = PFdata.DOG.coats; }
         else if (petTypeSelected == "cat") { petColorArray = PFdata.CAT.colors; furLengthArray = PFdata.CAT.coats;}
-        else if (petTypeSelected == "rabbit") { petColorArray = PFdata.RABBIT.colors; /*furLengthArray = PFdata.RABBIT.coats;*/ furLengthArray = ["TEst"];}
+        else if (petTypeSelected == "rabbit") { petColorArray = PFdata.RABBIT.colors; furLengthArray = PFdata.RABBIT.coats;}
         else if (petTypeSelected == "small_furry") { petColorArray = PFdata.SMALL_FURRY.colors; furLengthArray = PFdata.SMALL_FURRY.coats;}
         else if (petTypeSelected == "horse") { petColorArray = PFdata.HORSE.colors; furLengthArray = PFdata.HORSE.coats;}
         else if (petTypeSelected == "bird") { petColorArray = PFdata.BIRD.colors; furLengthArray = PFdata.BIRD.coats;}
@@ -153,6 +153,9 @@ export default function NewListing() {
         //console.log(petColorArray.length);
 
         var petColorSelect = document.getElementById('color');
+        while (petColorSelect.firstChild) {
+            petColorSelect.removeChild(petColorSelect.firstChild);
+        }
         for (var i = 0; i < petColorArray.length; i++) {
             console.log(petColorArray[i]);
             var petOption = document.createElement('option');
