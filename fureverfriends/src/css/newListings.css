@@ -87,3 +87,8 @@ input.select-dropdown.dropdown-trigger {
 li {
   text-transform: capitalize;
 }
+
+#output_image
+{
+ max-width: 20%;
+}

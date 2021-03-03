@@ -63,56 +63,19 @@ function processFormContents() {
     console.log(newPetProfile);
 }
 
-//console.log(getBreeds("barnyard"));
-//console.log("breeds test: " + PFdata.DOG.breeds.length);
+/* code from: http://talkerscode.com/webtricks/preview-image-before-upload-using-javascript.php */
+function preview_image(event) {
+    var reader = new FileReader();
+    reader.onload = function() {
+        var output = document.getElementById('output_image');
+        output.src = reader.result;
+    }
+    reader.readAsDataURL(event.target.files[0]);
+}
 
 function capitalize(word) {
     return word.charAt(0).toUpperCase() + word.slice(1);
 }
-
-function petType() {
-    var petTypeSelect = document.getElementById('type-of-pet');
-    var petTypesArray = PFdata.TYPES;
-    for (var i = 0; i < petTypesArray.length; i++) {
-        var petOption = document.createElement('option');
-        //petOption.innerHTML = (petTypesArray[i]).charAt(0).toUpperCase() + (petTypesArray[i]).slice(1);
-        petOption.innerHTML = capitalize(petTypesArray[i]);
-        petOption.value = petTypesArray[i];
-        petOption.setAttribute("id", "petTypeOption");
-        petTypeSelect.appendChild(petOption);
-    }
-}
-
-function petColor(petColorArray) {
-    //var petColorSelect = document.getElementById('color');
-    //var petTypeSelected = ((document.getElementById('petTypeOption')).value).toUpperCase;
-    /*var petTypeSelected = 'DOG';
-    if (petTypeSelected != '') {
-        var petColorArray = PFdata.DOG.colors;
-        for (var i =0; i < petColorArray.length; i++) {
-            console.log("Color for dog " + petColorArray[i]);
-            var petOption = document.createElement('option');
-            petOption.innerHTML = capitalize(petColorArray[i]);
-            petOption.value = petColorArray[i];
-            petOption.setAttribute("id", "petTypeOption");
-            petColorSelect.appendChild(petOption);
-        }
-    }*/
-    //var petTypeSelected = (document.getElementById('petTypeOption')).value;
-
-    /*var petColorSelect = document.getElementById('color');
-    for (var i = 0; i < petColorArray.length; i++) {
-        console.log(petColorArray[i]);
-        var petOption = document.createElement('option');
-        //petOption.innerHTML = (petTypesArray[i]).charAt(0).toUpperCase() + (petTypesArray[i]).slice(1);
-        petOption.innerHTML = capitalize(petColorArray[i]);
-        petOption.value = petColorArray[i];
-        petOption.setAttribute("id", "petTypeOption");
-        petColorSelect.appendChild(petOption);
-    }*/
-    //console.log(petColorArray[0].length);
-}
-
 
 export default function NewListing() {
 
@@ -123,8 +86,6 @@ export default function NewListing() {
           });
         
           M.textareaAutoResize($('#about-me'));
-          //petType();
-          petColor();
       });
       let typeArray = PFdata.TYPES;
       typeArray.unshift("");
@@ -262,13 +223,14 @@ export default function NewListing() {
                     <div className="file-field input-field">
                     <div className="btn">
                         <i className="material-icons">perm_media</i>
-                        <input type="file" accept=".gif,.jpg,.jpeg,.png" id="pet-profile-img"/>
+                        <input type="file" accept=".gif,.jpg,.jpeg,.png" id="pet-profile-img" onChange={e => preview_image(e)}/>
                     </div>
                     <div className="file-path-wrapper">
                         <input className="file-path validate" type="text" placeholder="Upload an image (.gif,.jpg,.jpeg,.png)"/>
                     </div>
                     </div>
                 </form>
+                <img id="output_image"/>
             </div>
             <div className="listings-add-pic-wrap listings-section container">
                 <h5>Set Additional Picture</h5>
