@@ -63,7 +63,8 @@ function processFormContents() {
     console.log(newPetProfile);
 }
 
-console.log(getBreeds("barnyard"));
+//console.log(getBreeds("barnyard"));
+//console.log("breeds test: " + PFdata.DOG.breeds.length);
 
 function capitalize(word) {
     return word.charAt(0).toUpperCase() + word.slice(1);
@@ -125,7 +126,10 @@ export default function NewListing() {
           //petType();
           petColor();
       });
-      const [petType, setPetType] = useState(PFdata.TYPES);
+      let typeArray = PFdata.TYPES;
+      typeArray.unshift("");
+      console.log(PFdata.TYPES);
+      const [petType, setPetType] = useState(typeArray);
       const [formData, setFormData] = useState({
        name: "",
         fur_length: "",
@@ -144,16 +148,63 @@ export default function NewListing() {
         var petTypeSelected = petType[e.target.value];
         var petColorArray = [];
         var furLengthArray = [];
-        if (petTypeSelected == "dog") { petColorArray = PFdata.DOG.colors; furLengthArray = PFdata.DOG.coats; }
-        else if (petTypeSelected == "cat") { petColorArray = PFdata.CAT.colors; furLengthArray = PFdata.CAT.coats;}
-        else if (petTypeSelected == "rabbit") { petColorArray = PFdata.RABBIT.colors; furLengthArray = PFdata.RABBIT.coats;}
-        else if (petTypeSelected == "small_furry") { petColorArray = PFdata.SMALL_FURRY.colors; furLengthArray = PFdata.SMALL_FURRY.coats;}
-        else if (petTypeSelected == "horse") { petColorArray = PFdata.HORSE.colors; furLengthArray = PFdata.HORSE.coats;}
-        else if (petTypeSelected == "bird") { petColorArray = PFdata.BIRD.colors; furLengthArray = PFdata.BIRD.coats;}
-        else if (petTypeSelected == "scales_fins_other") { petColorArray = PFdata.SCALES_FINS_OTHER.colors; furLengthArray = PFdata.SCALES_FINS_OTHER.coats;}
-        else if (petTypeSelected == "barnyard") { petColorArray = PFdata.BARNYARD.colors; furLengthArray = PFdata.BARNYARD.coats;}
-        console.log("petColorArray: " + petColorArray); //shows the CORRECT colors array but need to display this in options
-        console.log("furLengthArray: " + furLengthArray); //shows the CORRECT fur length array but need to display this in options
+        var breedArray = [];
+        if (petTypeSelected == "dog") { 
+            petColorArray = PFdata.DOG.colors; 
+            furLengthArray = PFdata.DOG.coats;
+            for (var i = 0; i < PFdata.DOG.breeds.length; i++) {
+                breedArray[i] = PFdata.DOG.breeds[i].name;
+            } 
+        }
+        else if (petTypeSelected == "cat") { 
+            petColorArray = PFdata.CAT.colors; 
+            furLengthArray = PFdata.CAT.coats;
+            for (var i = 0; i < PFdata.CAT.breeds.length; i++) {
+                breedArray[i] = PFdata.CAT.breeds[i].name;
+            } 
+        }
+        else if (petTypeSelected == "rabbit") { 
+            petColorArray = PFdata.RABBIT.colors; 
+            furLengthArray = PFdata.RABBIT.coats;
+            for (var i = 0; i < PFdata.RABBIT.breeds.length; i++) {
+                breedArray[i] = PFdata.RABBIT.breeds[i].name;
+            } 
+        }
+        else if (petTypeSelected == "small_furry") { 
+            petColorArray = PFdata.SMALL_FURRY.colors; 
+            furLengthArray = PFdata.SMALL_FURRY.coats;
+            for (var i = 0; i < PFdata.SMALL_FURRY.breeds.length; i++) {
+                breedArray[i] = PFdata.SMALL_FURRY.breeds[i].name;
+            } 
+        }
+        else if (petTypeSelected == "horse") { 
+            petColorArray = PFdata.HORSE.colors; 
+            furLengthArray = ["Not Applicable"];
+            for (var i = 0; i < PFdata.HORSE.breeds.length; i++) {
+                breedArray[i] = PFdata.HORSE.breeds[i].name;
+            } 
+        }
+        else if (petTypeSelected == "bird") { 
+            petColorArray = PFdata.BIRD.colors; 
+            furLengthArray = ["Not Applicable"];
+            for (var i = 0; i < PFdata.BIRD.breeds.length; i++) {
+                breedArray[i] = PFdata.BIRD.breeds[i].name;
+            } 
+        }
+        else if (petTypeSelected == "scales_fins_other") { 
+            petColorArray = PFdata.SCALES_FINS_OTHER.colors; 
+            furLengthArray = ["Not Applicable"];
+            for (var i = 0; i < PFdata.SCALES_FINS_OTHER.breeds.length; i++) {
+                breedArray[i] = PFdata.SCALES_FINS_OTHER.breeds[i].name;
+            } 
+        }
+        else if (petTypeSelected == "barnyard") { 
+            petColorArray = PFdata.BARNYARD.colors; 
+            furLengthArray = PFdata.BARNYARD.coats;
+            for (var i = 0; i < PFdata.BARNYARD.breeds.length; i++) {
+                breedArray[i] = PFdata.BARNYARD.breeds[i].name;
+            } 
+        }
         //console.log(petColorArray.length);
 
         var petColorSelect = document.getElementById('color');
@@ -161,7 +212,6 @@ export default function NewListing() {
             petColorSelect.removeChild(petColorSelect.firstChild);
         }
         for (var i = 0; i < petColorArray.length; i++) {
-            console.log(petColorArray[i]);
             var petOption = document.createElement('option');
             petOption.innerHTML = capitalize(petColorArray[i]);
             petOption.value = petColorArray[i];
@@ -170,14 +220,29 @@ export default function NewListing() {
         }
 
         var petFurSelect = document.getElementById('furLength');
+        while (petFurSelect.firstChild) {
+            petFurSelect.removeChild(petFurSelect.firstChild);
+        }
         for (var i = 0; i < furLengthArray.length; i++) {
-            console.log(furLengthArray[i]);
             var petOption = document.createElement('option');
             petOption.innerHTML = capitalize(furLengthArray[i]);
             petOption.value = petColorArray[i];
             petOption.setAttribute("id", "petTypeOption");
             petFurSelect.appendChild(petOption);
         }
+
+        var breedSelect = document.getElementById('breed');
+        while (breedSelect.firstChild) {
+            breedSelect.removeChild(breedSelect.firstChild);
+        }
+        for (var i = 0; i < breedArray.length; i++) {
+            var petOption = document.createElement('option');
+            petOption.innerHTML = capitalize(breedArray[i]);
+            petOption.value = breedArray[i];
+            petOption.setAttribute("id", "petTypeOption");
+            breedSelect.appendChild(petOption);
+        }
+
         M.AutoInit();
       }
 
@@ -206,7 +271,7 @@ export default function NewListing() {
                 </form>
             </div>
             <div className="listings-add-pic-wrap listings-section container">
-                <h5>Set Profile Picture</h5>
+                <h5>Set Additional Picture</h5>
                 <h6>These are any additional pictures of your pet and can be seen in the pet profile page</h6>
                 <form action="#">
                     <div className="file-field input-field">
@@ -222,6 +287,7 @@ export default function NewListing() {
             </div>
             <div className="listings-pet-info listings-section container">
                 <h5>Pet Information</h5>
+                <h6>Some dropdowns will autofill upon pet type selection</h6>
                 <form className="row">
                     <div className="left-filter col s12 m6 l6 x6">
 
