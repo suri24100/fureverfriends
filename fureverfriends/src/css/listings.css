@@ -4,10 +4,18 @@
   background-image: none;
 }
 
+.listings-page .pet-listing-nav {
+  margin-bottom:5%;
+}
+
 .listings-page .pet-listing-nav button{
   margin-right: 1rem;
   margin-left: 1rem;
   font-weight: bold;
+}
+
+.listings-page .listing-card {
+  height:375px;
 }
 
 .listings-page .listing-card .card-image img{

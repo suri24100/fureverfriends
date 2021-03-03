@@ -106,8 +106,8 @@ export async function getProfileInfo(petID){
 }
 
 // get first __ listings of a specific animal type
-export async function getTypeListing(animalType, numListings){
-    let typeURL = BASE_URL + "/v2/animals?type=" + animalType + "&limit=" + numListings;
+export async function getTypeListing(animalType, numListings, pageNum){
+    let typeURL = BASE_URL + "/v2/animals?type=" + animalType + "&limit=" + numListings + "&page=" + pageNum;
     let listingResults = await getData(typeURL);
     return listingResults.animals;
 }

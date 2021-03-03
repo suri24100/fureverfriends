@@ -1,4 +1,4 @@
-import React, {useEffect, useState, Component} from 'react';
+import React, {useEffect, useState, Component, useReducer, useRef} from 'react';
 import Header from "./Header";
 import './css/style.css';
 import './css/listings.css';
@@ -8,7 +8,6 @@ import {Link, useRouteMatch} from "react-router-dom";
 
 
 function PetCard(props){
-    console.log(props.petInfo);
     const petInfo = props.petInfo;
     const [petDetails, setPetDetails] = useState({
         petfinder_listing: true,       // check whether from petfinder or not
@@ -46,10 +45,10 @@ function PetCard(props){
         <div className="listing-card col s12 m4 l3">
             <div className="card">
                 <div className="card-image">
-                    <Link to={`${match.url}/` + petDetails.name + "-" + petDetails.id} className="profile-link-overlay">
+                    <Link to={`${match.url}/profile/` + "PF-" + petDetails.id} className="profile-link-overlay">
                         <img src={petDetails.photo_url} />
                     </Link>
-                    <a className="btn-floating halfway-fab waves-effect waves-light">
+                    <a className="btn-floating halfway-fab">
                         <i className="material-icons">favorite_border</i>
                     </a>
                 </div>
@@ -63,22 +62,33 @@ function PetCard(props){
 }
 
 export default function Listings(){
+    function usePrevious(value) {
+        const ref = useRef();
+        useEffect(() => {
+            ref.current = value;
+        });
+        return ref.current;
+    }
 
+    const [pageNumber, setPageNumber] = useState(1);
     const [petListings, setPetListings] = useState( null);
+    const prevPage = usePrevious(pageNumber);
 
     useEffect(() => {
         if(!petListings){
-            getListingData();
+            getListingData(pageNumber);
             console.log(petListings);
-        }
-        else{
+        } else if(prevPage !== pageNumber){
+            getListingData(pageNumber);
             console.log(petListings);
         }
     });
 
-    async function getListingData(){
-        let newPetListings = await getTypeListing("cat", 100);
+    async function getListingData(pageNum){
+        let newPetListings = await getTypeListing("cat", 100, pageNum);
         setPetListings(newPetListings);
+        console.log(newPetListings);
+        console.log(petListings);
     }
 
     function generateCards(){
@@ -86,6 +96,16 @@ export default function Listings(){
         return(
             <>{cardList}</>
         )
+    }
+
+    function loadNextPage(){
+        let newPageNum = pageNumber + 1;
+        setPageNumber(newPageNum);
+    }
+
+    function loadPrevPage(){
+        let newPageNum = pageNumber - 1;
+        setPageNumber(newPageNum);
     }
 
     // displays a loading circle while listings are fetched asynchronously
@@ -271,18 +291,25 @@ export default function Listings(){
         </div>
         <div className="container">
             <div className="row">
-                {(!petListings) ?
+                {(!petListings || prevPage !== pageNumber) ?
                     showLoading() :
                     generateCards()
                 }
             </div>
             <div className="row pet-listing-nav">
                 <div className="col s12 center">
-                    <button className="btn waves-effect waves-light" type="button" name="action" disabled>
-                        Prev
-                        <i className="material-icons left">navigate_before</i>
-                    </button>
-                    <button className="btn waves-effect waves-light" type="button" name="action">
+                    {(pageNumber > 1) ?
+                        <button className="btn" type="button" name="action" onClick={loadPrevPage}>
+                            Prev
+                            <i className="material-icons left">navigate_before</i>
+                        </button>
+                        :
+                        <button className="btn" type="button" name="action" disabled>
+                            Prev
+                            <i className="material-icons left">navigate_before</i>
+                        </button>
+                    }
+                    <button className="btn" type="button" name="next" onClick={loadNextPage}>
                         Next
                         <i className="material-icons right">navigate_next</i>
                     </button>

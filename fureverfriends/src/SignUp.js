@@ -1,62 +1,97 @@
-import React, {useRef, useState} from 'react'
-import {Form, Button, Card} from 'react-bootstrap';
-import { Link, useHistory } from "react-router-dom"
-
-
-export default function Signup() {
-    const emailRef = useRef()
-    const passwordRef = useRef()
-    const passwordConfirmRef = useRef()
-
-    function useAuth() {
-
-    }
-
-    const { signup } = useAuth()
-    const [error, setError] = useState("")
-    const [loading, setLoading] = useState(false)
-    const history = useHistory()
-
-    async function Submit(e) {
-        e.preventDefault()
-
-        if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-            return setError("Passwords do not match")
-        }
-
-        try {
-            setError("")
-            setLoading(true)
-            await signup(emailRef.current.value, passwordRef.current.value)
-            history.push("/")
-        } catch {
-            setError("Failed to create an account")
-        }
-
-        setLoading(false)
-    }
-    return(
-        <>
-            <Card>
-                <Card.Body>
-                    <h2> SING UP</h2>
-                    <Form>
-                        <Form.group id="email">
-                            <Form.label>Email</Form.label>
-                            <Form.control type={"email"} ref={emailRef} required/>
-                        </Form.group>
-                        <Form.group id="password">
-                            <Form.label>Password</Form.label>
-                            <Form.control type={"password"} ref={passwordRef} required/>
-                        </Form.group>
-                        <Form.group id="password-confirm">
-                            <Form.label>Confirm Password</Form.label>
-                            <Form.control type={"email"} ref={passwordConfirmRef} required/>
-                        </Form.group>
-                    </Form>
-                    <Button type = "submit"> SIGN UP</Button>
-                </Card.Body>
-            </Card>
-            </>
-    )
-}
+// import React, {useEffect, useState, Component} from 'react';
+// import Header from "./Header";
+// import './css/style.css';
+// import './css/signing.css';
+// import {Link} from "react-router-dom";
+// import db from "./ffdb";
+// import Login from "./Login";
+//
+//
+//
+// export default function SignUp () {
+//     const [user, setUser] = useState('');
+//     const [email, setEmail] = useState('');
+//     const [password, setPassword] = useState('');
+//     const [emailError, setEmailError] = useState('');
+//     const [passwordError, setPasswordError] = useState('');
+//     const [hasAccount, setHasAccount] = useState(false);
+//
+//     const clearInputs = () =>{
+//         setEmail('');
+//         setPassword('');
+//     }
+//     const clearErrors = () => {
+//         setEmailError('');
+//         setPasswordError('');
+//     }
+//
+//     const handleLogin = () => {
+//         clearErrors();
+//
+//         db
+//             .auth()
+//             .signInWithEmailAndPassword(email, password)
+//             .catch((err) => {
+//                 if (err.code === "auth/invalid-email" || err.code === "auth/user-disabled" || err.code === "auth/user-not-found") {
+//                     setEmailError(err.message);
+//                 } else if (err.code === "auth/wrong-password") {
+//                     setPasswordError(err.message);
+//                 }
+//             });
+//     };
+//     const handleSignUp = () => {
+//         db
+//             .auth()
+//             .createUserWithEmailAndPassword(email, password)
+//             .catch((err) => {
+//                 if (err.code === "auth/email-already-in-use" || err.code === "auth/invalid-email") {
+//                     setEmailError(err.message);
+//                 } else if (err.code === "auth/weak-password") {
+//                     setPasswordError(err.message);
+//                 }
+//             });
+//     };
+//
+//     const handleLogOut = () => {
+//         return db.auth().signOut();
+//     };
+//
+//     const authListener = () => {
+//         db.auth().onAuthStateChanged(user =>{
+//             if(user) {
+//                 clearInputs();
+//                 console.log("The user is logged in")
+//             }
+//             else{
+//                 console.log("The user is not logged in")
+//             }
+//         })
+//     }
+//
+//     useEffect(() =>{
+//         authListener();
+//     }, []);
+//
+//     return (
+//         <div className="SingUp">
+//             {user ? (
+//                 <Stuff handleLogOut = {handleLogOut}/>
+//             ) :
+//                 (
+//                 <Login
+//                     email = {email}
+//                     setEmail = {setEmail}
+//                     password = {password}
+//                     setPassword ={setPassword}
+//                     handleLogin = {handleLogin}
+//                     handleSignup = {handleSignUp}
+//                     hasAccount = {hasAccount}
+//                     setHasAccount = {setHasAccount}
+//                     emailError = {emailError}
+//                     passwordError = {passwordError} />
+//             )}
+//
+//
+//         </div>
+//     );
+// };
