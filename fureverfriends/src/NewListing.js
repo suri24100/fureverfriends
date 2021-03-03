@@ -6,6 +6,8 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import M from "materialize-css";
 
+import {getBreeds} from "./api-modules/PetfinderAPI.js";
+
 //all the data from PetFinderAPI
 import PFdata from "./api-modules/constants.js";
 
@@ -60,6 +62,8 @@ function processFormContents() {
 
     console.log(newPetProfile);
 }
+
+console.log(getBreeds("cat"));
 
 function capitalize(word) {
     return word.charAt(0).toUpperCase() + word.slice(1);
