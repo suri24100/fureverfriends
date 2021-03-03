@@ -63,7 +63,7 @@ function processFormContents() {
     console.log(newPetProfile);
 }
 
-console.log(getBreeds("bird"));
+console.log(getBreeds("barnyard"));
 
 function capitalize(word) {
     return word.charAt(0).toUpperCase() + word.slice(1);
