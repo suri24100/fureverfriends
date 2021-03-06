@@ -93,7 +93,8 @@ async function getData(dataURL){
 // get breeds of a specific animal type
 export async function getBreeds(animalType){
     let breedURL = BASE_URL + BREED_URLS[animalType];
-    await getData(breedURL);
+    let data =  await getData(breedURL);
+    await console.log(JSON.stringify(data));
 }
 
 // get profile info for a specific pet by id

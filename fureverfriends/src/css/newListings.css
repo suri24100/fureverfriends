@@ -80,3 +80,15 @@ img {
 .listings-submit-button-wrap.container button {
   font-weight: bold;
 }
+input.select-dropdown.dropdown-trigger {
+  text-transform: capitalize;
+}
+
+li {
+  text-transform: capitalize;
+}
+
+#output_image
+{
+ max-width: 20%;
+}

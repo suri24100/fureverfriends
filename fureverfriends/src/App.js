@@ -15,7 +15,7 @@ import Listings from "./Listings";
 import Login from "./Login";
 import PetCare from "./PetCare";
 import SignUp from "./SignUp";
-import {db} from "./ffdb";
+import db from "./ffdb";
 import NewListing from "./NewListing";
 import PetProfile from "./PetProfile";
 import CreateAccount from "./CreateAccount";
@@ -38,9 +38,9 @@ import CreateAccount from "./CreateAccount";
 export default function App() {
     let match = useRouteMatch();
 
-db.collection('petinformation').get().then((snapshot) => {
-    console.log(snapshot.docs)
-} )
+// db.collection('petinformation').get().then((snapshot) => {
+//     console.log(snapshot.docs)
+// } )
     return (
     <div>
         <Switch>
