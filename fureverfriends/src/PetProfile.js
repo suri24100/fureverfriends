@@ -80,7 +80,6 @@ export default function PetProfile(){
                     <div className="main-photo hide-on-small-only"
                          style={{backgroundImage: `url(` + petDetails.photo_url + `)`}}>
                     </div>
-                    <button type="button">Test Save</button>
                     <h3>Info</h3>
                     <ul>
                         <li><span className="title">Vaccinated:</span> {petDetails.vaccinated}</li>
@@ -110,7 +109,7 @@ export default function PetProfile(){
                         <li><span className="title">Adoption Fee:</span> Unknown</li>
                     </ul>
                     <h3>About Me</h3>
-                    <p>{petDetails.description}</p>
+                    <p>{petDetails.description} {(prefix === "PF") && <a className="text-link" target="_blank" href={petDetails.profile_url}>[read more on PetFinder]</a>}</p>
                     <h3>Contact Information</h3>
                     <ul>
                         <li><span className="title">Email:</span> <a className="text-link" target="_blank" href={"mailto:" + petDetails.contact.email}>{petDetails.contact.email}</a></li>
