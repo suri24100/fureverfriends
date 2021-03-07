@@ -5,6 +5,7 @@ import './css/listings.css';
 import {getTypeListing} from "./api-modules/PetfinderAPI";
 import {forEach} from "react-bootstrap/ElementChildren";
 import {Link, useRouteMatch} from "react-router-dom";
+import PFdata from "./api-modules/constants.js";
 
 
 function PetCard(props){
@@ -29,7 +30,7 @@ function PetCard(props){
         personality: petInfo.tags,
         good_with_pets: "",
         kid_friendly: "",
-        vaccinated: petInfo.attributes.shots_current,
+        vaccinated: (petInfo.attributes.shots_current) ? "Yes" : "No",
         neutered: petInfo.attributes.spayed_neutered,
         bonded_pair: "",
         allergy_friendly: ""
@@ -106,6 +107,23 @@ export default function Listings(){
     function loadPrevPage(){
         let newPageNum = pageNumber - 1;
         setPageNumber(newPageNum);
+    }
+
+    function generateFilters(filterID) {
+        const filterUL = document.getElementById(filterID);
+        switch (filterID){
+            case "TYPES":
+                PFdata.TYPES.map(ptype => {
+                    let li = document.createElement("li");
+                    let input = document.createElement("input");
+                    input.classList.add("filled-in");
+                    input.setAttribute()
+                });
+                break;
+            default:
+                console.log("Error: Undefined filter type.")
+        }
+
     }
 
     // displays a loading circle while listings are fetched asynchronously
@@ -290,6 +308,23 @@ export default function Listings(){
             </div>
         </div>
         <div className="container">
+            <div className="row">
+                <h5>Filters Results By:</h5>
+                <form>
+                    <div className="col s12 m4">
+                        <h6>Type of Pet</h6>
+                        <ul id="filter-type">
+                        </ul>
+                    </div>
+                    <div className="col s12 m4">
+                        <h6>Characteristics</h6>
+                    </div>
+                    <div className="col s12 m4">
+                        <h6>Location</h6>
+                    </div>
+                </form>
+            </div>
+            <hr className="line-break"/>
             <div className="row">
                 {(!petListings || prevPage !== pageNumber) ?
                     showLoading() :

@@ -4,7 +4,7 @@ import './css/style.css';
 import './css/signing.css';
 import {Link} from "react-router-dom";
 import Login from "./Login";
-import db from "./ffdb";
+import db from "./api-modules/ffdb";
 
 export default function CreateAccount(){
     const [user, setUser] = useState('');

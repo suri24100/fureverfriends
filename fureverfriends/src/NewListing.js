@@ -10,6 +10,7 @@ import {getBreeds} from "./api-modules/PetfinderAPI.js";
 
 //all the data from PetFinderAPI
 import PFdata from "./api-modules/constants.js";
+import placeholder_image from "./images/petProfiles/default-placeholder-image.png";
 
 function processFormContents() {
     var petProfileImg = (document.getElementById('pet-profile-img')).value;
@@ -27,13 +28,18 @@ function processFormContents() {
     var city = (document.getElementById('city')).value;
     var state = (document.getElementById('state')).value;
     var zip = (document.getElementById('zip')).value;
-    var attributes = (document.getElementById('attributes')).value;
     var aboutMe = (document.getElementById('about-me')).value;
     var contactName = (document.getElementById('contact-name')).value;
     var contactPhone = (document.getElementById('contact-phone')).value;
     var contactEmail = (document.getElementById('contact-email')).value;
     var contactWebsite = (document.getElementById('contact-website')).value;
     var applicationForm = (document.getElementById('pet-app-form')).value;
+
+    // get attributes separately for database structure
+    const attributesField = document.getElementById('attributes')
+    const attributes = [...attributesField.options]
+        .filter(option => option.selected)
+        .map(option => option.value);
 
     const newPetProfile = {
         pet_profile_img: petProfileImg,
@@ -59,6 +65,42 @@ function processFormContents() {
         contact_website : contactWebsite,
         application_form: applicationForm,
     };
+
+    const newPetListing = {
+        petfinder_listing: false,
+        pet_id: "", // NEED
+        name: petname,
+        type: pettype,
+        age: age,
+        breed: breed,
+        gender: gender,
+        fur_length: furLength,
+        photo_url: "",
+        additional_photos: [],
+        profile_url: "",
+        location: {
+            zipcode: zip,
+            city: city,
+            state: state
+        },
+        cared_by: caredBy,
+        contact: {
+            name: contactName,
+            email: contactEmail,
+            phone: contactPhone,
+            website: contactWebsite
+        },
+        personality: personality,
+        good_with_pets: "",
+        kid_friendly: "",
+        vaccinated: "",
+        neutered:"",
+        bonded_pair: "",
+        allergy_friendly: "",
+        adoption_fee: "",
+        tags: [],
+        description: aboutMe
+    }
 
     console.log(newPetProfile);
 }
@@ -87,6 +129,7 @@ export default function NewListing() {
         
           M.textareaAutoResize($('#about-me'));
       });
+
       let typeArray = PFdata.TYPES;
       typeArray.unshift("");
       console.log(PFdata.TYPES);
@@ -95,7 +138,8 @@ export default function NewListing() {
        name: "",
         fur_length: "",
         color: "",
-        }); 
+        });
+
       const handleName = (e) => {
           setFormData({
 			...formData,
@@ -103,6 +147,7 @@ export default function NewListing() {
 		});
         console.log(formData.name);
       }
+
       const type = petType.map(type => type)
       const handleChange = (e) => {
           //petColor(petType[e.target.value])
@@ -350,7 +395,7 @@ export default function NewListing() {
 
                         <div className="listings-form-row">
                             <label for="attributes">Pet Attributes</label>
-                            <select id="attributes" name="attributes" multiple>
+                            <select id="attributes" name="attributes" multiple="multiple">
                                 <option value="Vaccinated">Vaccinated</option>
                                 <option value="NeuteredSpayed">Neutered/Spayed</option>
                                 <option value="PetFriendly">Pet Friendly</option>

@@ -15,7 +15,7 @@ import Listings from "./Listings";
 import Login from "./Login";
 import PetCare from "./PetCare";
 import SignUp from "./SignUp";
-import db from "./ffdb";
+import db from "./api-modules/ffdb";
 import NewListing from "./NewListing";
 import PetProfile from "./PetProfile";
 import CreateAccount from "./CreateAccount";
@@ -60,7 +60,7 @@ export default function App() {
                 <Listings />
             </Route>
             <Route path="/findahome">
-                <FindHome />
+                <NewListing />
             </Route>
             <Route path="/petcare">
                 <PetCare />
