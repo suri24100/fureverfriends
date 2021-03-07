@@ -112,6 +112,12 @@ export async function getTypeListing(animalType, numListings, pageNum){
     return listingResults.animals;
 }
 
+export async function getFilteredListings(numListings, pageNum){
+    let typeURL = BASE_URL + "/v2/animals?limit=" + numListings + "&page=" + pageNum;
+    let listingResults = await getData(typeURL);
+    return listingResults.animals;
+}
+
 // query for training data
 export async function callTrainingData(){
     let startFrom = 101;

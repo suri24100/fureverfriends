@@ -2,7 +2,7 @@ import React, {useEffect, useState, Component, useReducer, useRef} from 'react';
 import Header from "./Header";
 import './css/style.css';
 import './css/listings.css';
-import {getTypeListing} from "./api-modules/PetfinderAPI";
+import {getFilteredListings, getTypeListing} from "./api-modules/PetfinderAPI";
 import {forEach} from "react-bootstrap/ElementChildren";
 import {Link, useRouteMatch} from "react-router-dom";
 import PFdata from "./api-modules/constants.js";
@@ -109,7 +109,7 @@ export default function Listings(){
     });
 
     async function getListingData(pageNum){
-        let newPetListings = await getTypeListing("cat", 100, pageNum);
+        let newPetListings = await getFilteredListings(100, pageNum);
         setPetListings(newPetListings);
         // console.log(newPetListings);
         // console.log(petListings);
