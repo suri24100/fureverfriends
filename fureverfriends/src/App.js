@@ -15,7 +15,7 @@ import Listings from "./Listings";
 import Login from "./Login";
 import PetCare from "./PetCare";
 import SignUp from "./SignUp";
-import db from "./api-modules/ffdb";
+import db from "./ffdb";
 import NewListing from "./NewListing";
 import PetProfile from "./PetProfile";
 import CreateAccount from "./CreateAccount";
@@ -41,7 +41,7 @@ export default function App() {
 
     return (
     <div>
-        <AuthProvider>
+        <AuthProvider />
         <Switch>
             <Route path ="/Signup">
                 <SignUp/>

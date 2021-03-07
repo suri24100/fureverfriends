@@ -5,32 +5,6 @@ import {useParams} from "react-router-dom";
 import {getProfileInfo, getTypeListing} from "./api-modules/PetfinderAPI";
 import placeholder_image from "./images/petProfiles/default-placeholder-image.png";
 
-import {firestore} from "./api-modules/ffdb";
-
-const testSaveProfile = async () => {
-    const newPetListing = {
-        petfinder_listing: false,
-        pet_id: "0123456789", // NEED
-        name: "Sandy",
-        type: "dog",
-        age: "young",
-    }
-
-    let prom = await firestore.collection("users").add({
-        first: "Ada",
-        last: "Lovelace",
-        born: 1815
-    })
-        .then((docRef) => {
-            console.log("Document written with ID: ", docRef.id);
-        })
-        .catch((error) => {
-            console.error("Error adding document: ", error);
-        });
-}
-    //createNewPetProfile("AdoptionList", newPetListing);
-
-
 export default function PetProfile(){
     let { id } = useParams();
     let { prefix } = useParams();
@@ -106,7 +80,7 @@ export default function PetProfile(){
                     <div className="main-photo hide-on-small-only"
                          style={{backgroundImage: `url(` + petDetails.photo_url + `)`}}>
                     </div>
-                    <button type="button" onClick={testSaveProfile}>Test Save</button>
+                    <button type="button">Test Save</button>
                     <h3>Info</h3>
                     <ul>
                         <li><span className="title">Vaccinated:</span> {petDetails.vaccinated}</li>

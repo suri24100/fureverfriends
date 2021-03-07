@@ -2,7 +2,7 @@ import React, {useEffect, useState, Component} from 'react';
 import Header from "./Header";
 import './css/style.css';
 import './css/signing.css';
-import db from "./api-modules/ffdb";
+import db from "./ffdb";
 import { Alert } from "react-bootstrap"
 import {Link, useHistory} from "react-router-dom";
 import {useAuth} from './AuthContext';
