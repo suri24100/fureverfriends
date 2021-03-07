@@ -108,7 +108,7 @@ export default function CreateAccount(){
                         </div>
                     </div>
                 </div>
-            </div>   
+            </div>
         </div>
     )
 }

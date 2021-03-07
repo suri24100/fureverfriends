@@ -20,5 +20,18 @@ const db = firebase.initializeApp({
 const auth = firebase.auth();
 const firestore = firebase.firestore();
 const analytics = firebase.analytics();
-export {firestore}
+//export {firestore}
+
+// Create a new pet listing/profile
+const createNewPetProfile = (listingType, petData) => {
+ // Add a new document in collection related to listing type
+ firestore.collection(listingType).doc(petData.pet_id).set(petData)
+     .then(() => {
+      console.log("Document successfully written!");
+     })
+     .catch((error) => {
+      console.error("Error writing document: ", error);
+     });
+}
+
 export default db;
