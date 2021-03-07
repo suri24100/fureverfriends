@@ -5,9 +5,9 @@ import {useParams} from "react-router-dom";
 import {getProfileInfo, getTypeListing} from "./api-modules/PetfinderAPI";
 import placeholder_image from "./images/petProfiles/default-placeholder-image.png";
 
-import {createNewPetProfile, getAdoptionList, firestore} from "./api-modules/ffdb";
+import {firestore} from "./api-modules/ffdb";
 
-const testSaveProfile = () => {
+const testSaveProfile = async () => {
     const newPetListing = {
         petfinder_listing: false,
         pet_id: "0123456789", // NEED
@@ -16,22 +16,19 @@ const testSaveProfile = () => {
         age: "young",
     }
 
-    createNewPetProfile("AdoptionList", newPetListing);
-}
-
-// DEBUG with JP
-firestore.collection("users").add({
-    first: "Ada",
-    last: "Lovelace",
-    born: 1815
-})
-    .then((docRef) => {
-        console.log("Document written with ID: ", docRef.id);
+    let prom = await firestore.collection("users").add({
+        first: "Ada",
+        last: "Lovelace",
+        born: 1815
     })
-    .catch((error) => {
-        console.error("Error adding document: ", error);
-    });
-// END DEBUG with JP
+        .then((docRef) => {
+            console.log("Document written with ID: ", docRef.id);
+        })
+        .catch((error) => {
+            console.error("Error adding document: ", error);
+        });
+}
+    //createNewPetProfile("AdoptionList", newPetListing);
 
 
 export default function PetProfile(){

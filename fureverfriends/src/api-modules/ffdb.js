@@ -21,31 +21,31 @@ const auth = firebase.auth();
 const firestore = firebase.firestore();
 const analytics = firebase.analytics();
 
-// Create a new pet listing/profile
-const createNewPetProfile = async (listingType, petData) => {
- // Add a new document in collection related to listing type
- firestore.collection("test-collection").doc("TestID").set({name:"Fluffy"})
-     .then(() => {
-      console.log("Document successfully written!");
-     })
-     .catch((error) => {
-      console.error("Error writing document: ", error);
-     });
-}
-
-// Adoption List Interactions
-const getAdoptionList = () => {
- firestore.collection("AdoptionList").get().then((querySnapshot) => {
-  querySnapshot.forEach((doc) => {
-   console.log(`${doc.id} => ${doc.data()}`);
-  });
- });
-}
-
-// Get an existing pet listing/profile
-const getPetProfileData = (listingType) => {
-
-}
+// // Create a new pet listing/profile
+// const createNewPetProfile = async (listingType, petData) => {
+//  // Add a new document in collection related to listing type
+//  firestore.collection("test-collection").doc("TestID").set({name:"Fluffy"})
+//      .then(() => {
+//       console.log("Document successfully written!");
+//      })
+//      .catch((error) => {
+//       console.error("Error writing document: ", error);
+//      });
+// }
+//
+// // Adoption List Interactions
+// const getAdoptionList = () => {
+//  firestore.collection("AdoptionList").get().then((querySnapshot) => {
+//   querySnapshot.forEach((doc) => {
+//    console.log(`${doc.id} => ${doc.data()}`);
+//   });
+//  });
+// }
+//
+// // Get an existing pet listing/profile
+// const getPetProfileData = (listingType) => {
+//
+// }
 
 
 
@@ -58,4 +58,4 @@ const getPetProfileData = (listingType) => {
 
 
 export default db;
-export {createNewPetProfile, getAdoptionList, firestore };
+export {firestore};
