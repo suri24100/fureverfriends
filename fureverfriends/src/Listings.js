@@ -6,6 +6,7 @@ import {getTypeListing} from "./api-modules/PetfinderAPI";
 import {forEach} from "react-bootstrap/ElementChildren";
 import {Link, useRouteMatch} from "react-router-dom";
 import PFdata from "./api-modules/constants.js";
+import M from "materialize-css";
 
 
 function PetCard(props){
@@ -78,18 +79,18 @@ export default function Listings(){
     useEffect(() => {
         if(!petListings){
             getListingData(pageNumber);
-            console.log(petListings);
+            //console.log(petListings);
         } else if(prevPage !== pageNumber){
             getListingData(pageNumber);
-            console.log(petListings);
+            // console.log(petListings);
         }
     });
 
     async function getListingData(pageNum){
         let newPetListings = await getTypeListing("cat", 100, pageNum);
         setPetListings(newPetListings);
-        console.log(newPetListings);
-        console.log(petListings);
+        // console.log(newPetListings);
+        // console.log(petListings);
     }
 
     function generateCards(){
@@ -111,17 +112,135 @@ export default function Listings(){
 
     function generateFilters(filterID) {
         const filterUL = document.getElementById(filterID);
-        switch (filterID){
-            case "TYPES":
-                PFdata.TYPES.map(ptype => {
+        if(filterUL){
+            switch (filterID){
+                case "filter-type":
+                    PFdata.TYPES.map(ptype => {
+                        let li = document.createElement("li");
+                        let label = document.createElement("label");
+                        let input = document.createElement("input");
+                        input.classList.add("filled-in");
+                        input.setAttribute("type", "checkbox");
+                        input.setAttribute("value", ptype)
+                        input.setAttribute("id", "type-" + ptype);
+                        let span = document.createElement("span");
+                        if(ptype === "small_furry") {span.innerText = "Small and Furry";}
+                        else if(ptype === "scales_fins_other") {span.innerText = "Scales, Fins, and Other";}
+                        else {span.innerText = ptype}
+                        label.appendChild(input);
+                        label.appendChild(span);
+                        li.appendChild(label);
+                        filterUL.appendChild(li);
+                    });
+                    break;
+                case "filter-furlen":
+                    PFdata.COAT.map(ptype => {
+                        let li = document.createElement("li");
+                        let label = document.createElement("label");
+                        let input = document.createElement("input");
+                        input.classList.add("filled-in");
+                        input.setAttribute("type", "checkbox");
+                        input.setAttribute("value", ptype)
+                        input.setAttribute("id", "furlen-" + ptype);
+                        let span = document.createElement("span");
+                        span.innerText = ptype;
+                        label.appendChild(input);
+                        label.appendChild(span);
+                        li.appendChild(label);
+                        filterUL.appendChild(li);
+                    });
+                    break;
+                case "filter-size":
+                    PFdata.SIZE.map(ptype => {
+                        let li = document.createElement("li");
+                        let label = document.createElement("label");
+                        let input = document.createElement("input");
+                        input.classList.add("filled-in");
+                        input.setAttribute("type", "checkbox");
+                        input.setAttribute("value", ptype)
+                        input.setAttribute("id", "size-" + ptype);
+                        let span = document.createElement("span");
+                        span.innerText = ptype;
+                        label.appendChild(input);
+                        label.appendChild(span);
+                        li.appendChild(label);
+                        filterUL.appendChild(li);
+                    });
+                    break;
+                case "filter-age":
+                    PFdata.AGE.map(ptype => {
+                        let li = document.createElement("li");
+                        let label = document.createElement("label");
+                        let input = document.createElement("input");
+                        input.classList.add("filled-in");
+                        input.setAttribute("type", "checkbox");
+                        input.setAttribute("value", ptype)
+                        input.setAttribute("id", "age-" + ptype);
+                        let span = document.createElement("span");
+                        span.innerText = ptype;
+                        label.appendChild(input);
+                        label.appendChild(span);
+                        li.appendChild(label);
+                        filterUL.appendChild(li);
+                    });
+                    break;
+                case "filter-gender":
+                    PFdata.GENDERS.map(ptype => {
+                        let li = document.createElement("li");
+                        let label = document.createElement("label");
+                        let input = document.createElement("input");
+                        input.classList.add("filled-in");
+                        input.setAttribute("type", "checkbox");
+                        input.setAttribute("value", ptype)
+                        input.setAttribute("id", "gender-" + ptype);
+                        let span = document.createElement("span");
+                        span.innerText = ptype;
+                        label.appendChild(input);
+                        label.appendChild(span);
+                        li.appendChild(label);
+                        filterUL.appendChild(li);
+                    });
+                    break;
+                case "filter-location":
+                    // zip code
                     let li = document.createElement("li");
+                    li.classList.add("input-field");
                     let input = document.createElement("input");
-                    input.classList.add("filled-in");
-                    input.setAttribute()
-                });
-                break;
-            default:
-                console.log("Error: Undefined filter type.")
+                    input.setAttribute("type", "text");
+                    input.setAttribute("id", "filter-zipcode");
+                    input.setAttribute("placeholder", "12345");
+                    let label = document.createElement("label");
+                    label.classList.add("active");
+                    label.setAttribute("for", "filter-zipcode");
+                    label.innerText = "Zip Code";
+                    li.appendChild(input);
+                    li.appendChild(label);
+                    filterUL.appendChild(li);
+
+                    // distance
+                    li = document.createElement("li");
+                    li.classList.add("input-field");
+                    let select = document.createElement("select");
+                    select.setAttribute("id", "filter-distance");
+                    label = document.createElement("label");
+                    label.innerText = "Distance";
+                    PFdata.DISTANCE.map(ptype => {
+                        let option = document.createElement("option");;
+                        option.setAttribute("value", ptype)
+                        option.setAttribute("name", "filter-distance");
+                        let span = document.createElement("span");
+                        span.innerText = ptype + " miles";
+                        option.appendChild(span);
+                        select.appendChild(option);
+                    });
+                    li.appendChild(select);
+                    li.appendChild(label);
+                    filterUL.appendChild(li);
+                    break;
+                default:
+                    console.log("Error: Undefined filter type.")
+            }
+            M.AutoInit();
         }
 
     }
@@ -314,13 +433,33 @@ export default function Listings(){
                     <div className="col s12 m4">
                         <h6>Type of Pet</h6>
                         <ul id="filter-type">
+                            {generateFilters("filter-type")}
+                        </ul>
+                    </div>
+                    <div className="col s12 m4">
+                        <h6>Location</h6>
+                        <ul id="filter-location">
+                            {generateFilters("filter-location")}
                         </ul>
                     </div>
                     <div className="col s12 m4">
                         <h6>Characteristics</h6>
-                    </div>
-                    <div className="col s12 m4">
-                        <h6>Location</h6>
+                        <span className="title">Age</span>
+                        <ul id="filter-age">
+                            {generateFilters("filter-age")}
+                        </ul>
+                        <span className="title">Gender</span>
+                        <ul id="filter-gender">
+                            {generateFilters("filter-gender")}
+                        </ul>
+                        <span className="title">Size</span>
+                        <ul id="filter-size">
+                            {generateFilters("filter-size")}
+                        </ul>
+                        <span className="title">Fur Length</span>
+                        <ul id="filter-furlen">
+                            {generateFilters("filter-furlen")}
+                        </ul>
                     </div>
                 </form>
             </div>

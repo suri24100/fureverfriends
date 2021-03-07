@@ -7,6 +7,7 @@ module.exports = Object.freeze ({
     AGE : ["baby", "young", "adult", "senior"],
     COAT : ["short", "medium", "long", "wire", "hairless", "curly"],
     STATUS : ["adoptable", "adopted", "found"],
+    DISTANCE : [25, 50, 75, 100, 500],
 
     DOG :  {
     "name":"Dog",
