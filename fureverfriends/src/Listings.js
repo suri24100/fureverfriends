@@ -44,7 +44,7 @@ function PetCard(props){
     let match = useRouteMatch();
 
     return (
-        <div className="listing-card col s12 m4 l3">
+        <div className="listing-card col s12 m6 l4">
             <div className="card">
                 <div className="card-image">
                     <Link to={`${match.url}/profile/` + "PF-" + petDetails.id} className="profile-link-overlay">
@@ -428,47 +428,48 @@ export default function Listings(){
         </div>
         <div className="container">
             <div className="row">
-                <h5>Filters Results By:</h5>
-                <form>
-                    <div className="col s12 m4">
-                        <h6>Type of Pet</h6>
-                        <ul id="filter-type">
-                            {generateFilters("filter-type")}
-                        </ul>
-                    </div>
-                    <div className="col s12 m4">
-                        <h6>Location</h6>
-                        <ul id="filter-location">
-                            {generateFilters("filter-location")}
-                        </ul>
-                    </div>
-                    <div className="col s12 m4">
-                        <h6>Characteristics</h6>
-                        <span className="title">Age</span>
-                        <ul id="filter-age">
-                            {generateFilters("filter-age")}
-                        </ul>
-                        <span className="title">Gender</span>
-                        <ul id="filter-gender">
-                            {generateFilters("filter-gender")}
-                        </ul>
-                        <span className="title">Size</span>
-                        <ul id="filter-size">
-                            {generateFilters("filter-size")}
-                        </ul>
-                        <span className="title">Fur Length</span>
-                        <ul id="filter-furlen">
-                            {generateFilters("filter-furlen")}
-                        </ul>
-                    </div>
-                </form>
-            </div>
-            <hr className="line-break"/>
-            <div className="row">
-                {(!petListings || prevPage !== pageNumber) ?
-                    showLoading() :
-                    generateCards()
-                }
+                <div className="col s12 m3">
+                    <h5>Filters Results By:</h5>
+                    <form>
+                        <div className="col s12">
+                            <h6>Type of Pet</h6>
+                            <ul id="filter-type">
+                                {generateFilters("filter-type")}
+                            </ul>
+                        </div>
+                        <div className="col s12">
+                            <h6>Location</h6>
+                            <ul id="filter-location">
+                                {generateFilters("filter-location")}
+                            </ul>
+                        </div>
+                        <div className="col s12">
+                            <h6>Characteristics</h6>
+                            <span className="title">Age</span>
+                            <ul id="filter-age">
+                                {generateFilters("filter-age")}
+                            </ul>
+                            <span className="title">Gender</span>
+                            <ul id="filter-gender">
+                                {generateFilters("filter-gender")}
+                            </ul>
+                            <span className="title">Size</span>
+                            <ul id="filter-size">
+                                {generateFilters("filter-size")}
+                            </ul>
+                            <span className="title">Fur Length</span>
+                            <ul id="filter-furlen">
+                                {generateFilters("filter-furlen")}
+                            </ul>
+                        </div>
+                    </form>
+                </div>
+                <div className="col s12 m9">
+                    {(!petListings || prevPage !== pageNumber) ?
+                        showLoading() :
+                        generateCards()
+                    }
+                </div>
             </div>
             <div className="row pet-listing-nav">
                 <div className="col s12 center">
