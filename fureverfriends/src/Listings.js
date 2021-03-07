@@ -87,11 +87,20 @@ export default function Listings(){
         coat: [],
         color: [],
     });
+    useEffect( () => {
+        // do something
+    });
     const prevPage = usePrevious(pageNumber);
 
     useEffect(() => {
         if(!petListings){
-            getListingData(pageNumber);
+            let promise = getListingData(pageNumber);
+            generateFilters("filter-type");
+            generateFilters("filter-location");
+            generateFilters("filter-age");
+            generateFilters("filter-gender");
+            generateFilters("filter-size");
+            generateFilters("filter-furlen");
             //console.log(petListings);
         } else if(prevPage !== pageNumber){
             getListingData(pageNumber);
@@ -124,37 +133,76 @@ export default function Listings(){
     }
 
     function updateFilters(props){
-        console.log(props)
         const filterID = props.target.name;
         const value = props.target.value;
         const checked = props.target.checked;
+        let typeArr = [];
+        let index = -1;
+        let newArr = [];
         console.log(filterID + ", " + value + ", " + checked)
-        // switch (filterID){
-        //     case "filter-type":
-        //         let typeArr = filters.type;
-        //         let index = typeArr.indexOf(value);
-        //         let newArr = [];
-        //         if(checked && index < 0) {newArr = typeArr.push(value)}
-        //         else if(index >= 0) {newArr = typeArr.splice(index, 1)}
-        //         setFilters({
-        //             ...filters,
-        //             type: newArr
-        //         });
-        //         console.log(filters.type);
-        //         break;
-        //     case "filter-furlen":
-        //         break;
-        //     case "filter-size":
-        //         break;
-        //     case "filter-age":
-        //         break;
-        //     case "filter-gender":
-        //         break;
-        //     case "filter-location":
-        //         break
-        //     default:
-        //         break;
-        // }
+        switch (filterID){
+            case "type":
+                typeArr = filters.type;
+                index = typeArr.indexOf(value);
+                if(checked && index < 0) {newArr = typeArr.push(value)}
+                else if(index >= 0) {newArr = typeArr.splice(index, 1)}
+                setFilters({
+                    ...filters,
+                    type: newArr
+                });
+                console.log(filters);
+                break;
+            case "furlen":
+                typeArr = filters.coat;
+                index = typeArr.indexOf(value);
+                if(checked && index < 0) {newArr = typeArr.push(value)}
+                else if(index >= 0) {newArr = typeArr.splice(index, 1)}
+                setFilters({
+                    ...filters,
+                    coat: newArr
+                });
+                console.log(filters);
+                break;
+            case "size":
+                typeArr = filters.size;
+                index = typeArr.indexOf(value);
+                if(checked && index < 0) {newArr = typeArr.push(value)}
+                else if(index >= 0) {newArr = typeArr.splice(index, 1)}
+                setFilters({
+                    ...filters,
+                    size: newArr
+                });
+                console.log(filters);
+                break;
+            case "age":
+                typeArr = filters.age;
+                index = typeArr.indexOf(value);
+                if(checked && index < 0) {newArr = typeArr.push(value)}
+                else if(index >= 0) {newArr = typeArr.splice(index, 1)}
+                setFilters({
+                    ...filters,
+                    age: newArr
+                });
+                console.log(filters);
+                break;
+            case "gender":
+                typeArr = filters.gender;
+                index = typeArr.indexOf(value);
+                if(checked && index < 0) {newArr = typeArr.push(value)}
+                else if(index >= 0) {newArr = typeArr.splice(index, 1)}
+                setFilters({
+                    ...filters,
+                    gender: newArr
+                });
+                console.log(filters);
+                break;
+            case "zipcode":
+                break
+            case "distance":
+                break;
+            default:
+                break;
+        }
     }
 
     function applyFilters(){
@@ -355,37 +403,40 @@ export default function Listings(){
             </div>
             <div className="row">
                 <div className="col s12 m4 l3">
-                    <h5>Filters Results</h5>
                     <form>
+                        <div className="col s12">
+                        <button className="btn-small" type="button">
+                            Apply Filters
+                            <i className="material-icons left">refresh</i>
+                        </button>
+                            <button className="btn-small" type="button">
+                                Reset Filters
+                                <i className="material-icons left">restore</i>
+                            </button>
+                        </div>
                         <div className="col s12">
                             <h6>Type of Pet</h6>
                             <ul id="filter-type">
-                                {generateFilters("filter-type")}
                             </ul>
                         </div>
                         <div className="col s12">
                             <h6>Location</h6>
                             <ul id="filter-location">
-                                {generateFilters("filter-location")}
                             </ul>
                         </div>
                         <div className="col s12">
                             <h6>Characteristics</h6>
                             <span className="title">Age</span>
                             <ul id="filter-age">
-                                {generateFilters("filter-age")}
                             </ul>
                             <span className="title">Gender</span>
                             <ul id="filter-gender">
-                                {generateFilters("filter-gender")}
                             </ul>
                             <span className="title">Size</span>
                             <ul id="filter-size">
-                                {generateFilters("filter-size")}
                             </ul>
                             <span className="title">Fur Length</span>
                             <ul id="filter-furlen">
-                                {generateFilters("filter-furlen")}
                             </ul>
                         </div>
                     </form>
