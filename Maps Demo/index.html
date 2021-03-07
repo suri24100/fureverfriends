@@ -77,8 +77,13 @@
         <ul id="list"></ul>
       </div> 
     </div>
+
+    <div>
+      <button onclick="doStuff()">Submit</button>
+    </div>
 </body>
 <script>
+    var long1 = "", lat1 = "", long2 = "", lat2 = "";
 
     var platform = new H.service.Platform({
         apikey: `cEmKn4p2fsUDNYX6qesi52C3blJ03LztzekKRTIB9EE` // replace with your api key
@@ -116,8 +121,9 @@
     }
     };
     const addMarkerToMap1 = (lat, lng, title) => {
+      lat1 = lat; long1 = lng;
       console.log("location: " + title);
-      console.log("latitude: " + lat + " longtitude: " + lng);
+      console.log("latitude: " + lat1 + " longtitude: " + long1);
       let input = document.getElementById("search1");
       input.value = title;
       let list = document.getElementById("list");
@@ -125,13 +131,42 @@
     }; 
     
     const addMarkerToMap2 = (lat, lng, title) => {
+      lat2 = lat; long2 = lng;
       console.log("location: " + title);
-      console.log("latitude: " + lat + " longtitude: " + lng);
+      console.log("latitude: " + lat2 + " longtitude: " + long2);
       let input = document.getElementById("search2");
       input.value = title;
       let list = document.getElementById("list");
       list.style.display = "none";
-    }; 
+    };
+
+    function toRad(deg) {
+      return deg * (Math.PI/180);
+    }
+
+    function doStuff() {
+      console.log(calculateDistance(lat1,long1,lat2,long2));
+    }
+
+    function calculateDistance(x1, y1, x2, y2) {
+      var R = 3956; // mi
+      var dLat = toRad(x2-x1);
+      console.log("distance latitude in radians: " + dLat);
+      var dLon = toRad(y2-y1);
+      console.log("distance longtitude in radians: " + dLon);
+      var xr1 = toRad(x1);
+      console.log("latitude1 in radians: " + xr1);
+      console.log("latitude2 in degrees: " + x2);
+      var xr2 = toRad(x2);
+      console.log("latitude2 in radians: " + xr2);
+
+      var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+        Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(xr1) * Math.cos(xr2);
+
+      var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+      var d = R * c;
+      return d;
+    }
 
 </script>
 
