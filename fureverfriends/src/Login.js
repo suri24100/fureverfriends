@@ -2,18 +2,22 @@ import React, {useEffect, useState, Component} from 'react';
 import Header from "./Header";
 import './css/style.css';
 import './css/signing.css';
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import db from "./ffdb";
+import { useAuthState } from 'react-firebase-hooks/auth';
+// import { useCollectionData } from 'react-firebase-hooks/firestore';
 
 export default function Login(){
     //JP_Changes
     //adding states
-    const [user, setUser] = useState('');
+    //const [user, setUser] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [emailError, setEmailError] = useState('');
     const [passwordError, setPasswordError] = useState('');
     const [hasAccount, setHasAccount] = useState(false);
+    const history = useHistory()
+    const [user] = useAuthState(db.auth())
 
     const clearInputs = () =>{
         setEmail('');
@@ -59,10 +63,11 @@ export default function Login(){
         db.auth().onAuthStateChanged(user =>{
             if(user) {
                 clearInputs();
-                console.log("The user is logged in")
+                console.log("The user is logged in");
+                history.push("/Home")
             }
             else{
-                console.log("The user is not logged in")
+                console.log("The user is not logged in");
             }
         })
     }
