@@ -1,10 +1,13 @@
 module.exports = Object.freeze ({
+    LISTING_TYPES : ["AdoptedList", "AdoptionList", "LostFoundList"],
+
     TYPES : ["dog", "cat", "rabbit", "small_furry", "horse", "bird", "scales_fins_other", "barnyard"],
     GENDERS : ["male", "female", "unknown"],
     SIZE : ["small", "medium", "large", "xlarge"],
     AGE : ["baby", "young", "adult", "senior"],
     COAT : ["short", "medium", "long", "wire", "hairless", "curly"],
     STATUS : ["adoptable", "adopted", "found"],
+    DISTANCE : [25, 50, 75, 100, 500],
 
     DOG :  {
     "name":"Dog",

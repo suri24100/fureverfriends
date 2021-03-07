@@ -19,6 +19,7 @@ import db from "./ffdb";
 import NewListing from "./NewListing";
 import PetProfile from "./PetProfile";
 import CreateAccount from "./CreateAccount";
+import { AuthProvider } from "./AuthContext"
 
 
 
@@ -38,11 +39,9 @@ import CreateAccount from "./CreateAccount";
 export default function App() {
     let match = useRouteMatch();
 
-// db.collection('petinformation').get().then((snapshot) => {
-//     console.log(snapshot.docs)
-// } )
     return (
     <div>
+        <AuthProvider />
         <Switch>
             <Route path ="/Signup">
                 <SignUp/>

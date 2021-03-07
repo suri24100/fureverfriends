@@ -4,6 +4,17 @@
   background-image: none;
 }
 
+.listings-page .container {
+  margin-top: 30px;
+}
+
+@media only screen and (min-width: 993px) {
+  .listings-page .container{
+    width:90%;
+  }
+}
+
+
 .listings-page .pet-listing-nav {
   margin-bottom:5%;
 }
