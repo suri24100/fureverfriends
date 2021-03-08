@@ -70,7 +70,7 @@ export default function Header() {
             <Link to="/listings">Adopt</Link>
             <Link to="/findahome">Rehome</Link>
             <Link to="/petcare">Pet Care</Link>
-            {currentUser ? <Link to="/logout" onClick={handleLogOut}>Log Out</Link> : <Link to="/login">Log In</Link> }
+            {currentUser ? <Link to="/Home" onClick={handleLogOut}>Log Out</Link> : <Link to="/login">Log In</Link> }
             <img src={notification_icon} alt="Notifications"/>
             <img src={messages_icon} alt="Messages"/>
             {currentUser ? <Link disable = {loading} to="/UserProfile">{currentUser.email}</Link> : <></>}
