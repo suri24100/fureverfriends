@@ -12,6 +12,10 @@ import M from "materialize-css";
 
 
 export default function CreateAccount(){
+    useEffect( () =>{
+        M.AutoInit();
+    })
+
     const [username, setUsername] = useState('');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
