@@ -39,7 +39,7 @@ export default function CreateAccountConfirmation(){
                             <div className="bottom-info">
                                 <div className="btn-wrap default">
                                     <button className="signing-btn">
-                                        <Link to="/Home">My Account</Link>
+                                        <Link to="/UserProfile">My Account</Link>
                                     </button>
                                 </div>
                                 <div className="belowbutton-subheading">
