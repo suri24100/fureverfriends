@@ -11,53 +11,56 @@ import PFdata from "./api-modules/constants.js";
 import placeholder_image from "./images/petProfiles/default-placeholder-image.png";
 
 // test code for creating a listing
-import {firestore} from "./ffdb";
+import {firestore, storage} from "./ffdb";
 
 const createPetListing = (listingData) =>{
+    // create image references for images
+    
+
     console.log(listingData)
-    firestore.collection("PetInfo")
-        .doc("PublicListings")
-        .collection("AdoptionList")
-        .doc("PetTypes")
-        .collection(listingData.type)
-        .doc(listingData.pet_id)
-        .set(listingData)
-        .then((docRef) => {
-            console.log("Document written");
-        })
-        .catch((error) => {
-            console.error("Error adding document: ", error);
-        });
+    // firestore.collection("PetInfo")
+    //     .doc("PublicListings")
+    //     .collection("AdoptionList")
+    //     .doc("PetTypes")
+    //     .collection(listingData.type)
+    //     .doc(listingData.pet_id)
+    //     .set(listingData)
+    //     .then((docRef) => {
+    //         console.log("Document written");
+    //     })
+    //     .catch((error) => {
+    //         console.error("Error adding document: ", error);
+    //     });
 }
 
 
 
 function processFormContents() {
     // pet information
-    var petname = (document.getElementById('petname')).value;
-    var pettype = (document.getElementById('type-of-pet')).value;
-    var age = (document.getElementById('age')).value;
-    var gender = (document.getElementById('gender')).value;
-    var breed = (document.getElementById('breed')).value;
-    var color = (document.getElementById('color')).value;
-    var caredBy = (document.getElementById('cared-by')).value;
-    var furLength = (document.getElementById('furLength')).value;
-    var adoptionFee = (document.getElementById('adoptionFee')).value;
-    var city = (document.getElementById('city')).value;
-    var state = (document.getElementById('state')).value;
-    var zip = (document.getElementById('zip')).value;
-    var aboutMe = (document.getElementById('about-me')).value;
+    let petname = (document.getElementById('petname')).value;
+    let pettype = (document.getElementById('type-of-pet')).value;
+    let age = (document.getElementById('age')).value;
+    let gender = (document.getElementById('gender')).value;
+    let breed = (document.getElementById('breed')).value;
+    let color = (document.getElementById('color')).value;
+    let caredBy = (document.getElementById('cared-by')).value;
+    let furLength = (document.getElementById('furLength')).value;
+    let adoptionFee = (document.getElementById('adoptionFee')).value;
+    let city = (document.getElementById('city')).value;
+    let state = (document.getElementById('state')).value;
+    let zip = (document.getElementById('zip')).value;
+    let aboutMe = (document.getElementById('about-me')).value;
 
     // user contact information
-    var contactName = (document.getElementById('contact-name')).value;
-    var contactPhone = (document.getElementById('contact-phone')).value;
-    var contactEmail = (document.getElementById('contact-email')).value;
-    var contactWebsite = (document.getElementById('contact-website')).value;
+    let contactName = (document.getElementById('contact-name')).value;
+    let contactPhone = (document.getElementById('contact-phone')).value;
+    let contactEmail = (document.getElementById('contact-email')).value;
+    let contactWebsite = (document.getElementById('contact-website')).value;
 
     // files from user
-    var petProfileImg = (document.getElementById('pet-profile-img')).value;
-    var petAddImg = (document.getElementById('pet-add-img')).value;
-    var applicationForm = (document.getElementById('pet-app-form')).value;
+    let petProfileImg = (document.getElementById('pet-profile-img')).files;
+    let petAddImg = (document.getElementById('pet-add-img')).value;
+    let applicationForm = (document.getElementById('pet-app-form')).value;
 
     // get attributes separately for database structure
     const attributesField = document.getElementById('attributes')
@@ -69,9 +72,38 @@ function processFormContents() {
         .filter(option => option.selected)
         .map(option => option.value);
 
+    // create an ID for the pet
+    const new_pet_id = Date.now().toString();
+
+    // create references and blobs for images
+    console.log(petProfileImg);
+
+    if(petProfileImg.length > 0) {
+        // Create a root reference
+        //let storageRef = storage.ref();
+        // Create a reference to image name
+        switch (petProfileImg[0].type) {
+            case "image/png":
+               //let imageRef = storageRef.child(new_pet_id + '-img1.png');
+                break;
+            case"image/jpeg":
+                break;
+            case "image/jpg":
+                break;
+            default:
+                console.log("Error: unhandled image type")
+        }
+    }
+
+    // Create a reference to 'images/mountains.jpg'
+    // While the file names are the same, the references point to different files
+
+
+    // create reference and blob for adoption form
+
     const newPetListing = {
         petfinder_listing: false,
-        pet_id: Date.now().toString(),
+        pet_id: new_pet_id,
         name: petname,
         type: PFdata.TYPES[pettype],
         age: age,
@@ -95,14 +127,14 @@ function processFormContents() {
             website: contactWebsite
         },
         personality: personality,
-        good_with_cats: (attributes.includes("good_with_cats")) ? true : false,
-        good_with_dogs: (attributes.includes("good_with_dogs")) ? true : false,
-        kid_friendly: (attributes.includes("kid_friendly")) ? true : false,
-        vaccinated: (attributes.includes("vaccinated")) ? true : false,
-        spayed_neutered: (attributes.includes("spayed_neutered")) ? true : false,
-        bonded_pair: (attributes.includes("bonded_pair")) ? true : false,
-        allergy_friendly: (attributes.includes("allergy_friendly")) ? true : false,
-        special_needs: (attributes.includes("special_needs")) ? true : false,
+        good_with_cats: attributes.includes("good_with_cats"),
+        good_with_dogs: attributes.includes("good_with_dogs"),
+        kid_friendly: attributes.includes("kid_friendly"),
+        vaccinated: attributes.includes("vaccinated"),
+        spayed_neutered: attributes.includes("spayed_neutered"),
+        bonded_pair: attributes.includes("bonded_pair"),
+        allergy_friendly: attributes.includes("allergy_friendly"),
+        special_needs: attributes.includes("special_needs"),
         adoption_fee: adoptionFee,
         tags: [],
         description: aboutMe,
@@ -115,9 +147,9 @@ function processFormContents() {
 
 /* code from: http://talkerscode.com/webtricks/preview-image-before-upload-using-javascript.php */
 function preview_image(event) {
-    var reader = new FileReader();
+    let reader = new FileReader();
     reader.onload = function() {
-        var output = document.getElementById('output_image');
+        let output = document.getElementById('output_image');
         output.src = reader.result;
     }
     reader.readAsDataURL(event.target.files[0]);
@@ -150,98 +182,98 @@ export default function NewListing() {
       const type = petType.map(type => type)
       const handleChange = (e) => {
           //petColor(petType[e.target.value])
-        var petTypeSelected = petType[e.target.value];
-        var petColorArray = [];
-        var furLengthArray = [];
-        var breedArray = [];
+        let petTypeSelected = petType[e.target.value];
+        let petColorArray = [];
+        let furLengthArray = [];
+        let breedArray = [];
         if (petTypeSelected == "dog") { 
             petColorArray = PFdata.DOG.colors; 
             furLengthArray = PFdata.DOG.coats;
-            for (var i = 0; i < PFdata.DOG.breeds.length; i++) {
+            for (let i = 0; i < PFdata.DOG.breeds.length; i++) {
                 breedArray[i] = PFdata.DOG.breeds[i].name;
             } 
         }
         else if (petTypeSelected == "cat") { 
             petColorArray = PFdata.CAT.colors; 
             furLengthArray = PFdata.CAT.coats;
-            for (var i = 0; i < PFdata.CAT.breeds.length; i++) {
+            for (let i = 0; i < PFdata.CAT.breeds.length; i++) {
                 breedArray[i] = PFdata.CAT.breeds[i].name;
             } 
         }
         else if (petTypeSelected == "rabbit") { 
             petColorArray = PFdata.RABBIT.colors; 
             furLengthArray = PFdata.RABBIT.coats;
-            for (var i = 0; i < PFdata.RABBIT.breeds.length; i++) {
+            for (let i = 0; i < PFdata.RABBIT.breeds.length; i++) {
                 breedArray[i] = PFdata.RABBIT.breeds[i].name;
             } 
         }
         else if (petTypeSelected == "small_furry") { 
             petColorArray = PFdata.SMALL_FURRY.colors; 
             furLengthArray = PFdata.SMALL_FURRY.coats;
-            for (var i = 0; i < PFdata.SMALL_FURRY.breeds.length; i++) {
+            for (let i = 0; i < PFdata.SMALL_FURRY.breeds.length; i++) {
                 breedArray[i] = PFdata.SMALL_FURRY.breeds[i].name;
             } 
         }
         else if (petTypeSelected == "horse") { 
             petColorArray = PFdata.HORSE.colors; 
             furLengthArray = ["Not Applicable"];
-            for (var i = 0; i < PFdata.HORSE.breeds.length; i++) {
+            for (let i = 0; i < PFdata.HORSE.breeds.length; i++) {
                 breedArray[i] = PFdata.HORSE.breeds[i].name;
             } 
         }
         else if (petTypeSelected == "bird") { 
             petColorArray = PFdata.BIRD.colors; 
             furLengthArray = ["Not Applicable"];
-            for (var i = 0; i < PFdata.BIRD.breeds.length; i++) {
+            for (let i = 0; i < PFdata.BIRD.breeds.length; i++) {
                 breedArray[i] = PFdata.BIRD.breeds[i].name;
             } 
         }
         else if (petTypeSelected == "scales_fins_other") { 
             petColorArray = PFdata.SCALES_FINS_OTHER.colors; 
             furLengthArray = ["Not Applicable"];
-            for (var i = 0; i < PFdata.SCALES_FINS_OTHER.breeds.length; i++) {
+            for (let i = 0; i < PFdata.SCALES_FINS_OTHER.breeds.length; i++) {
                 breedArray[i] = PFdata.SCALES_FINS_OTHER.breeds[i].name;
             } 
         }
         else if (petTypeSelected == "barnyard") { 
             petColorArray = PFdata.BARNYARD.colors; 
             furLengthArray = PFdata.BARNYARD.coats;
-            for (var i = 0; i < PFdata.BARNYARD.breeds.length; i++) {
+            for (let i = 0; i < PFdata.BARNYARD.breeds.length; i++) {
                 breedArray[i] = PFdata.BARNYARD.breeds[i].name;
             } 
         }
         //console.log(petColorArray.length);
 
-        var petColorSelect = document.getElementById('color');
+        let petColorSelect = document.getElementById('color');
         while (petColorSelect.firstChild) {
             petColorSelect.removeChild(petColorSelect.firstChild);
         }
-        for (var i = 0; i < petColorArray.length; i++) {
-            var petOption = document.createElement('option');
+        for (let i = 0; i < petColorArray.length; i++) {
+            let petOption = document.createElement('option');
             petOption.innerHTML = capitalize(petColorArray[i]);
             petOption.value = petColorArray[i];
             petOption.setAttribute("id", "petTypeOption");
             petColorSelect.appendChild(petOption);
         }
 
-        var petFurSelect = document.getElementById('furLength');
+        let petFurSelect = document.getElementById('furLength');
         while (petFurSelect.firstChild) {
             petFurSelect.removeChild(petFurSelect.firstChild);
         }
-        for (var i = 0; i < furLengthArray.length; i++) {
-            var petOption = document.createElement('option');
+        for (let i = 0; i < furLengthArray.length; i++) {
+            let petOption = document.createElement('option');
             petOption.innerHTML = capitalize(furLengthArray[i]);
             petOption.value = petColorArray[i];
             petOption.setAttribute("id", "petTypeOption");
             petFurSelect.appendChild(petOption);
         }
 
-        var breedSelect = document.getElementById('breed');
+        let breedSelect = document.getElementById('breed');
         while (breedSelect.firstChild) {
             breedSelect.removeChild(breedSelect.firstChild);
         }
-        for (var i = 0; i < breedArray.length; i++) {
-            var petOption = document.createElement('option');
+        for (let i = 0; i < breedArray.length; i++) {
+            let petOption = document.createElement('option');
             petOption.innerHTML = capitalize(breedArray[i]);
             petOption.value = breedArray[i];
             petOption.setAttribute("id", "petTypeOption");
@@ -283,7 +315,7 @@ export default function NewListing() {
                     <div className="file-field input-field">
                     <div className="btn">
                         <i className="material-icons">perm_media</i>
-                        <input type="file" accept=".gif,.jpg,.jpeg,.png" id="pet-add-img" multiple/>
+                        <input type="file" accept=".jpg,.jpeg,.png" id="pet-add-img" multiple/>
                     </div>
                     <div className="file-path-wrapper">
                         <input className="file-path validate" type="text" placeholder="Upload additional image(s) (.gif,.jpg,.jpeg,.png)"/>

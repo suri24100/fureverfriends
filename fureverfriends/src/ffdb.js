@@ -2,6 +2,7 @@ import firebase from "firebase/app";
 import 'firebase/firestore';
 import 'firebase/auth';
 import 'firebase/analytics';
+import 'firebase/storage'
 
 // import { useAuthState } from 'react-firebase-hooks/auth';
 // import { useCollectionData } from 'react-firebase-hooks/firestore';
@@ -20,4 +21,5 @@ const db = firebase.initializeApp({
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 export const analytics = firebase.analytics();
+export const storage = firebase.storage();
 export default db;
