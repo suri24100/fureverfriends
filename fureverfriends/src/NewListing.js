@@ -11,13 +11,92 @@ import PFdata from "./api-modules/constants.js";
 import placeholder_image from "./images/petProfiles/default-placeholder-image.png";
 
 // test code for creating a listing
-import {firestore, storage} from "./ffdb";
+import db, {firestore, storage} from "./ffdb";
+import 'firebase/storage';
 
-const createPetListing = (listingData) =>{
-    // create image references for images
+const createPetListing = (listingData, profileImages, adoptionFile) =>{
+    const newPetID = listingData.pet_id;
+    // handle images to get URLs for profile data
+    if(profileImages.profilePhoto.length > 0) {
+        const profile_image = profileImages.profilePhoto[0];
+        // Create the file metadata
+        let metadata = {};
+        let filepath = "";
+        // Create a root reference
+        let storageRef = storage.ref();
+        // Create a reference to image name
+        switch (profile_image.type) {
+            case "image/png":
+                metadata = {
+                    contentType: 'image/png'
+                };
+                filepath = "listings/images/" + newPetID + "-img1.png";
+                break;
+            case"image/jpeg":
+                metadata = {
+                    contentType: 'image/jpeg'
+                };
+                filepath = "listings/images/" + newPetID + "-img1.jpeg";
+                break;
+            case "image/jpg":
+                metadata = {
+                    contentType: 'image/jpg'
+                };
+                filepath = "listings/images/" + newPetID + "-img1.jpg";
+                break;
+            default:
+                console.log("Error: unhandled image type")
+        }
+        let uploadTask = storageRef.child(filepath).put(profile_image, metadata);
+        // Listen for state changes, errors, and completion of the upload.
+        if(uploadTask){
+            uploadTask.on('state_changed', // or 'state_changed'
+                (snapshot) => {
+                    // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+                    var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                    console.log('Upload is ' + progress + '% done');
+                    switch (snapshot.state) {
+                        case 'paused': // or 'paused'
+                            console.log('Upload is paused');
+                            break;
+                        case 'running': // or 'running'
+                            console.log('Upload is running');
+                            break;
+                    }
+                },
+                (error) => {
+                    // A full list of error codes is available at
+                    // https://firebase.google.com/docs/storage/web/handle-errors
+                    switch (error.code) {
+                        case 'storage/unauthorized':
+                            // User doesn't have permission to access the object
+                            break;
+                        case 'storage/canceled':
+                            // User canceled the upload
+                            break;
+
+                        // ...
+
+                        case 'storage/unknown':
+                            // Unknown error occurred, inspect error.serverResponse
+                            break;
+                    }
+                },
+                () => {
+                    // Upload completed successfully, now we can get the download URL
+                    uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+                        console.log('File available at', downloadURL);
+                    });
+                }
+            );
+        }
+    }
     
 
-    console.log(listingData)
+    console.log(listingData);
+    console.log(profileImages);
+    console.log(adoptionFile);
+
     // firestore.collection("PetInfo")
     //     .doc("PublicListings")
     //     .collection("AdoptionList")
@@ -59,8 +138,8 @@ function processFormContents() {
 
     // files from user
     let petProfileImg = (document.getElementById('pet-profile-img')).files;
-    let petAddImg = (document.getElementById('pet-add-img')).value;
-    let applicationForm = (document.getElementById('pet-app-form')).value;
+    let petAddImg = (document.getElementById('pet-add-img')).files;
+    let applicationForm = (document.getElementById('pet-app-form')).files;
 
     // get attributes separately for database structure
     const attributesField = document.getElementById('attributes')
@@ -74,32 +153,6 @@ function processFormContents() {
 
     // create an ID for the pet
     const new_pet_id = Date.now().toString();
-
-    // create references and blobs for images
-    console.log(petProfileImg);
-
-    if(petProfileImg.length > 0) {
-        // Create a root reference
-        //let storageRef = storage.ref();
-        // Create a reference to image name
-        switch (petProfileImg[0].type) {
-            case "image/png":
-               //let imageRef = storageRef.child(new_pet_id + '-img1.png');
-                break;
-            case"image/jpeg":
-                break;
-            case "image/jpg":
-                break;
-            default:
-                console.log("Error: unhandled image type")
-        }
-    }
-
-    // Create a reference to 'images/mountains.jpg'
-    // While the file names are the same, the references point to different files
-
-
-    // create reference and blob for adoption form
 
     const newPetListing = {
         petfinder_listing: false,
@@ -141,8 +194,12 @@ function processFormContents() {
         applicationForm: "",
         listing_created: new Date().toJSON()
     }
-    console.log(newPetListing);
-    createPetListing(newPetListing);
+    const profileImages = {
+        profilePhoto: petProfileImg,
+        additionalPhotos: petAddImg
+    }
+
+    createPetListing(newPetListing, profileImages, applicationForm);
 }
 
 /* code from: http://talkerscode.com/webtricks/preview-image-before-upload-using-javascript.php */
