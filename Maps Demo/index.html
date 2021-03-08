@@ -193,9 +193,15 @@
       let resultsEnd = document.createTextNode(" is " + calculateDistance(lat1,long1,lat2,long2) + " miles.");
       resultsSpan.append(resultsEnd);
 
-      resultsLocation.append(resultsSpan);
-    }
+      let booleanDiv = document.createElement("div");
+      let booleanText = document.createTextNode("Within 25 miles? " + (calculateDistance(lat1,long1,lat2,long2) <= 25));
+      booleanDiv.append(booleanText);
 
+      resultsLocation.append(resultsSpan);
+      resultsLocation.append(booleanDiv);
+    }
+    
+    //USES HAVERSINE FORMULA TO DETERMINE DISTANCE
     function calculateDistance(x1, y1, x2, y2) {
       var R = 3956; // mi
       var dLat = toRad(x2-x1);
