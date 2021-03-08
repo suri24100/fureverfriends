@@ -66,6 +66,7 @@ function saveuserprofile (){
                         <div>
                             <div className="userinfoform">
                                 <form id="userinfo">
+                                    <br/>
                                     <div id="username">
                                         <label htmlFor="name">User name: </label>
                                         <input type="text" id="userID" name="user_uname" onChange={handleinput}/>
@@ -87,12 +88,16 @@ function saveuserprofile (){
                                     </div>
                                     <br/>
                                     <div id="useraccount">
-                                        <label htmlFor="accounts" onChange={handleinput}> Account Type: </label>
+                                        <label htmlFor="accounts" class = "input-field col s12" > Account Type: </label>
                                         <select name="userAccountType" id="accounts">
-                                            <option value="userAccountType"> Adopter</option>
-                                            <option value="userAccountType"> Pet Owner</option>
+                                            {/*<option value="userAccountType"> Adopter</option>*/}
+                                            {/*<option value="userAccountType"> Pet Owner</option>*/}
+                                            <option value="" disabled selected>Choose your option</option>
+                                            <option value="1">Adopter</option>
+                                            <option value="2">Pet Owner</option>
                                         </select>
                                     </div>
+
                                     <br/>
                                     <div id="userbio">
                                         <label htmlFor="aboutme">About Me: </label>

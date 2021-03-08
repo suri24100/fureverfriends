@@ -21,6 +21,7 @@ import CreateAccount from "./CreateAccount";
 import ForgotPassword from "./ForgotPassword";
 import { AuthProvider } from "./AuthContext"
 import UserProfile from "./UserProfile";
+import UserProfileRead from "./UserProfileRead";
 
 
 
@@ -74,6 +75,9 @@ export default function App() {
             </Route>
             <Route path ="/userprofile">
                 <UserProfile/>
+            </Route>
+            <Route path ="/userprofileread">
+                <UserProfileRead/>
             </Route>
             <Route path="/">
                 <Home />
