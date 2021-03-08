@@ -5,18 +5,21 @@ import './css/home.css';
 import Footer from "./Footer";
 import {Link} from "react-router-dom";
 import {firestore} from "./ffdb";
-
+import {useAuth} from "./AuthContext";
 
 
 export default function UserProfile() {
+    // const {currentUser} = useAuth()
 const [userInfo, setuserInfo] = useState({ //setstate is async
-    userID : " ",
+    userID : " ",//currentUser.uid, //user id should be givennnnnn -- primary key
     userName : " ",
-    userLocation : " ",  //address, street, zip, city, state
+    userLocation : 0,  //zip
     userPhoneNum : " ",
     userAccountType : " ",
     userBio : " "
 });
+
+
 
 function handleinput (props){ //access to input that calls it
     const id = props.target.id
@@ -48,57 +51,62 @@ function saveuserprofile (){
             <div className = "container">
                 <div className="row">
                 <div className="col s12 m3">
-                    <div >
-                        <a href="msg">Messages</a>
-                        <a href="ntf">Notifications</a>
-                        <a href="yl">Your Listings</a>
-                        <a href="information">Account Info</a>
-                        <a href="ss">Safe Spawts</a>
-                        <a href="favs">Favorites</a>
+                    <div class = "collection">
+                        <a href="msg" class = "collection-item">Messages</a>
+                        <a href="ntf" class ="collection-item">Notifications</a>
+                        <a href="yl" class = "collection-item">Your Listings</a>
+                        <a href="information" class = "collection-item">Account Info</a>
+                        <a href="ss" class= "collection-item">Safe Spawts</a>
+                        <a href="favs" class = "collection-item">Favorites</a>
                     </div>
                 </div>
 
 
-                <div className="col s12 m9" href="information">
-                <div>
-                    <div className="userinfoform">
-                        <form id="userinfo">
-                            <div id="username">
-                                <label htmlFor="name">User name: </label>
-                                <input type="text" id="userID" name="user_uname" onChange={handleinput}/>
-                            </div>
-                            <div id="username">
-                                <label For="name">Name: </label>
-                                <input type="text" id="name" name="user_name"/>
-                            </div>
+                    <div className="col s12 m9" href="information">
+                        <div>
+                            <div className="userinfoform">
+                                <form id="userinfo">
+                                    <br/>
+                                    <div id="username">
+                                        <label htmlFor="name">User name: </label>
+                                        <input type="text" id="userID" name="user_uname" onChange={handleinput}/>
+                                    </div>
+                                    <div id="username">
+                                        <label htmlFor="name">Name: </label>
+                                        <input type="text" id="userName" name="user_name" onChange={handleinput}/>
+                                    </div>
 
-                            <br/>
-                                <div id="userlocation">
-                                    <label For="location">Location: </label>
-                                    <input type="text" id="location" name="user_loc"/>
-                                </div>
-                                <br/>
-                            <div id="usernumber">
-                                <label htmlFor="mail">Phone Number: </label>
-                                <input type="email" id="mail" name="user_email"/>
+                                    <br/>
+                                    <div id="userlocation">
+                                        <label htmlFor="location">Location: </label>
+                                        <input type="text" id="userLocation" name="user_loc" onChange={handleinput}/>
+                                    </div>
+                                    <br/>
+                                    <div id="usernumber">
+                                        <label htmlFor="mail">Phone Number: </label>
+                                        <input type="email" id="userPhoneNum" name="user_email" onChange={handleinput}/>
+                                    </div>
+                                    <br/>
+                                    <div id="useraccount">
+                                        <label htmlFor="accounts" class = "input-field col s12" > Account Type: </label>
+                                        <select name="userAccountType" id="accounts">
+                                            {/*<option value="userAccountType"> Adopter</option>*/}
+                                            {/*<option value="userAccountType"> Pet Owner</option>*/}
+                                            <option value="" disabled selected>Choose your option</option>
+                                            <option value="1">Adopter</option>
+                                            <option value="2">Pet Owner</option>
+                                        </select>
+                                    </div>
+
+                                    <br/>
+                                    <div id="userbio">
+                                        <label htmlFor="aboutme">About Me: </label>
+                                        <textarea id="userBio" name="user_message" onChange={handleinput}></textarea>
+                                    </div>
+                                    <br/>
+                                </form>
+                                <button onClick={saveuserprofile}> Save Changes</button>
                             </div>
-                            <br/>
-                            <div id="useraccount">
-                                <label For="accounts"> Account Type: </label>
-                                <select name="accounttype" id= "accounts" >
-                                    <option value="adopter"> Adopter</option>
-                                    <option value="petowner"> Pet Owner</option>
-                                </select>
-                            </div>
-                            <br/>
-                                <div id="userbio">
-                                    <label For="aboutme">About Me: </label>
-                                    <textarea id="aboutme" name="user_message"></textarea>
-                                </div>
-                                <br/>
-                        </form>
-                        <button onClick={saveuserprofile}> Save Changes</button>
-                    </div>
                 </div>
                 </div>
             </div>
