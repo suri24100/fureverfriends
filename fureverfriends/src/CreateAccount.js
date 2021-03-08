@@ -109,108 +109,89 @@ export default function CreateAccount(){
 
     return (
         <body>
-            <div className="listings-banner-wrap">
-                <Header/>
-                <div className="listings-banner-img-wrap"></div>
-            </div>
             <div className="signing-banner-wrap">
-                <div className="signing-banner-img-wrap"></div>
-                <div className="invis-wrap">
-                    <div className="info-wrap">
-                        <div className="logo-wrap">
+                <Header/>
+            </div>
+            <div className="create-account container">
+                <div className="row">
+                    <div className="col s12 m5 offset-m7 form-box">
+                        <div className="row logo-wrap center">
                             <img src="paw-green.svg"/>
                             <h3>Furever Friends</h3>
                             <img src="paw-green.svg"/>
                         </div>
-                        <br></br>
-                        <h3 className="subH">Sign Up</h3>
+                        <div className="row center"><h3 className="subH">Sign Up</h3></div>
 
                         {error && <Alert variant="danger">{error}</Alert>}
-
-                        <div className="form-wrap" id="log-in-form">
-                            <form onSubmit={handleSignUp} className="account-form">
-                                <h2 className="welcome-back-heading">Welcome Back!</h2>
-
-                                <label for="username">Enter New Username:</label>
-                                <input type="username" id="username" name="username"
-                                       value={username}
-                                       onChange={(e) => setUsername(e.target.value)}/>
-                                <p className="errorMsg">{usernameError}</p>
-
-                                <label for="firstName">Enter Your First Name:</label>
-                                <input type="firstName" id="firstName" name="firstName"
-                                       value={firstName}
-                                       onChange={(e) => setFirstName(e.target.value)}/>
-
-                                <label for="lastName">Enter Your Last Name:</label>
-                                <input type="lastName" id="lastName" name="lastName"
-                                       value={lastName}
-                                       onChange={(e) => setLastName(e.target.value)}/>
-
-                                <label for="email">Enter Your Email Address:</label>
-                                <input type="email" id="email" name="email"
-                                       value = {email}
-                                       onChange ={(e) => setEmail(e.target.value)}/>
-                                <p className="errorMsg">{emailError}</p>
-
-                                <label for="phone">Enter Your Phone Number:</label>
-                                <input type="phone" id="phone" name="phone"
-                                       value={phone}
-                                       onChange={(e) => setPhone(e.target.value)}/>
-
-                                {/*<label htmlFor="accountType">Choose Account:</label>*/}
-                                {/*<div className="input-field col s12">*/}
-                                {/*    <select id="accountType" name="accountType">*/}
-                                {/*        <option value="Adopter">Adopter</option>*/}
-                                {/*        <option value="Private Owner">Private Owner</option>*/}
-                                {/*        <option value="Organization ">Organization</option>*/}
-                                {/*    </select>*/}
-                                {/*</div>*/}
-
-                                {/*<div className="input-field col s3 right">*/}
-                                {/*    <select>*/}
-                                {/*        <option value="" disabled selected>Sort By</option>*/}
-                                {/*        <option value="1">Newest</option>*/}
-                                {/*        <option value="2">Most Viewed</option>*/}
-                                {/*        <option value="3">Least Viewed</option>*/}
-                                {/*        <option value="3">Distance</option>*/}
-                                {/*    </select>*/}
-                                {/*</div>*/}
-
-                                <label for="accountType">Choose Account:</label>
-                                <input type="accountType" id="accountType" name="accountType"
-                                       value={accountType}
-                                       onChange={(e) => setAccountType(e.target.value)}/>
-
-                                <label for="zip">Enter Your Zip Code:</label>
-                                <input type="zip" id="zip" name="zip"
-                                       value={zip}
-                                       onChange={(e) => setZip(e.target.value)}/>
-
-                                <label for="pass">Enter Your Password</label>
-                                <input type="password" id="pass" name="pass"
-                                       value = {password}
-                                       onChange ={(e) => setPassword(e.target.value)}/>
-                                <p className = "errorMsg"> {passwordError}</p>
-
-                                <label htmlFor="pass">Confirm Your Password</label>
-                                <input type="password" id="pass" name="pass"
-                                       value={passwordConfirm}
-                                       onChange={(e) => setPasswordConfirm(e.target.value)}/>
-                                <p className="errorMsg"> {passwordErrorConfirm}</p>
-
-                                <div className="bottom-info">
-                                    <div className="btn-wrap default">
-                                        <button disabled = {loading} className="signing-btn">Sign Up</button>
+                        <form>
+                            <div className="row">
+                                <div className="input-field col s12">
+                                    <input type="text" id="username" name="username"
+                                           value={username}
+                                           onChange={(e) => setUsername(e.target.value)}/>
+                                   <label htmlFor="username">Enter New Username</label>
+                                    <p className="errorMsg">{usernameError}</p>
+                                </div>
+                                <div className="input-field col s12">
+                                    <input type="text" id="firstName" name="firstName"
+                                           value={firstName}
+                                           onChange={(e) => setFirstName(e.target.value)}/>
+                                    <label htmlFor="firstName">Enter Your First Name:</label>
+                                </div>
+                                <div className="input-field col s12">
+                                    <input type="text" id="lastName" name="lastName"
+                                           value={lastName}
+                                           onChange={(e) => setLastName(e.target.value)}/>
+                                    <label htmlFor="lastName">Enter Your Last Name:</label>
+                                </div>
+                                <div className="input-field col s12">
+                                    <input type="email" id="email" name="email"
+                                           value={email}
+                                           onChange={(e) => setEmail(e.target.value)}/>
+                                           <label htmlFor="email">Enter Your Email Address:</label>
+                                    <p className="errorMsg">{emailError}</p>
+                                </div>
+                                <div className="input-field col s12">
+                                    <input type="tel" id="phone" name="phone"
+                                           value={phone}
+                                           onChange={(e) => setPhone(e.target.value)}/>
+                                    <label htmlFor="phone">Enter Your Phone Number:</label>
+                                </div>
+                                <div className="input-field col s12">
+                                    <select>
+                                        <option value="Adopter">Adopter</option>
+                                        <option value="Private Owner">Private Owner</option>
+                                        <option value="Organization ">Organization</option>
+                                    </select>
+                                    <label>I am signing up as:</label>
+                                </div>
+                                <div className="input-field col s12">
+                                    <input type="number" id="zip" name="zip"
+                                           value={zip}
+                                           onChange={(e) => setZip(e.target.value)}/>
+                                    <label htmlFor="zip">Enter Your Zip Code:</label>
+                                </div>
+                                <div className="input-field col s12">
+                                    <input type="password" id="pass" name="pass"
+                                           value={password}
+                                           onChange={(e) => setPassword(e.target.value)}/>
+                                    <label htmlFor="pass">Enter Your Password</label>
+                                    <p className="errorMsg"> {passwordError}</p>
+                                    </div>
+                                    <div className="input-field col s12">
+                                    <label htmlFor="pass">Confirm Your Password</label>
+                                    <input type="password" id="pass" name="pass"
+                                           value={passwordConfirm}
+                                           onChange={(e) => setPasswordConfirm(e.target.value)}/>
+                                    </div>
+                                <div className="col s12 center">
+                                    <button className="btn" disabled={loading}>Sign Up</button>
+                                    <div className="sub-text">
+                                        <span>Already have an account? <Link to="/Login">Log In</Link></span>
                                     </div>
                                 </div>
-                            </form>
-                            <div className="bottom-info">
-                                <div className="belowbutton-subheading">
-                                    <span>Already have an account?<Link to="/Login">Log In</Link></span>
-                                </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
