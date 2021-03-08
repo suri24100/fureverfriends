@@ -3,49 +3,43 @@ import Header from "./Header";
 import './css/style.css';
 import './css/signing.css';
 import { Alert } from "react-bootstrap"
-import {Link, useHistory} from "react-router-dom";
+import {Link} from "react-router-dom";
 import db from './ffdb';
 import {useAuth} from './AuthContext';
 
 
-export default function Login(){
+export default function ForgotPassword(){
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const { resetPassword } = useAuth();
     const [error, setError] = useState('');
     const [emailError, setEmailError] = useState('');
-    const [passwordError, setPasswordError] = useState('');
+    const [message, setMessage] = useState('');
     const [loading, setLoading] = useState(false);
-    const { login } = useAuth();
-    const history = useHistory();
 
     const clearInputs = () =>{
         setEmail('');
-        setPassword('');
+        setMessage('');
     }
     const clearErrors = () => {
         setError('');
         setEmailError('');
-        setPasswordError('');
     }
 
-    async function handleLogin(e) {
+    async function handleResetPassword(e) {
         e.preventDefault();
 
         try {
             clearErrors();
             setLoading(true);
-            await login(email, password);
+            await resetPassword(email);
             clearInputs();
-            history.push("/Home")
+            setMessage("Check your inbox for further instructions");
         }catch(err) {
             clearErrors();
-            setError("Failed to log in");
+            setError("Failed to reset password");
             if (err.code === "auth/invalid-email" || err.code === "auth/user-disabled" || err.code === "auth/user-not-found") {
-                    setEmailError(err.message);
-                }
-            if (err.code === "auth/wrong-password") {
-                    setPasswordError(err.message);
-                }
+                setEmailError(err.message);
+            }
         }
 
         setLoading(false);
@@ -57,10 +51,10 @@ export default function Login(){
         db.auth().onAuthStateChanged(user =>{
             if(user) {
                 clearInputs();
-                console.log("The user is logged in")
+                console.log("The user is logged in");
             }
             else{
-                console.log("The user is not logged in")
+                console.log("The user is not logged in");
             }
         })
     }
@@ -79,12 +73,13 @@ export default function Login(){
                         <img src="paw-green.svg"/>
                     </div>
                     <br></br>
-                    <h3 className="subH">Log In</h3>
+                    <h3 className="subH">Password Reset</h3>
 
                     {error && <Alert variant="danger">{error}</Alert>}
+                    {message && <Alert variant="success">{message}</Alert>}
 
                     <div className="form-wrap" id="log-in-form">
-                        <form onSubmit={handleLogin}className="account-form">
+                        <form onSubmit={handleResetPassword}className="account-form">
                             <h2 className="welcome-back-heading">Welcome Back!</h2>
 
                             <label for="email">Enter Your Email Address:</label>
@@ -93,21 +88,15 @@ export default function Login(){
                                    onChange ={(e) => setEmail(e.target.value)}/>
                             <p className="errorMsg">{emailError}</p>
 
-                            <label for="pass">Enter Your Password</label>
-                            <input type="password" id="pass" name="pass"
-                                   value = {password}
-                                   onChange ={(e) => setPassword(e.target.value)}/>
-                            <p className = "errorMsg"> {passwordError}</p>
-
                             <div className="bottom-info">
                                 <div className="btn-wrap default">
-                                    <button disabled = {loading} className="signing-btn">Log In</button>
+                                    <button disabled = {loading} className="signing-btn">Reset Password</button>
                                 </div>
                             </div>
                         </form>
                         <div className="bottom-info">
                             <div className="belowbutton-subheading">
-                                <center><Link to="/ForgotPassword">Forgot Password?</Link></center>
+                                <center><Link to="/Login">Login</Link></center>
                             </div>
                             <div className="belowbutton-subheading">
                                 <span>Need to create an account?<Link to="/CreateAccount">Sign Up</Link></span>

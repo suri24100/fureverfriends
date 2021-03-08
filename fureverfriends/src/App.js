@@ -1,6 +1,7 @@
 import React, {useEffect} from "react";
 // React router components
 import {Switch, Route, Link, useRouteMatch, useParams} from "react-router-dom";
+import PrivateRoute from "./PrivateRoute";
 
 //Materialize
 import 'materialize-css/dist/css/materialize.min.css';
@@ -14,10 +15,10 @@ import FindHome from "./FindHome";
 import Listings from "./Listings";
 import Login from "./Login";
 import PetCare from "./PetCare";
-import SignUp from "./SignUp";
 import NewListing from "./NewListing";
 import PetProfile from "./PetProfile";
 import CreateAccount from "./CreateAccount";
+import ForgotPassword from "./ForgotPassword";
 import { AuthProvider } from "./AuthContext"
 
 
@@ -42,8 +43,8 @@ export default function App() {
     <div>
         <AuthProvider>
         <Switch>
-            <Route path ="/Signup">
-                <SignUp/>
+            <Route path ="/ForgotPassword">
+                <ForgotPassword/>
             </Route>
             <Route path ="/NewListing">
                 <NewListing/>

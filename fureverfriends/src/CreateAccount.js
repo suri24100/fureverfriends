@@ -8,7 +8,6 @@ import db from './ffdb';
 import {useAuth} from './AuthContext';
 
 export default function CreateAccount(){
-    const [user, setUser] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [passwordConfirm, setPasswordConfirm] = useState('');
@@ -16,7 +15,6 @@ export default function CreateAccount(){
     const [emailError, setEmailError] = useState('');
     const [passwordError, setPasswordError] = useState('');
     const [passwordErrorConfirm, setPasswordErrorConfirm] = useState('');
-    const [hasAccount, setHasAccount] = useState(false);
     const [loading, setLoading] = useState(false);
     const { signup } = useAuth();
     const history = useHistory();
