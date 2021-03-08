@@ -45,7 +45,7 @@ export default function PetProfile(){
                         website: petData.url
                     },
                     gender: petData.gender,
-                    fur_length: petData.coat,
+                    fur_length: (petData.coat) ? petData.coat : "Unknown",
                     personality: (petData.tags.length > 0) ? petData.tags : "No traits given.",
                     good_with_cats: (petData.environment.cats) ? "Yes" :
                         (((petData.environment.cats) === null) ? "Unknown" : "No"),
@@ -59,7 +59,8 @@ export default function PetProfile(){
                     special_needs: (petData.attributes.special_needs) ? "Yes" : "No",
                     allergy_friendly: "",
                     tags: petData.tags,
-                    description: petData.description
+                    description: petData.description,
+                    listing_created: petData.published_at
                 });
                 console.log(petData)
                 setProfileFound("success");
@@ -80,7 +81,6 @@ export default function PetProfile(){
                     <div className="main-photo hide-on-small-only"
                          style={{backgroundImage: `url(` + petDetails.photo_url + `)`}}>
                     </div>
-                    <button type="button">Test Save</button>
                     <h3>Info</h3>
                     <ul>
                         <li><span className="title">Vaccinated:</span> {petDetails.vaccinated}</li>
@@ -110,7 +110,7 @@ export default function PetProfile(){
                         <li><span className="title">Adoption Fee:</span> Unknown</li>
                     </ul>
                     <h3>About Me</h3>
-                    <p>{petDetails.description}</p>
+                    <p>{petDetails.description} {(prefix === "PF") && <a className="text-link" target="_blank" href={petDetails.profile_url}>[read more on PetFinder]</a>}</p>
                     <h3>Contact Information</h3>
                     <ul>
                         <li><span className="title">Email:</span> <a className="text-link" target="_blank" href={"mailto:" + petDetails.contact.email}>{petDetails.contact.email}</a></li>
