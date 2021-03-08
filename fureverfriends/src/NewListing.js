@@ -6,15 +6,34 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import M from "materialize-css";
 
-import {getBreeds} from "./api-modules/PetfinderAPI.js";
-
 //all the data from PetFinderAPI
 import PFdata from "./api-modules/constants.js";
 import placeholder_image from "./images/petProfiles/default-placeholder-image.png";
 
+// test code for creating a listing
+import {firestore} from "./ffdb";
+
+const createPetListing = (listingData) =>{
+    console.log(listingData)
+    firestore.collection("PetInfo")
+        .doc("PublicListings")
+        .collection("AdoptionList")
+        .doc("PetTypes")
+        .collection(listingData.type)
+        .doc(listingData.pet_id)
+        .set(listingData)
+        .then((docRef) => {
+            console.log("Document written");
+        })
+        .catch((error) => {
+            console.error("Error adding document: ", error);
+        });
+}
+
+
+
 function processFormContents() {
-    var petProfileImg = (document.getElementById('pet-profile-img')).value;
-    var petAddImg = (document.getElementById('pet-add-img')).value;
+    // pet information
     var petname = (document.getElementById('petname')).value;
     var pettype = (document.getElementById('type-of-pet')).value;
     var age = (document.getElementById('age')).value;
@@ -23,16 +42,21 @@ function processFormContents() {
     var color = (document.getElementById('color')).value;
     var caredBy = (document.getElementById('cared-by')).value;
     var furLength = (document.getElementById('furLength')).value;
-    var personality = (document.getElementById('age')).value;
     var adoptionFee = (document.getElementById('adoptionFee')).value;
     var city = (document.getElementById('city')).value;
     var state = (document.getElementById('state')).value;
     var zip = (document.getElementById('zip')).value;
     var aboutMe = (document.getElementById('about-me')).value;
+
+    // user contact information
     var contactName = (document.getElementById('contact-name')).value;
     var contactPhone = (document.getElementById('contact-phone')).value;
     var contactEmail = (document.getElementById('contact-email')).value;
     var contactWebsite = (document.getElementById('contact-website')).value;
+
+    // files from user
+    var petProfileImg = (document.getElementById('pet-profile-img')).value;
+    var petAddImg = (document.getElementById('pet-add-img')).value;
     var applicationForm = (document.getElementById('pet-app-form')).value;
 
     // get attributes separately for database structure
@@ -40,40 +64,20 @@ function processFormContents() {
     const attributes = [...attributesField.options]
         .filter(option => option.selected)
         .map(option => option.value);
-
-    const newPetProfile = {
-        pet_profile_img: petProfileImg,
-        pet_add_img: petAddImg,
-        pet_name : petname,
-        pet_type : pettype,
-        age : age,
-        gender : gender,
-        breed : breed, 
-        color : color,
-        caredBy : caredBy,
-        furLength : furLength,
-        personality : personality,
-        adoptionFee : adoptionFee,
-        city : city,
-        state : state,
-        zip : zip,
-        attributes : attributes,
-        about_me : aboutMe,
-        contact_name : contactName,
-        contact_phone : contactPhone,
-        contact_email : contactEmail,
-        contact_website : contactWebsite,
-        application_form: applicationForm,
-    };
+    const personalityField = document.getElementById('personality');
+    const personality = [...personalityField.options]
+        .filter(option => option.selected)
+        .map(option => option.value);
 
     const newPetListing = {
         petfinder_listing: false,
-        pet_id: "", // NEED
+        pet_id: Date.now().toString(),
         name: petname,
-        type: pettype,
+        type: PFdata.TYPES[pettype],
         age: age,
         breed: breed,
         gender: gender,
+        color: color,
         fur_length: furLength,
         photo_url: "",
         additional_photos: [],
@@ -91,18 +95,22 @@ function processFormContents() {
             website: contactWebsite
         },
         personality: personality,
-        good_with_pets: "",
-        kid_friendly: "",
-        vaccinated: "",
-        neutered:"",
-        bonded_pair: "",
-        allergy_friendly: "",
-        adoption_fee: "",
+        good_with_cats: (attributes.includes("good_with_cats")) ? true : false,
+        good_with_dogs: (attributes.includes("good_with_dogs")) ? true : false,
+        kid_friendly: (attributes.includes("kid_friendly")) ? true : false,
+        vaccinated: (attributes.includes("vaccinated")) ? true : false,
+        spayed_neutered: (attributes.includes("spayed_neutered")) ? true : false,
+        bonded_pair: (attributes.includes("bonded_pair")) ? true : false,
+        allergy_friendly: (attributes.includes("allergy_friendly")) ? true : false,
+        special_needs: (attributes.includes("special_needs")) ? true : false,
+        adoption_fee: adoptionFee,
         tags: [],
-        description: aboutMe
+        description: aboutMe,
+        applicationForm: "",
+        listing_created: new Date().toJSON()
     }
-
-    console.log(newPetProfile);
+    console.log(newPetListing);
+    createPetListing(newPetListing);
 }
 
 /* code from: http://talkerscode.com/webtricks/preview-image-before-upload-using-javascript.php */
@@ -132,21 +140,12 @@ export default function NewListing() {
 
       let typeArray = PFdata.TYPES;
       typeArray.unshift("");
-      console.log(PFdata.TYPES);
       const [petType, setPetType] = useState(typeArray);
       const [formData, setFormData] = useState({
        name: "",
         fur_length: "",
         color: "",
         });
-
-      const handleName = (e) => {
-          setFormData({
-			...formData,
-			name: e.target.value
-		});
-        console.log(formData.name);
-      }
 
       const type = petType.map(type => type)
       const handleChange = (e) => {
@@ -300,7 +299,7 @@ export default function NewListing() {
 
                         <div className="listings-form-row">
                             <label for="petname">Name: </label>
-                            <input type="text" id="petname" name="petname" onChange={e => handleName(e)}/>
+                            <input type="text" id="petname" name="petname"/>
                         </div>
 
                         <div className="listings-form-row">
@@ -396,13 +395,14 @@ export default function NewListing() {
                         <div className="listings-form-row">
                             <label for="attributes">Pet Attributes</label>
                             <select id="attributes" name="attributes" multiple="multiple">
-                                <option value="Vaccinated">Vaccinated</option>
-                                <option value="NeuteredSpayed">Neutered/Spayed</option>
-                                <option value="PetFriendly">Pet Friendly</option>
-                                <option value="5orolder">Good with Kids 5 or older</option>
-                                <option value="allKids">Good with all kids</option>
-                                <option value="Hypoallergenic">Hypoallergenic</option>
-                                <option value="BondedPair">Bonded Pair</option>
+                                <option value="vaccinated">Vaccinated</option>
+                                <option value="spayed_neutered">Neutered/Spayed</option>
+                                <option value="good_with_cats">Good with Cats</option>
+                                <option value="good_with_dogs">Good with Dogs</option>
+                                <option value="kid_friendly">Good with Kids</option>
+                                <option value="special_needs">Special Needs</option>
+                                <option value="special_needs">Allergy Friendly</option>
+                                <option value="bonded_pair">Bonded Pair</option>
                             </select>
                         </div>
 
@@ -411,9 +411,10 @@ export default function NewListing() {
             </div>
             <div className="listings-about-me listings-section container">
                 <h5>About me section</h5>
+                <h6>Please fill out this section regarding any additional info (such as a backstory!)</h6>
                 <form className="row">
                     <div className="input-field col s12">
-                        <label for="textarea1">Please fill out this section regarding any additional info (such as a backstory!)</label>
+                        <label for="textarea1">Pet Bio</label>
                         <textarea id="about-me" className="materialize-textarea"></textarea>
                     </div>
                 </form>

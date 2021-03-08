@@ -59,7 +59,7 @@ export default function App() {
                 <Listings />
             </Route>
             <Route path="/findahome">
-                <FindHome />
+                <NewListing />
             </Route>
             <Route path="/petcare">
                 <PetCare />

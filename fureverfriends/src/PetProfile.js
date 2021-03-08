@@ -45,7 +45,7 @@ export default function PetProfile(){
                         website: petData.url
                     },
                     gender: petData.gender,
-                    fur_length: petData.coat,
+                    fur_length: (petData.coat) ? petData.coat : "Unknown",
                     personality: (petData.tags.length > 0) ? petData.tags : "No traits given.",
                     good_with_cats: (petData.environment.cats) ? "Yes" :
                         (((petData.environment.cats) === null) ? "Unknown" : "No"),
@@ -59,7 +59,8 @@ export default function PetProfile(){
                     special_needs: (petData.attributes.special_needs) ? "Yes" : "No",
                     allergy_friendly: "",
                     tags: petData.tags,
-                    description: petData.description
+                    description: petData.description,
+                    listing_created: petData.published_at
                 });
                 console.log(petData)
                 setProfileFound("success");
