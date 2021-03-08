@@ -8,37 +8,37 @@ import {firestore} from "./ffdb";
 import {useAuth} from "./AuthContext";
 
 
-export default function UserProfile() {
-    // const {currentUser} = useAuth()
-const [userInfo, setuserInfo] = useState({ //setstate is async
-    userID : " ",//currentUser.uid, //user id should be givennnnnn -- primary key
-    userName : " ",
-    userLocation : 0,  //zip
-    userPhoneNum : " ",
-    userAccountType : " ",
-    userBio : " "
-});
+export default function UserProfileRead() {
+    const {currentUser} = useAuth()
+    const [userInfo, setuserInfo] = useState({ //setstate is async
+        userID : cu,//currentUser.uid, //user id should be givennnnnn -- primary key
+        userName : " ",
+        userLocation : 0,  //zip
+        userPhoneNum : " ",
+        userAccountType : " ",
+        userBio : " "
+    });
 
 
 
-function handleinput (props){ //access to input that calls it
-    const id = props.target.id
-    const value = props.target.value //value vs valueOf
-    // console.log(id)
-    // console.log(value)
-    setuserInfo({...userInfo, [id]:value})
-    console.log(userInfo)
-}
-function saveuserprofile (){
-    firestore.collection("UserInfo")
-        .add(userInfo)//statevariaABLE
-        .then((docRef) => {
-            console.log("Document written with ID: ", docRef.id);
-        })
-        .catch((error) => {
-            console.error("Error adding document: ", error);
-        });
-}
+    function handleinput (props){ //access to input that calls it
+        const id = props.target.id
+        const value = props.target.value //value vs valueOf
+        // console.log(id)
+        // console.log(value)
+        setuserInfo({...userInfo, [id]:value})
+        console.log(userInfo)
+    }
+    function saveuserprofile (){
+        firestore.collection("UserInfo")
+            .add(userInfo)//statevariaABLE
+            .then((docRef) => {
+                console.log("Document written with ID: ", docRef.id);
+            })
+            .catch((error) => {
+                console.error("Error adding document: ", error);
+            });
+    }
 
     return (
         <div className="actionsnav">
@@ -50,16 +50,16 @@ function saveuserprofile (){
 
             <div className = "container">
                 <div className="row">
-                <div className="col s12 m3">
-                    <div class = "collection">
-                        <a href="msg" class = "collection-item">Messages</a>
-                        <a href="ntf" class ="collection-item">Notifications</a>
-                        <a href="yl" class = "collection-item">Your Listings</a>
-                        <a href="information" class = "collection-item">Account Info</a>
-                        <a href="ss" class= "collection-item">Safe Spawts</a>
-                        <a href="favs" class = "collection-item">Favorites</a>
+                    <div className="col s12 m3">
+                        <div >
+                            <a href="msg">Messages</a>
+                            <a href="ntf">Notifications</a>
+                            <a href="yl">Your Listings</a>
+                            <a href="information">Account Info</a>
+                            <a href="ss">Safe Spawts</a>
+                            <a href="favs">Favorites</a>
+                        </div>
                     </div>
-                </div>
 
 
                     <div className="col s12 m9" href="information">
@@ -102,11 +102,10 @@ function saveuserprofile (){
                                 </form>
                                 <button onClick={saveuserprofile}> Save Changes</button>
                             </div>
+                        </div>
+                    </div>
                 </div>
-                </div>
-            </div>
             </div>
         </div>
     )
 }
-
