@@ -16,11 +16,12 @@ import Login from "./Login";
 import PetCare from "./PetCare";
 import NewListing from "./NewListing";
 import PetProfile from "./PetProfile";
+import CreateAccountConfirmation from "./CreateAccountConfirmation";
 import CreateAccount from "./CreateAccount";
 import ForgotPassword from "./ForgotPassword";
 import { AuthProvider } from "./AuthContext"
 import UserProfile from "./UserProfile";
-import CreateAccountConfirmation from "./CreateAccountConfirmation";
+
 
 
 
@@ -50,11 +51,11 @@ export default function App() {
             <Route path ="/NewListing">
                 <NewListing/>
             </Route>
-            <Route path ="/CreateAccount">
-                <CreateAccount />
-            </Route>
             <Route path ="/CreateAccountConfirmation">
                 <CreateAccountConfirmation />
+            </Route>
+            <Route path ="/CreateAccount">
+                <CreateAccount />
             </Route>
             <Route path="/listings/profile/:prefix-:id">
                 <PetProfile />
