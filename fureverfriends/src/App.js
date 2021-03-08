@@ -1,7 +1,6 @@
 import React, {useEffect} from "react";
 // React router components
 import {Switch, Route, Link, useRouteMatch, useParams} from "react-router-dom";
-import PrivateRoute from "./PrivateRoute";
 
 //Materialize
 import 'materialize-css/dist/css/materialize.min.css';
@@ -20,6 +19,7 @@ import PetProfile from "./PetProfile";
 import CreateAccount from "./CreateAccount";
 import ForgotPassword from "./ForgotPassword";
 import { AuthProvider } from "./AuthContext"
+import UserProfile from "./UserProfile";
 
 
 
@@ -59,13 +59,16 @@ export default function App() {
                 <Listings />
             </Route>
             <Route path="/findahome">
-                <FindHome />
+                <NewListing />
             </Route>
             <Route path="/petcare">
                 <PetCare />
             </Route>
             <Route path="/login">
                 <Login />
+            </Route>
+            <Route path ="/userprofile">
+                <UserProfile/>
             </Route>
             <Route path="/">
                 <Home />

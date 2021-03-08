@@ -2,9 +2,11 @@ import React, {useEffect, useState, Component, useReducer, useRef} from 'react';
 import Header from "./Header";
 import './css/style.css';
 import './css/listings.css';
-import {getTypeListing} from "./api-modules/PetfinderAPI";
+import {getFilteredListings, getTypeListing} from "./api-modules/PetfinderAPI";
 import {forEach} from "react-bootstrap/ElementChildren";
 import {Link, useRouteMatch} from "react-router-dom";
+import PFdata from "./api-modules/constants.js";
+import M from "materialize-css";
 
 
 function PetCard(props){
@@ -29,7 +31,7 @@ function PetCard(props){
         personality: petInfo.tags,
         good_with_pets: "",
         kid_friendly: "",
-        vaccinated: petInfo.attributes.shots_current,
+        vaccinated: (petInfo.attributes.shots_current) ? "Yes" : "No",
         neutered: petInfo.attributes.spayed_neutered,
         bonded_pair: "",
         allergy_friendly: ""
@@ -42,7 +44,7 @@ function PetCard(props){
     let match = useRouteMatch();
 
     return (
-        <div className="listing-card col s12 m4 l3">
+        <div className="listing-card col s12 m6 l4">
             <div className="card">
                 <div className="card-image">
                     <Link to={`${match.url}/profile/` + "PF-" + petDetails.id} className="profile-link-overlay">
@@ -62,6 +64,7 @@ function PetCard(props){
 }
 
 export default function Listings(){
+
     function usePrevious(value) {
         const ref = useRef();
         useEffect(() => {
@@ -72,23 +75,44 @@ export default function Listings(){
 
     const [pageNumber, setPageNumber] = useState(1);
     const [petListings, setPetListings] = useState( null);
+    const [filters, setFilters] = useState({
+        type: [],
+        location:{
+            zipcode: "",
+            distance: 0,
+        },
+        age: [],
+        gender: [],
+        size: [],
+        coat: [],
+        color: [],
+    });
+    useEffect( () => {
+        // do something
+    });
     const prevPage = usePrevious(pageNumber);
 
     useEffect(() => {
         if(!petListings){
-            getListingData(pageNumber);
-            console.log(petListings);
+            let promise = getListingData(pageNumber);
+            generateFilters("filter-type");
+            generateFilters("filter-location");
+            generateFilters("filter-age");
+            generateFilters("filter-gender");
+            generateFilters("filter-size");
+            generateFilters("filter-furlen");
+            //console.log(petListings);
         } else if(prevPage !== pageNumber){
             getListingData(pageNumber);
-            console.log(petListings);
+            // console.log(petListings);
         }
     });
 
     async function getListingData(pageNum){
-        let newPetListings = await getTypeListing("cat", 100, pageNum);
+        let newPetListings = await getFilteredListings(100, pageNum);
         setPetListings(newPetListings);
-        console.log(newPetListings);
-        console.log(petListings);
+        // console.log(newPetListings);
+        // console.log(petListings);
     }
 
     function generateCards(){
@@ -106,6 +130,230 @@ export default function Listings(){
     function loadPrevPage(){
         let newPageNum = pageNumber - 1;
         setPageNumber(newPageNum);
+    }
+
+    function updateFilters(props){
+        const filterID = props.target.name;
+        const value = props.target.value;
+        const checked = props.target.checked;
+        let typeArr = [];
+        let index = -1;
+        let newArr = [];
+        console.log(filterID + ", " + value + ", " + checked)
+        switch (filterID){
+            case "type":
+                typeArr = filters.type;
+                index = typeArr.indexOf(value);
+                if(checked && index < 0) {newArr = typeArr.push(value)}
+                else if(index >= 0) {newArr = typeArr.splice(index, 1)}
+                setFilters({
+                    ...filters,
+                    type: newArr
+                });
+                console.log(filters);
+                break;
+            case "furlen":
+                typeArr = filters.coat;
+                index = typeArr.indexOf(value);
+                if(checked && index < 0) {newArr = typeArr.push(value)}
+                else if(index >= 0) {newArr = typeArr.splice(index, 1)}
+                setFilters({
+                    ...filters,
+                    coat: newArr
+                });
+                console.log(filters);
+                break;
+            case "size":
+                typeArr = filters.size;
+                index = typeArr.indexOf(value);
+                if(checked && index < 0) {newArr = typeArr.push(value)}
+                else if(index >= 0) {newArr = typeArr.splice(index, 1)}
+                setFilters({
+                    ...filters,
+                    size: newArr
+                });
+                console.log(filters);
+                break;
+            case "age":
+                typeArr = filters.age;
+                index = typeArr.indexOf(value);
+                if(checked && index < 0) {newArr = typeArr.push(value)}
+                else if(index >= 0) {newArr = typeArr.splice(index, 1)}
+                setFilters({
+                    ...filters,
+                    age: newArr
+                });
+                console.log(filters);
+                break;
+            case "gender":
+                typeArr = filters.gender;
+                index = typeArr.indexOf(value);
+                if(checked && index < 0) {newArr = typeArr.push(value)}
+                else if(index >= 0) {newArr = typeArr.splice(index, 1)}
+                setFilters({
+                    ...filters,
+                    gender: newArr
+                });
+                console.log(filters);
+                break;
+            case "zipcode":
+                break
+            case "distance":
+                break;
+            default:
+                break;
+        }
+    }
+
+    function applyFilters(){
+
+    }
+
+    function generateFilters(filterID) {
+        const filterUL = document.getElementById(filterID);
+        if(filterUL){
+            switch (filterID){
+                case "filter-type":
+                    PFdata.TYPES.map(ptype => {
+                        let li = document.createElement("li");
+                        let label = document.createElement("label");
+                        let input = document.createElement("input");
+                        input.classList.add("filled-in");
+                        input.addEventListener("change", updateFilters, false);
+                        input.setAttribute("type", "checkbox");
+                        input.setAttribute("value", ptype)
+                        input.setAttribute("id", "type-" + ptype);
+                        input.setAttribute("name", "type");
+                        let span = document.createElement("span");
+                        if(ptype === "small_furry") {span.innerText = "Small and Furry";}
+                        else if(ptype === "scales_fins_other") {span.innerText = "Scales, Fins, and Other";}
+                        else {span.innerText = ptype}
+                        label.appendChild(input);
+                        label.appendChild(span);
+                        li.appendChild(label);
+                        filterUL.appendChild(li);
+                    });
+                    break;
+                case "filter-furlen":
+                    PFdata.COAT.map(ptype => {
+                        let li = document.createElement("li");
+                        let label = document.createElement("label");
+                        let input = document.createElement("input");
+                        input.classList.add("filled-in");
+                        input.setAttribute("type", "checkbox");
+                        input.setAttribute("value", ptype)
+                        input.setAttribute("id", "furlen-" + ptype);
+                        input.setAttribute("name", "furlen");
+                        input.addEventListener("change", updateFilters, false);
+                        let span = document.createElement("span");
+                        span.innerText = ptype;
+                        label.appendChild(input);
+                        label.appendChild(span);
+                        li.appendChild(label);
+                        filterUL.appendChild(li);
+                    });
+                    break;
+                case "filter-size":
+                    PFdata.SIZE.map(ptype => {
+                        let li = document.createElement("li");
+                        let label = document.createElement("label");
+                        let input = document.createElement("input");
+                        input.classList.add("filled-in");
+                        input.setAttribute("type", "checkbox");
+                        input.setAttribute("value", ptype)
+                        input.setAttribute("name", "size");
+                        input.setAttribute("id", "size-" + ptype);
+                        input.addEventListener("change", updateFilters, false);
+                        let span = document.createElement("span");
+                        span.innerText = ptype;
+                        label.appendChild(input);
+                        label.appendChild(span);
+                        li.appendChild(label);
+                        filterUL.appendChild(li);
+                    });
+                    break;
+                case "filter-age":
+                    PFdata.AGE.map(ptype => {
+                        let li = document.createElement("li");
+                        let label = document.createElement("label");
+                        let input = document.createElement("input");
+                        input.classList.add("filled-in");
+                        input.setAttribute("type", "checkbox");
+                        input.setAttribute("value", ptype)
+                        input.setAttribute("name", "age");
+                        input.setAttribute("id", "age-" + ptype);
+                        input.addEventListener("change", updateFilters, false);
+                        let span = document.createElement("span");
+                        span.innerText = ptype;
+                        label.appendChild(input);
+                        label.appendChild(span);
+                        li.appendChild(label);
+                        filterUL.appendChild(li);
+                    });
+                    break;
+                case "filter-gender":
+                    PFdata.GENDERS.map(ptype => {
+                        let li = document.createElement("li");
+                        let label = document.createElement("label");
+                        let input = document.createElement("input");
+                        input.classList.add("filled-in");
+                        input.setAttribute("type", "checkbox");
+                        input.setAttribute("value", ptype)
+                        input.setAttribute("id", "gender-" + ptype);
+                        let span = document.createElement("span");
+                        span.innerText = ptype;
+                        label.appendChild(input);
+                        label.appendChild(span);
+                        li.appendChild(label);
+                        filterUL.appendChild(li);
+                    });
+                    break;
+                case "filter-location":
+                    // zip code
+                    let li = document.createElement("li");
+                    li.classList.add("input-field");
+                    let input = document.createElement("input");
+                    input.setAttribute("type", "number");
+                    input.setAttribute("name", "zipcode");
+                    input.setAttribute("id", "filter-zipcode");
+                    input.setAttribute("placeholder", "12345");
+                    input.addEventListener("change", updateFilters, false);
+                    let label = document.createElement("label");
+                    label.classList.add("active");
+                    label.setAttribute("for", "filter-zipcode");
+                    label.innerText = "Zip Code";
+                    li.appendChild(input);
+                    li.appendChild(label);
+                    filterUL.appendChild(li);
+
+                    // distance
+                    li = document.createElement("li");
+                    li.classList.add("input-field");
+                    let select = document.createElement("select");
+                    select.setAttribute("id", "filter-distance");
+                    select.setAttribute("name", "distance");
+                    select.addEventListener("change", updateFilters, false);
+                    label = document.createElement("label");
+                    label.innerText = "Distance";
+                    PFdata.DISTANCE.map(ptype => {
+                        let option = document.createElement("option");;
+                        option.setAttribute("value", ptype)
+                        option.setAttribute("name", "distance");
+                        let span = document.createElement("span");
+                        span.innerText = ptype + " miles";
+                        option.appendChild(span);
+                        select.appendChild(option);
+                    });
+                    li.appendChild(select);
+                    li.appendChild(label);
+                    filterUL.appendChild(li);
+                    break;
+                default:
+                    console.log("Error: Undefined filter type.")
+            }
+            M.AutoInit();
+        }
+
     }
 
     // displays a loading circle while listings are fetched asynchronously
@@ -141,160 +389,64 @@ export default function Listings(){
                 <span>Filter below for better results!</span>
             </div>
         </div>
-
-        <div className="additional-filters-wrap row">
-            <div className="top">
-                <div className="heading">
-                    <h3>Additional Filters</h3>
-                </div>
-                <div className="apply-btn-wrap default">
-                    <button className="apply-btn"><span>Apply Filters</span></button>
-                </div>
-            </div>
-            <div className="forms">
-                <div className="row1">
-                    <form action="#" method="post" className="search-form" id="search-form">
-                        <div className="wrap">
-                            <label for="type-of-pet">Type of Pet:</label>
-                            <select id="type-of-pet" name="type-of-pet" onchange="populate(this.id,'breed')">
-                                <option value=""></option>
-                                <option value="Cat">Cat</option>
-                                <option value="Dog">Dog</option>
-                                <option value="HamsterGuinea">Small Furbabies</option>
-                                <option value="Rabbit">Rabbit</option>
-                                <option value="Fish">Fish</option>
-                                <option value="ReptileAmphibians">Reptile & Amphibian</option>
-                                <option value="Bird">Bird</option>
-                                <option value="Other">Other</option>
-                            </select>
-                        </div>
-                
-                        <div className="wrap">
-                            <label for="age">Age:</label>
-                            <select id="age" name="age">
-                                <option value="No Preference">No Preference</option>
-                                <option value="Young">Young</option>
-                                <option value="Teen">Teen</option>
-                                <option value="Adult">Adult</option>
-                            </select>
-                        </div>
-
-                        <div className="wrap">
-                            <label for="breed">Breed:</label>
-                            <select id="breed" name="breed" className="breed">
-                                {/*populated with JavaScript */}
-                            </select>
-                        </div>
-
-                        <div className="wrap">
-                            <label for="zip-code">Zip Code:</label>
-                            <input type="number" id="zip-code" name="zip-code" className="zip-code"></input>
-                        </div>
-
-                        <div className="wrap">
-                            <label for="distance">Distance:</label>
-                            <select id="distance" name="distance">
-                                <option value="25 miles">25 miles</option>
-                                <option value="50 miles">50 miles</option>
-                                <option value="100 miles">100 miles</option>
-                            </select>
-                        </div>
-                    </form>
-                </div>
-                <div className="row2">
-                    <form className="row2form">
-                        <div className="wrap">
-                            <label for="gender">Gender:</label>
-                            <select id="gender" name="gender">
-                                <option value="No Preference">No Preference</option>
-                                <option value="Female">Female</option>
-                                <option value="Male">Male</option>
-                            </select>
-                        </div>
-
-                        <div className="wrap">
-                            <label for="fur length">Fur Length:</label>
-                            <select id="fur length" name="fur length">
-                                <option value="No Preference">No Preference</option>
-                                <option value="Short Hair">Short Hair</option>
-                                <option value="Medium Hair">Medium Hair</option>
-                                <option value="Long Hair">Long Hair</option>
-                            </select>
-                        </div>
-
-                        <div className="wrap">
-                            <label for="caregiver">Current Caregiver:</label>
-                            <select id="caregiver" name="caregiver">
-                                <option value="No Preference">No Preference</option>
-                                <option value="Private Owner">Private Owner</option>
-                                <option value="Rescue/Shelter">Rescue/Shelter</option>
-                            </select>
-                        </div>
-
-                        <div className="wrap">
-                            <label for="personality">Personality:</label>
-                            <select id="personality" name="personality">
-                                <option value="No Preference">No Preference</option>
-                                <option value="Social">Social</option>
-                                <option value="Independent">Independent</option>
-                                <option value="Talkative">Talkative</option>
-                                <option value="Quiet">Quit</option>
-                                <option value="Playful">Playful</option>
-                                <option value="Shy">Shy</option>
-                                <option value="Adaptable">Adaptable</option>
-                            </select>
-                        </div>
-                    </form>
-                </div>
-
-                <div className="row3">
-                    <div className="wrap">
-                        <input type="checkbox" id="good with other pets" name="good with other pets" value="good with other pets"></input>
-                        <label for="good with other pets"> Good with other pets</label>
-                    </div>
-                    <div className="wrap">
-                        <input type="checkbox" id="kid friendly" name="kid friendly" value="kid friendly"></input>
-                        <label for="kid friendly"> Kid Friendly</label>
-                    </div>
-                    <div className="wrap">
-                        <input type="checkbox" id="vaccinated" name="vaccinated" value="vaccinated"></input>
-                        <label for="vaccinated"> Vaccinated</label>
-                    </div>
-                    <div className="wrap">
-                        <input type="checkbox" id="neutered/spayed" name="neutered/spayed" value="neutered/spayed"></input>
-                        <label for="neutered/spayed">Neutered/Spayed</label>
-                    </div>
-                    <div className="wrap">
-                        <input type="checkbox" id="bonded pair" name="bonded pair" value="bonded pair"></input>
-                        <label for="bonded pair">Bonded Pair</label>
-                    </div>
-                    <div className="wrap">
-                        <input type="checkbox" id="allergy friendly" name="allergy friendly" value="allergy friendly"></input>
-                        <label for="allergy friendly">Allergy Friendly</label>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <hr className="line-break"/>
-        <div className="results-wrap ">
-            <div className="sort-wrap">
-                <form className="sort-by-form">
-                    <label for="caregiver">Sort By:</label>
-                    <select id="caregiver" name="caregiver">
-                        <option value="Newest">Newest</option>
-                        <option value="Oldest">Oldest</option>
-                        <option value="Adoption Fee (asc)">Adoption Fee (asc)</option>
-                        <option value="Adoption Fee (desc)">Adoption Fee (desc)</option>
-                    </select>
-                </form>
-            </div>
-        </div>
         <div className="container">
             <div className="row">
-                {(!petListings || prevPage !== pageNumber) ?
-                    showLoading() :
-                    generateCards()
-                }
+                <div className="input-field col s3 right">
+                    <select>
+                        <option value="" disabled selected>Sort By</option>
+                        <option value="1">Newest</option>
+                        <option value="2">Most Viewed</option>
+                        <option value="3">Least Viewed</option>
+                        <option value="3">Distance</option>
+                    </select>
+                </div>
+            </div>
+            <div className="row">
+                <div className="col s12 m4 l3">
+                    <form>
+                        <div className="col s12">
+                        <button className="btn-small" type="button">
+                            Apply Filters
+                            <i className="material-icons left">refresh</i>
+                        </button>
+                            <button className="btn-small" type="button">
+                                Reset Filters
+                                <i className="material-icons left">restore</i>
+                            </button>
+                        </div>
+                        <div className="col s12">
+                            <h6>Type of Pet</h6>
+                            <ul id="filter-type">
+                            </ul>
+                        </div>
+                        <div className="col s12">
+                            <h6>Location</h6>
+                            <ul id="filter-location">
+                            </ul>
+                        </div>
+                        <div className="col s12">
+                            <h6>Characteristics</h6>
+                            <span className="title">Age</span>
+                            <ul id="filter-age">
+                            </ul>
+                            <span className="title">Gender</span>
+                            <ul id="filter-gender">
+                            </ul>
+                            <span className="title">Size</span>
+                            <ul id="filter-size">
+                            </ul>
+                            <span className="title">Fur Length</span>
+                            <ul id="filter-furlen">
+                            </ul>
+                        </div>
+                    </form>
+                </div>
+                <div className="col s12 m8 l9">
+                    {(!petListings || prevPage !== pageNumber) ?
+                        showLoading() :
+                        generateCards()
+                    }
+                </div>
             </div>
             <div className="row pet-listing-nav">
                 <div className="col s12 center">
