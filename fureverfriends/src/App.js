@@ -47,7 +47,7 @@ export default function App() {
         <AuthProvider>
         <Switch>
             <Route path ="/ForgotPassword">
-                <ForgotPassword/>
+                {/*<ForgotPassword/>*/}
             </Route>
             <Route path ="/NewListing">
                 <NewListing/>
