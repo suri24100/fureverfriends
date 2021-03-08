@@ -9,15 +9,28 @@
     <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
     <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+     <!-- Compiled and minified CSS -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+     <!-- Compiled and minified JavaScript -->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+             
     <style>
-    .dropdown {
-      position: absolute;
+    .dropdown1 {
+      /*position: absolute;*/
       z-index: 99999;
       list-style-type: none;
       width: 360px;
       border: rgb(15, 22, 33);
       list-style: none;
-      top: 135px;
+    }
+    .dropdown2 {
+      z-index: 99999;
+      list-style-type: none;
+      width: 360px;
+      border: rgb(15, 22, 33);
+      list-style: none;
     }
     /*input{
       font-size: 18px;
@@ -31,40 +44,45 @@
       background-color: white; 
       padding: 0px;
       margin-left: 29px;
-      width: 360px;
+      width: 400px;
     }
     li{
       list-style-type: none;
       height: 12px;
-      padding: 12px;
-      box-shadow: rgb(158, 202, 237) 0px 0px 4px;
+      padding: 12px 12px 25px 12px;
+      /*box-shadow: rgb(158, 202, 237) 0px 0px 4px;
       display: list-item;
-      text-align: -webkit-match-parent;
+      text-align: -webkit-match-parent;*/
       font-family: 'Allerta', Helvetica, Arial, sans-serif;
       color: #495057;
       }
     li:hover {
-      background-color: yellowgreen;
+      background-color: #2bbbad;
+      color: white;
     }
     #list {
       cursor: pointer;
     }
-    .fa-search-custom {
-      position: absolute;
-      left: 375px;
-      top: 123px;
-      z-index: 99999;
+    .container-1 {
+      margin-bottom: 50px;
+    }
+    #results {
+      margin: 20px 0px 20px 0px;
+      font-weight: bold;
+    }
+    .title {
+      color: #2bbbad;
     }
     </style>
     <title>Geocoding Demo</title>
 </head>
 <body>
+  <div class="container">
     <h2>Testing Locations </h2>
     <div id="mapContainer" class="container-1">
       <label>Location #1</label>
       <input placeholder="Search for a Place or an Address." type="text" name="search" id="search1" autocomplete="off" onkeyup="autosuggest(this)" autofocus />
-      <i class="fa fa-search fa-search-custom" aria-hidden="true"></i>
-      <div class="dropdown">
+      <div class="dropdown1">
         <ul id="list"></ul>
       </div> 
     </div>
@@ -72,18 +90,22 @@
     <div id="mapContainer" class="container-1">
       <label>Location #2</label>
       <input placeholder="Search for a Place or an Address." type="text" name="search" id="search2" autocomplete="off" onkeyup="autosuggest(this)" autofocus />
-      <i class="fa fa-search fa-search-custom" aria-hidden="true"></i>
-      <div class="dropdown">
+      <div class="dropdown2">
         <ul id="list"></ul>
       </div> 
     </div>
 
     <div>
-      <button onclick="doStuff()">Submit</button>
+      <button class="btn waves-effect waves-light" onclick="doStuff()">Submit  <i class="material-icons right">send</i> </button>
     </div>
+
+    <div id="results">
+
+    </div>
+  </div>
 </body>
 <script>
-    var long1 = "", lat1 = "", long2 = "", lat2 = "";
+    var title1 = "", title2 = "", long1 = "", lat1 = "", long2 = "", lat2 = "";
 
     var platform = new H.service.Platform({
         apikey: `cEmKn4p2fsUDNYX6qesi52C3blJ03LztzekKRTIB9EE` // replace with your api key
@@ -121,7 +143,7 @@
     }
     };
     const addMarkerToMap1 = (lat, lng, title) => {
-      lat1 = lat; long1 = lng;
+      lat1 = lat; long1 = lng; title1 = title;
       console.log("location: " + title);
       console.log("latitude: " + lat1 + " longtitude: " + long1);
       let input = document.getElementById("search1");
@@ -131,7 +153,7 @@
     }; 
     
     const addMarkerToMap2 = (lat, lng, title) => {
-      lat2 = lat; long2 = lng;
+      lat2 = lat; long2 = lng; title2 = title;
       console.log("location: " + title);
       console.log("latitude: " + lat2 + " longtitude: " + long2);
       let input = document.getElementById("search2");
@@ -146,6 +168,32 @@
 
     function doStuff() {
       console.log(calculateDistance(lat1,long1,lat2,long2));
+      let resultsLocation = document.getElementById("results");
+      resultsLocation.removeChild(resultsLocation.firstChild);
+      let resultsSpan = document.createElement("span");
+      //let results = document.createTextNode("The distance between " + title1 + " and " + title2 + " is " + calculateDistance(lat1,long1,lat2,long2) + " miles.");
+      let resultsBegin = document.createTextNode("The distance between ");
+      resultsSpan.append(resultsBegin);
+
+      let resultsTitle1Span = document.createElement("span");
+      resultsTitle1Span.classList.add("title");
+      let resultsTitle1 = document.createTextNode(title1);
+      resultsTitle1Span.append(resultsTitle1);
+      resultsSpan.append(resultsTitle1Span);
+
+      let resultsAnd = document.createTextNode(" and ");
+      resultsSpan.append(resultsAnd);
+
+      let resultsTitle2Span = document.createElement("span");
+      resultsTitle2Span.classList.add("title");
+      let resultsTitle2 = document.createTextNode(title2);
+      resultsTitle2Span.append(resultsTitle2);
+      resultsSpan.append(resultsTitle2Span);
+
+      let resultsEnd = document.createTextNode(" is " + calculateDistance(lat1,long1,lat2,long2) + " miles.");
+      resultsSpan.append(resultsEnd);
+
+      resultsLocation.append(resultsSpan);
     }
 
     function calculateDistance(x1, y1, x2, y2) {
