@@ -1,6 +1,7 @@
 import React, {useEffect} from "react";
 // React router components
 import {Switch, Route, Link, useRouteMatch, useParams} from "react-router-dom";
+import PrivateRoute from "./PrivateRoute";
 
 //Materialize
 import 'materialize-css/dist/css/materialize.min.css';
@@ -14,11 +15,11 @@ import FindHome from "./FindHome";
 import Listings from "./Listings";
 import Login from "./Login";
 import PetCare from "./PetCare";
-import SignUp from "./SignUp";
-import db from "./ffdb";
 import NewListing from "./NewListing";
 import PetProfile from "./PetProfile";
 import CreateAccount from "./CreateAccount";
+import ForgotPassword from "./ForgotPassword";
+import { AuthProvider } from "./AuthContext"
 
 
 
@@ -38,14 +39,12 @@ import CreateAccount from "./CreateAccount";
 export default function App() {
     let match = useRouteMatch();
 
-// db.collection('petinformation').get().then((snapshot) => {
-//     console.log(snapshot.docs)
-// } )
     return (
     <div>
+        <AuthProvider>
         <Switch>
-            <Route path ="/Signup">
-                <SignUp/>
+            <Route path ="/ForgotPassword">
+                <ForgotPassword/>
             </Route>
             <Route path ="/NewListing">
                 <NewListing/>
@@ -72,6 +71,7 @@ export default function App() {
                 <Home />
             </Route>
         </Switch>
+        </AuthProvider>
         <Footer />
 
     </div>

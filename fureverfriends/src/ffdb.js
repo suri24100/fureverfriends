@@ -17,21 +17,7 @@ const db = firebase.initializeApp({
  measurementId: "G-1XM6V6EB86"
 })
 
-const auth = firebase.auth();
-const firestore = firebase.firestore();
-const analytics = firebase.analytics();
-//export {firestore}
-
-// Create a new pet listing/profile
-const createNewPetProfile = (listingType, petData) => {
- // Add a new document in collection related to listing type
- firestore.collection(listingType).doc(petData.pet_id).set(petData)
-     .then(() => {
-      console.log("Document successfully written!");
-     })
-     .catch((error) => {
-      console.error("Error writing document: ", error);
-     });
-}
-
+export const auth = firebase.auth();
+export const firestore = firebase.firestore();
+export const analytics = firebase.analytics();
 export default db;
