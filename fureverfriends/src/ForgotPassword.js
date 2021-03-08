@@ -4,7 +4,6 @@ import './css/style.css';
 import './css/signing.css';
 import { Alert } from "react-bootstrap"
 import {Link} from "react-router-dom";
-import db from './ffdb';
 import {useAuth} from './AuthContext';
 
 
@@ -46,65 +45,55 @@ export default function ForgotPassword(){
 
     }
 
-
-    const authListener = () => {
-        db.auth().onAuthStateChanged(user =>{
-            if(user) {
-                clearInputs();
-                console.log("The user is logged in");
-            }
-            else{
-                console.log("The user is not logged in");
-            }
-        })
-    }
-
-    useEffect(() =>{
-        authListener();
-    }, []);
     return (
-        <div className="signing-banner-wrap">
-            <div className="signing-banner-img-wrap"></div>
-            <div className="invis-wrap">
-                <div className="info-wrap">
-                    <div className="logo-wrap">
-                        <img src="paw-green.svg"/>
-                        <h3>Furever Friends</h3>
-                        <img src="paw-green.svg"/>
-                    </div>
-                    <br></br>
-                    <h3 className="subH">Password Reset</h3>
+        <body>
+            <div className="listings-banner-wrap">
+                <Header/>
+                <div className="listings-banner-img-wrap"></div>
+            </div>
+            <div className="signing-banner-wrap">
+                <div className="signing-banner-img-wrap"></div>
+                <div className="invis-wrap">
+                    <div className="info-wrap">
+                        <div className="logo-wrap">
+                            <img src="paw-green.svg"/>
+                            <h3>Furever Friends</h3>
+                            <img src="paw-green.svg"/>
+                        </div>
+                        <br></br>
+                        <h3 className="subH">Password Reset</h3>
 
-                    {error && <Alert variant="danger">{error}</Alert>}
-                    {message && <Alert variant="success">{message}</Alert>}
+                        {error && <Alert variant="danger">{error}</Alert>}
+                        {message && <Alert variant="success">{message}</Alert>}
 
-                    <div className="form-wrap" id="log-in-form">
-                        <form onSubmit={handleResetPassword}className="account-form">
-                            <h2 className="welcome-back-heading">Welcome Back!</h2>
+                        <div className="form-wrap" id="log-in-form">
+                            <form onSubmit={handleResetPassword}className="account-form">
+                                <h2 className="welcome-back-heading">Welcome Back!</h2>
 
-                            <label for="email">Enter Your Email Address:</label>
-                            <input type="email" id="email" name="email"
-                                   value = {email}
-                                   onChange ={(e) => setEmail(e.target.value)}/>
-                            <p className="errorMsg">{emailError}</p>
+                                <label for="email">Enter Your Email Address:</label>
+                                <input type="email" id="email" name="email"
+                                       value = {email}
+                                       onChange ={(e) => setEmail(e.target.value)}/>
+                                <p className="errorMsg">{emailError}</p>
 
-                            <div className="bottom-info">
-                                <div className="btn-wrap default">
-                                    <button disabled = {loading} className="signing-btn">Reset Password</button>
+                                <div className="bottom-info">
+                                    <div className="btn-wrap default">
+                                        <button disabled = {loading} className="signing-btn">Reset Password</button>
+                                    </div>
                                 </div>
-                            </div>
-                        </form>
-                        <div className="bottom-info">
-                            <div className="belowbutton-subheading">
-                                <center><Link to="/Login">Login</Link></center>
-                            </div>
-                            <div className="belowbutton-subheading">
-                                <span>Need to create an account?<Link to="/CreateAccount">Sign Up</Link></span>
+                            </form>
+                            <div className="bottom-info">
+                                <div className="belowbutton-subheading">
+                                    <center><Link to="/Login">Login</Link></center>
+                                </div>
+                                <div className="belowbutton-subheading">
+                                    <span>Need to create an account?<Link to="/CreateAccount">Sign Up</Link></span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </body>
     )
 }
