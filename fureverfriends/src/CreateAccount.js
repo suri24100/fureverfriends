@@ -112,7 +112,7 @@ export default function CreateAccount(){
     }
 
     return (
-        <body>
+        <div className="create-account-body">
             <div className="signing-banner-wrap">
                 <Header/>
             </div>
@@ -199,6 +199,6 @@ export default function CreateAccount(){
                     </div>
                 </div>
             </div>
-        </body>
+        </div>
     )
 }
