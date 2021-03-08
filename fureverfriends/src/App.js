@@ -20,6 +20,7 @@ import CreateAccount from "./CreateAccount";
 import ForgotPassword from "./ForgotPassword";
 import { AuthProvider } from "./AuthContext"
 import UserProfile from "./UserProfile";
+import CreateAccountConfirmation from "./CreateAccountConfirmation";
 
 
 
@@ -51,6 +52,9 @@ export default function App() {
             </Route>
             <Route path ="/CreateAccount">
                 <CreateAccount />
+            </Route>
+            <Route path ="/CreateAccountConfirmation">
+                <CreateAccountConfirmation />
             </Route>
             <Route path="/listings/profile/:prefix-:id">
                 <PetProfile />

@@ -22,6 +22,7 @@ export default function CreateAccount(){
     const [password, setPassword] = useState('');
     const [passwordConfirm, setPasswordConfirm] = useState('');
     const [error, setError] = useState('');
+    const [usernameError, setUsernameError] = useState('');
     const [emailError, setEmailError] = useState('');
     const [passwordError, setPasswordError] = useState('');
     const [passwordErrorConfirm, setPasswordErrorConfirm] = useState('');
@@ -44,6 +45,7 @@ export default function CreateAccount(){
     }
     const clearErrors = () => {
         setError('');
+        setUsernameError('')
         setEmailError('');
         setPasswordError('');
         setPasswordErrorConfirm('');
@@ -58,12 +60,20 @@ export default function CreateAccount(){
             return setPasswordErrorConfirm("Passwords do not match");
         }
 
+        const snapshot = await firestore.collection("UserInfo").where("Username", "==", username).get();
+        if(!snapshot.empty)
+        {
+            return setUsernameError('Username already taken, please choose another one.');
+        }
+
+
         try {
             clearErrors();
             setLoading(true);
             await signup(email, password);
             saveUser();
             clearInputs();
+            history.push('/CreateAccountConfirmation')
         }catch(err) {
             clearErrors();
             setError("Failed to create an account");
@@ -125,6 +135,7 @@ export default function CreateAccount(){
                                 <input type="username" id="username" name="username"
                                        value={username}
                                        onChange={(e) => setUsername(e.target.value)}/>
+                                <p className="errorMsg">{usernameError}</p>
 
                                 <label for="firstName">Enter Your First Name:</label>
                                 <input type="firstName" id="firstName" name="firstName"
