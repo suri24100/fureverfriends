@@ -11,7 +11,8 @@ export default function CreateAccountConfirmation(){
     const {currentUser} = useAuth();
 
     return (
-        <body>
+
+        <div>
             <div className="listings-banner-wrap">
                 <Header/>
                 <div className="listings-banner-img-wrap"></div>
@@ -28,10 +29,10 @@ export default function CreateAccountConfirmation(){
                         <br></br>
                         <div className="form-wrap" id="log-in-form">
                             <form className="account-form">
-                                <h1 style="color:  #379683;">Congratulations!</h1>
-                                <h2 style="color:  #379683;">Your account has been created!</h2>
+                                <h3>Congratulations!</h3>
+                                <h2>Your account has been created!</h2>
 
-                                <p>You can now favorite pets, message others, get alerts for new matchs and application statuses.
+                                <p>You can now favorite pets, message others, get alerts for new match and application statuses.
                                     The email registered to your account is {currentUser.email}. For more information regarding
                                     your account, click on the My Account button below
                                 </p>
@@ -42,14 +43,11 @@ export default function CreateAccountConfirmation(){
                                         <Link to="/UserProfile">My Account</Link>
                                     </button>
                                 </div>
-                                <div className="belowbutton-subheading">
-                                    <span>Need to create an account?<Link to="/Listing">Sign Up</Link></span>
-                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </body>
+        </div>
     )
 }

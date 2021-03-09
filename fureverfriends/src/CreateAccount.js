@@ -77,7 +77,7 @@ export default function CreateAccount(){
             await signup(email, password);
             saveUser();
             clearInputs();
-            history.push('/CreateAccountConfirmation')
+            history.push('/CreateAccountConfirmation');
         }catch(err) {
             clearErrors();
             setError("Failed to create an account");

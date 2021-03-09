@@ -47,12 +47,12 @@ export default function App() {
         <AuthProvider>
         <Switch>
             <Route path ="/ForgotPassword">
-                {/*<ForgotPassword/>*/}
+                <ForgotPassword/>
             </Route>
             <Route path ="/NewListing">
                 <NewListing/>
             </Route>
-            <PrivateRoute path="/createaccountconfirmation" component={CreateAccountConfirmation} />
+            <PrivateRoute path="/CreateAccountConfirmation" component={CreateAccountConfirmation} />
             <Route path ="/CreateAccount">
                 <CreateAccount />
             </Route>

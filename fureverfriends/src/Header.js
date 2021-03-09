@@ -5,9 +5,12 @@ import messages_icon from "./images/svg/message.svg";
 import './css/style.css';
 //need this for changing log in to log out in nav
 import { useAuth } from "./AuthContext";
-import {firestore} from "./ffdb";
+import {auth, firestore} from "./ffdb";
 
 export default function Header() {
+    useEffect(() => {
+        getUsername();
+        })
     //everything has to be in one div
     //put the \> after image
     //change class to className
@@ -43,20 +46,15 @@ export default function Header() {
         }
     }
 
-    // async function getUsername()
-    // {
-    //     try {
-    //         setEmail(currentUser.email)
-    //         setLoading(true);
-    //         const snapshot = await firestore.collection("UserInfo").where("Email", "==", email).get();
-    //         console.log(snapshot.docs[0].data()["Username"]);
-    //         setLoading(false);
-    //     }
-    //     catch{
-    //
-    //     }
-    //     return snapshot.docs[0].data()["Username"];
-    // }
+    async function getUsername()
+    {
+        setEmail(currentUser.email)
+        setLoading(true);
+        const snapshot = await firestore.collection("UserInfo").where("Email", "==", email).get();
+        await setUsername(snapshot.docs[0].data()["Username"]);
+        console.log(username);
+        setLoading(false);
+    }
 
 
 
@@ -73,7 +71,7 @@ export default function Header() {
             {currentUser ? <Link to="/Home" onClick={handleLogOut}>Log Out</Link> : <Link to="/login">Log In</Link> }
             <img src={notification_icon} alt="Notifications"/>
             <img src={messages_icon} alt="Messages"/>
-            {currentUser ? <Link disable = {loading} to="/UserProfile">{currentUser.email}</Link> : <></>}
+            {currentUser ? <Link disable = {loading} to="/UserProfile">{username}</Link> : <></>}
         </div>
         </div>
     )
