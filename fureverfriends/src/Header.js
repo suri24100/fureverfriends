@@ -8,9 +8,6 @@ import { useAuth } from "./AuthContext";
 import {auth, firestore} from "./ffdb";
 
 export default function Header() {
-    useEffect(() => {
-        getUsername();
-        })
     //everything has to be in one div
     //put the \> after image
     //change class to className
@@ -24,14 +21,21 @@ export default function Header() {
 	// 		logged_in : value
 	// 	});
     // }
+
     const [error, setError] = useState('')
     const { currentUser, logout } = useAuth();
     const [loading, setLoading] = useState(false);
+
+    // loading has been initialized or changed, check for user info
+    useEffect(() => {
+        if(currentUser && username === ''){
+            getUsername();
+        }
+        console.log("Reloaded");
+    })
+
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
-
-
-
 
 
     async function handleLogOut()
@@ -48,11 +52,13 @@ export default function Header() {
 
     async function getUsername()
     {
-        setEmail(currentUser.email)
         setLoading(true);
-        const snapshot = await firestore.collection("UserInfo").where("Email", "==", email).get();
-        await setUsername(snapshot.docs[0].data()["Username"]);
-        console.log(username);
+        setEmail(currentUser.email)
+        if(email){
+            const snapshot = await firestore.collection("UserInfo")
+                .where("Email", "==", email).get();
+            await setUsername(snapshot.docs[0].data()["Username"]);
+        }
         setLoading(false);
     }
 

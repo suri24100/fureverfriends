@@ -63,7 +63,6 @@ export default function CreateAccount(){
             clearErrors();
             return setPasswordErrorConfirm("Passwords do not match");
         }
-
         const snapshot = await firestore.collection("UserInfo").where("Username", "==", username).get();
         if(!snapshot.empty)
         {
@@ -162,10 +161,10 @@ export default function CreateAccount(){
                                     <label htmlFor="phone">Enter Your Phone Number:</label>
                                 </div>
                                 <div className="input-field col s12">
-                                    <select>
+                                    <select id="account-type" onChange={(e) => setAccountType(e.target.value)}>
                                         <option value="Adopter">Adopter</option>
                                         <option value="Private Owner">Private Owner</option>
-                                        <option value="Organization ">Organization</option>
+                                        <option value="Organization">Organization</option>
                                     </select>
                                     <label>I am signing up as:</label>
                                 </div>
@@ -189,7 +188,7 @@ export default function CreateAccount(){
                                            onChange={(e) => setPasswordConfirm(e.target.value)}/>
                                     </div>
                                 <div className="col s12 center">
-                                    <button className="btn" disabled={loading}>Sign Up</button>
+                                    <button className="btn" disabled={loading} onClick={(e) => handleSignUp(e)} type="button">Sign Up</button>
                                     <div className="sub-text">
                                         <span>Already have an account? <Link to="/Login">Log In</Link></span>
                                     </div>
