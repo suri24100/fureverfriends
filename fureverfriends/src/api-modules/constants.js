@@ -9,6 +9,8 @@ module.exports = Object.freeze ({
     STATUS : ["adoptable", "adopted", "found"],
     DISTANCE : [25, 50, 75, 100, 500],
 
+
+
     DOG :  {
     "name":"Dog",
     "coats":[

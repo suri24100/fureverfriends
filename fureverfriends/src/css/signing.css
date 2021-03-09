@@ -1,9 +1,13 @@
 .create-account-body{
     background-image: url("./signing-background2.jpg");
     background-repeat: no-repeat;
-    background-size: 150%;
+    background-size: cover;
+    background-attachment: fixed;
 }
-
+.create-account-body .row{
+    margin-bottom: 0;
+    padding-bottom: 10% !important;
+}
 .form-box{
     margin-top: 15% !important;
     border:10px solid #379683;
@@ -17,6 +21,7 @@
     display: flex;
     color: #379683;
     font-weight: bold;
+    align-content: stretch!important;
 }
 
 .form-box img{
@@ -42,6 +47,10 @@
     margin-top: 20px;
     margin-bottom: 20px;
     font-weight: bold;
+}
+
+.form-box h3{
+    margin:0;
 }
 
 /*.signing-page body {*/

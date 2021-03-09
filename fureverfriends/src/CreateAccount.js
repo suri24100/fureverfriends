@@ -127,7 +127,7 @@ export default function CreateAccount(){
 
                         {error && <Alert variant="danger">{error}</Alert>}
                         <form>
-                            <div className="row">
+                            <div className="row body-row">
                                 <div className="input-field col s12">
                                     <input type="text" id="username" name="username"
                                            value={username}

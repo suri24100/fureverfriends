@@ -53,59 +53,55 @@ export default function Login(){
     }
 
     return (
-        <body>
-            <div className="listings-banner-wrap">
-                <Header/>
-                <div className="listings-banner-img-wrap"></div>
-            </div>
+        <div className="create-account-body">
             <div className="signing-banner-wrap">
-                <div className="signing-banner-img-wrap"></div>
-                <div className="invis-wrap">
-                    <div className="info-wrap">
-                        <div className="logo-wrap">
+                <Header/>
+            </div>
+            <div className="create-account container">
+                <div className="row">
+                    <div className="col s12 m5 offset-m7 form-box">
+                        <div className="row logo-wrap center">
                             <img src="paw-green.svg"/>
                             <h3>Furever Friends</h3>
                             <img src="paw-green.svg"/>
                         </div>
-                        <br></br>
-                        <h3 className="subH">Log In</h3>
+                        <div className="row center">
+                            <h3>Log In</h3></div>
 
                         {error && <Alert variant="danger">{error}</Alert>}
 
-                        <div className="form-wrap" id="log-in-form">
-                            <form onSubmit={handleLogin}className="account-form">
-                                <h2 className="welcome-back-heading">Welcome Back!</h2>
+                            <form onSubmit={handleLogin} className="center">
 
-                                <label for="email">Enter Your Email Address:</label>
-                                <input type="email" id="email" name="email"
-                                       value = {email}
-                                       onChange ={(e) => setEmail(e.target.value)}/>
-                                <p className="errorMsg">{emailError}</p>
+                                <h5>Welcome Back!</h5>
 
-                                <label for="pass">Enter Your Password</label>
-                                <input type="password" id="pass" name="pass"
-                                       value = {password}
-                                       onChange ={(e) => setPassword(e.target.value)}/>
-                                <p className = "errorMsg"> {passwordError}</p>
-
-                                <div className="bottom-info">
-                                    <div className="btn-wrap default">
-                                        <button disabled = {loading} className="signing-btn">Log In</button>
-                                    </div>
+                                <div className="input-field col s12">
+                                    <input type="email" id="email" name="email"
+                                           value = {email}
+                                           onChange ={(e) => setEmail(e.target.value)}/>
+                                    <label htmlFor="email">Enter Your Email Address:</label>
+                                    <p className="errorMsg">{emailError}</p>
+                                </div>
+                                <div className="input-field col s12">
+                                    <input type="password" id="pass" name="pass"
+                                           value = {password}
+                                           onChange ={(e) => setPassword(e.target.value)}/>
+                                    <label htmlFor="pass">Enter Your Password</label>
+                                    <p className = "errorMsg"> {passwordError}</p>
                                 </div>
                             </form>
-                            <div className="bottom-info">
-                                <div className="belowbutton-subheading">
-                                    <center><Link to="/ForgotPassword">Forgot Password?</Link></center>
+                            <div className="col s12 center">
+                                <button disabled = {loading} className="btn">Log In</button>
+                                <div className="sub-text">
+                                    <Link to="/ForgotPassword">Forgot Password?</Link>
                                 </div>
-                                <div className="belowbutton-subheading">
-                                    <span>Need to create an account?<Link to="/CreateAccount">Sign Up</Link></span>
+                                <div className="sub-text">
+                                    <span>Need to create an account? <Link to="/CreateAccount">Sign Up</Link>
+                                    </span>
                                 </div>
                             </div>
-                        </div>
                     </div>
                 </div>
             </div>
-        </body>
+        </div>
     )
 }
