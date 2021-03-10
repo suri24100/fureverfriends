@@ -4,6 +4,30 @@ body {
 img {
   width: 100%;
 }
+
+.create-profile h4 {
+  text-transform: uppercase;
+}
+
+.create-profile .login-required{
+  border: 5px solid #379683;
+  border-radius: 10px;
+  padding: 5%;
+  margin: 10%;
+}
+
+.create-profile .intro-text{
+  font-size: 14pt;
+}
+
+.create-profile .login-required .btn-large{
+  margin-right: 5%;
+  margin-left: 5%;
+  font-weight: bold;
+  font-size: 14pt;
+  width: 300px;
+}
+
 .listings-banner-wrap {
   text-align: center;
   color: #ffffff;

@@ -72,7 +72,7 @@ export default function Header() {
         <div className="primary-menu">
             <Link to="/">Home</Link>
             <Link to="/listings">Adopt</Link>
-            <Link to="/findahome">Rehome</Link>
+            <Link to="/CreatePetProfile">Rehome</Link>
             <Link to="/petcare">Pet Care</Link>
             {currentUser ? <Link to="/Home" onClick={handleLogOut}>Log Out</Link> : <Link to="/login">Log In</Link> }
             <img src={notification_icon} alt="Notifications"/>

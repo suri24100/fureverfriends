@@ -49,7 +49,7 @@ export default function App() {
             <Route path ="/ForgotPassword">
                 <ForgotPassword/>
             </Route>
-            <Route path ="/NewListing">
+            <Route path ="/CreatePetProfile">
                 <NewListing/>
             </Route>
             <PrivateRoute path="/CreateAccountConfirmation" component={CreateAccountConfirmation} />
