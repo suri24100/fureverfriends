@@ -333,6 +333,10 @@ export default function NewListing() {
         const newPetListing = {
                 petfinder_listing: false,
                 pet_id: new_pet_id,
+                account_info: { // implement after account structure finalized
+                    id: "",
+                    email: ""
+                },
                 name: petname,
                 type: PFdata.TYPES[pettype],
                 age: age,
@@ -508,8 +512,8 @@ export default function NewListing() {
                 </p>
             </div>
             {currentUser ?
-                <div>
-                    <div className="listings-profile-pic-wrap listings-section container">
+                <div className="row form-container">
+                    <div className="listings-profile-pic-wrap listings-section">
                         <h5>Set Profile Picture</h5>
                         <h6>This picture will be the main image for your pet and will be seen in the listings page</h6>
                         <form action="#">
@@ -525,7 +529,7 @@ export default function NewListing() {
                         </form>
                         <img id="output_image"/>
                     </div>
-                    <div className="listings-add-pic-wrap listings-section container">
+                    <div className="listings-add-pic-wrap listings-section">
                         <h5>Set Additional Picture</h5>
                         <h6>These are any additional pictures of your pet and can be seen in the pet profile page</h6>
                         <form action="#">
@@ -540,7 +544,7 @@ export default function NewListing() {
                             </div>
                         </form>
                     </div>
-                    <div className="listings-pet-info listings-section container">
+                    <div className="listings-pet-info listings-section">
                         <h5>Pet Information</h5>
                         <h6>Some dropdowns will autofill upon pet type selection</h6>
                         <form className="row">
@@ -658,7 +662,7 @@ export default function NewListing() {
                             </div>
                         </form>
                     </div>
-                    <div className="listings-about-me listings-section container">
+                    <div className="listings-about-me listings-section ">
                         <h5>About me section</h5>
                         <h6>Please fill out this section regarding any additional info (such as a backstory!)</h6>
                         <form className="row">
@@ -668,8 +672,10 @@ export default function NewListing() {
                             </div>
                         </form>
                     </div>
-                    <div className="listings-contact-info listings-section container">
+                    <div className="listings-contact-info listings-section ">
                         <h5>Contact Information</h5>
+                        <h6>This contact information will be posted publicly on the profile to allow potential
+                            adopters to contact you with questions and inquiries.</h6>
                         <form className="listings-contact-form">
                             <div className="row">
                                 <div className="left-filter col s12 m6 l6 x6">
@@ -699,7 +705,7 @@ export default function NewListing() {
                             </div>
                         </form>
                     </div>
-                    <div className="listings-application-info listings-section container">
+                    <div className="listings-application-info listings-section ">
                         <h5>Application Information</h5>
                         <h6>Upload the file that the applicant will be filling out</h6>
                         <form action="#">
@@ -714,7 +720,7 @@ export default function NewListing() {
                             </div>
                         </form>
                     </div>
-                    <div className="listings-submit-button-wrap container center-align">
+                    <div className="listings-submit-button-wrap  center-align">
                         <button className="btn waves-effect waves-light btn-large" type="button" name="action" onClick={() => processFormContents()}>Create Profile
                             <i className="material-icons right">send</i>
                         </button>

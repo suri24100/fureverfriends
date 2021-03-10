@@ -20,6 +20,10 @@ img {
   font-size: 14pt;
 }
 
+.create-profile .form-container{
+  margin-top: 10%;
+}
+
 .create-profile .login-required .btn-large{
   margin-right: 5%;
   margin-left: 5%;
@@ -96,12 +100,12 @@ img {
   font-weight: bold;
   font-size: 1.25rem;
 }
-.listings-section.container,
-.listings-submit-button-wrap.container {
-  margin-bottom: 4rem;
+.listings-section,
+.listings-submit-button-wrap {
+  margin-bottom: 5%;
 }
-.listings-section.container button,
-.listings-submit-button-wrap.container button {
+.listings-section button,
+.listings-submit-button-wrap button {
   font-weight: bold;
 }
 input.select-dropdown.dropdown-trigger {
