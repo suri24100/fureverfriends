@@ -46,54 +46,47 @@ export default function ForgotPassword(){
     }
 
     return (
-        <body>
-            <div className="listings-banner-wrap">
-                <Header/>
-                <div className="listings-banner-img-wrap"></div>
-            </div>
+        <div className="create-account-body">
             <div className="signing-banner-wrap">
-                <div className="signing-banner-img-wrap"></div>
-                <div className="invis-wrap">
-                    <div className="info-wrap">
-                        <div className="logo-wrap">
+                <Header/>
+            </div>
+            <div className="create-account container">
+                <div className="row">
+                    <div className="col s12 m5 offset-m7 form-box">
+                        <div className="row logo-wrap center">
                             <img src="paw-green.svg"/>
                             <h3>Furever Friends</h3>
                             <img src="paw-green.svg"/>
                         </div>
-                        <br></br>
-                        <h3 className="subH">Password Reset</h3>
+                        <div className="row center">
+                            <h3>Password Reset</h3>
+                        </div>
 
                         {error && <Alert variant="danger">{error}</Alert>}
                         {message && <Alert variant="success">{message}</Alert>}
 
-                        <div className="form-wrap" id="log-in-form">
-                            <form onSubmit={handleResetPassword}className="account-form">
-                                <h2 className="welcome-back-heading">Welcome Back!</h2>
+                            <form onSubmit={handleResetPassword} className="center">
+                                <h5>Welcome Back!</h5>
 
-                                <label for="email">Enter Your Email Address:</label>
-                                <input type="email" id="email" name="email"
+                                <div className="input-field col s12">
+                                    <input type="email" id="email" name="email"
                                        value = {email}
                                        onChange ={(e) => setEmail(e.target.value)}/>
-                                <p className="errorMsg">{emailError}</p>
-
-                                <div className="bottom-info">
-                                    <div className="btn-wrap default">
-                                        <button disabled = {loading} className="signing-btn">Reset Password</button>
+                                    <label htmlFor="email">Enter Your Email Address:</label>
+                                    <p className="errorMsg">{emailError}</p>
+                                </div>
+                                <div className="col s12 center">
+                                    <button disabled = {loading} className="btn">Reset Password</button>
+                                    <div className="sub-text">
+                                        <Link to="/Login">Login</Link>
+                                        <br/>
+                                        <span>Need to create an account? <Link to="/CreateAccount">Sign Up</Link></span>
                                     </div>
                                 </div>
                             </form>
-                            <div className="bottom-info">
-                                <div className="belowbutton-subheading">
-                                    <center><Link to="/Login">Login</Link></center>
-                                </div>
-                                <div className="belowbutton-subheading">
-                                    <span>Need to create an account?<Link to="/CreateAccount">Sign Up</Link></span>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
-        </body>
+        </div>
     )
 }

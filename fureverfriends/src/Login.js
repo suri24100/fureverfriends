@@ -88,17 +88,17 @@ export default function Login(){
                                     <label htmlFor="pass">Enter Your Password</label>
                                     <p className = "errorMsg"> {passwordError}</p>
                                 </div>
+                                <div className="col s12 center">
+                                    <button disabled = {loading} className="btn">Log In</button>
+                                    <div className="sub-text">
+                                        <Link to="/ForgotPassword">Forgot Password?</Link>
+                                    </div>
+                                    <div className="sub-text">
+                                        <span>Need to create an account? <Link to="/CreateAccount">Sign Up</Link>
+                                        </span>
+                                    </div>
+                                </div>
                             </form>
-                            <div className="col s12 center">
-                                <button disabled = {loading} className="btn">Log In</button>
-                                <div className="sub-text">
-                                    <Link to="/ForgotPassword">Forgot Password?</Link>
-                                </div>
-                                <div className="sub-text">
-                                    <span>Need to create an account? <Link to="/CreateAccount">Sign Up</Link>
-                                    </span>
-                                </div>
-                            </div>
                     </div>
                 </div>
             </div>
