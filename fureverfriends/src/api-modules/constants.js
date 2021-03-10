@@ -11,49 +11,56 @@ module.exports = Object.freeze ({
 
     // Pet Listing Structure
     PET_PROFILE : {
-        petfinder_listing: false,
-        pet_id: "",                 // Date.now().toString();
-        account_info: {             // private for account reference
-            id: "",
-            email: ""
-        },
-        listing_type: "",
-        name: "",
-        type: "",
-        age: "",
-        breed: "breed",
-        gender: "gender",
-        color: "",
-        fur_length: "",
-        photo_url: "",
-        additional_photos: [],
-        profile_url: "",
-        location: {
-            zipcode: "",
-            city: "",
-            state: ""
-        },
-        cared_by: "",
-        contact: {
+        pet_data: {
+            petfinder_listing: false,
+            pet_id: "",                 // Date.now().toString();
+            account_info: {             // private for account reference
+                id: "",
+                email: ""
+            },
+            listing_type: "",
             name: "",
-            email: "",
-            phone: "",
-            website: ""
+            type: "",
+            age: "",
+            breed: "",
+            gender: "",
+            color: "",
+            fur_length: "",
+            photo_url: "",
+            additional_photos: [],
+            profile_url: "",
+            location: {
+                zipcode: "",
+                city: "",
+                state: ""
+            },
+            cared_by: "",
+            contact: {
+                name: "",
+                email: "",
+                phone: "",
+                website: ""
+            },
+            personality: [],
+            good_with_cats: false,
+            good_with_dogs: false,
+            kid_friendly: false,
+            vaccinated: false,
+            spayed_neutered: false,
+            bonded_pair: false,
+            allergy_friendly: false,
+            special_needs: false,
+            adoption_fee: 0.00,
+            tags: [],
+            description: "",
+            applicationForm: "",
+            listing_created: ""     // new Date().toJSON()
         },
-        personality: [],
-        good_with_cats: false,
-        good_with_dogs: false,
-        kid_friendly: false,
-        vaccinated: false,
-        spayed_neutered: false,
-        bonded_pair: false,
-        allergy_friendly: false,
-        special_needs: false,
-        adoption_fee: 0.00,
-        tags: [],
-        description: "",
-        applicationForm: "",
-        listing_created: ""     // new Date().toJSON()
+        profileFiles: {
+            profilePhoto: "",
+            additionalPhotos: [],
+            applicationForm: ""
+        }
     },
 
     // petfinder animal types

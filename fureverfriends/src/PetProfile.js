@@ -4,35 +4,125 @@ import './css/pet-profile.css';
 import {useParams} from "react-router-dom";
 import {getProfileInfo, getTypeListing} from "./api-modules/PetfinderAPI";
 import placeholder_image from "./images/petProfiles/default-placeholder-image.png";
+import {firestore} from "./ffdb";
+
 
 export default function PetProfile(){
     let { id } = useParams();
     let { prefix } = useParams();
+    let { type } = useParams();
+
+    const [initialData, setInitialData] = useState(null);
+
+    useEffect(() => {
+       if(initialData && profileFound === "loading"){
+           console.log("Pet Data: " + initialData)
+           const newPetDetails = {
+               petfinder_listing: false,
+               pet_id: initialData.pet_data.pet_id,
+               account_info: {
+                   id: "",
+                   email: ""
+               },
+               listing_type: initialData.pet_data.listing_type,
+               name: initialData.pet_data.name,
+               type: initialData.pet_data.type,
+               age: initialData.pet_data.age,
+               breed: initialData.pet_data.breed,
+               gender: initialData.pet_data.gender,
+               color: initialData.pet_data.color,
+               fur_length: initialData.pet_data.fur_length,
+               profile_url: initialData.pet_data.profile_url,
+               location: {
+                   zipcode: initialData.pet_data.location.zipcode,
+                   city: initialData.pet_data.location.city,
+                   state: initialData.pet_data.state
+               },
+               cared_by: initialData.pet_data.cared_by,
+               contact: {
+                   name: initialData.pet_data.contact.name,
+                   email: initialData.pet_data.email,
+                   phone: initialData.pet_data.phone,
+                   website: initialData.pet_data.website
+               },
+               personality: initialData.pet_data.personality,
+               good_with_cats: (initialData.pet_data.good_with_cats) ? "Yes" : "No",
+               good_with_dogs: (initialData.pet_data.good_with_dogs) ? "Yes" : "No",
+               kid_friendly: (initialData.pet_data.kid_friendly) ? "Yes" : "No",
+               vaccinated: (initialData.pet_data.vaccinated) ? "Yes" : "No",
+               spayed_neutered: (initialData.pet_data.spayed_neutered) ? "Yes" : "No",
+               bonded_pair: (initialData.pet_data.bonded_pair) ? "Yes" : "No",
+               allergy_friendly: (initialData.pet_data.allergy_friendly) ? "Yes" : "No",
+               special_needs: (initialData.pet_data.special_needs) ? "Yes" : "No",
+               adoption_fee: initialData.pet_data.adoption_fee,
+               tags: initialData.pet_data.tags,
+               description: initialData.pet_data.description,
+               listing_created: initialData.pet_data.listing_created,     // new Date().toJSON()
+               profileFiles: {
+                   profilePhoto: (initialData.profileFiles.profilePhoto) ? initialData.profileFiles.profilePhoto : placeholder_image,
+                   additionalPhotos: (initialData.profileFiles.additionalPhotos.length > 0) ? initialData.profileFiles.additionalPhotos : placeholder_image,
+                   applicationForm: ""
+               }
+           }
+           setPetDetails(newPetDetails);
+           console.log(initialData);
+           setProfileFound("success");
+       }
+    });
 
     const [petDetails, setPetDetails] = useState(null);
     const [isFavorite, setIsFavorite] = useState(false);
     const [profileFound, setProfileFound] = useState("loading");
 
     useEffect(() => {
-        if(!petDetails){
+        if(profileFound === "loading"){
             getPetData();
         }
     });
+
+    async function getFFProfileInfo(id, type) {
+        let profileData = {};
+        let docRef = firestore.collection("PetInfo")
+            .doc("PublicListings")
+            .collection("AdoptionList")
+            .doc("PetTypes")
+            .collection(type)
+            .doc(id);
+
+        docRef.get().then((doc) => {
+            if (doc.exists) {
+                console.log("Document data:", doc.data());
+                setInitialData(doc.data());
+            } else {
+                // doc.data() will be undefined in this case
+                console.log("No such document!");
+            }
+        }).catch((error) => {
+            console.log("Error getting document:", error);
+        });
+        return profileData;
+    }
 
     async function getPetData(){
         if(prefix === "PF") {
             let petData = await getProfileInfo(id);
             if (petData) {
                 await setPetDetails({
-                    petfinder_listing: true,       // check whether from petfinder or not
-                    id: petData.id,
+                    petfinder_listing: true,
+                    pet_id: petData.id,                 // Date.now().toString();
+                    account_info: {             // private for account reference
+                        id: "",
+                        email: ""
+                    },
+                    listing_type: "AdoptionList",
                     name: petData.name,
-                    photo_url: (petData.primary_photo_cropped) ? petData.primary_photo_cropped.medium : placeholder_image,
-                    additional_photos: petData.photos,
-                    profile_url: petData.url,
                     type: petData.type,
                     age: petData.age,
                     breed: petData.breeds.primary,
+                    gender: petData.gender,
+                    color: petData.colors.primary,
+                    fur_length: (petData.coat) ? petData.coat : "Unknown",
+                    profile_url: petData.url,
                     location: {
                         zipcode: petData.contact.address.postcode,
                         city: petData.contact.address.city,
@@ -40,12 +130,11 @@ export default function PetProfile(){
                     },
                     cared_by: "",
                     contact: {
+                        name: "",
                         email: petData.contact.email,
                         phone: petData.contact.phone,
                         website: petData.url
                     },
-                    gender: petData.gender,
-                    fur_length: (petData.coat) ? petData.coat : "Unknown",
                     personality: (petData.tags.length > 0) ? petData.tags : "No traits given.",
                     good_with_cats: (petData.environment.cats) ? "Yes" :
                         (((petData.environment.cats) === null) ? "Unknown" : "No"),
@@ -54,19 +143,32 @@ export default function PetProfile(){
                     kid_friendly: (petData.environment.children) ? "Yes" :
                         (((petData.environment.children) === null) ? "Unknown" : "No"),
                     vaccinated: (petData.attributes.shots_current) ? "Yes" : "No",
-                    neutered: (petData.attributes.spayed_neutered) ? "Yes" : "No",
+                    spayed_neutered: (petData.attributes.spayed_neutered) ? "Yes" : "No",
                     bonded_pair: "",
-                    special_needs: (petData.attributes.special_needs) ? "Yes" : "No",
                     allergy_friendly: "",
-                    tags: petData.tags,
+                    special_needs: (petData.attributes.special_needs) ? "Yes" : "No",
+                    adoption_fee: "",
+                    tags: [],
                     description: petData.description,
-                    listing_created: petData.published_at
+                    applicationForm: "",
+                    listing_created: petData.published_at,
+                    profileFiles: {
+                        profilePhoto: (petData.primary_photo_cropped) ? petData.primary_photo_cropped.medium : placeholder_image,
+                        additionalPhotos: petData.photos,
+                        applicationForm: ""
+                    }
                 });
                 console.log(petData)
                 setProfileFound("success");
             } else {
                 setProfileFound("failed");
             }
+        }
+        else if (prefix === "FF") {
+            let promise = await getFFProfileInfo(id, type);
+        }
+        else{
+            setProfileFound("failed");
         }
     }
 
@@ -79,7 +181,7 @@ export default function PetProfile(){
             <div className="row">
                 <div className="col s12 m4 side-info">
                     <div className="main-photo hide-on-small-only"
-                         style={{backgroundImage: `url(` + petDetails.photo_url + `)`}}>
+                         style={{backgroundImage: `url(` + petDetails.profileFiles.profilePhoto + `)`}}>
                     </div>
                     <h3>Info</h3>
                     <ul>
@@ -168,7 +270,7 @@ export default function PetProfile(){
     function ProfileSlider(){
         return(
             <div className="image-slider">
-                {petDetails ? <img src={petDetails.photo_url} /> : <img src={placeholder_image} />}
+                {petDetails ? <img src={petDetails.profileFiles.profilePhoto} /> : <img src={placeholder_image} />}
             </div>
         )
     }

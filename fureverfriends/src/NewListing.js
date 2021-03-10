@@ -345,8 +345,6 @@ export default function NewListing() {
                 gender: gender,
                 color: color,
                 fur_length: furLength,
-                photo_url: "",
-                additional_photos: [],
                 profile_url: "",
                 location: {
                     zipcode: zip,
@@ -372,7 +370,6 @@ export default function NewListing() {
                 adoption_fee: adoptionFee,
                 tags: [],
                 description: aboutMe,
-                applicationForm: "",
                 listing_created: new Date().toJSON()
         }
         const profileFiles = {

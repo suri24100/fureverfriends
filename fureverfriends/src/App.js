@@ -56,7 +56,7 @@ export default function App() {
             <Route path ="/CreateAccount">
                 <CreateAccount />
             </Route>
-            <Route path="/listings/profile/:prefix-:id">
+            <Route path="/listings/:type/profile/:prefix-:id">
                 <PetProfile />
             </Route>
             <Route path="/listings">
