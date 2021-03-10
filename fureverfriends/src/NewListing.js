@@ -337,6 +337,7 @@ export default function NewListing() {
                     id: "",
                     email: ""
                 },
+                listing_type: "AdoptionList",
                 name: petname,
                 type: PFdata.TYPES[pettype],
                 age: age,
