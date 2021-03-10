@@ -41,8 +41,8 @@ export default function PetProfile(){
                cared_by: initialData.pet_data.cared_by,
                contact: {
                    name: initialData.pet_data.contact.name,
-                   email: initialData.pet_data.email,
-                   phone: initialData.pet_data.phone,
+                   email: initialData.pet_data.contact.email,
+                   phone: initialData.pet_data.contact.phone,
                    website: initialData.pet_data.website
                },
                personality: initialData.pet_data.personality,
@@ -59,7 +59,7 @@ export default function PetProfile(){
                description: initialData.pet_data.description,
                listing_created: initialData.pet_data.listing_created,     // new Date().toJSON()
                profileFiles: {
-                   profilePhoto: (initialData.profileFiles.profilePhoto) ? initialData.profileFiles.profilePhoto : placeholder_image,
+                   profilePhoto: (initialData.profileFiles.profilePhoto.profilePhotoURL) ? initialData.profileFiles.profilePhoto.profilePhotoURL : placeholder_image,
                    additionalPhotos: (initialData.profileFiles.additionalPhotos.length > 0) ? initialData.profileFiles.additionalPhotos : placeholder_image,
                    applicationForm: ""
                }
