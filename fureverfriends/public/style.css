@@ -66,7 +66,7 @@ a {
 .mobile-ftr-wrap .logo h2 {
   font-family: 'Grand Hotel', cursive;
   font-style: italic;
-  font-size: 3rem;
+  font-size: 2rem;
   text-align: center;
   margin: 2vw 0vw 0vw 0vw;
 }
@@ -75,13 +75,13 @@ a {
 }
 .mobile-ftr-wrap .all-accordion .collapsible .collapsible-header {
   background-color: #379683;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   text-transform: uppercase;
   font-weight: bold;
   /*text-align: center;*/
 }
 .mobile-ftr-wrap .all-accordion .collapsible .collapsible-body {
-  font-size: 1.15rem;
+  font-size: 1rem;
 }
 .ftr-wrap {
   display: flex;
