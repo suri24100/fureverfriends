@@ -66,7 +66,7 @@ a {
 .mobile-ftr-wrap .logo h2 {
   font-family: 'Grand Hotel', cursive;
   font-style: italic;
-  font-size: 2rem;
+  font-size: 3rem;
   text-align: center;
   margin: 2vw 0vw 0vw 0vw;
 }
@@ -75,13 +75,13 @@ a {
 }
 .mobile-ftr-wrap .all-accordion .collapsible .collapsible-header {
   background-color: #379683;
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   text-transform: uppercase;
   font-weight: bold;
   /*text-align: center;*/
 }
 .mobile-ftr-wrap .all-accordion .collapsible .collapsible-body {
-  font-size: 1rem;
+  font-size: 1.15rem;
 }
 .ftr-wrap {
   display: flex;
@@ -137,4 +137,16 @@ a {
 }
 .ftr-wrap .social-wrap img:hover {
   cursor: pointer;
+}
+.mobile-menu-wrapper {
+  background: transparent !important;
+  border: none;
+  height: 0;
+  padding-top: 0.1vw;
+}
+.mobile-menu-wrapper .brand-logo {
+  font-family: 'Grand Hotel', cursive;
+  font-style: italic;
+  font-size: 2.5rem;
+  margin-left: 6vw;
 }
