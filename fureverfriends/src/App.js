@@ -14,11 +14,15 @@ import FindHome from "./FindHome";
 import Listings from "./Listings";
 import Login from "./Login";
 import PetCare from "./PetCare";
-import SignUp from "./SignUp";
 import NewListing from "./NewListing";
 import PetProfile from "./PetProfile";
+import CreateAccountConfirmation from "./CreateAccountConfirmation";
 import CreateAccount from "./CreateAccount";
+import ForgotPassword from "./ForgotPassword";
 import { AuthProvider } from "./AuthContext"
+import UserProfile from "./UserProfile";
+import PrivateRoute from "./PrivateRoute";
+
 
 
 
@@ -42,12 +46,13 @@ export default function App() {
     <div>
         <AuthProvider>
         <Switch>
-            <Route path ="/Signup">
-                <SignUp/>
+            <Route path ="/ForgotPassword">
+                <ForgotPassword/>
             </Route>
             <Route path ="/NewListing">
                 <NewListing/>
             </Route>
+            <PrivateRoute path="/CreateAccountConfirmation" component={CreateAccountConfirmation} />
             <Route path ="/CreateAccount">
                 <CreateAccount />
             </Route>
@@ -58,7 +63,7 @@ export default function App() {
                 <Listings />
             </Route>
             <Route path="/findahome">
-                <FindHome />
+                <NewListing />
             </Route>
             <Route path="/petcare">
                 <PetCare />
@@ -66,6 +71,7 @@ export default function App() {
             <Route path="/login">
                 <Login />
             </Route>
+            <PrivateRoute path="/userprofile" component={UserProfile} />
             <Route path="/">
                 <Home />
             </Route>
@@ -77,93 +83,3 @@ export default function App() {
 
   );
 }
-
-// const App =() => {
-//     const [user, setUser] = useState('');
-//     const [email, setEmail] = useState('');
-//     const [password, setPassword] = useState('');
-//     const [emailError, setEmailError] = useState('');
-//     const [passwordError, setPasswordError] = useState('');
-//     const [hasAccount, setHasAccount] = useState(false);
-//
-//     const clearInputs = () =>{
-//         setEmail('');
-//         setPassword('');
-//     }
-//     const clearErrors = () => {
-//         setEmailError('');
-//         setPasswordError('');
-//     }
-//     const handleLogin = () => {
-//         clearErrors();
-//
-//         fire
-//             .auth()
-//             .signInWithEmailAndPassword(email, password)
-//             .catch((err) => {
-//                 if (err.code === "auth/invalid-email" || err.code === "auth/user-disabled" || err.code === "auth/user-not-found") {
-//                     setEmailError(err.message);
-//                 } else if (err.code === "auth/wrong-password") {
-//                     setPasswordError(err.message);
-//                 }
-//             });
-//     };
-//     const handleSignUp = () => {
-//         fire
-//             .auth()
-//             .createUserWithEmailAndPassword(email, password)
-//             .catch((err) => {
-//                 if (err.code === "auth/email-already-in-use" || err.code === "auth/invalid-email") {
-//                     setEmailError(err.message);
-//                 } else if (err.code === "auth/weak-password") {
-//                     setPasswordError(err.message);
-//                 }
-//             });
-//     };
-//
-//     const handleLogOut = () => {
-//         return fire.auth().signOut();
-//     };
-//
-//     const authListener = () => {
-//         fire.auth().onAuthStateChanged(user =>{
-//             if(user) {
-//                 clearInputs();
-//                 console.log("The user is logged in")
-//             }
-//             else{
-//                 console.log("The user is not logged in")
-//             }
-//         })
-//     }
-//
-//     useEffect(() =>{
-//         authListener();
-//     }, []);
-//
-//     return (
-//         <div className="App">
-//             {user ? (
-//                 <Stuff handleLogOut = {handleLogOut}/>
-//             ):(
-//                 <Login
-//                     email = {email}
-//                     setEmail = {setEmail}
-//                     password = {password}
-//                     setPassword ={setPassword}
-//                     handleLogin = {handleLogin}
-//                     handleSignup = {handleSignUp}
-//                     hasAccount = {hasAccount}
-//                     setHasAccount = {setHasAccount}
-//                     emailError = {emailError}
-//                     passwordError = {passwordError} />
-//             )}
-//
-//
-//         </div>
-//     );
-// };
-//
-//
-//
-// export default App

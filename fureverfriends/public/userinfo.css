@@ -1,0 +1,105 @@
+/*form {*/
+/*    margin: 0 auto;*/
+/*    width: 700px;*/
+/*    padding: 1em;*/
+/*    border: 0.75vw solid #379683;*/
+/*}*/
+
+/*ul {*/
+/*    list-style: none;*/
+/*    padding: 0;*/
+/*    margin: 0;*/
+/*}*/
+
+/*form li + li {*/
+/*    margin-top: 1em;*/
+/*}*/
+
+/*label {*/
+/*    display: inline-block;*/
+/*    width: 90px;*/
+/*    height: auto;*/
+/*    text-align: right;*/
+/*}*/
+
+/*input,*/
+/*textarea {*/
+/*    font: 1em sans-serif;*/
+/*    width: 300px;*/
+/*    box-sizing: border-box;*/
+/*    border: 1px solid #999;*/
+/*}*/
+
+/*input:focus,*/
+/*textarea:focus {*/
+/*    border-color: #000;*/
+/*}*/
+
+/*textarea {*/
+/*    vertical-align: top;*/
+/*    height: 5em;*/
+/*}*/
+
+/*.button {*/
+/*    padding-left: 90px;*/
+/*}*/
+
+/*button {*/
+/*    background-color: #379683;*/
+/*    border: none;*/
+/*    color: #ffffff;*/
+/*    font-size: 1vw;*/
+/*    padding: 1vw 1.5vw 1vw 1.5vw;*/
+/*    text-transform: uppercase;*/
+/*    font-weight: bold;*/
+/*    border-radius: 1.25vw;*/
+/*    box-shadow: 0 0.25vw 0.5vw 0 rgba(0, 0, 0, 0.2), 0 0.25vw 0.5vw 0 rgba(0, 0, 0, 0.19);*/
+/*    transition: all 0.5s;*/
+/*    margin: 1vw 0 0.25vw 36%;*/
+/*}*/
+/**{*/
+/*    margin: 0;*/
+/*    padding: 0;*/
+/*    list-style: none;*/
+/*    text-decoration: none;*/
+/*    box-sizing: border-box;*/
+/*    font-family: 'Montserrat', sans-serif;*/
+/*}*/
+
+
+
+/*.vertical-menu {*/
+/*    width: 200px;*/
+/*}*/
+
+/*.vertical-menu a {*/
+/*    background-color: #eee;*/
+/*    color: #379683;*/
+/*    display: block;*/
+/*    padding: 12px;*/
+/*    text-decoration: none;*/
+/*}*/
+
+/*.vertical-menu a:hover {*/
+/*    background-color: #379683;*/
+/*    color: white;*/
+/*}*/
+
+/*.vertical-menu a.active {*/
+/*    background-color: #379683;*/
+/*    color: white;*/
+/*}*/
+
+/*.default button:hover {*/
+/*    background-color: #2a7364;*/
+/*    text-decoration: underline;*/
+/*    cursor: pointer;*/
+/*}*/
+
+/*.column2 {*/
+/*    float: left;*/
+/*}*/
+/*.column4 {*/
+/*    float: left;*/
+/*}*/
+
