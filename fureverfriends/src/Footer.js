@@ -1,5 +1,6 @@
 import React from "react";
 import M from "materialize-css";
+import { Modal, Collapsible } from 'react-materialize';
 
 export default function Footer() {
     M.AutoInit();
