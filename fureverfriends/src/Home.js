@@ -9,8 +9,8 @@ export default function Home() {
 
     return (
     <div>
+        <Header/>
         <div className="banner-wrap">
-            <Header/>
         <div className="banner-img-wrap">
             {/*<img className="banner-img" src="home-banner.png">*/}
         </div>
