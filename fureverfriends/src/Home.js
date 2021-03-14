@@ -5,6 +5,7 @@ import './css/home.css';
 import $ from 'jquery';
 import M from "materialize-css";
 import PFdata from "./api-modules/constants.js";
+import {DisplayMapFC} from "./api-modules/HereAPI";
 
 
 export default function Home() {
@@ -99,6 +100,8 @@ export default function Home() {
 
         console.log(newSearchFilter);
     }
+
+    
     return (
     <div>
         <Header/>
@@ -149,7 +152,10 @@ export default function Home() {
 
                     <div className="listings-form-row">
                         <label for="location">Location</label>
-                        <input type="text" id="location" name="location"/>
+                        <input type="text" name="location" id="location" autocomplete="off" onkeyup="autosuggest(this)" autofocus />
+                        <div class="dropdown2">
+                            <ul id="list"></ul>
+                        </div> 
                     </div>
 
                     <div className="search-btn-wrap container">
