@@ -20,7 +20,6 @@ export default function Home() {
       }
 
       let typeArray = PFdata.TYPES;
-      typeArray.unshift("");
       const [petType, setPetType] = useState(typeArray);
       const type = petType.map(type => type)
       const handleChange = (e) => {
@@ -84,9 +83,21 @@ export default function Home() {
         M.AutoInit();
       }
 
-
+    //called from the "find my furever friend" button
     function processFormContents() {
+        let pettype = (document.getElementById('type-of-pet')).value;
+        let age = (document.getElementById('age')).value;
+        let breed = (document.getElementById('breed')).value;
+        let location = (document.getElementById('location')).value;
 
+        const newSearchFilter = {
+            type: PFdata.TYPES[pettype],
+            age: age,
+            breed: breed,
+            location: location
+        }
+
+        console.log(newSearchFilter);
     }
     return (
     <div>
@@ -115,6 +126,7 @@ export default function Home() {
                     <div className="listings-form-row">
                         <label for="type-of-pet">Type of Pet</label>
                         <select id="type-of-pet" name="type-of-pet" onChange={e => handleChange(e)}>
+                            <option disabled selected></option>
                             {/*populated using JavaScript (see function petType()*/}
                             {type.map((address, key) => <option value={key}>{address}</option>)}
                         </select>
