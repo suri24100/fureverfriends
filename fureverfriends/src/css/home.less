@@ -1,0 +1,279 @@
+
+body {
+    font-family: 'Calibri';
+  }
+  img {
+    width: 100%;
+  }
+  .default button {
+    background-color: #379683;
+    border: none;
+    color: #ffffff;
+    font-size: 1.25vw;
+    padding: 1vw 1.5vw 1vw 1.5vw;
+    text-transform: uppercase;
+    font-weight: bold;
+    border-radius: 1.25vw;
+    box-shadow: 0 0.25vw 0.5vw 0 rgba(0, 0, 0, 0.2), 0 0.25vw 0.5vw 0 rgba(0, 0, 0, 0.19);
+    transition: all 0.5s;
+  }
+  .default button:hover {
+    background-color: #2a7364;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  .banner-wrap {
+    text-align: center;
+    color: #ffffff;
+    position: relative;
+    width: 100%;
+    height: 38.5vw;
+    background-image: url(./home-banner-full.jpg);
+    background-size: 100%;
+    background-attachment: fixed;
+    z-index: -99;
+    margin-top: -6vw;
+  }
+  .banner-wrap .heading {
+    font-size: 2.5vw;
+    text-transform: uppercase;
+    font-weight: bold;
+    position: absolute;
+    left: 30%;
+    top: 77%;
+  }
+  .banner-wrap .subheading {
+    font-size: 1.5vw;
+    position: absolute;
+    left: 40%;
+    top: 87%;
+  }
+  /*.search-or-quiz-wrap {
+    background-color: #e1e1e1;
+    margin-top: -0.25%;
+    display: flex;
+  }
+  .search-or-quiz-wrap .quiz-wrap {
+    position: relative;
+    margin-left: 12%;
+    width: 50%;
+  }
+  .search-or-quiz-wrap .quiz-wrap .quiz-img-wrap .quiz-img {
+    width: 100%;
+    margin-top: 0.75vh;
+    margin-bottom: -0.6vh;
+  }
+  .search-or-quiz-wrap .quiz-wrap .q-btn {
+    position: absolute;
+    left: 32%;
+    top: 15%;
+  }
+  .search-or-quiz-wrap .search-wrap {
+    background-color: #379683;
+    margin-right: 12%;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+  .search-or-quiz-wrap .search-wrap .form-wrap form {
+    display: flex;
+    flex-direction: column;
+    width: 20vw;
+  }
+  .search-or-quiz-wrap .search-wrap .form-wrap form label {
+    font-size: 1.75vw;
+    color: #ffffff;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+  }
+  .search-or-quiz-wrap .search-wrap .form-wrap form select,
+  .search-or-quiz-wrap .search-wrap .form-wrap form input {
+    padding-top: 0.5vw;
+    padding-bottom: 0.5vw;
+    text-transform: uppercase;
+    font-size: 1.25vw;
+    color: #707070;
+    font-weight: bold;
+  }
+  .search-or-quiz-wrap .search-wrap .search-button button {
+    background: transparent;
+    border: 2px solid #ffffff;
+    border-radius: 1.25vw;
+    color: #ffffff;
+    font-size: 1.25vw;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding: 0.75vw 1vw 0.75vw 1vw;
+  }
+  .search-or-quiz-wrap .search-wrap .search-button button:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  */
+  form.row {
+    background-image: url(./Group-78.png);
+    background-size: contain;
+  }
+  .search-or-quiz-wrap {
+      background-color: #e1e1e1;
+      .quiz-wrap {
+        .q-btn {
+            background-color: #379683;
+            text-transform: uppercase;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20%;
+            font-size: 1.25rem;
+            border-radius: 1vw;
+            box-shadow: 0 0.25vw 0.5vw 0 rgba(0, 0, 0, 0.2), 0 0.25vw 0.5vw 0 rgba(0, 0, 0, 0.19);
+        }
+        .q-btn:hover {
+            background-color: #2a7364;
+        }
+      }
+      .search-wrap {
+        background-color: #379683;
+        .search {
+            margin: 2.5vw 4vw 2.5vw 4vw;
+            label {
+                color: white;
+                text-transform: uppercase;
+                font-weight: bold;
+                font-size: 1rem;
+            }
+            input {
+               color: white;
+               margin-bottom: 2vw;
+            }
+            .select-wrapper .caret {
+
+                fill: white;
+            }
+            .search-btn {
+                border: solid white 2px;
+                border-radius: 1.25vw;
+                background: transparent;
+                padding: 0.75rem;
+                color: white;
+                text-transform: uppercase;
+                font-weight: bold;
+                cursor: pointer;
+            }
+            .search-btn:hover {
+                text-decoration: underline;
+            }
+        }
+      }
+  }
+
+
+  .testimonial-wrap {
+    position: relative;
+    /* Add a background color to the active dot/circle */
+  }
+  .testimonial-wrap .quotes {
+    display: none;
+    width: 42%;
+    position: absolute;
+    top: 15%;
+    left: 30%;
+    font-size: 1.5vw;
+    text-align: center;
+    color: #379683;
+    font-weight: bold;
+    line-height: 2.5vw;
+  }
+  .testimonial-wrap .dot-container {
+    position: absolute;
+    top: 55%;
+    left: 46%;
+  }
+  .testimonial-wrap .dot {
+    cursor: pointer;
+    height: 1vw;
+    width: 1vw;
+    margin: 0.15vw;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+    left: 38%;
+    top: 70%;
+  }
+  .testimonial-wrap .active,
+  .testimonial-wrap .dot:hover {
+    background-color: #717171;
+  }
+  .testimonial-wrap .share-your-xp-btn {
+    position: absolute;
+    left: 38%;
+    top: 70%;
+  }
+  .newsletters-wrap {
+    text-align: center;
+    color: #ffffff;
+    position: relative;
+    width: 100%;
+    height: 30vw;
+    background-image: url(./newsletters-banner-full.jpg);
+    background-size: 100%;
+    background-attachment: fixed;
+  }
+  .newsletters-wrap .heading {
+    font-size: 2vw;
+    text-transform: uppercase;
+    font-weight: bold;
+    position: absolute;
+    left: 63%;
+    top: 30%;
+  }
+  .newsletters-wrap .subheading {
+    font-size: 1.5vw;
+    position: absolute;
+    left: 60%;
+    top: 40%;
+  }
+  .newsletters-wrap .newsletter-form {
+    position: absolute;
+    left: 67%;
+    top: 55%;
+    width: 15%;
+  }
+  .newsletters-wrap .newsletter-form input {
+    width: 100%;
+    padding: 0.5vw 1vh 0.5vw 1vh;
+    font-size: 1vw;
+  }
+  .newsletters-wrap .newsletter-form input::placeholder {
+    font-size: 1vw;
+  }
+  .lost-and-found-wrap {
+    margin-top: -0.25%;
+    position: relative;
+  }
+  .lost-and-found-wrap .heading {
+    font-size: 2vw;
+    text-transform: uppercase;
+    font-weight: bold;
+    position: absolute;
+    color: #379683;
+    left: 17%;
+    top: 5%;
+  }
+  .lost-and-found-wrap .subheading {
+    width: 38%;
+    text-align: center;
+    font-size: 1.5vw;
+    color: #4c4c4c;
+    line-height: 2.5vw;
+    position: absolute;
+    left: 10%;
+    top: 17%;
+  }
+  .lost-and-found-wrap .lost-and-found-button {
+    position: absolute;
+    left: 20.75%;
+    top: 57%;
+  }

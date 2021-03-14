@@ -1,12 +1,18 @@
-import React from "react";
+import React, { useState, useEffect } from 'react';
 import Header from "./Header";
 import './css/style.css';
 import './css/home.css';
-
+import $ from 'jquery';
+import M from "materialize-css";
 
 
 export default function Home() {
-
+    useEffect(() => {
+        M.AutoInit();
+        $(document).ready(function(){
+            $('select').select();
+          });
+      });
     return (
     <div>
         <Header/>
@@ -21,52 +27,51 @@ export default function Home() {
             <span>Simply search below or take our quiz</span>
         </div>
     </div>
-    <div className="search-or-quiz-wrap">
-        <div className="quiz-wrap">
-            <div className="quiz-img-wrap">
-                <img className="quiz-img" src="/images/Group 78.png"/>
+    <div className="search-or-quiz-wrap container hide-on-small-only">
+        <form className="row">
+            <div className="center-align quiz-wrap col s12 m6 l6 x6">
+            <a class="waves-effect waves-light btn q-btn">Take The Quiz!</a>
+                {/*<div className="quiz-img-wrap">
+                    <img className="quiz-img m6 l6 x6" src="/images/Group 78.png"/>
+                </div>*/}
             </div>
-            <div className="quiz-button default">
-                <button className="q-btn">Take the quiz</button>
-            </div>
-        </div>
-        <div className="search-wrap">
-            <div className="form-wrap">
-                <form action="#" method="post" className="search-form" id="search-form">
-                    <label for="type-of-pet">Type of Pet</label>
-                    <select id="type-of-pet" name="type-of-pet" onchange="populate(this.id,'breed')">
-                        <option value=""></option>
-                        <option value="Cat">Cat</option>
-                        <option value="Dog">Dog</option>
-                        <option value="HamsterGuinea">Small Furbabies</option>
-                        <option value="Rabbit">Rabbit</option>
-                        <option value="Fish">Fish</option>
-                        <option value="ReptileAmphibians">Reptile & Amphibian</option>
-                        <option value="Bird">Bird</option>
-                        <option value="Other">Other</option>
-                      </select>
+            <div className="search-wrap container col s12 m6 l6 x6">
+                <div className="search">
+                    <div className="listings-form-row">
+                        <label for="type-of-pet">Type of Pet</label>
+                        <select id="type-of-pet" name="type-of-pet">
+                        </select>
+                    </div>
 
-                      <label for="age">Age</label>
-                      <select id="age" name="age">
-                        <option value="No Preference">No Preference</option>
-                        <option value="Young">Young</option>
-                        <option value="Teen">Teen</option>
-                        <option value="Adult">Adult</option>
-                      </select>
+                    <div className="listings-form-row">
+                        <label for="age">Age</label>
+                        <select id="age" name="age">
+                            <option disabled selected></option>
+                            <option value="Young">Young</option>
+                            <option value="Teen">Teen</option>
+                            <option value="Adult">Adult</option>
+                            <option value="NoPreference">No Preference</option>
+                        </select>
+                    </div>
 
-                      <label for="breed">Breed</label>
-                      <select id="breed" name="breed">
-                        {/*populated using JavaScript*/}
-                      </select>
+                    <div className="listings-form-row">
+                        <label for="breed">Breed</label>
+                        <select id="breed" name="breed">
+                            {/*populated using JavaScript*/}
+                        </select>
+                    </div>
 
-                      <label for="zip-code">Zip Code</label>
-                      <input type="number" id="zip-code" name="zip-code"/>
-                </form>
+                    <div className="listings-form-row">
+                        <label for="location">Location</label>
+                        <input type="text" id="location" name="location"/>
+                    </div>
+
+                    <div className="search-btn-wrap container">
+                        <button className="search-btn">Find my furever friend!</button>
+                    </div>
+                </div>
             </div>
-            <div className="search-button">
-                <button className="s-btn"><a href="listings.html">Search</a></button>
-            </div>
-        </div>
+        </form>
     </div>
     <div className="testimonial-wrap">
         <div className="testimonial-background">
