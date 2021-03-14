@@ -4,6 +4,7 @@ import './css/style.css';
 import './css/home.css';
 import $ from 'jquery';
 import M from "materialize-css";
+import PFdata from "./api-modules/constants.js";
 
 
 export default function Home() {
@@ -13,6 +14,80 @@ export default function Home() {
             $('select').select();
           });
       });
+
+      function capitalize(word) {
+        return word.charAt(0).toUpperCase() + word.slice(1);
+      }
+
+      let typeArray = PFdata.TYPES;
+      typeArray.unshift("");
+      const [petType, setPetType] = useState(typeArray);
+      const type = petType.map(type => type)
+      const handleChange = (e) => {
+          //petColor(petType[e.target.value])
+        let petTypeSelected = petType[e.target.value];
+        let breedArray = [];
+        if (petTypeSelected == "dog") { 
+            for (let i = 0; i < PFdata.DOG.breeds.length; i++) {
+                breedArray[i] = PFdata.DOG.breeds[i].name;
+            } 
+        }
+        else if (petTypeSelected == "cat") { 
+            for (let i = 0; i < PFdata.CAT.breeds.length; i++) {
+                breedArray[i] = PFdata.CAT.breeds[i].name;
+            } 
+        }
+        else if (petTypeSelected == "rabbit") { 
+            for (let i = 0; i < PFdata.RABBIT.breeds.length; i++) {
+                breedArray[i] = PFdata.RABBIT.breeds[i].name;
+            } 
+        }
+        else if (petTypeSelected == "small_furry") { 
+            for (let i = 0; i < PFdata.SMALL_FURRY.breeds.length; i++) {
+                breedArray[i] = PFdata.SMALL_FURRY.breeds[i].name;
+            } 
+        }
+        else if (petTypeSelected == "horse") { 
+            for (let i = 0; i < PFdata.HORSE.breeds.length; i++) {
+                breedArray[i] = PFdata.HORSE.breeds[i].name;
+            } 
+        }
+        else if (petTypeSelected == "bird") { 
+            for (let i = 0; i < PFdata.BIRD.breeds.length; i++) {
+                breedArray[i] = PFdata.BIRD.breeds[i].name;
+            } 
+        }
+        else if (petTypeSelected == "scales_fins_other") { 
+            for (let i = 0; i < PFdata.SCALES_FINS_OTHER.breeds.length; i++) {
+                breedArray[i] = PFdata.SCALES_FINS_OTHER.breeds[i].name;
+            } 
+        }
+        else if (petTypeSelected == "barnyard") { 
+            for (let i = 0; i < PFdata.BARNYARD.breeds.length; i++) {
+                breedArray[i] = PFdata.BARNYARD.breeds[i].name;
+            } 
+        }
+        //console.log(petColorArray.length);
+
+        let breedSelect = document.getElementById('breed');
+        while (breedSelect.firstChild) {
+            breedSelect.removeChild(breedSelect.firstChild);
+        }
+        for (let i = 0; i < breedArray.length; i++) {
+            let petOption = document.createElement('option');
+            petOption.innerHTML = capitalize(breedArray[i]);
+            petOption.value = breedArray[i];
+            petOption.setAttribute("id", "petTypeOption");
+            breedSelect.appendChild(petOption);
+        }
+
+        M.AutoInit();
+      }
+
+
+    function processFormContents() {
+
+    }
     return (
     <div>
         <Header/>
@@ -39,7 +114,9 @@ export default function Home() {
                 <div className="search">
                     <div className="listings-form-row">
                         <label for="type-of-pet">Type of Pet</label>
-                        <select id="type-of-pet" name="type-of-pet">
+                        <select id="type-of-pet" name="type-of-pet" onChange={e => handleChange(e)}>
+                            {/*populated using JavaScript (see function petType()*/}
+                            {type.map((address, key) => <option value={key}>{address}</option>)}
                         </select>
                     </div>
 
@@ -67,7 +144,7 @@ export default function Home() {
                     </div>
 
                     <div className="search-btn-wrap container">
-                        <button className="search-btn">Find my furever friend!</button>
+                        <button className="search-btn" onClick={() => processFormContents()}>Find my furever friend!</button>
                     </div>
                 </div>
             </div>
