@@ -61,11 +61,14 @@ export default function CreateAccount(){
         if(password !== passwordConfirm)
         {
             clearErrors();
+            setLoading(false);
             return setPasswordErrorConfirm("Passwords do not match");
         }
         const snapshot = await firestore.collection("UserInfo").where("Username", "==", username).get();
         if(!snapshot.empty)
         {
+            clearErrors();
+            setLoading(false);
             return setUsernameError('Username already taken, please choose another one.');
         }
 
@@ -186,6 +189,7 @@ export default function CreateAccount(){
                                     <input type="password" id="pass" name="pass"
                                            value={passwordConfirm}
                                            onChange={(e) => setPasswordConfirm(e.target.value)}/>
+                                        <p className="errorMsg"> {passwordErrorConfirm}</p>
                                     </div>
                                 <div className="col s12 center">
                                     <button className="btn" disabled={loading} onClick={(e) => handleSignUp(e)} type="button">Sign Up</button>

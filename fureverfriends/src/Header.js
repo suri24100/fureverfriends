@@ -44,7 +44,6 @@ export default function Header() {
 
         try {
             await logout();
-            //history.push("/login");
         } catch {
             setError("Failed to log out");
         }
