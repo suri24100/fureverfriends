@@ -92,7 +92,7 @@ export default function Header() {
                 </nav>
             </div>
     
-            <ul className="mobile-menu sidenav" id="mobile-links">
+            <ul className="mobile-menu sidenav hide-on-large-only" id="mobile-links">
                 <div className="container">
                     <li className="side-logo">
                         <i className="material-icons">pets</i>
