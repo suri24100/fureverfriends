@@ -101,7 +101,49 @@ export default function Home() {
         console.log(newSearchFilter);
     }
 
-    
+    //HERE API STUFF
+
+    var title1 = "", title2 = "", long1 = "", lat1 = "", long2 = "", lat2 = "";
+
+    const autosuggest = (e) => {
+        if(e.metaKey){
+          return
+        }
+  
+      let searchString = e.value
+      let triggered = e.id;
+      if (searchString != "") {
+        fetch(
+          `https://autosuggest.search.hereapi.com/v1/autosuggest?apiKey=cEmKn4p2fsUDNYX6qesi52C3blJ03LztzekKRTIB9EE&at=33.738045,73.084488&limit=5&resultType=city&q=${searchString}&lang=en-US`
+        )
+        .then((res) => res.json())
+        .then((json) => {
+          if (json.length != 0) {
+            document.getElementById("list").style.display = "block";
+            document.getElementById("list").innerHTML = ``;
+            let dropData = json.items.map((item) => {
+              if ((item.position != undefined) & (item.position != "")) {
+                if (triggered == "location") {
+                  document.getElementById("list").innerHTML += `<li onClick="addMarkerToMap1(${item.position.lat},${item.position.lng},'${item.title}')">${item.title}</li>`;
+                }
+              }
+            });
+          }
+        });
+      }
+      };
+
+      const addMarkerToMap1 = (lat, lng, title) => {
+        lat1 = lat; long1 = lng; title1 = title;
+        console.log("location: " + title);
+        console.log("latitude: " + lat1 + " longtitude: " + long1);
+        let input = document.getElementById("search1");
+        input.value = title;
+        let list = document.getElementById("list");
+        list.style.display = "none";
+      }; 
+
+
     return (
     <div>
         <Header/>
