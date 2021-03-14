@@ -117,9 +117,6 @@ export default function Home() {
         <form className="row">
             <div className="center-align quiz-wrap col s12 m6 l6 x6">
             <a class="waves-effect waves-light btn q-btn">Take The Quiz!</a>
-                {/*<div className="quiz-img-wrap">
-                    <img className="quiz-img m6 l6 x6" src="/images/Group 78.png"/>
-                </div>*/}
             </div>
             <div className="search-wrap container col s12 m6 l6 x6">
                 <div className="search">
