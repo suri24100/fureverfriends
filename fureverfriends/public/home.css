@@ -30,6 +30,8 @@ img {
   background-image: url("home-banner-full.jpg");
   background-size: 100%;
   background-attachment: fixed;
+  z-index: -99;
+  margin-top: -6vw;
 }
 .banner-wrap .heading {
   font-size: 2.5vw;
