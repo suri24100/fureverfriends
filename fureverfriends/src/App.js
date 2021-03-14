@@ -46,7 +46,7 @@ export default function App() {
     return (
     <div>
         <AuthProvider>
-            <Header />
+            {/*<Header />*/}
             <Switch>
                 <Route path ="/ForgotPassword">
                     <ForgotPassword/>
@@ -64,9 +64,6 @@ export default function App() {
                 <Route path="/listings">
                     <Listings />
                 </Route>
-                <Route path="/findahome">
-                    <NewListing />
-                </Route>
                 <Route path="/petcare">
                     <PetCare />
                 </Route>
@@ -81,7 +78,7 @@ export default function App() {
                     <Home />
                 </Route>
             </Switch>
-            <Footer />
+            {/*<Footer />*/}
         </AuthProvider>
     </div>
 
