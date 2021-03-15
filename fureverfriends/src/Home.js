@@ -1,12 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
-import Header from "./Header";
 import './css/style.css';
 import './css/home.css';
 import $ from 'jquery';
 import M from "materialize-css";
 import PFdata from "./api-modules/constants.js";
-import {DisplayMapFC} from "./api-modules/HereAPI";
-
 
 export default function Home() {
     useEffect(() => {
@@ -150,50 +147,7 @@ export default function Home() {
         console.log(geoData);
     }
 
-    //HERE API STUFF
-
-    var title1 = "", title2 = "", long1 = "", lat1 = "", long2 = "", lat2 = "";
-
-    const autosuggest = () => {
-        var e = document.getElementById("location");
-
-        if (e != null) {
-  
-      let searchString = e.value
-      let triggered = e.id;
-      if (searchString != "") {
-        fetch(
-          `https://autosuggest.search.hereapi.com/v1/autosuggest?apiKey=cEmKn4p2fsUDNYX6qesi52C3blJ03LztzekKRTIB9EE&at=33.738045,73.084488&limit=5&resultType=city&q=${searchString}&lang=en-US`
-        )
-        .then((res) => res.json())
-        .then((json) => {
-          if (json.length != 0) {
-            document.getElementById("list").style.display = "block";
-            document.getElementById("list").innerHTML = ``;
-            let dropData = json.items.map((item) => {
-              if ((item.position != undefined) & (item.position != "")) {
-                if (triggered == "location") {
-                  document.getElementById("list").innerHTML += `<li onClick="addMarkerToMap1(${item.position.lat},${item.position.lng},'${item.title}')">${item.title}</li>`;
-                }
-              }
-            });
-          }
-        });
-      } }
-      };
-
-      const addMarkerToMap1 = (lat, lng, title) => {
-        lat1 = lat; long1 = lng; title1 = title;
-        console.log("location: " + title);
-        console.log("latitude: " + lat1 + " longtitude: " + long1);
-        let input = document.getElementById("search1");
-        input.value = title;
-        let list = document.getElementById("list");
-        list.style.display = "none";
-      }; 
-
-      //var geodata = "";
-      //FINDING LONG AND LAT FOR ZIP CODE
+      //FINDING LONG AND LAT FOR ZIP CODE (API STUFF)
       function getLocationAsync(zip) {
         const apikey = '317f5c81a3241fbb45bbf57e335d466d';
         const path = `http://api.openweathermap.org/data/2.5/forecast?zip=${zip}&units=imperial&appid=${apikey}`;
@@ -282,12 +236,12 @@ export default function Home() {
                         <label>Location: </label>
                         <p>
                             <label>
-                                <input name="group1" type="radio" onClick={() => enableCurrent()}/>
+                                <input className="home-radio with-gap" name="group1" type="radio" onClick={() => enableCurrent()}/>
                                 <span className="lc">Use Current Location</span>
                             </label>
                         </p>
                         <label>
-                            <input name="group1" type="radio" onClick={() => enableZip()}/>
+                            <input className="home-radio with-gap" name="group1" type="radio" onClick={() => enableZip()}/>
                             <span className="lc" id="addPadding">Enter Zip Code</span>
                         </label>
                         <input type="number" name="location" id="location" className="locationInput"/> 
