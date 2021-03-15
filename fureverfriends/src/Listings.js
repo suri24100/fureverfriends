@@ -47,7 +47,7 @@ function PetCard(props){
         <div className="listing-card col s12 m6 l4">
             <div className="card">
                 <div className="card-image">
-                    <Link to={`${match.url}/profile/` + petDetails.type + "/PF-" + petDetails.id} className="profile-link-overlay">
+                    <Link to={`${match.url}/` + petDetails.type + "/profile/PF-" + petDetails.id} className="profile-link-overlay">
                         <img src={petDetails.photo_url} />
                     </Link>
                     <a className="btn-floating halfway-fab">
@@ -65,6 +65,16 @@ function PetCard(props){
 
 export default function Listings(){
 
+    // useEffect(() =>{
+    //     let promise = getListingData(pageNumber);
+    //     generateFilters("filter-type");
+    //     generateFilters("filter-location");
+    //     generateFilters("filter-age");
+    //     generateFilters("filter-gender");
+    //     generateFilters("filter-size");
+    //     generateFilters("filter-furlen");
+    // })
+
     function usePrevious(value) {
         const ref = useRef();
         useEffect(() => {
@@ -73,10 +83,11 @@ export default function Listings(){
         return ref.current;
     }
 
+    const [pageLoaded, setPageLoaded] = useState(false);
     const [pageNumber, setPageNumber] = useState(1);
     const [petListings, setPetListings] = useState( null);
     const [filters, setFilters] = useState({
-        type: [],
+        type: "all",
         location:{
             zipcode: "",
             distance: 0,
@@ -86,33 +97,43 @@ export default function Listings(){
         size: [],
         coat: [],
         color: [],
+        breed: []
     });
     useEffect( () => {
-        // do something
-    });
+        console.log("type has changed to " + filters.type);
+        generateFilters("filter-age");
+        generateFilters("filter-gender");
+        generateFilters("filter-size");
+        generateFilters("filter-furlen");
+        generateFilters("filter-color");
+        generateFilters("filter-breed");
+    }, [filters.type]);
+
+    const [applyFilter, setApplyFilter] = useState(false);
     const prevPage = usePrevious(pageNumber);
+    const prevListings = usePrevious(petListings);
 
     useEffect(() => {
-        if(!petListings){
+        if(!pageLoaded){
             let promise = getListingData(pageNumber);
             generateFilters("filter-type");
             generateFilters("filter-location");
-            generateFilters("filter-age");
-            generateFilters("filter-gender");
-            generateFilters("filter-size");
-            generateFilters("filter-furlen");
-            //console.log(petListings);
-        } else if(prevPage !== pageNumber){
+            setPageLoaded(true);
+        }
+        else if(prevPage !== pageNumber){
             getListingData(pageNumber);
-            // console.log(petListings);
+        }
+        else if(prevListings !== petListings){
+            setApplyFilter(false);
+            console.log(petListings)
         }
     });
 
     async function getListingData(pageNum){
-        let newPetListings = await getFilteredListings(100, pageNum);
+        let newPetListings = await getFilteredListings(filters,10, pageNum);
         setPetListings(newPetListings);
-        // console.log(newPetListings);
-        // console.log(petListings);
+        console.log(newPetListings);
+        console.log(petListings);
     }
 
     function generateCards(){
@@ -132,6 +153,11 @@ export default function Listings(){
         setPageNumber(newPageNum);
     }
 
+    function applyFilters(){
+        setApplyFilter(true);
+        let prom = getListingData(pageNumber);
+    }
+
     function updateFilters(props){
         const filterID = props.target.name;
         const value = props.target.value;
@@ -139,18 +165,12 @@ export default function Listings(){
         let typeArr = [];
         let index = -1;
         let newArr = [];
-        console.log(filterID + ", " + value + ", " + checked)
         switch (filterID){
             case "type":
-                typeArr = filters.type;
-                index = typeArr.indexOf(value);
-                if(checked && index < 0) {newArr = typeArr.push(value)}
-                else if(index >= 0) {newArr = typeArr.splice(index, 1)}
                 setFilters({
                     ...filters,
-                    type: newArr
+                    type: value
                 });
-                console.log(filters);
                 break;
             case "furlen":
                 typeArr = filters.coat;
@@ -159,9 +179,8 @@ export default function Listings(){
                 else if(index >= 0) {newArr = typeArr.splice(index, 1)}
                 setFilters({
                     ...filters,
-                    coat: newArr
+                    coat: typeArr
                 });
-                console.log(filters);
                 break;
             case "size":
                 typeArr = filters.size;
@@ -170,9 +189,8 @@ export default function Listings(){
                 else if(index >= 0) {newArr = typeArr.splice(index, 1)}
                 setFilters({
                     ...filters,
-                    size: newArr
+                    size: typeArr
                 });
-                console.log(filters);
                 break;
             case "age":
                 typeArr = filters.age;
@@ -181,9 +199,8 @@ export default function Listings(){
                 else if(index >= 0) {newArr = typeArr.splice(index, 1)}
                 setFilters({
                     ...filters,
-                    age: newArr
+                    age: typeArr
                 });
-                console.log(filters);
                 break;
             case "gender":
                 typeArr = filters.gender;
@@ -192,50 +209,85 @@ export default function Listings(){
                 else if(index >= 0) {newArr = typeArr.splice(index, 1)}
                 setFilters({
                     ...filters,
-                    gender: newArr
+                    gender: typeArr
                 });
-                console.log(filters);
+                break;
+            case "color":
+                typeArr = filters.color;
+                index = typeArr.indexOf(value);
+                if(checked && index < 0) {newArr = typeArr.push(value)}
+                else if(index >= 0) {newArr = typeArr.splice(index, 1)}
+                setFilters({
+                    ...filters,
+                    color: typeArr
+                });
+                break;
+            case "breed":
+                typeArr = filters.breed;
+                index = typeArr.indexOf(value);
+                if(checked && index < 0) {newArr = typeArr.push(value)}
+                else if(index >= 0) {newArr = typeArr.splice(index, 1)}
+                setFilters({
+                    ...filters,
+                    breed: typeArr
+                });
                 break;
             case "zipcode":
+                setFilters({
+                    ...filters,
+                    zipcode: value
+                });
                 break
             case "distance":
+                setFilters({
+                    ...filters,
+                    distance: value
+                });
                 break;
             default:
                 break;
         }
     }
 
-    function applyFilters(){
-
-    }
-
     function generateFilters(filterID) {
         const filterUL = document.getElementById(filterID);
         if(filterUL){
+            let typeVar = "";
             switch (filterID){
                 case "filter-type":
+                    let typeli = document.createElement("li");
+                    typeli.classList.add("input-field");
+                    let typeSelect = document.createElement("select");
+                    typeSelect.setAttribute("id", "filter-type");
+                    typeSelect.setAttribute("name", "type");
+                    typeSelect.addEventListener("change", updateFilters, false);
+                    let option = document.createElement("option");;
+                    option.setAttribute("value", "all")
+                    option.setAttribute("name", "type");
+                    let span = document.createElement("span");
+                    span.innerText = "All"
+                    option.appendChild(span);
+                    typeSelect.appendChild(option);
                     PFdata.TYPES.map(ptype => {
-                        let li = document.createElement("li");
-                        let label = document.createElement("label");
-                        let input = document.createElement("input");
-                        input.classList.add("filled-in");
-                        input.addEventListener("change", updateFilters, false);
-                        input.setAttribute("type", "checkbox");
-                        input.setAttribute("value", ptype)
-                        input.setAttribute("id", "type-" + ptype);
-                        input.setAttribute("name", "type");
-                        let span = document.createElement("span");
+                        option = document.createElement("option");;
+                        option.setAttribute("value", ptype)
+                        option.setAttribute("name", "type");
+                        span = document.createElement("span");
                         if(ptype === "small_furry") {span.innerText = "Small and Furry";}
                         else if(ptype === "scales_fins_other") {span.innerText = "Scales, Fins, and Other";}
                         else {span.innerText = ptype}
-                        label.appendChild(input);
-                        label.appendChild(span);
-                        li.appendChild(label);
-                        filterUL.appendChild(li);
+                        option.appendChild(span);
+                        typeSelect.appendChild(option);
                     });
+                    typeli.appendChild(typeSelect);
+                    filterUL.appendChild(typeli);
                     break;
                 case "filter-furlen":
-                    PFdata.COAT.map(ptype => {
+                    while (filterUL.firstChild) {
+                        filterUL.removeChild(filterUL.firstChild);
+                    }
+                    typeVar = filters.type.toUpperCase();
+                    PFdata[typeVar].coats.map(ptype => {
                         let li = document.createElement("li");
                         let label = document.createElement("label");
                         let input = document.createElement("input");
@@ -254,6 +306,10 @@ export default function Listings(){
                     });
                     break;
                 case "filter-size":
+                    typeVar = filters.type.toUpperCase();
+                    while (filterUL.firstChild) {
+                        filterUL.removeChild(filterUL.firstChild);
+                    }
                     PFdata.SIZE.map(ptype => {
                         let li = document.createElement("li");
                         let label = document.createElement("label");
@@ -273,6 +329,9 @@ export default function Listings(){
                     });
                     break;
                 case "filter-age":
+                    while (filterUL.firstChild) {
+                        filterUL.removeChild(filterUL.firstChild);
+                    }
                     PFdata.AGE.map(ptype => {
                         let li = document.createElement("li");
                         let label = document.createElement("label");
@@ -292,16 +351,68 @@ export default function Listings(){
                     });
                     break;
                 case "filter-gender":
-                    PFdata.GENDERS.map(ptype => {
+                    while (filterUL.firstChild) {
+                        filterUL.removeChild(filterUL.firstChild);
+                    }
+                    typeVar = filters.type.toUpperCase();
+                    PFdata[typeVar].genders.map(ptype => {
                         let li = document.createElement("li");
                         let label = document.createElement("label");
                         let input = document.createElement("input");
                         input.classList.add("filled-in");
                         input.setAttribute("type", "checkbox");
                         input.setAttribute("value", ptype)
+                        input.setAttribute("name", "gender");
                         input.setAttribute("id", "gender-" + ptype);
+                        input.addEventListener("change", updateFilters, false);
                         let span = document.createElement("span");
                         span.innerText = ptype;
+                        label.appendChild(input);
+                        label.appendChild(span);
+                        li.appendChild(label);
+                        filterUL.appendChild(li);
+                    });
+                    break;
+                case "filter-color":
+                    while (filterUL.firstChild) {
+                        filterUL.removeChild(filterUL.firstChild);
+                    }
+                    typeVar = filters.type.toUpperCase();
+                    PFdata[typeVar].colors.map(ptype => {
+                        let li = document.createElement("li");
+                        let label = document.createElement("label");
+                        let input = document.createElement("input");
+                        input.classList.add("filled-in");
+                        input.setAttribute("type", "checkbox");
+                        input.setAttribute("value", ptype)
+                        input.setAttribute("name", "color");
+                        input.setAttribute("id", "color-" + ptype);
+                        input.addEventListener("change", updateFilters, false);
+                        let span = document.createElement("span");
+                        span.innerText = ptype;
+                        label.appendChild(input);
+                        label.appendChild(span);
+                        li.appendChild(label);
+                        filterUL.appendChild(li);
+                    });
+                    break;
+                case "filter-breed":
+                    while (filterUL.firstChild) {
+                        filterUL.removeChild(filterUL.firstChild);
+                    }
+                    typeVar = filters.type.toUpperCase();
+                    PFdata[typeVar].breeds.map(ptype => {
+                        let li = document.createElement("li");
+                        let label = document.createElement("label");
+                        let input = document.createElement("input");
+                        input.classList.add("filled-in");
+                        input.setAttribute("type", "checkbox");
+                        input.setAttribute("value", ptype.name)
+                        input.setAttribute("name", "breed");
+                        input.setAttribute("id", "breed-" + ptype.name);
+                        input.addEventListener("change", updateFilters, false);
+                        let span = document.createElement("span");
+                        span.innerText = ptype.name;
                         label.appendChild(input);
                         label.appendChild(span);
                         li.appendChild(label);
@@ -404,14 +515,10 @@ export default function Listings(){
                 <div className="col s12 m4 l3">
                     <form>
                         <div className="col s12">
-                        <button className="btn-small" type="button">
+                        <button className="btn-small" type="button" onClick={applyFilters}>
                             Apply Filters
                             <i className="material-icons left">refresh</i>
                         </button>
-                            <button className="btn-small" type="button">
-                                Reset Filters
-                                <i className="material-icons left">restore</i>
-                            </button>
                         </div>
                         <div className="col s12">
                             <h6>Type of Pet</h6>
@@ -425,23 +532,35 @@ export default function Listings(){
                         </div>
                         <div className="col s12">
                             <h6>Characteristics</h6>
-                            <span className="title">Age</span>
-                            <ul id="filter-age">
-                            </ul>
-                            <span className="title">Gender</span>
-                            <ul id="filter-gender">
-                            </ul>
-                            <span className="title">Size</span>
-                            <ul id="filter-size">
-                            </ul>
-                            <span className="title">Fur Length</span>
-                            <ul id="filter-furlen">
-                            </ul>
+                            {(filters.type === "all") ?
+                                <p>Select a pet type to choose characteristics.</p>
+                                :
+                                <div>
+                                    <span className="title">Age</span>
+                                    <ul id="filter-age">
+                                    </ul>
+                                    <span className="title">Gender</span>
+                                    <ul id="filter-gender">
+                                    </ul>
+                                    <span className="title">Size</span>
+                                    <ul id="filter-size">
+                                    </ul>
+                                    <span className="title">Fur Length</span>
+                                    <ul id="filter-furlen">
+                                    </ul>
+                                    <span className="title">Colors</span>
+                                    <ul id="filter-color">
+                                    </ul>
+                                    <span className="title">Breeds</span>
+                                    <ul id="filter-breed">
+                                    </ul>
+                                </div>
+                            }
                         </div>
                     </form>
                 </div>
                 <div className="col s12 m8 l9">
-                    {(!petListings || prevPage !== pageNumber) ?
+                    {(!petListings || prevPage !== pageNumber || applyFilter) ?
                         showLoading() :
                         generateCards()
                     }

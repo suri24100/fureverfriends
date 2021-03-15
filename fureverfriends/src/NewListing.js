@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Header from "./Header";
 import './css/style.css';
 import './css/newListings.css';
 import ReactDOM from 'react-dom';

@@ -25,8 +25,6 @@ import PrivateRoute from "./PrivateRoute";
 import PurrsonalityQuiz from "./PurrsonalityQuiz";
 
 
-
-
 /* This should load the header and footer on each page
 * - Links to these routes can be created on any component using the format in Header.js
 * - Then those links have a corresponding route below. All routes should be defined together
@@ -46,7 +44,7 @@ export default function App() {
     return (
     <div>
         <AuthProvider>
-            {/*<Header />*/}
+            <Header />
             <Switch>
                 <Route path ="/ForgotPassword">
                     <ForgotPassword/>
@@ -70,6 +68,9 @@ export default function App() {
                 <Route path="/login">
                     <Login />
                 </Route>
+                <Route path="/findahome">
+                    <NewListing />
+                </Route>
                 <Route path="/quiz">
                     <PurrsonalityQuiz />
                 </Route>
@@ -78,7 +79,7 @@ export default function App() {
                     <Home />
                 </Route>
             </Switch>
-            {/*<Footer />*/}
+            <Footer />
         </AuthProvider>
     </div>
 

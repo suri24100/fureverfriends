@@ -288,8 +288,8 @@ export default function PetProfile(){
 
     return(
         <div className="profile-page">
+            <div className="header-bg"></div>
             <div className="banner-wrap">
-                <Header/>
                 <ProfileSlider />
             </div>
             <div className="container">

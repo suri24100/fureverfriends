@@ -111,8 +111,25 @@ export async function getTypeListing(animalType, numListings, pageNum){
     return listingResults.animals;
 }
 
-export async function getFilteredListings(numListings, pageNum){
-    let typeURL = BASE_URL + "/v2/animals?limit=" + numListings + "&page=" + pageNum;
+export async function getFilteredListings(filters, numListings, pageNum){
+    let typeURL = BASE_URL + "/v2/animals?";
+    // add types of pets to get
+    if(filters.age.length > 0){
+        typeURL += "age="
+        filters.age.forEach(age => {
+            typeURL += age + ",";
+        });
+        typeURL = typeURL.slice(0, -1);
+    }
+    if(filters.age.length > 0){
+        typeURL += "age="
+        filters.age.forEach(age => {
+            typeURL += age + ",";
+        });
+        typeURL = typeURL.slice(0, -1);
+    }
+    typeURL += "&limit=" + numListings + "&page=" + pageNum;
+    console.log(typeURL);
     let listingResults = await getData(typeURL);
     return listingResults.animals;
 }
