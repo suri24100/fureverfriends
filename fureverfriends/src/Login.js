@@ -5,6 +5,7 @@ import './css/signing.css';
 import { Alert } from "react-bootstrap"
 import {Link, useHistory} from "react-router-dom";
 import {useAuth} from './AuthContext';
+import {firestore} from "./ffdb";
 
 
 
@@ -15,7 +16,7 @@ export default function Login(){
     const [emailError, setEmailError] = useState('');
     const [passwordError, setPasswordError] = useState('');
     const [loading, setLoading] = useState(false);
-    const { login } = useAuth();
+    const { login, USER, handleSetUSER, setUSER } = useAuth();
     const history = useHistory();
 
     const clearInputs = () =>{
@@ -28,6 +29,18 @@ export default function Login(){
         setPasswordError('');
     }
 
+    async function getUser(){
+
+            const snapshot = await firestore.collection("UserInfo")
+                .where("email", "==", email).get();
+            // await setUsername(snapshot.docs[0].data()["Username"]);
+        // snapshot.docs[0].data().forEach()
+        setUSER(snapshot.docs[0].data());
+
+        console.log(USER);
+
+    }
+
     async function handleLogin(e) {
         e.preventDefault();
 
@@ -35,6 +48,7 @@ export default function Login(){
             clearErrors();
             setLoading(true);
             await login(email, password);
+            await getUser();
             clearInputs();
             history.push("/Home")
         }catch(err) {
