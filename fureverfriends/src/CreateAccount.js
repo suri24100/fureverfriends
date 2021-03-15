@@ -6,7 +6,6 @@ import { Alert } from "react-bootstrap"
 import {Link, useHistory} from "react-router-dom";
 import {useAuth} from './AuthContext';
 import {firestore} from "./ffdb";
-import {USER} from './api-modules/constants'
 
 import $ from 'jquery';
 import M from "materialize-css";
@@ -34,7 +33,7 @@ export default function CreateAccount(){
     const [passwordError, setPasswordError] = useState('');
     const [passwordErrorConfirm, setPasswordErrorConfirm] = useState('');
     const [loading, setLoading] = useState(false);
-    const { signup } = useAuth();
+    const { signup, USER, handleSetUSER } = useAuth();
     const history = useHistory();
 
 
@@ -59,25 +58,34 @@ export default function CreateAccount(){
         setPasswordErrorConfirm('');
     }
 
-    function setUser(){
-        // const id = e.target.id
-        // const value = e.target.value
-        // // console.log(id)
-        // // console.log(value)
-        // // setState({...USER,
-        // //     [id]:value})
-        // // console.log(USER)
-        // USER.({ID;
-        // console.log(USER)
-        // // console.log(value)
-        USER.username = username;
-        USER.first_name = firstName;
-        USER.last_name = lastName;
-        USER.email = email;
-        USER.phone_number = phone;
-        USER.account_type = accountType;
-        USER.user_zip = zip;
+    // function setUser(){
+    //     // const id = e.target.id
+    //     // const value = e.target.value
+    //     // // console.log(id)
+    //     // // console.log(value)
+    //     // // setState({...USER,
+    //     // //     [id]:value})
+    //     // // console.log(USER)
+    //     // USER.({ID;
+    //     // console.log(USER)
+    //     // // console.log(value)
+    //     USER.username = username;
+    //     USER.first_name = firstName;
+    //     USER.last_name = lastName;
+    //     USER.email = email;
+    //     USER.phone_number = phone;
+    //     USER.account_type = accountType;
+    //     USER.user_zip = zip;
+    //
+    //     localStorage.setItem("USER", USER)
+    //
+    //     console.log(USER)
+    // }
 
+    function handleOnChange(e){
+        const id = e.target.id;
+        const value = e.target.value;
+        handleSetUSER(id,value);
         console.log(USER)
     }
 
@@ -90,7 +98,7 @@ export default function CreateAccount(){
             setLoading(false);
             return setPasswordErrorConfirm("Passwords do not match");
         }
-        const snapshot = await firestore.collection("UserInfo").where("Username", "==", username).get();
+        const snapshot = await firestore.collection("UserInfo").where("Username", "==", USER.username).get();
         if(!snapshot.empty)
         {
             clearErrors();
@@ -102,8 +110,8 @@ export default function CreateAccount(){
         try {
             clearErrors();
             setLoading(true);
-            await signup(email, password);
-            setUser();
+            await signup(USER.email, password);
+            // setUser();
             saveUser();
             clearInputs();
             history.push('/CreateAccountConfirmation');
@@ -122,7 +130,7 @@ export default function CreateAccount(){
     }
 
     function saveUser(){
-        firestore.collection("UserInfo").doc(username).set(USER)
+        firestore.collection("UserInfo").doc(USER.username).set(USER)
             .then(() => {
                 console.log("Document successfully written!");
             });
@@ -148,38 +156,38 @@ export default function CreateAccount(){
                             <div className="row body-row">
                                 <div className="input-field col s12">
                                     <input type="text" id="username" name="username"
-                                           value={username}
-                                           onChange={(e) => setUsername(e.target.value)}/>
+                                           value={USER.username}
+                                           onChange={handleOnChange}/>
                                    <label htmlFor="username">Enter New Username</label>
                                     <p className="errorMsg">{usernameError}</p>
                                 </div>
                                 <div className="input-field col s12">
                                     <input type="text" id="first_name" name="first_name"
-                                           value={firstName}
-                                           onChange={(e) => setFirstName(e.target.value)}/>
+                                           value={USER.first_name}
+                                           onChange={handleOnChange}/>
                                     <label htmlFor="first_name">Enter Your First Name:</label>
                                 </div>
                                 <div className="input-field col s12">
                                     <input type="text" id="last_name" name="last_name"
-                                           value={lastName}
-                                           onChange={(e) => setLastName(e.target.value)}/>
+                                           value={USER.last_name}
+                                           onChange={handleOnChange}/>
                                     <label htmlFor="last_name">Enter Your Last Name:</label>
                                 </div>
                                 <div className="input-field col s12">
                                     <input type="email" id="email" name="email"
-                                           value={email}
-                                           onChange={(e) => setEmail(e.target.value)}/>
+                                           value={USER.email}
+                                           onChange={handleOnChange}/>
                                            <label htmlFor="email">Enter Your Email Address:</label>
                                     <p className="errorMsg">{emailError}</p>
                                 </div>
                                 <div className="input-field col s12">
                                     <input type="tel" id="phone_number" name="phone_number"
-                                           value={phone}
-                                           onChange={(e) => setPhone(e.target.value)}/>
+                                           value={USER.phone_number}
+                                           onChange={handleOnChange}/>
                                     <label htmlFor="phone_number">Enter Your Phone Number:</label>
                                 </div>
                                 <div className="input-field col s12">
-                                    <select id="account_type" onChange={(e) => setAccountType(e.target.value)}>
+                                    <select id="account_type" onChange={handleOnChange}>
                                         <option value="Adopter">Adopter</option>
                                         <option value="Private Owner">Private Owner</option>
                                         <option value="Organization">Organization</option>
@@ -188,8 +196,8 @@ export default function CreateAccount(){
                                 </div>
                                 <div className="input-field col s12">
                                     <input type="number" id="user_zip" name="user_zip"
-                                           value={zip}
-                                           onChange={(e) => setZip(e.target.value)}/>
+                                           value={USER.user_zip}
+                                           onChange={handleOnChange}/>
                                     <label htmlFor="user_zip">Enter Your Zip Code:</label>
                                 </div>
                                 <div className="input-field col s12">

@@ -1,10 +1,6 @@
 import React, {useContext, useEffect, useState, Component} from 'react';
-import Header from "./Header";
 import './css/style.css';
 import './css/signing.css';
-import {Link, useHistory} from "react-router-dom";
-import db from "./ffdb";
-import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from "./ffdb"
 
 const AuthContext = React.createContext();
@@ -16,6 +12,25 @@ export function useAuth() {
 export function AuthProvider({ children }) {
     const [currentUser, setCurrentUser] = useState()
     const [loading, setLoading] = useState(true)
+    const [USER, setUSER] = useState({
+        username: "",
+        first_name: "",
+        last_name: "",
+        email: "",
+        phone_number: "",
+        account_type: "",
+        user_zip: "",
+        user_bio: "",
+        pet_listings: [],
+        favorites: [],
+        longitude: "",
+        latitude : ""
+    })
+
+    function handleSetUSER(id, value){
+        setUSER({...USER,
+            [id]:value});
+    }
 
     function signup(email, password) {
         return auth.createUserWithEmailAndPassword(email, password)
@@ -57,7 +72,9 @@ export function AuthProvider({ children }) {
         logout,
         resetPassword,
         updateEmail,
-        updatePassword
+        updatePassword,
+        USER,
+        handleSetUSER
     }
 
     return (
