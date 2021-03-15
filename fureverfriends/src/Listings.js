@@ -113,6 +113,9 @@ export default function Listings(){
     const prevPage = usePrevious(pageNumber);
     const prevListings = usePrevious(petListings);
 
+    // SURI: The prevLisings != petListings is called when new pets are
+    // retrieved from petfinder. If you need to do something with location
+    // after getting pets, do it there
     useEffect(() => {
         if(!pageLoaded){
             let promise = getListingData(pageNumber);
@@ -153,6 +156,11 @@ export default function Listings(){
         setPageNumber(newPageNum);
     }
 
+    // SURI: This is called when someone clicks apply filters
+    // It is async so if you need to do something before getting listings
+    // from database/petfinder, do that here.
+    // if you need to do something AFTER listings retrieved, that can be called
+    // at useEffect above (see comment)
     function applyFilters(){
         setApplyFilter(true);
         let prom = getListingData(pageNumber);
