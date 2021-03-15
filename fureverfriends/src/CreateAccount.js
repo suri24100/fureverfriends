@@ -6,7 +6,7 @@ import { Alert } from "react-bootstrap"
 import {Link, useHistory} from "react-router-dom";
 import {useAuth} from './AuthContext';
 import {firestore} from "./ffdb";
-import USER from './api-modules/constants'
+import {USER} from './api-modules/constants'
 
 import $ from 'jquery';
 import M from "materialize-css";
@@ -70,6 +70,15 @@ export default function CreateAccount(){
         // USER.({ID;
         // console.log(USER)
         // // console.log(value)
+        USER.username = username;
+        USER.first_name = firstName;
+        USER.last_name = lastName;
+        USER.email = email;
+        USER.phone_number = phone;
+        USER.account_type = accountType;
+        USER.user_zip = zip;
+
+        console.log(USER)
     }
 
     async function handleSignUp(e) {
@@ -94,6 +103,7 @@ export default function CreateAccount(){
             clearErrors();
             setLoading(true);
             await signup(email, password);
+            setUser();
             saveUser();
             clearInputs();
             history.push('/CreateAccountConfirmation');
@@ -112,21 +122,9 @@ export default function CreateAccount(){
     }
 
     function saveUser(){
-        firestore.collection("UserInfo").add({
-            Username: username,
-            FirstName: firstName,
-            LastName: lastName,
-            Email: email,
-            PhoneNumber: phone,
-            AccountType: accountType,
-            UserZip: zip,
-            UserBio: ""
-        })
-            .then((docRef) => {
-                console.log("Document written with ID: ", docRef.id);
-            })
-            .catch((error) => {
-                console.error("Error adding document: ", error);
+        firestore.collection("UserInfo").doc(username).set(USER)
+            .then(() => {
+                console.log("Document successfully written!");
             });
     }
 
