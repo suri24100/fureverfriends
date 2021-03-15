@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import Header from "./Header";
+import React, { useState, useEffect, useRef } from 'react';
 import './css/style.css';
 import './css/home.css';
 import $ from 'jquery';
 import M from "materialize-css";
 import PFdata from "./api-modules/constants.js";
-
 
 export default function Home() {
     useEffect(() => {
@@ -14,6 +12,47 @@ export default function Home() {
             $('select').select();
           });
       });
+      function usePrevious(value) {
+        const ref = useRef();
+        useEffect(() => {
+            ref.current = value;
+        });
+        return ref.current;
+    }
+      const [geoData, setGeoData] = useState({});
+
+      const prevGeoData = usePrevious(geoData);
+
+      useEffect(() => {
+        if(prevGeoData !== geoData){
+            processFormContents();
+        }
+      })
+
+      var enableCurrentRadio = false;
+    var enableZipRadio = false;
+    var currentLocation = {};
+
+    function enableCurrent() {
+        enableCurrentRadio = true;
+        enableZipRadio = false;
+        let locationInput = document.getElementById("location");
+        locationInput.style.display = "none";
+    }
+
+
+    function enableZip() {
+        enableCurrentRadio = false;
+        enableZipRadio = true;
+        let locationInput = document.getElementById("location");
+        locationInput.style.display = "inline";
+        locationInput.style.width = "40%";
+        locationInput.style.marginLeft = "8%";
+        locationInput.style.marginTop = "-100px";
+        locationInput.style.marginBottom = "";
+        let addPadding = document.getElementById("addPadding");
+        addPadding.style.paddingBottom = "-2vw";
+    }
 
       function capitalize(word) {
         return word.charAt(0).toUpperCase() + word.slice(1);
@@ -88,20 +127,66 @@ export default function Home() {
         let pettype = (document.getElementById('type-of-pet')).value;
         let age = (document.getElementById('age')).value;
         let breed = (document.getElementById('breed')).value;
-        let location = (document.getElementById('location')).value;
+        let location = "";
+        if (enableCurrentRadio) {
+            location = currentLocation;
 
+        } else if (enableZipRadio) {
+            location = (document.getElementById('location')).value;
+        }
         const newSearchFilter = {
             type: PFdata.TYPES[pettype],
             age: age,
             breed: breed,
-            location: location
+            location: location,
+            geoData: geoData
+            //geodata: geodata
         }
 
         console.log(newSearchFilter);
+        console.log(geoData);
     }
+
+      //FINDING LONG AND LAT FOR ZIP CODE (API STUFF)
+      function getLocationAsync(zip) {
+        const apikey = '317f5c81a3241fbb45bbf57e335d466d';
+        const path = `http://api.openweathermap.org/data/2.5/forecast?zip=${zip}&units=imperial&appid=${apikey}`;
+    
+        return fetch(path)
+        .then((res) => {
+            return res.json()
+        }).then((json) => {
+            //console.log(JSON.stringify(json,null,2))
+            //console.log(json)
+            //console.log(json.city.coord);
+            //getLocation(json.city.coord)
+            setGeoData(json.city.coord);
+            
+        }).catch((err) => {
+            console.log(err.message)
+        })
+    }
+
+    function getLocation() {
+        if (enableZipRadio) {
+            let location = document.getElementById("location").value;
+            getLocationAsync(location);
+        }
+        else if (enableCurrentRadio) {
+            if (navigator.geolocation) { //check if geolocation is available
+                navigator.geolocation.getCurrentPosition(function(position){
+                    currentLocation = {
+                        lat: position.coords.latitude,
+                        lon: position.coords.longitude
+                    }
+                  processFormContents();
+                });   
+            }
+        }
+    }
+
     return (
     <div>
-        <Header/>
         <div className="banner-wrap">
         <div className="banner-img-wrap">
             {/*<img className="banner-img" src="home-banner.png">*/}
@@ -148,12 +233,22 @@ export default function Home() {
                     </div>
 
                     <div className="listings-form-row">
-                        <label for="location">Location</label>
-                        <input type="text" id="location" name="location"/>
+                        <label>Location: </label>
+                        <p>
+                            <label>
+                                <input className="home-radio with-gap" name="group1" type="radio" onClick={() => enableCurrent()}/>
+                                <span className="lc">Use Current Location</span>
+                            </label>
+                        </p>
+                        <label>
+                            <input className="home-radio with-gap" name="group1" type="radio" onClick={() => enableZip()}/>
+                            <span className="lc" id="addPadding">Enter Zip Code</span>
+                        </label>
+                        <input type="number" name="location" id="location" className="locationInput"/> 
                     </div>
 
                     <div className="search-btn-wrap container">
-                        <button className="search-btn" onClick={() => processFormContents()}>Find my furever friend!</button>
+                    <button className="search-btn" type="button" name="action" onClick={() => getLocation()}>Find My Furever Friend!</button>
                     </div>
                 </div>
             </div>

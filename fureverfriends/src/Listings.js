@@ -15,10 +15,10 @@ function PetCard(props){
     let formattedPetInfo = {};
     // FF pet listing
     if(petInfo.pet_data){
-        console.log("FF data");
+        console.log(petInfo);
         formattedPetInfo = {
             petfinder_listing: false,
-            pet_id: petInfo.pet_data.id,
+            pet_id: petInfo.pet_data.pet_id,
             account_info: {
                 id: "",
                 email: ""
@@ -65,7 +65,7 @@ function PetCard(props){
         }
     }
     // petfinder listing
-    else if (petInfo) {formattedPetInfo = {
+    else if (petInfo.id) {formattedPetInfo = {
             petfinder_listing: true,
             pet_id: petInfo.id,
             account_info: {
@@ -76,9 +76,9 @@ function PetCard(props){
             name: petInfo.name,
             type: petInfo.type,
             age: petInfo.age,
-            breed: petInfo.breeds.primary,
+            breed: petInfo.breed,
             gender: petInfo.gender,
-            color: petInfo.colors.primary,
+            color: petInfo.color,
             fur_length: petInfo.coat,
             profile_url: petInfo.url,
             location: {
@@ -114,8 +114,6 @@ function PetCard(props){
         }
     }
     const [petDetails, setPetDetails] = useState(formattedPetInfo);
-    useEffect(() => {console.log(petDetails)}
-    )
 
     function calculateDistance(){
         // TODO: to be filled in later when we have Maps api setup
@@ -126,36 +124,26 @@ function PetCard(props){
     let newURL = `${match.url}/` + petDetails.type + "/profile/" + prefix + petDetails.pet_id;
 
     return (
-        <div className="listing-card col s12 m6 l4">
-            <div className="card">
-                <div className="card-image">
-                    <Link to={newURL} className="profile-link-overlay">
-                        <img src={petDetails.profileFiles.profilePhoto} />
-                    </Link>
-                    <a className="btn-floating halfway-fab">
-                        <i className="material-icons">favorite_border</i>
-                    </a>
-                </div>
-                <div className="card-content">
-                    <span className="name">{petDetails.name}</span>
-                    <span className="location">{petDetails.location.city}, {petDetails.location.state}</span>
+            <div className="listing-card col s12 m6 l4">
+                <div className="card">
+                    <div className="card-image">
+                        <Link to={newURL} className="profile-link-overlay">
+                            <img src={petDetails.profileFiles.profilePhoto} />
+                        </Link>
+                        <a className="btn-floating halfway-fab">
+                            <i className="material-icons">favorite_border</i>
+                        </a>
+                    </div>
+                    <div className="card-content">
+                        <span className="name">{petDetails.name}</span>
+                        <span className="location">{petDetails.location.city}, {petDetails.location.state}</span>
+                    </div>
                 </div>
             </div>
-        </div>
     )
 }
 
 export default function Listings(){
-
-    // useEffect(() =>{
-    //     let promise = getListingData(pageNumber);
-    //     generateFilters("filter-type");
-    //     generateFilters("filter-location");
-    //     generateFilters("filter-age");
-    //     generateFilters("filter-gender");
-    //     generateFilters("filter-size");
-    //     generateFilters("filter-furlen");
-    // })
 
     function usePrevious(value) {
         const ref = useRef();
@@ -167,9 +155,11 @@ export default function Listings(){
 
     const [pageLoaded, setPageLoaded] = useState(false);
     const [pageNumber, setPageNumber] = useState(1);
-    const [ffListings, setFFListings] = useState([]);
-    const [pfListings, setPFListings] = useState([]);
+    const [ffListings, setFFListings] = useState(null);
+    const [pfListings, setPFListings] = useState(null);
     const [petListings, setPetListings] = useState( null);
+
+
     const [filters, setFilters] = useState({
         type: "all",
         location:{
@@ -194,6 +184,8 @@ export default function Listings(){
     }, [filters.type]);
 
     const [applyFilter, setApplyFilter] = useState(false);
+
+
     const prevPage = usePrevious(pageNumber);
     const prevListings = usePrevious(petListings);
     const prevFFListings = usePrevious(ffListings);
@@ -207,6 +199,7 @@ export default function Listings(){
             let promise = getListingData(pageNumber);
             generateFilters("filter-type");
             generateFilters("filter-location");
+            setApplyFilter(true);
             setPageLoaded(true);
         }
         else if(prevPage !== pageNumber){
@@ -214,13 +207,22 @@ export default function Listings(){
         }
         else if(prevListings !== petListings){
             setApplyFilter(false);
-            console.log(petListings)
         }
-        if(prevFFListings !== ffListings || prevpfListings !== pfListings){
+        // if(prevFFListings !== ffListings || prevpfListings !== pfListings){
+        //     let newCombinedListings = ffListings.concat(pfListings);
+        //     setPetListings(newCombinedListings);
+        // }
+    }, [pageLoaded, pageNumber, petListings]);
+    useEffect(() =>{
+        if(ffListings && pfListings && (prevFFListings !== ffListings)){
             let newCombinedListings = ffListings.concat(pfListings);
-            console.log(newCombinedListings);
+            setPetListings(newCombinedListings);
+            console.log(newCombinedListings)
         }
-    });
+    }, [ffListings, pfListings]);
+
+    const [cardList, setCardList] = useState([]);
+    const prevCardList = usePrevious(cardList);
 
     async function getListingData(pageNum){
         let newPFListings = await getFilteredListings(filters,10, pageNum);
@@ -230,24 +232,51 @@ export default function Listings(){
 
     async function getFFListings(filters, pageNum) {
         let listingData = [];
-        let docRef =  firestore.collection("PetInfo")
-            .doc("PublicListings")
-            .collection("AdoptionList")
-            .doc("PetTypes").collection("cat");
-        docRef.get()
-            .then((querySnapshot) => {
-            querySnapshot.forEach((doc) => {
-                // doc.data() is never undefined for query doc snapshots
-                console.log(doc.id, " => ", doc.data());
-                listingData.push(doc.data());
-            })
-        }).then(() => setFFListings(listingData));
+        if(filters.type === "all"){
+            console.log("FF all")
+            firestore.collection("PetInfo")
+                .doc("PublicListings")
+                .collection("AdoptionList")
+                .doc("PetTypes").collection("dog").get()
+                .then((querySnapshot) => {
+                    querySnapshot.forEach((doc) => {
+                        // doc.data() is never undefined for query doc snapshots
+                        listingData.push(doc.data());
+                    })
+                }).then(() => {
+                    firestore.collection("PetInfo")
+                        .doc("PublicListings")
+                        .collection("AdoptionList")
+                        .doc("PetTypes").collection("cat").get()
+                        .then((querySnapshot) => {
+                            querySnapshot.forEach((doc) => {
+                                // doc.data() is never undefined for query doc snapshots
+                                listingData.push(doc.data());
+                                console.log(doc.data());
+                            })}).then(() => {setFFListings(listingData); console.log(listingData)});
+                }
+                )
+        } else {
+            console.log("FF " + filters.type)
+            let docRef =  firestore.collection("PetInfo")
+                .doc("PublicListings")
+                .collection("AdoptionList")
+                .doc("PetTypes").collection(filters.type);
+            docRef.get()
+                .then((querySnapshot) => {
+                    querySnapshot.forEach((doc) => {
+                        // doc.data() is never undefined for query doc snapshots
+                        console.log(doc.id, " => ", doc.data());
+                        listingData.push(doc.data());
+                    })
+                }).then(() => {setFFListings(listingData); console.log(listingData)});
+        }
     }
 
     function generateCards(){
-        let cardList = petListings.map(pet => <PetCard petInfo={pet} />);
+        let cardList = petListings.filter(pet => (pet.pet_data || pet.id)).map(pet => <PetCard petInfo={pet} />);
         return(
-            <>{cardList}</>
+            <div>{cardList}</div>
         )
     }
 

@@ -105,7 +105,7 @@
   </div>
 </body>
 <script>
-    var title1 = "", title2 = "", long1 = "", lat1 = "", long2 = "", lat2 = "";
+    var title1 = "", title2 = "", long1 = "", lat1 = "", long2 = "", lat2 = ""; var us_location = "";
 
     var platform = new H.service.Platform({
         apikey: `cEmKn4p2fsUDNYX6qesi52C3blJ03LztzekKRTIB9EE` // replace with your api key
@@ -125,6 +125,20 @@
       )
       .then((res) => res.json())
       .then((json) => {
+        //console.log(json);
+        console.log("-------------------------");
+        
+
+        let x = json.items;
+        var y = "";
+        //console.log(json.items);
+        Object.values(json.items).forEach(key => {
+          //console.log(key, json.items[key]);
+          y = key;
+        });
+       
+
+
         if (json.length != 0) {
           document.getElementById("list").style.display = "block";
           document.getElementById("list").innerHTML = ``;

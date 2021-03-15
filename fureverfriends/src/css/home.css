@@ -47,6 +47,30 @@ img {
   left: 40%;
   top: 87%;
 }
+.locationInput {
+  display: none;
+  width: 40%;
+}
+.locationInputEnabled {
+  display: inline;
+  width: 40%;
+  margin: -10% 10% 10% 8%;
+}
+.lc {
+  text-transform: capitalize;
+}
+#addPadding {
+  margin-bottom: 2vw;
+}
+[type="radio"]:checked + span:after,
+[type="radio"].with-gap:checked + span:before,
+[type="radio"].with-gap:checked + span:after {
+  border: 2px solid white;
+}
+[type="radio"]:checked + span:after,
+[type="radio"].with-gap:checked + span:after {
+  background-color: white;
+}
 /*.search-or-quiz-wrap {
     background-color: #e1e1e1;
     margin-top: -0.25%;

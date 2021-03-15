@@ -492,7 +492,6 @@ export default function NewListing() {
     return (
         <div className="create-profile">
             <div className="listings-banner-wrap">
-                <div className="listings-banner-img-wrap"></div>
             </div>
             <div className="container">
             <div className="listings-heading center">

@@ -86,7 +86,6 @@ function handleinput (props){ //access to input that calls it
         <div className="actionsnav">
 
             <div className="listings-banner-wrap">
-                <Header/>
                 <div className="listings-banner-img-wrap"></div>
             </div>
 
