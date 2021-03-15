@@ -13,13 +13,13 @@ export default function UserProfileRead() {
 
 
 
-    const [userInfo, setuserInfo] = useState({ //setstate is async
-        // userID : {currentUser:userInfo},//currentUser.uid, //user id should be givennnnnn -- primary key
-        // userName :{currentUser:userInfo},
-        // userLocation : {currentUser:userInfo}, //zip
-        // userPhoneNum : {currentUser:userInfo},
-        // userAccountType :{currentUser:userInfo},
-        // userBio : {currentUser:userInfo}
+    const [userInfo, setuserInfo] = useState({//setstate is async
+        userID : {currentUser:userInfo},//currentUser.uid, //user id should be givennnnnn -- primary key
+        userName :{currentUser:userInfo},
+        userLocation : {currentUser:userInfo}, //zip
+        userPhoneNum : {currentUser:userInfo},
+        userAccountType :{currentUser:userInfo},
+        userBio : {currentUser:userInfo}
     });
 
     function handleinput (props){ //access to input that calls it
