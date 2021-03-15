@@ -9,7 +9,7 @@ import {useAuth} from "./AuthContext";
 
 
 export default function UserProfile() {
-    // const {currentUser} = useAuth()
+    const {USER, handleSetUSER, setUSER} = useAuth()
 const [userInfo, setuserInfo] = useState({ //setstate is async
     userID : " ",//currentUser.uid, //user id should be givennnnnn -- primary key
     userName : " ",
@@ -29,7 +29,9 @@ function handleinput (props){ //access to input that calls it
     setuserInfo({...userInfo, [id]:value})
     console.log(userInfo)
 }
-function saveuserprofile (){
+
+//DON'T USE ADD, USE UPDATE - we don't want to add new users, just update them.
+    function saveuserprofile (){
     firestore.collection("UserInfo")
         .add(userInfo)//statevariaABLE
         .then((docRef) => {
@@ -66,35 +68,49 @@ function saveuserprofile (){
                             <div className="userinfoform">
                                 <form id="userinfo">
                                     <br/>
-                                    <div id="username">
-                                        <label htmlFor="name">User name: </label>
-                                        <input type="text" id="userID" name="user_uname" onChange={handleinput}/>
+                                    <div className="input-field col s12">
+                                        <input type="text" id="username" name="username"
+                                               defaultValue={USER.username}
+                                               onChange={handleinput}/>
+                                        <label htmlFor="username">Enter New Username</label>
                                     </div>
-                                    <div id="username">
-                                        <label htmlFor="name">Name: </label>
-                                        <input type="text" id="userName" name="user_name" onChange={handleinput}/>
+                                    <div className="input-field col s12">
+                                        <input type="text" id="first_name" name="first_name"
+                                               defaultValue={USER.first_name}
+                                               onChange={handleinput}/>
+                                        <label htmlFor="first_name">Enter Your First Name:</label>
                                     </div>
-
-                                    <br/>
-                                    <div id="userlocation">
-                                        <label htmlFor="location">Location: </label>
-                                        <input type="text" id="userLocation" name="user_loc" onChange={handleinput}/>
+                                    <div className="input-field col s12">
+                                        <input type="text" id="last_name" name="last_name"
+                                               defaultValue={USER.last_name}
+                                               onChange={handleinput}/>
+                                        <label htmlFor="last_name">Enter Your Last Name:</label>
                                     </div>
-                                    <br/>
-                                    <div id="usernumber">
-                                        <label htmlFor="mail">Phone Number: </label>
-                                        <input type="email" id="userPhoneNum" name="user_email" onChange={handleinput}/>
+                                    <div className="input-field col s12">
+                                        <input type="email" id="email" name="email"
+                                               defaultValue={USER.email}
+                                               onChange={handleinput}/>
+                                        <label htmlFor="email">Enter Your Email Address:</label>
                                     </div>
-                                    <br/>
-                                    <div id="useraccount">
-                                        <label htmlFor="accounts" class = "input-field col s12" > Account Type: </label>
-                                        <select name="userAccountType" id="accounts">
-                                            {/*<option value="userAccountType"> Adopter</option>*/}
-                                            {/*<option value="userAccountType"> Pet Owner</option>*/}
-                                            <option value="" disabled selected>Choose your option</option>
-                                            <option value="1">Adopter</option>
-                                            <option value="2">Pet Owner</option>
+                                    <div className="input-field col s12">
+                                        <input type="tel" id="phone_number" name="phone_number"
+                                               defaultValue={USER.phone_number}
+                                               onChange={handleinput}/>
+                                        <label htmlFor="phone_number">Enter Your Phone Number:</label>
+                                    </div>
+                                    <div className="input-field col s12">
+                                        <select id="account_type" onChange={handleinput}>
+                                            <option value="Adopter">Adopter</option>
+                                            <option value="Private Owner">Private Owner</option>
+                                            <option value="Organization">Organization</option>
                                         </select>
+                                        <label>I am signing up as:</label>
+                                    </div>
+                                    <div className="input-field col s12">
+                                        <input type="number" id="user_zip" name="user_zip"
+                                               defaultValue={USER.user_zip}
+                                               onChange={handleinput}/>
+                                        <label htmlFor="user_zip">Enter Your Zip Code:</label>
                                     </div>
 
                                     <br/>

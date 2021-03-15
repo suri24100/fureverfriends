@@ -16,13 +16,15 @@ export default function CreateAccount(){
         M.AutoInit();
     })
 
-    const [username, setUsername] = useState('');
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [email, setEmail] = useState('');
-    const [phone, setPhone] = useState('');
-    const [accountType, setAccountType] = useState('');
-    const [zip, setZip] = useState('');
+
+
+    // const [username, setUsername] = useState('');
+    // const [firstName, setFirstName] = useState('');
+    // const [lastName, setLastName] = useState('');
+    // const [email, setEmail] = useState('');
+    // const [phone, setPhone] = useState('');
+    // const [accountType, setAccountType] = useState('');
+    // const [zip, setZip] = useState('');
     const [password, setPassword] = useState('');
     const [passwordConfirm, setPasswordConfirm] = useState('');
     const [error, setError] = useState('');
@@ -31,17 +33,18 @@ export default function CreateAccount(){
     const [passwordError, setPasswordError] = useState('');
     const [passwordErrorConfirm, setPasswordErrorConfirm] = useState('');
     const [loading, setLoading] = useState(false);
-    const { signup } = useAuth();
+    const { signup, USER, handleSetUSER } = useAuth();
     const history = useHistory();
 
+
     const clearInputs = () =>{
-        setUsername('');
-        setFirstName('');
-        setLastName('');
-        setEmail('');
-        setPhone('');
-        setAccountType('');
-        setZip('');
+        // setUsername('');
+        // setFirstName('');
+        // setLastName('');
+        // setEmail('');
+        // setPhone('');
+        // setAccountType('');
+        // setZip('');
         setPassword('');
         setPasswordConfirm('');
         setPassword('');
@@ -55,6 +58,13 @@ export default function CreateAccount(){
         setPasswordErrorConfirm('');
     }
 
+    function handleOnChange(e){
+        const id = e.target.id;
+        const value = e.target.value;
+        handleSetUSER(id,value);
+        console.log(USER)
+    }
+
     async function handleSignUp(e) {
         e.preventDefault();
 
@@ -64,7 +74,7 @@ export default function CreateAccount(){
             setLoading(false);
             return setPasswordErrorConfirm("Passwords do not match");
         }
-        const snapshot = await firestore.collection("UserInfo").where("Username", "==", username).get();
+        const snapshot = await firestore.collection("UserInfo").where("Username", "==", USER.username).get();
         if(!snapshot.empty)
         {
             clearErrors();
@@ -76,7 +86,7 @@ export default function CreateAccount(){
         try {
             clearErrors();
             setLoading(true);
-            await signup(email, password);
+            await signup(USER.email, password);
             saveUser();
             clearInputs();
             history.push('/CreateAccountConfirmation');
@@ -95,21 +105,9 @@ export default function CreateAccount(){
     }
 
     function saveUser(){
-        firestore.collection("UserInfo").add({
-            Username: username,
-            FirstName: firstName,
-            LastName: lastName,
-            Email: email,
-            PhoneNumber: phone,
-            AccountType: accountType,
-            UserZip: zip,
-            UserBio: ""
-        })
-            .then((docRef) => {
-                console.log("Document written with ID: ", docRef.id);
-            })
-            .catch((error) => {
-                console.error("Error adding document: ", error);
+        firestore.collection("UserInfo").doc(USER.username).set(USER)
+            .then(() => {
+                console.log("Document successfully written!");
             });
     }
 
@@ -133,38 +131,38 @@ export default function CreateAccount(){
                             <div className="row body-row">
                                 <div className="input-field col s12">
                                     <input type="text" id="username" name="username"
-                                           value={username}
-                                           onChange={(e) => setUsername(e.target.value)}/>
+                                           value={USER.username}
+                                           onChange={handleOnChange}/>
                                    <label htmlFor="username">Enter New Username</label>
                                     <p className="errorMsg">{usernameError}</p>
                                 </div>
                                 <div className="input-field col s12">
-                                    <input type="text" id="firstName" name="firstName"
-                                           value={firstName}
-                                           onChange={(e) => setFirstName(e.target.value)}/>
-                                    <label htmlFor="firstName">Enter Your First Name:</label>
+                                    <input type="text" id="first_name" name="first_name"
+                                           value={USER.first_name}
+                                           onChange={handleOnChange}/>
+                                    <label htmlFor="first_name">Enter Your First Name:</label>
                                 </div>
                                 <div className="input-field col s12">
-                                    <input type="text" id="lastName" name="lastName"
-                                           value={lastName}
-                                           onChange={(e) => setLastName(e.target.value)}/>
-                                    <label htmlFor="lastName">Enter Your Last Name:</label>
+                                    <input type="text" id="last_name" name="last_name"
+                                           value={USER.last_name}
+                                           onChange={handleOnChange}/>
+                                    <label htmlFor="last_name">Enter Your Last Name:</label>
                                 </div>
                                 <div className="input-field col s12">
                                     <input type="email" id="email" name="email"
-                                           value={email}
-                                           onChange={(e) => setEmail(e.target.value)}/>
+                                           value={USER.email}
+                                           onChange={handleOnChange}/>
                                            <label htmlFor="email">Enter Your Email Address:</label>
                                     <p className="errorMsg">{emailError}</p>
                                 </div>
                                 <div className="input-field col s12">
-                                    <input type="tel" id="phone" name="phone"
-                                           value={phone}
-                                           onChange={(e) => setPhone(e.target.value)}/>
-                                    <label htmlFor="phone">Enter Your Phone Number:</label>
+                                    <input type="tel" id="phone_number" name="phone_number"
+                                           value={USER.phone_number}
+                                           onChange={handleOnChange}/>
+                                    <label htmlFor="phone_number">Enter Your Phone Number:</label>
                                 </div>
                                 <div className="input-field col s12">
-                                    <select id="account-type" onChange={(e) => setAccountType(e.target.value)}>
+                                    <select id="account_type" onChange={handleOnChange}>
                                         <option value="Adopter">Adopter</option>
                                         <option value="Private Owner">Private Owner</option>
                                         <option value="Organization">Organization</option>
@@ -172,10 +170,10 @@ export default function CreateAccount(){
                                     <label>I am signing up as:</label>
                                 </div>
                                 <div className="input-field col s12">
-                                    <input type="number" id="zip" name="zip"
-                                           value={zip}
-                                           onChange={(e) => setZip(e.target.value)}/>
-                                    <label htmlFor="zip">Enter Your Zip Code:</label>
+                                    <input type="number" id="user_zip" name="user_zip"
+                                           value={USER.user_zip}
+                                           onChange={handleOnChange}/>
+                                    <label htmlFor="user_zip">Enter Your Zip Code:</label>
                                 </div>
                                 <div className="input-field col s12">
                                     <input type="password" id="pass" name="pass"

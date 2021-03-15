@@ -1,0 +1,10 @@
+.quiz-banner-wrap {
+    text-align: center;
+    color: #ffffff;
+    position: relative;
+    width: 100%;
+    height: 38.5vw;
+    background-image: url("./quiz-banner.jpg");
+    background-size: 100%;
+    background-attachment: fixed;
+}
