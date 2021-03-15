@@ -8,20 +8,17 @@ import {useAuth} from './AuthContext';
 
 
 export default function CreateAccountConfirmation(){
-    const {currentUser} = useAuth();
+    const {USER} = useAuth();
 
     return (
-
-        <div>
-            <div className="listings-banner-wrap">
-                <Header/>
-                <div className="listings-banner-img-wrap"></div>
-            </div>
+        <div className="create-account-body">
             <div className="signing-banner-wrap">
-                <div className="signing-banner-img-wrap"></div>
-                <div className="invis-wrap">
-                    <div className="info-wrap">
-                        <div className="logo-wrap">
+                <Header/>
+            </div>
+            <div className="create-account container">
+                <div className="row">
+                    <div className="col s12 m5 offset-m7 form-box">
+                        <div className="row logo-wrap center">
                             <img src="paw-green.svg"/>
                             <h3>Furever Friends</h3>
                             <img src="paw-green.svg"/>
@@ -33,7 +30,7 @@ export default function CreateAccountConfirmation(){
                                 <h2>Your account has been created!</h2>
 
                                 <p>You can now favorite pets, message others, get alerts for new match and application statuses.
-                                    The email registered to your account is {currentUser.email}. For more information regarding
+                                    The email registered to your account is {USER.email}. For more information regarding
                                     your account, click on the My Account button below
                                 </p>
                             </form>

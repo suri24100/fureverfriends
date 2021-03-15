@@ -892,69 +892,68 @@ module.exports = Object.freeze ({
     }
     },
     BARNYARD : {
-    "name":"Barnyard",
-    "coats":[
-        "Short",
-        "Long"
-    ],
-    "colors":[
-        "Agouti",
-        "Black",
-        "Black & White",
-        "Brindle",
-        "Brown",
-        "Gray",
-        "Pink",
-        "Red",
-        "Roan",
-        "Spotted",
-        "Tan",
-        "White"
-    ],
-    "genders":[
-        "Male",
-        "Female"
-    ],
-    "breeds":[
-        {"name":"Alpaca","_links":{"type":{"href":"/v2/types/barnyard"}}},
-        {"name":"Alpine","_links":{"type":{"href":"/v2/types/barnyard"}}},
-        {"name":"Angora","_links":{"type":{"href":"/v2/types/barnyard"}}},
-        {"name":"Angus","_links":{"type":{"href":"/v2/types/barnyard"}}},
-        {"name":"Barbados","_links":{"type":{"href":"/v2/types/barnyard"}}},
-        {"name":"Boer","_links":{"type":{"href":"/v2/types/barnyard"}}},
-        {"name":"Cow","_links":{"type":{"href":"/v2/types/barnyard"}}},
-        {"name":"Duroc","_links":{"type":{"href":"/v2/types/barnyard"}}},
-        {"name":"Goat","_links":{"type":{"href":"/v2/types/barnyard"}}},
-        {"name":"Hampshire","_links":{"type":{"href":"/v2/types/barnyard"}}},
-        {"name":"Holstein","_links":{"type":{"href":"/v2/types/barnyard"}}},
-        {"name":"Jersey","_links":{"type":{"href":"/v2/types/barnyard"}}},
-        {"name":"LaMancha","_links":{"type":{"href":"/v2/types/barnyard"}}},
-        {"name":"Landrace","_links":{"type":{"href":"/v2/types/barnyard"}}},
-        {"name":"Llama","_links":{"type":{"href":"/v2/types/barnyard"}}},
-        {"name":"Merino","_links":{"type":{"href":"/v2/types/barnyard"}}},
-        {"name":"Mouflon","_links":{"type":{"href":"/v2/types/barnyard"}}},
-        {"name":"Myotonic / Fainting","_links":{"type":{"href":"/v2/types/barnyard"}}},
-        {"name":"Nigerian Dwarf","_links":{"type":{"href":"/v2/types/barnyard"}}},
-        {"name":"Nubian","_links":{"type":{"href":"/v2/types/barnyard"}}},
-        {"name":"Oberhasli","_links":{"type":{"href":"/v2/types/barnyard"}}},
-        {"name":"Pig","_links":{"type":{"href":"/v2/types/barnyard"}}},
-        {"name":"Pot Bellied","_links":{"type":{"href":"/v2/types/barnyard"}}},
-        {"name":"Pygmy","_links":{"type":{"href":"/v2/types/barnyard"}}},
-        {"name":"Saanen","_links":{"type":{"href":"/v2/types/barnyard"}}},
-        {"name":"Sheep","_links":{"type":{"href":"/v2/types/barnyard"}}},
-        {"name":"Shetland","_links":{"type":{"href":"/v2/types/barnyard"}}},
-        {"name":"Toggenburg","_links":{"type":{"href":"/v2/types/barnyard"}}},
-        {"name":"Vietnamese Pot Bellied","_links":{"type":{"href":"/v2/types/barnyard"}}},
-        {"name":"Yorkshire","_links":{"type":{"href":"/v2/types/barnyard"}}}
-    ],
-    "_links":{
-        "self":{
-            "href":"/v2/types/barnyard"
-        },
-        "breeds":{
-            "href":"/v2/types/barnyard/breeds"
+        "name": "Barnyard",
+        "coats": [
+            "Short",
+            "Long"
+        ],
+        "colors": [
+            "Agouti",
+            "Black",
+            "Black & White",
+            "Brindle",
+            "Brown",
+            "Gray",
+            "Pink",
+            "Red",
+            "Roan",
+            "Spotted",
+            "Tan",
+            "White"
+        ],
+        "genders": [
+            "Male",
+            "Female"
+        ],
+        "breeds": [
+            {"name": "Alpaca", "_links": {"type": {"href": "/v2/types/barnyard"}}},
+            {"name": "Alpine", "_links": {"type": {"href": "/v2/types/barnyard"}}},
+            {"name": "Angora", "_links": {"type": {"href": "/v2/types/barnyard"}}},
+            {"name": "Angus", "_links": {"type": {"href": "/v2/types/barnyard"}}},
+            {"name": "Barbados", "_links": {"type": {"href": "/v2/types/barnyard"}}},
+            {"name": "Boer", "_links": {"type": {"href": "/v2/types/barnyard"}}},
+            {"name": "Cow", "_links": {"type": {"href": "/v2/types/barnyard"}}},
+            {"name": "Duroc", "_links": {"type": {"href": "/v2/types/barnyard"}}},
+            {"name": "Goat", "_links": {"type": {"href": "/v2/types/barnyard"}}},
+            {"name": "Hampshire", "_links": {"type": {"href": "/v2/types/barnyard"}}},
+            {"name": "Holstein", "_links": {"type": {"href": "/v2/types/barnyard"}}},
+            {"name": "Jersey", "_links": {"type": {"href": "/v2/types/barnyard"}}},
+            {"name": "LaMancha", "_links": {"type": {"href": "/v2/types/barnyard"}}},
+            {"name": "Landrace", "_links": {"type": {"href": "/v2/types/barnyard"}}},
+            {"name": "Llama", "_links": {"type": {"href": "/v2/types/barnyard"}}},
+            {"name": "Merino", "_links": {"type": {"href": "/v2/types/barnyard"}}},
+            {"name": "Mouflon", "_links": {"type": {"href": "/v2/types/barnyard"}}},
+            {"name": "Myotonic / Fainting", "_links": {"type": {"href": "/v2/types/barnyard"}}},
+            {"name": "Nigerian Dwarf", "_links": {"type": {"href": "/v2/types/barnyard"}}},
+            {"name": "Nubian", "_links": {"type": {"href": "/v2/types/barnyard"}}},
+            {"name": "Oberhasli", "_links": {"type": {"href": "/v2/types/barnyard"}}},
+            {"name": "Pig", "_links": {"type": {"href": "/v2/types/barnyard"}}},
+            {"name": "Pot Bellied", "_links": {"type": {"href": "/v2/types/barnyard"}}},
+            {"name": "Pygmy", "_links": {"type": {"href": "/v2/types/barnyard"}}},
+            {"name": "Saanen", "_links": {"type": {"href": "/v2/types/barnyard"}}},
+            {"name": "Sheep", "_links": {"type": {"href": "/v2/types/barnyard"}}},
+            {"name": "Shetland", "_links": {"type": {"href": "/v2/types/barnyard"}}},
+            {"name": "Toggenburg", "_links": {"type": {"href": "/v2/types/barnyard"}}},
+            {"name": "Vietnamese Pot Bellied", "_links": {"type": {"href": "/v2/types/barnyard"}}},
+            {"name": "Yorkshire", "_links": {"type": {"href": "/v2/types/barnyard"}}}
+        ],
+        "_links": {
+            "self": {
+                "href": "/v2/types/barnyard"
+            },
+            "breeds": {
+                "href": "/v2/types/barnyard/breeds"
+            }
         }
-    }
-}
-
+    },
 });

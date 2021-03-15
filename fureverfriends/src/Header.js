@@ -6,32 +6,19 @@ import M from "materialize-css";
 import './css/style.css';
 //need this for changing log in to log out in nav
 import { useAuth } from "./AuthContext";
-import {auth, firestore} from "./ffdb";
 
 export default function Header() {
-    //everything has to be in one div
-    //put the \> after image
-    //change class to className
-    // const [userState, setUserState] = useState( {
-    //         logged_in: false
-    //     });
-    // function handleUserState() {
-    //     let value = !userState.logged_in;
-    //     setUserState({
-	// 		...userState,
-	// 		logged_in : value
-	// 	});
-    // }
-    M.AutoInit();
+
     const [error, setError] = useState('')
-    const { currentUser, logout } = useAuth();
+    const { currentUser, logout, USER, handleClearUSER} = useAuth();
     const [loading, setLoading] = useState(false);
 
     // loading has been initialized or changed, check for user info
     useEffect(() => {
-        if(currentUser && username === ''){
-            getUsername();
-        }
+        M.AutoInit();
+        // if(currentUser && username === ''){
+        //     getUsername();
+        // }
         console.log("Reloaded");
     })
 
@@ -45,22 +32,23 @@ export default function Header() {
 
         try {
             await logout();
+            handleClearUSER();
         } catch {
             setError("Failed to log out");
         }
     }
 
-    async function getUsername()
-    {
-        setLoading(true);
-        setEmail(currentUser.email)
-        if(email){
-            const snapshot = await firestore.collection("UserInfo")
-                .where("Email", "==", email).get();
-            await setUsername(snapshot.docs[0].data()["Username"]);
-        }
-        setLoading(false);
-    }
+    // async function getUsername()
+    // {
+    //     setLoading(true);
+    //     setEmail(currentUser.email)
+    //     if(email){
+    //         const snapshot = await firestore.collection("UserInfo")
+    //             .where("Email", "==", email).get();
+    //         await setUsername(snapshot.docs[0].data()["Username"]);
+    //     }
+    //     setLoading(false);
+    // }
 
 
 
@@ -78,7 +66,7 @@ export default function Header() {
                     {currentUser ? <Link to="/Home" onClick={handleLogOut}>Log Out</Link> : <Link to="/login">Log In</Link> }
                     <img src={notification_icon} alt="Notifications"/>
                     <img src={messages_icon} alt="Messages"/>
-                    {currentUser ? <Link disable = {loading} to="/UserProfile">{username}</Link> : <></>}
+                    {currentUser ? <Link disable = {loading} to="/UserProfile">{USER.username}</Link> : <></>}
                 </div>
             </div>
             <div className="navbar hide-on-large-only">
