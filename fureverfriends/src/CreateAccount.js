@@ -87,7 +87,6 @@ export default function CreateAccount(){
             clearErrors();
             setLoading(true);
             await signup(USER.email, password);
-            // setUser();
             saveUser();
             clearInputs();
             history.push('/CreateAccountConfirmation');

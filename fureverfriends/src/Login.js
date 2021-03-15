@@ -16,7 +16,7 @@ export default function Login(){
     const [emailError, setEmailError] = useState('');
     const [passwordError, setPasswordError] = useState('');
     const [loading, setLoading] = useState(false);
-    const { login } = useAuth();
+    const { login, USER, handleSetUSER, setUSER } = useAuth();
     const history = useHistory();
 
     const clearInputs = () =>{
@@ -29,22 +29,15 @@ export default function Login(){
         setPasswordError('');
     }
 
-    // function getUser(e){
-    //     const id = e.target.id
-    //     const value = e.target.value //value vs valueOf
-    //     // console.log(id)
-    //     // console.log(value)
-    //     setState({...USER,
-    //         [id]:value})
-    //     console.log(USER)
-    // }
-
     async function getUser(){
 
             const snapshot = await firestore.collection("UserInfo")
-                .where("Email", "==", email).get();
+                .where("email", "==", email).get();
             // await setUsername(snapshot.docs[0].data()["Username"]);
-        console.log("User: " + snapshot.docs[0].data()["Username"])
+        // snapshot.docs[0].data().forEach()
+        setUSER(snapshot.docs[0].data());
+
+        console.log(USER);
 
     }
 
@@ -55,7 +48,7 @@ export default function Login(){
             clearErrors();
             setLoading(true);
             await login(email, password);
-            getUser();
+            await getUser();
             clearInputs();
             history.push("/Home")
         }catch(err) {

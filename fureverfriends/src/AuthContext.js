@@ -46,7 +46,7 @@ export function AuthProvider({ children }) {
             favorites: [],
             longitude: "",
             latitude : ""
-        })
+        });
     }
 
     function signup(email, password) {
@@ -92,7 +92,8 @@ export function AuthProvider({ children }) {
         updatePassword,
         USER,
         handleSetUSER,
-        handleClearUSER
+        handleClearUSER,
+        setUSER
     }
 
     return (

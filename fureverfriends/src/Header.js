@@ -6,7 +6,6 @@ import M from "materialize-css";
 import './css/style.css';
 //need this for changing log in to log out in nav
 import { useAuth } from "./AuthContext";
-import {auth, firestore} from "./ffdb";
 
 export default function Header() {
 
