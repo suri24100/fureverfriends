@@ -120,3 +120,7 @@ li {
 {
  max-width: 20%;
 }
+
+.create-profile form.row{
+  background: none;
+}
