@@ -11,17 +11,14 @@ export default function CreateAccountConfirmation(){
     const {USER} = useAuth();
 
     return (
-
-        <div>
-            <div className="listings-banner-wrap">
-                <Header/>
-                <div className="listings-banner-img-wrap"></div>
-            </div>
+        <div className="create-account-body">
             <div className="signing-banner-wrap">
-                <div className="signing-banner-img-wrap"></div>
-                <div className="invis-wrap">
-                    <div className="info-wrap">
-                        <div className="logo-wrap">
+                <Header/>
+            </div>
+            <div className="create-account container">
+                <div className="row">
+                    <div className="col s12 m5 offset-m7 form-box">
+                        <div className="row logo-wrap center">
                             <img src="paw-green.svg"/>
                             <h3>Furever Friends</h3>
                             <img src="paw-green.svg"/>
