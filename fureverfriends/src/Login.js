@@ -33,8 +33,6 @@ export default function Login(){
 
             const snapshot = await firestore.collection("UserInfo")
                 .where("email", "==", email).get();
-            // await setUsername(snapshot.docs[0].data()["Username"]);
-        // snapshot.docs[0].data().forEach()
         setUSER(snapshot.docs[0].data());
 
         console.log(USER);
