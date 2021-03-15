@@ -214,9 +214,10 @@ export default function Listings(){
         // }
     }, [pageLoaded, pageNumber, petListings]);
     useEffect(() =>{
-        if(ffListings && pfListings){
+        if(ffListings && pfListings && (prevFFListings !== ffListings)){
             let newCombinedListings = ffListings.concat(pfListings);
             setPetListings(newCombinedListings);
+            console.log(newCombinedListings)
         }
     }, [ffListings, pfListings]);
 
@@ -231,29 +232,49 @@ export default function Listings(){
 
     async function getFFListings(filters, pageNum) {
         let listingData = [];
-        let docRef =  firestore.collection("PetInfo")
-            .doc("PublicListings")
-            .collection("AdoptionList")
-            .doc("PetTypes").collection("cat");
-        docRef.get()
-            .then((querySnapshot) => {
-            querySnapshot.forEach((doc) => {
-                // doc.data() is never undefined for query doc snapshots
-                console.log(doc.id, " => ", doc.data());
-                listingData.push(doc.data());
-            })
-        }).then(() => setFFListings(listingData));
+        if(filters.type === "all"){
+            console.log("FF all")
+            firestore.collection("PetInfo")
+                .doc("PublicListings")
+                .collection("AdoptionList")
+                .doc("PetTypes").collection("dog").get()
+                .then((querySnapshot) => {
+                    querySnapshot.forEach((doc) => {
+                        // doc.data() is never undefined for query doc snapshots
+                        listingData.push(doc.data());
+                    })
+                }).then(() => {
+                    firestore.collection("PetInfo")
+                        .doc("PublicListings")
+                        .collection("AdoptionList")
+                        .doc("PetTypes").collection("cat").get()
+                        .then((querySnapshot) => {
+                            querySnapshot.forEach((doc) => {
+                                // doc.data() is never undefined for query doc snapshots
+                                listingData.push(doc.data());
+                                console.log(doc.data());
+                            })}).then(() => {setFFListings(listingData); console.log(listingData)});
+                }
+                )
+        } else {
+            console.log("FF " + filters.type)
+            let docRef =  firestore.collection("PetInfo")
+                .doc("PublicListings")
+                .collection("AdoptionList")
+                .doc("PetTypes").collection(filters.type);
+            docRef.get()
+                .then((querySnapshot) => {
+                    querySnapshot.forEach((doc) => {
+                        // doc.data() is never undefined for query doc snapshots
+                        console.log(doc.id, " => ", doc.data());
+                        listingData.push(doc.data());
+                    })
+                }).then(() => {setFFListings(listingData); console.log(listingData)});
+        }
     }
 
     function generateCards(){
         let cardList = petListings.filter(pet => (pet.pet_data || pet.id)).map(pet => <PetCard petInfo={pet} />);
-        return(
-            <div>{cardList}</div>
-        )
-    }
-
-    function reloadCards(){
-        console.log(cardList)
         return(
             <div>{cardList}</div>
         )
