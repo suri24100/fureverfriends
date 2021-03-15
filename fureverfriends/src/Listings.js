@@ -7,48 +7,130 @@ import {forEach} from "react-bootstrap/ElementChildren";
 import {Link, useRouteMatch} from "react-router-dom";
 import PFdata from "./api-modules/constants.js";
 import M from "materialize-css";
-
+import placeholder_image from "./images/petProfiles/default-placeholder-image.png";
+import {firestore} from "./ffdb";
 
 function PetCard(props){
     const petInfo = props.petInfo;
-    const [petDetails, setPetDetails] = useState({
-        petfinder_listing: true,       // check whether from petfinder or not
-        id: petInfo.id,
-        name: petInfo.name,
-        photo_url: (petInfo.photos[0]) ? petInfo.photos[0].large : "./images/petProfiles/default-placeholder-image.png",
-        profile_url: petInfo.url,
-        type: petInfo.type,
-        age: petInfo.age,
-        breed: petInfo.breed,
-        location: {
-            zipcode: petInfo.contact.address.postcode,
-            city: petInfo.contact.address.city,
-            state: petInfo.contact.address.state
-        },
-        cared_by: "",
-        gender: petInfo.gender,
-        fur_length: petInfo.coat,
-        personality: petInfo.tags,
-        good_with_pets: "",
-        kid_friendly: "",
-        vaccinated: (petInfo.attributes.shots_current) ? "Yes" : "No",
-        neutered: petInfo.attributes.spayed_neutered,
-        bonded_pair: "",
-        allergy_friendly: ""
-    });
+    let formattedPetInfo = {};
+    // FF pet listing
+    if(petInfo.pet_data){
+        console.log("FF data");
+        formattedPetInfo = {
+            petfinder_listing: false,
+            pet_id: petInfo.pet_data.id,
+            account_info: {
+                id: "",
+                email: ""
+            },
+            listing_type: petInfo.pet_data.listing_type,
+                name: petInfo.pet_data.name,
+                type: petInfo.pet_data.type,
+                age: petInfo.pet_data.age,
+                breed: petInfo.pet_data.breed,
+                gender: petInfo.pet_data.gender,
+                color: petInfo.pet_data.color,
+                fur_length: petInfo.pet_data.fur_length,
+                profile_url: petInfo.pet_data.profile_url,
+                location: {
+                zipcode: petInfo.pet_data.location.zipcode,
+                    city: petInfo.pet_data.location.city,
+                    state: petInfo.pet_data.state
+            },
+            cared_by: petInfo.pet_data.cared_by,
+                contact: {
+                name: petInfo.pet_data.contact.name,
+                email: petInfo.pet_data.contact.email,
+                phone: petInfo.pet_data.contact.phone,
+                website: petInfo.pet_data.website
+            },
+            personality: petInfo.pet_data.personality,
+            good_with_cats: petInfo.pet_data.good_with_cats,
+            good_with_dogs: petInfo.pet_data.good_with_dogs,
+            kid_friendly: petInfo.pet_data.kid_friendly,
+            vaccinated: petInfo.pet_data.vaccinated,
+            spayed_neutered: petInfo.pet_data.spayed_neutered,
+            bonded_pair: petInfo.pet_data.bonded_pair,
+            allergy_friendly: petInfo.pet_data.allergy_friendly,
+            special_needs: petInfo.pet_data.special_needs,
+            adoption_fee: petInfo.pet_data.adoption_fee,
+            tags: petInfo.pet_data.tags,
+            description: petInfo.pet_data.description,
+            listing_created: petInfo.pet_data.listing_created,     // new Date().toJSON()
+            profileFiles: {
+                profilePhoto: (petInfo.profileFiles.profilePhoto.profilePhotoURL) ? petInfo.profileFiles.profilePhoto.profilePhotoURL : placeholder_image,
+                additionalPhotos: (petInfo.profileFiles.additionalPhotos.length > 0) ? petInfo.profileFiles.additionalPhotos : placeholder_image,
+                applicationForm: ""
+            }
+        }
+    }
+    // petfinder listing
+    else if (petInfo) {formattedPetInfo = {
+            petfinder_listing: true,
+            pet_id: petInfo.id,
+            account_info: {
+                id: "",
+                email: ""
+            },
+            listing_type: "AdoptionList",
+            name: petInfo.name,
+            type: petInfo.type,
+            age: petInfo.age,
+            breed: petInfo.breeds.primary,
+            gender: petInfo.gender,
+            color: petInfo.colors.primary,
+            fur_length: petInfo.coat,
+            profile_url: petInfo.url,
+            location: {
+                zipcode: petInfo.contact.address.postcode,
+                city: petInfo.contact.address.city,
+                state: petInfo.contact.address.state
+            },
+            cared_by:"",
+            contact: {
+                name: "",
+                email: petInfo.contact.email,
+                phone: petInfo.contact.phone,
+                website: petInfo.url
+            },
+            personality: petInfo.tags,
+            good_with_cats: petInfo.environment.cats,
+            good_with_dogs: petInfo.environment.dogs,
+            kid_friendly: petInfo.environment.children,
+            vaccinated: petInfo.attributes.shots_current,
+            spayed_neutered: petInfo.attributes.spayed_neutered,
+            bonded_pair: false,
+            allergy_friendly: false,
+            special_needs: petInfo.attributes.special_needs,
+            adoption_fee: false,
+            tags: [],
+            description: petInfo.description,
+            listing_created: petInfo.published_at,     // new Date().toJSON()
+            profileFiles: {
+                profilePhoto: (petInfo.primary_photo_cropped) ? petInfo.primary_photo_cropped.small : placeholder_image,
+                additionalPhotos: petInfo.photos,
+                applicationForm: ""
+            }
+        }
+    }
+    const [petDetails, setPetDetails] = useState(formattedPetInfo);
+    useEffect(() => {console.log(petDetails)}
+    )
 
     function calculateDistance(){
         // TODO: to be filled in later when we have Maps api setup
     }
 
     let match = useRouteMatch();
+    let prefix = petDetails.petfinder_listing ? "PF-" : "FF-";
+    let newURL = `${match.url}/` + petDetails.type + "/profile/" + prefix + petDetails.pet_id;
 
     return (
         <div className="listing-card col s12 m6 l4">
             <div className="card">
                 <div className="card-image">
-                    <Link to={`${match.url}/` + petDetails.type + "/profile/PF-" + petDetails.id} className="profile-link-overlay">
-                        <img src={petDetails.photo_url} />
+                    <Link to={newURL} className="profile-link-overlay">
+                        <img src={petDetails.profileFiles.profilePhoto} />
                     </Link>
                     <a className="btn-floating halfway-fab">
                         <i className="material-icons">favorite_border</i>
@@ -85,6 +167,8 @@ export default function Listings(){
 
     const [pageLoaded, setPageLoaded] = useState(false);
     const [pageNumber, setPageNumber] = useState(1);
+    const [ffListings, setFFListings] = useState([]);
+    const [pfListings, setPFListings] = useState([]);
     const [petListings, setPetListings] = useState( null);
     const [filters, setFilters] = useState({
         type: "all",
@@ -112,6 +196,8 @@ export default function Listings(){
     const [applyFilter, setApplyFilter] = useState(false);
     const prevPage = usePrevious(pageNumber);
     const prevListings = usePrevious(petListings);
+    const prevFFListings = usePrevious(ffListings);
+    const prevpfListings = usePrevious(pfListings);
 
     // SURI: The prevLisings != petListings is called when new pets are
     // retrieved from petfinder. If you need to do something with location
@@ -130,13 +216,32 @@ export default function Listings(){
             setApplyFilter(false);
             console.log(petListings)
         }
+        if(prevFFListings !== ffListings || prevpfListings !== pfListings){
+            let newCombinedListings = ffListings.concat(pfListings);
+            console.log(newCombinedListings);
+        }
     });
 
     async function getListingData(pageNum){
-        let newPetListings = await getFilteredListings(filters,10, pageNum);
-        setPetListings(newPetListings);
-        console.log(newPetListings);
-        console.log(petListings);
+        let newPFListings = await getFilteredListings(filters,10, pageNum);
+        let newFFListings = await getFFListings(filters, pageNum);
+        setPFListings(newPFListings);
+    }
+
+    async function getFFListings(filters, pageNum) {
+        let listingData = [];
+        let docRef =  firestore.collection("PetInfo")
+            .doc("PublicListings")
+            .collection("AdoptionList")
+            .doc("PetTypes").collection("cat");
+        docRef.get()
+            .then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                // doc.data() is never undefined for query doc snapshots
+                console.log(doc.id, " => ", doc.data());
+                listingData.push(doc.data());
+            })
+        }).then(() => setFFListings(listingData));
     }
 
     function generateCards(){

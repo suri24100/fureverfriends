@@ -72,11 +72,6 @@ export default function NewListing() {
     });
 
     function checkFiles(){
-        console.log(formState);
-        console.log(fileState);
-        console.log(profilePhotoURL);
-        console.log(additionalPhotoURLS);
-        console.log(applicationFileURL);
         let url_count = 0;
         if(fileState.total_urls > 0){
             if(fileState.has_profile_img && profilePhotoURL.length > 0){
