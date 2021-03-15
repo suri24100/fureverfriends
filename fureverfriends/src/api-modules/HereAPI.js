@@ -13,7 +13,6 @@ export const DisplayMapFC = () => {
    */
   React.useLayoutEffect(() => {
     // `mapRef.current` will be `undefined` when this hook first runs; edge case that
-    if (!mapRef.current) return;
     const H = window.H;
     const platform = new H.service.Platform({
         apikey: "cEmKn4p2fsUDNYX6qesi52C3blJ03LztzekKRTIB9EE"

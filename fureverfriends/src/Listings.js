@@ -380,7 +380,6 @@ export default function Listings(){
     return (
     <div className="listings-page">
         <div className="banner-wrap">
-            <Header/>
             <div className="banner-img-wrap"></div>
             <div className="heading">
                 <span>Listing your potential new friend</span>

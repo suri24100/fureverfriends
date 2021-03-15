@@ -493,7 +493,6 @@ export default function NewListing() {
     return (
         <div>
             <div className="listings-banner-wrap">
-            <Header/>
             <div className="listings-banner-img-wrap"></div>
             </div>
                 <div className="listings-heading container">

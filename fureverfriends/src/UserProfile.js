@@ -44,7 +44,6 @@ function saveuserprofile (){
         <div className="actionsnav">
 
             <div className="listings-banner-wrap">
-                <Header/>
                 <div className="listings-banner-img-wrap"></div>
             </div>
 

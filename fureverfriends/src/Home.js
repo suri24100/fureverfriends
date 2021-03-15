@@ -99,16 +99,17 @@ export default function Home() {
         }
 
         console.log(newSearchFilter);
+        getLocation(location);
     }
 
     //HERE API STUFF
 
     var title1 = "", title2 = "", long1 = "", lat1 = "", long2 = "", lat2 = "";
 
-    const autosuggest = (e) => {
-        if(e.metaKey){
-          return
-        }
+    const autosuggest = () => {
+        var e = document.getElementById("location");
+
+        if (e != null) {
   
       let searchString = e.value
       let triggered = e.id;
@@ -130,7 +131,7 @@ export default function Home() {
             });
           }
         });
-      }
+      } }
       };
 
       const addMarkerToMap1 = (lat, lng, title) => {
@@ -144,9 +145,25 @@ export default function Home() {
       }; 
 
 
+      //FINDING LONG AND LAT FOR ZIP CODE
+      function getLocation(zip) {
+        const apikey = '317f5c81a3241fbb45bbf57e335d466d';
+        const path = `http://api.openweathermap.org/data/2.5/forecast?zip=${zip}&units=imperial&appid=${apikey}`;
+    
+        fetch(path).then((res) => {
+            return res.json()
+        }).then((json) => {
+            //console.log(JSON.stringify(json,null,2))
+            //console.log(json)
+            console.log(json.city.coord);
+        }).catch((err) => {
+            console.log(err.message)
+        })
+    }
+
+
     return (
     <div>
-        <Header/>
         <div className="banner-wrap">
         <div className="banner-img-wrap">
             {/*<img className="banner-img" src="home-banner.png">*/}
@@ -193,15 +210,12 @@ export default function Home() {
                     </div>
 
                     <div className="listings-form-row">
-                        <label for="location">Location</label>
-                        <input type="text" name="location" id="location" autocomplete="off" onkeyup="autosuggest(this)" autofocus />
-                        <div class="dropdown2">
-                            <ul id="list"></ul>
-                        </div> 
+                        <label for="location">Zip Code</label>
+                        <input type="number" name="location" id="location"/> 
                     </div>
 
                     <div className="search-btn-wrap container">
-                        <button className="search-btn" onClick={() => processFormContents()}>Find my furever friend!</button>
+                    <button className="search-btn" type="button" name="action" onClick={() => processFormContents()}>Search</button>
                     </div>
                 </div>
             </div>

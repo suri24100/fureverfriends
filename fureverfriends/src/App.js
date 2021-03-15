@@ -45,6 +45,7 @@ export default function App() {
     return (
     <div>
         <AuthProvider>
+        <Header />
         <Switch>
             <Route path ="/ForgotPassword">
                 <ForgotPassword/>
@@ -76,8 +77,8 @@ export default function App() {
                 <Home />
             </Route>
         </Switch>
-        </AuthProvider>
         <Footer />
+        </AuthProvider>
 
     </div>
 
