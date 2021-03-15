@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Header from "./Header";
 import './css/style.css';
 import './css/home.css';
@@ -15,6 +15,22 @@ export default function Home() {
             $('select').select();
           });
       });
+      function usePrevious(value) {
+        const ref = useRef();
+        useEffect(() => {
+            ref.current = value;
+        });
+        return ref.current;
+    }
+      const [geoData, setGeoData] = useState({});
+
+      const prevGeoData = usePrevious(geoData);
+
+      useEffect(() => {
+        if(prevGeoData !== geoData){
+            processFormContents();
+        }
+      })
 
       function capitalize(word) {
         return word.charAt(0).toUpperCase() + word.slice(1);
@@ -95,11 +111,13 @@ export default function Home() {
             type: PFdata.TYPES[pettype],
             age: age,
             breed: breed,
-            location: location
+            location: location,
+            geoData: geoData
+            //geodata: geodata
         }
 
         console.log(newSearchFilter);
-        getLocation(location);
+        console.log(geoData);
     }
 
     //HERE API STUFF
@@ -144,22 +162,40 @@ export default function Home() {
         list.style.display = "none";
       }; 
 
-
+      //var geodata = "";
       //FINDING LONG AND LAT FOR ZIP CODE
-      function getLocation(zip) {
+      function getLocationAsync(zip) {
         const apikey = '317f5c81a3241fbb45bbf57e335d466d';
         const path = `http://api.openweathermap.org/data/2.5/forecast?zip=${zip}&units=imperial&appid=${apikey}`;
     
-        fetch(path).then((res) => {
+        return fetch(path)
+        .then((res) => {
             return res.json()
         }).then((json) => {
             //console.log(JSON.stringify(json,null,2))
             //console.log(json)
-            console.log(json.city.coord);
+            //console.log(json.city.coord);
+            //getLocation(json.city.coord)
+            setGeoData(json.city.coord);
+            
         }).catch((err) => {
             console.log(err.message)
         })
     }
+
+    function getLocation() {
+        let location = document.getElementById("location").value;
+        getLocationAsync(location);
+    }
+
+    /*async function getLocationAsync(zip) {
+        const apikey = '317f5c81a3241fbb45bbf57e335d466d';
+        const path = `http://api.openweathermap.org/data/2.5/forecast?zip=${zip}&units=imperial&appid=${apikey}`;
+        const response = await fetch(path, {});
+        const json = await response.json();
+
+        return json.city.coord;
+    }*/
 
 
     return (
@@ -215,7 +251,7 @@ export default function Home() {
                     </div>
 
                     <div className="search-btn-wrap container">
-                    <button className="search-btn" type="button" name="action" onClick={() => processFormContents()}>Search</button>
+                    <button className="search-btn" type="button" name="action" onClick={() => getLocation()}>Search</button>
                     </div>
                 </div>
             </div>
