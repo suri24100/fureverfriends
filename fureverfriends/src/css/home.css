@@ -49,6 +49,18 @@ img {
 }
 .locationInput {
   display: none;
+  width: 40%;
+}
+.locationInputEnabled {
+  display: inline;
+  width: 40%;
+  margin: -10% 10% 10% 8%;
+}
+.lc {
+  text-transform: capitalize;
+}
+#addPadding {
+  margin-bottom: 2vw;
 }
 /*.search-or-quiz-wrap {
     background-color: #e1e1e1;

@@ -32,6 +32,31 @@ export default function Home() {
         }
       })
 
+      var enableCurrentRadio = false;
+    var enableZipRadio = false;
+    var currentLocation = {};
+
+    function enableCurrent() {
+        enableCurrentRadio = true;
+        enableZipRadio = false;
+        let locationInput = document.getElementById("location");
+        locationInput.style.display = "none";
+    }
+
+
+    function enableZip() {
+        enableCurrentRadio = false;
+        enableZipRadio = true;
+        let locationInput = document.getElementById("location");
+        locationInput.style.display = "inline";
+        locationInput.style.width = "40%";
+        locationInput.style.marginLeft = "8%";
+        locationInput.style.marginTop = "-100px";
+        locationInput.style.marginBottom = "";
+        let addPadding = document.getElementById("addPadding");
+        addPadding.style.paddingBottom = "-2vw";
+    }
+
       function capitalize(word) {
         return word.charAt(0).toUpperCase() + word.slice(1);
       }
@@ -105,8 +130,13 @@ export default function Home() {
         let pettype = (document.getElementById('type-of-pet')).value;
         let age = (document.getElementById('age')).value;
         let breed = (document.getElementById('breed')).value;
-        let location = (document.getElementById('location')).value;
+        let location = "";
+        if (enableCurrentRadio) {
+            location = currentLocation;
 
+        } else if (enableZipRadio) {
+            location = (document.getElementById('location')).value;
+        }
         const newSearchFilter = {
             type: PFdata.TYPES[pettype],
             age: age,
@@ -184,27 +214,21 @@ export default function Home() {
     }
 
     function getLocation() {
-        let location = document.getElementById("location").value;
-        getLocationAsync(location);
-    }
-
-    /*async function getLocationAsync(zip) {
-        const apikey = '317f5c81a3241fbb45bbf57e335d466d';
-        const path = `http://api.openweathermap.org/data/2.5/forecast?zip=${zip}&units=imperial&appid=${apikey}`;
-        const response = await fetch(path, {});
-        const json = await response.json();
-
-        return json.city.coord;
-    }*/
-
-    function enableCurrent() {
-        let locationInput = document.getElementById("location");
-        locationInput.style.display = "none";
-    }
-
-    function enableZip() {
-        let locationInput = document.getElementById("location");
-        locationInput.style.display = "inline";
+        if (enableZipRadio) {
+            let location = document.getElementById("location").value;
+            getLocationAsync(location);
+        }
+        else if (enableCurrentRadio) {
+            if (navigator.geolocation) { //check if geolocation is available
+                navigator.geolocation.getCurrentPosition(function(position){
+                    currentLocation = {
+                        lat: position.coords.latitude,
+                        lon: position.coords.longitude
+                    }
+                  processFormContents();
+                });   
+            }
+        }
     }
 
     return (
@@ -262,12 +286,10 @@ export default function Home() {
                                 <span className="lc">Use Current Location</span>
                             </label>
                         </p>
-                        <p>
-                            <label>
-                                <input name="group1" type="radio" onClick={() => enableZip()}/>
-                                <span className="lc">Enter Zip Code</span>
-                            </label>
-                        </p>
+                        <label>
+                            <input name="group1" type="radio" onClick={() => enableZip()}/>
+                            <span className="lc" id="addPadding">Enter Zip Code</span>
+                        </label>
                         <input type="number" name="location" id="location" className="locationInput"/> 
                     </div>
 
