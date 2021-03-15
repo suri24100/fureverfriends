@@ -36,14 +36,20 @@ function handleinput (props){ //access to input that calls it
 
 //DON'T USE ADD, USE UPDATE - we don't want to add new users, just update them.
     function saveuserprofile (){
-    firestore.collection("UserInfo")
-        .update({  //pass documents from the object
-            userID : " ",
-            userName : " ",
-            userLocation : 0,  //zip
-            userPhoneNum : " ",
-            userAccountType : " ",
-            userBio : " "
+
+    firestore.collection("UserInfo").doc("userId").update({  //pass documents from the object.
+        username:{currentUser: " "},
+        first_name: {currentUser: " "} ,
+        last_name: {currentUser: " "},
+        email: {currentUser: " "},
+        phone_number: {currentUser: " "},
+        account_type:{currentUser: " "},
+        user_zip: {currentUser: " "},
+        user_bio: {currentUser: " "},
+        pet_listings: [],
+        favorites: [],
+        longitude: {currentUser: " "},
+        latitude : {currentUser: " "}
         })//statevariaABLE
         .then((docRef) => {
             console.log("Document written with ID: ", docRef.id);
