@@ -51,7 +51,8 @@ export default function UserProfileRead() {
         })
             .then(() => setuserInfo() ) //this needs to return the objects int the constants.js
     }
-
+//on submit: when the user clicks save after adding values to the input field,
+    //the input values are supposed to overwrite the existing values in the database
     const deleteVal = (id) =>{
         ffdb.collection("UserProfile").doc(id).delete()
     }
