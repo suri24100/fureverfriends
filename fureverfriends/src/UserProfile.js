@@ -45,28 +45,30 @@ function handleinput (props){ //access to input that calls it
 
 //DON'T USE ADD, USE UPDATE - we don't want to add new users, just update them.
     function saveuserprofile (){
-        ffdb.collection("UserInfo").doc('username').update({ //pass documents from the object.
-            username: USER.username,
-            first_name: USER.first_name,
-            last_name: USER.last_name,
-            email: USER.email,
-            phone_number: USER.phone_number,
-            account_type: USER.account_type,
-            user_zip: USER.user_zip,
-            user_bio: USER.user_bio,
+        firestore.collection('UserInfo').doc(USER.username).update({ //pass documents from the object.
+            // username : 'avocoder',
+            // first_name: ' ',
+            // last_name: '',
+            // email: '',
+            // phone_number: '',
+            // user_zip: '',
+            // user_bio: ''
+            // username: USER.username,
+            // first_name: USER.first_name,
+            // last_name: USER.last_name,
+            // email: USER.email,
+            // phone_number: USER.phone_number,
+            // account_type: USER.account_type,
+            // user_zip: USER.user_zip,
+            // user_bio: USER.user_bio,
         // "username": {
-        //     "first_name": " ",
-        //     "last_name": " ",
-        //     "email": " ",
-        //     "phone_number": " ",
-        //     "account_type":" ",
-        //     "user_zip": " ",
-        //     "user_bio": " ",
-        //     // pet_listings: [], will need it for listings and fav
-        //     // favorites: [],
-        //     // longitude: {longitude: " "},
-        //     // latitude : {latitude: " "}
-        //     }
+            "first_name": "USER.first_name",
+            "last_name": "USER.last_name",
+            "email": "USER.email",
+            "phone_number":  "USER.phone_number",
+            "account_type": "USER.account_type",
+            "user_zip": "USER.user_zip",
+            "user_bio": "USER.user_bio"
 
         })//statevariaABLE
         .then((docRef) => {
@@ -159,7 +161,7 @@ function handleinput (props){ //access to input that calls it
                                     </div>
                                     <br/>
                                 </form>
-                                <button onClick={saveuserprofile} onClick={saveuserprofile}> Save Changes</button>
+                                <button onClick={handleinput} > Save Changes</button>
                                 {/*<button onClick={deleteVal}> Delete Profile</button>*/}
                             </div>
                 </div>
