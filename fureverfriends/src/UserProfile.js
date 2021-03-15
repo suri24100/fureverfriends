@@ -5,22 +5,31 @@ import './css/home.css';
 import Footer from "./Footer";
 import {Link} from "react-router-dom";
 import ffdb, {firestore} from "./ffdb";
+
 import {useAuth} from "./AuthContext";
+import db from "./ffdb";
 
 
 // function deleteVal() {
 //     this.deleteVal = this.delete.bind(this);
 // }
 
+
 export default function UserProfile() {
     const {USER, handleSetUSER, setUSER} = useAuth()
-const [userInfo, setuserInfo] = useState({ //setstate is async
-    userID : " ",//currentUser.uid, //user id should be givennnnnn -- primary key
-    userName : " ",
-    userLocation : 0,  //zip
-    userPhoneNum : " ",
-    userAccountType : " ",
-    userBio : " "
+    const [userInfo, setuserInfo] = useState({ //setstate is async
+        username: "",
+        first_name: "",
+        last_name: "",
+        email: "",
+        phone_number: "",
+        account_type: "",
+        user_zip: "",
+        user_bio: "",
+        pet_listings: [],
+        favorites: [],
+        longitude: "",
+        latitude : ""
 });
 
 
@@ -36,20 +45,29 @@ function handleinput (props){ //access to input that calls it
 
 //DON'T USE ADD, USE UPDATE - we don't want to add new users, just update them.
     function saveuserprofile (){
+        ffdb.collection("UserInfo").doc('username').update({ //pass documents from the object.
+            username: USER.username,
+            first_name: USER.first_name,
+            last_name: USER.last_name,
+            email: USER.email,
+            phone_number: USER.phone_number,
+            account_type: USER.account_type,
+            user_zip: USER.user_zip,
+            user_bio: USER.user_bio,
+        // "username": {
+        //     "first_name": " ",
+        //     "last_name": " ",
+        //     "email": " ",
+        //     "phone_number": " ",
+        //     "account_type":" ",
+        //     "user_zip": " ",
+        //     "user_bio": " ",
+        //     // pet_listings: [], will need it for listings and fav
+        //     // favorites: [],
+        //     // longitude: {longitude: " "},
+        //     // latitude : {latitude: " "}
+        //     }
 
-    firestore.collection("UserInfo").doc("userId").update({  //pass documents from the object.
-        username:{currentUser: " "},
-        first_name: {currentUser: " "} ,
-        last_name: {currentUser: " "},
-        email: {currentUser: " "},
-        phone_number: {currentUser: " "},
-        account_type:{currentUser: " "},
-        user_zip: {currentUser: " "},
-        user_bio: {currentUser: " "},
-        pet_listings: [],
-        favorites: [],
-        longitude: {currentUser: " "},
-        latitude : {currentUser: " "}
         })//statevariaABLE
         .then((docRef) => {
             console.log("Document written with ID: ", docRef.id);
@@ -59,15 +77,7 @@ function handleinput (props){ //access to input that calls it
         });
 }
 
-    // deleteVal() {
-    //     CRUD.delete(this.state.userInfo.id)
-    //         .then(() => {
-    //             this.props.refreshList();
-    //         })
-    //         .catch((e) => {
-    //             console.log(e);
-    //         });
-    // }
+
 
 
     return (
@@ -106,29 +116,29 @@ function handleinput (props){ //access to input that calls it
                                     <div className="input-field col s12">
                                         <input type="text" id="first_name" name="first_name"
                                                defaultValue={USER.first_name}
-                                               onChange={handleinput}/>
+                                               onChange={handleinput} />
                                         <label htmlFor="first_name">Enter Your First Name:</label>
                                     </div>
                                     <div className="input-field col s12">
                                         <input type="text" id="last_name" name="last_name"
                                                defaultValue={USER.last_name}
-                                               onChange={handleinput}/>
+                                               onChange={handleinput} />
                                         <label htmlFor="last_name">Enter Your Last Name:</label>
                                     </div>
                                     <div className="input-field col s12">
                                         <input type="email" id="email" name="email"
                                                defaultValue={USER.email}
-                                               onChange={handleinput}/>
+                                               onChange={handleinput} />
                                         <label htmlFor="email">Enter Your Email Address:</label>
                                     </div>
                                     <div className="input-field col s12">
                                         <input type="tel" id="phone_number" name="phone_number"
                                                defaultValue={USER.phone_number}
-                                               onChange={handleinput}/>
+                                               onChange={handleinput} />
                                         <label htmlFor="phone_number">Enter Your Phone Number:</label>
                                     </div>
                                     <div className="input-field col s12">
-                                        <select id="account_type" onChange={handleinput}>
+                                        <select id="account_type" onChange={handleinput} >
                                             <option value="Adopter">Adopter</option>
                                             <option value="Private Owner">Private Owner</option>
                                             <option value="Organization">Organization</option>
@@ -138,7 +148,7 @@ function handleinput (props){ //access to input that calls it
                                     <div className="input-field col s12">
                                         <input type="number" id="user_zip" name="user_zip"
                                                defaultValue={USER.user_zip}
-                                               onChange={handleinput}/>
+                                               onChange={handleinput} />
                                         <label htmlFor="user_zip">Enter Your Zip Code:</label>
                                     </div>
 
@@ -149,7 +159,7 @@ function handleinput (props){ //access to input that calls it
                                     </div>
                                     <br/>
                                 </form>
-                                <button onClick={saveuserprofile}> Save Changes</button>
+                                <button onClick={saveuserprofile} onClick={saveuserprofile}> Save Changes</button>
                                 {/*<button onClick={deleteVal}> Delete Profile</button>*/}
                             </div>
                 </div>
