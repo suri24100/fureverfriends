@@ -33,7 +33,7 @@ function handleinput (props){ //access to input that calls it
 //DON'T USE ADD, USE UPDATE - we don't want to add new users, just update them.
     function saveuserprofile (){
     firestore.collection("UserInfo")
-        .add(userInfo)//statevariaABLE
+        .set(userInfo)//statevariaABLE
         .then((docRef) => {
             console.log("Document written with ID: ", docRef.id);
         })
