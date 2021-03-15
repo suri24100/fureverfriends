@@ -4,9 +4,13 @@ import './css/style.css';
 import './css/home.css';
 import Footer from "./Footer";
 import {Link} from "react-router-dom";
-import {firestore} from "./ffdb";
+import ffdb, {firestore} from "./ffdb";
 import {useAuth} from "./AuthContext";
 
+
+// function deleteVal() {
+//     this.deleteVal = this.delete.bind(this);
+// }
 
 export default function UserProfile() {
     const {USER, handleSetUSER, setUSER} = useAuth()
@@ -33,7 +37,14 @@ function handleinput (props){ //access to input that calls it
 //DON'T USE ADD, USE UPDATE - we don't want to add new users, just update them.
     function saveuserprofile (){
     firestore.collection("UserInfo")
-        .set(userInfo)//statevariaABLE
+        .update({  //pass documents from the object
+            userID : " ",
+            userName : " ",
+            userLocation : 0,  //zip
+            userPhoneNum : " ",
+            userAccountType : " ",
+            userBio : " "
+        })//statevariaABLE
         .then((docRef) => {
             console.log("Document written with ID: ", docRef.id);
         })
@@ -41,6 +52,17 @@ function handleinput (props){ //access to input that calls it
             console.error("Error adding document: ", error);
         });
 }
+
+    // deleteVal() {
+    //     CRUD.delete(this.state.userInfo.id)
+    //         .then(() => {
+    //             this.props.refreshList();
+    //         })
+    //         .catch((e) => {
+    //             console.log(e);
+    //         });
+    // }
+
 
     return (
         <div className="actionsnav">
@@ -122,6 +144,7 @@ function handleinput (props){ //access to input that calls it
                                     <br/>
                                 </form>
                                 <button onClick={saveuserprofile}> Save Changes</button>
+                                {/*<button onClick={deleteVal}> Delete Profile</button>*/}
                             </div>
                 </div>
                 </div>

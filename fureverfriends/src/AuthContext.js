@@ -1,7 +1,7 @@
 import React, {useContext, useEffect, useState, Component} from 'react';
 import './css/style.css';
 import './css/signing.css';
-import { auth } from "./ffdb"
+import db, { auth } from "./ffdb"
 
 const AuthContext = React.createContext();
 
@@ -72,6 +72,11 @@ export function AuthProvider({ children }) {
     function updatePassword(password) {
         return currentUser.updatePassword(password)
     }
+    // function CRUD{
+    //     delete(id){
+    //         return db.doc(id).delete();
+    //     }
+    // }
 
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(user => {
