@@ -197,6 +197,15 @@ export default function Home() {
         return json.city.coord;
     }*/
 
+    function enableCurrent() {
+        let locationInput = document.getElementById("location");
+        locationInput.style.display = "none";
+    }
+
+    function enableZip() {
+        let locationInput = document.getElementById("location");
+        locationInput.style.display = "inline";
+    }
 
     return (
     <div>
@@ -246,12 +255,24 @@ export default function Home() {
                     </div>
 
                     <div className="listings-form-row">
-                        <label for="location">Zip Code</label>
-                        <input type="number" name="location" id="location"/> 
+                        <label>Location: </label>
+                        <p>
+                            <label>
+                                <input name="group1" type="radio" onClick={() => enableCurrent()}/>
+                                <span className="lc">Use Current Location</span>
+                            </label>
+                        </p>
+                        <p>
+                            <label>
+                                <input name="group1" type="radio" onClick={() => enableZip()}/>
+                                <span className="lc">Enter Zip Code</span>
+                            </label>
+                        </p>
+                        <input type="number" name="location" id="location" className="locationInput"/> 
                     </div>
 
                     <div className="search-btn-wrap container">
-                    <button className="search-btn" type="button" name="action" onClick={() => getLocation()}>Search</button>
+                    <button className="search-btn" type="button" name="action" onClick={() => getLocation()}>Find My Furever Friend!</button>
                     </div>
                 </div>
             </div>
