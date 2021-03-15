@@ -8,7 +8,7 @@ import {useAuth} from './AuthContext';
 
 
 export default function CreateAccountConfirmation(){
-    const {currentUser} = useAuth();
+    const {USER} = useAuth();
 
     return (
 
@@ -33,7 +33,7 @@ export default function CreateAccountConfirmation(){
                                 <h2>Your account has been created!</h2>
 
                                 <p>You can now favorite pets, message others, get alerts for new match and application statuses.
-                                    The email registered to your account is {currentUser.email}. For more information regarding
+                                    The email registered to your account is {USER.email}. For more information regarding
                                     your account, click on the My Account button below
                                 </p>
                             </form>

@@ -956,20 +956,4 @@ module.exports = Object.freeze ({
             }
         }
     },
-
-    USER : {
-        username: "",
-        first_name: "",
-        last_name: "",
-        email: "",
-        phone_number: "",
-        account_type: "",
-        user_zip: "",
-        user_bio: "",
-        pet_listings: [],
-        favorites: [],
-        longitude: "",
-        latitude : ""
-    }
-
 });

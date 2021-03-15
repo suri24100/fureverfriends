@@ -32,6 +32,23 @@ export function AuthProvider({ children }) {
             [id]:value});
     }
 
+    function handleClearUSER(){
+        setUSER({
+            username: "",
+            first_name: "",
+            last_name: "",
+            email: "",
+            phone_number: "",
+            account_type: "",
+            user_zip: "",
+            user_bio: "",
+            pet_listings: [],
+            favorites: [],
+            longitude: "",
+            latitude : ""
+        })
+    }
+
     function signup(email, password) {
         return auth.createUserWithEmailAndPassword(email, password)
     }
@@ -74,7 +91,8 @@ export function AuthProvider({ children }) {
         updateEmail,
         updatePassword,
         USER,
-        handleSetUSER
+        handleSetUSER,
+        handleClearUSER
     }
 
     return (

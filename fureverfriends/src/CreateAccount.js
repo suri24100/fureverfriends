@@ -18,13 +18,13 @@ export default function CreateAccount(){
 
 
 
-    const [username, setUsername] = useState('');
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [email, setEmail] = useState('');
-    const [phone, setPhone] = useState('');
-    const [accountType, setAccountType] = useState('');
-    const [zip, setZip] = useState('');
+    // const [username, setUsername] = useState('');
+    // const [firstName, setFirstName] = useState('');
+    // const [lastName, setLastName] = useState('');
+    // const [email, setEmail] = useState('');
+    // const [phone, setPhone] = useState('');
+    // const [accountType, setAccountType] = useState('');
+    // const [zip, setZip] = useState('');
     const [password, setPassword] = useState('');
     const [passwordConfirm, setPasswordConfirm] = useState('');
     const [error, setError] = useState('');
@@ -38,13 +38,13 @@ export default function CreateAccount(){
 
 
     const clearInputs = () =>{
-        setUsername('');
-        setFirstName('');
-        setLastName('');
-        setEmail('');
-        setPhone('');
-        setAccountType('');
-        setZip('');
+        // setUsername('');
+        // setFirstName('');
+        // setLastName('');
+        // setEmail('');
+        // setPhone('');
+        // setAccountType('');
+        // setZip('');
         setPassword('');
         setPasswordConfirm('');
         setPassword('');
@@ -57,30 +57,6 @@ export default function CreateAccount(){
         setPasswordError('');
         setPasswordErrorConfirm('');
     }
-
-    // function setUser(){
-    //     // const id = e.target.id
-    //     // const value = e.target.value
-    //     // // console.log(id)
-    //     // // console.log(value)
-    //     // // setState({...USER,
-    //     // //     [id]:value})
-    //     // // console.log(USER)
-    //     // USER.({ID;
-    //     // console.log(USER)
-    //     // // console.log(value)
-    //     USER.username = username;
-    //     USER.first_name = firstName;
-    //     USER.last_name = lastName;
-    //     USER.email = email;
-    //     USER.phone_number = phone;
-    //     USER.account_type = accountType;
-    //     USER.user_zip = zip;
-    //
-    //     localStorage.setItem("USER", USER)
-    //
-    //     console.log(USER)
-    // }
 
     function handleOnChange(e){
         const id = e.target.id;

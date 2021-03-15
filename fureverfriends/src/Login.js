@@ -5,7 +5,6 @@ import './css/signing.css';
 import { Alert } from "react-bootstrap"
 import {Link, useHistory} from "react-router-dom";
 import {useAuth} from './AuthContext';
-import {USER} from './api-modules/constants'
 import {firestore} from "./ffdb";
 
 

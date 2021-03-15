@@ -11,7 +11,7 @@ import {auth, firestore} from "./ffdb";
 export default function Header() {
 
     const [error, setError] = useState('')
-    const { currentUser, logout, USER, handleSetUSER} = useAuth();
+    const { currentUser, logout, USER, handleClearUSER} = useAuth();
     const [loading, setLoading] = useState(false);
 
     // loading has been initialized or changed, check for user info
@@ -33,6 +33,7 @@ export default function Header() {
 
         try {
             await logout();
+            handleClearUSER();
         } catch {
             setError("Failed to log out");
         }
