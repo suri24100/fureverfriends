@@ -9,26 +9,14 @@ import { useAuth } from "./AuthContext";
 import {auth, firestore} from "./ffdb";
 
 export default function Header() {
-    //everything has to be in one div
-    //put the \> after image
-    //change class to className
-    // const [userState, setUserState] = useState( {
-    //         logged_in: false
-    //     });
-    // function handleUserState() {
-    //     let value = !userState.logged_in;
-    //     setUserState({
-	// 		...userState,
-	// 		logged_in : value
-	// 	});
-    // }
-    M.AutoInit();
+
     const [error, setError] = useState('')
     const { currentUser, logout } = useAuth();
     const [loading, setLoading] = useState(false);
 
     // loading has been initialized or changed, check for user info
     useEffect(() => {
+        M.AutoInit();
         if(currentUser && username === ''){
             getUsername();
         }

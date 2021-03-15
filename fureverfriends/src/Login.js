@@ -5,6 +5,8 @@ import './css/signing.css';
 import { Alert } from "react-bootstrap"
 import {Link, useHistory} from "react-router-dom";
 import {useAuth} from './AuthContext';
+import {USER} from './api-modules/constants'
+import {firestore} from "./ffdb";
 
 
 
@@ -28,6 +30,25 @@ export default function Login(){
         setPasswordError('');
     }
 
+    // function getUser(e){
+    //     const id = e.target.id
+    //     const value = e.target.value //value vs valueOf
+    //     // console.log(id)
+    //     // console.log(value)
+    //     setState({...USER,
+    //         [id]:value})
+    //     console.log(USER)
+    // }
+
+    async function getUser(){
+
+            const snapshot = await firestore.collection("UserInfo")
+                .where("Email", "==", email).get();
+            // await setUsername(snapshot.docs[0].data()["Username"]);
+        console.log("User: " + snapshot.docs[0].data()["Username"])
+
+    }
+
     async function handleLogin(e) {
         e.preventDefault();
 
@@ -35,6 +56,7 @@ export default function Login(){
             clearErrors();
             setLoading(true);
             await login(email, password);
+            getUser();
             clearInputs();
             history.push("/Home")
         }catch(err) {

@@ -6,6 +6,7 @@ import { Alert } from "react-bootstrap"
 import {Link, useHistory} from "react-router-dom";
 import {useAuth} from './AuthContext';
 import {firestore} from "./ffdb";
+import USER from './api-modules/constants'
 
 import $ from 'jquery';
 import M from "materialize-css";
@@ -15,6 +16,8 @@ export default function CreateAccount(){
     useEffect( () =>{
         M.AutoInit();
     })
+
+
 
     const [username, setUsername] = useState('');
     const [firstName, setFirstName] = useState('');
@@ -33,6 +36,7 @@ export default function CreateAccount(){
     const [loading, setLoading] = useState(false);
     const { signup } = useAuth();
     const history = useHistory();
+
 
     const clearInputs = () =>{
         setUsername('');
@@ -53,6 +57,19 @@ export default function CreateAccount(){
         setEmailError('');
         setPasswordError('');
         setPasswordErrorConfirm('');
+    }
+
+    function setUser(){
+        // const id = e.target.id
+        // const value = e.target.value
+        // // console.log(id)
+        // // console.log(value)
+        // // setState({...USER,
+        // //     [id]:value})
+        // // console.log(USER)
+        // USER.({ID;
+        // console.log(USER)
+        // // console.log(value)
     }
 
     async function handleSignUp(e) {
@@ -139,16 +156,16 @@ export default function CreateAccount(){
                                     <p className="errorMsg">{usernameError}</p>
                                 </div>
                                 <div className="input-field col s12">
-                                    <input type="text" id="firstName" name="firstName"
+                                    <input type="text" id="first_name" name="first_name"
                                            value={firstName}
                                            onChange={(e) => setFirstName(e.target.value)}/>
-                                    <label htmlFor="firstName">Enter Your First Name:</label>
+                                    <label htmlFor="first_name">Enter Your First Name:</label>
                                 </div>
                                 <div className="input-field col s12">
-                                    <input type="text" id="lastName" name="lastName"
+                                    <input type="text" id="last_name" name="last_name"
                                            value={lastName}
                                            onChange={(e) => setLastName(e.target.value)}/>
-                                    <label htmlFor="lastName">Enter Your Last Name:</label>
+                                    <label htmlFor="last_name">Enter Your Last Name:</label>
                                 </div>
                                 <div className="input-field col s12">
                                     <input type="email" id="email" name="email"
@@ -158,13 +175,13 @@ export default function CreateAccount(){
                                     <p className="errorMsg">{emailError}</p>
                                 </div>
                                 <div className="input-field col s12">
-                                    <input type="tel" id="phone" name="phone"
+                                    <input type="tel" id="phone_number" name="phone_number"
                                            value={phone}
                                            onChange={(e) => setPhone(e.target.value)}/>
-                                    <label htmlFor="phone">Enter Your Phone Number:</label>
+                                    <label htmlFor="phone_number">Enter Your Phone Number:</label>
                                 </div>
                                 <div className="input-field col s12">
-                                    <select id="account-type" onChange={(e) => setAccountType(e.target.value)}>
+                                    <select id="account_type" onChange={(e) => setAccountType(e.target.value)}>
                                         <option value="Adopter">Adopter</option>
                                         <option value="Private Owner">Private Owner</option>
                                         <option value="Organization">Organization</option>
@@ -172,10 +189,10 @@ export default function CreateAccount(){
                                     <label>I am signing up as:</label>
                                 </div>
                                 <div className="input-field col s12">
-                                    <input type="number" id="zip" name="zip"
+                                    <input type="number" id="user_zip" name="user_zip"
                                            value={zip}
                                            onChange={(e) => setZip(e.target.value)}/>
-                                    <label htmlFor="zip">Enter Your Zip Code:</label>
+                                    <label htmlFor="user_zip">Enter Your Zip Code:</label>
                                 </div>
                                 <div className="input-field col s12">
                                     <input type="password" id="pass" name="pass"
