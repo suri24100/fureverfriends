@@ -22,8 +22,7 @@ import ForgotPassword from "./ForgotPassword";
 import { AuthProvider } from "./AuthContext"
 import UserProfile from "./UserProfile";
 import PrivateRoute from "./PrivateRoute";
-
-
+import PurrsonalityQuiz from "./PurrsonalityQuiz";
 
 
 /* This should load the header and footer on each page
@@ -45,40 +44,43 @@ export default function App() {
     return (
     <div>
         <AuthProvider>
-        <Switch>
-            <Route path ="/ForgotPassword">
-                <ForgotPassword/>
-            </Route>
-            <Route path ="/NewListing">
-                <NewListing/>
-            </Route>
-            <PrivateRoute path="/CreateAccountConfirmation" component={CreateAccountConfirmation} />
-            <Route path ="/CreateAccount">
-                <CreateAccount />
-            </Route>
-            <Route path="/listings/profile/:prefix-:id">
-                <PetProfile />
-            </Route>
-            <Route path="/listings">
-                <Listings />
-            </Route>
-            <Route path="/findahome">
-                <NewListing />
-            </Route>
-            <Route path="/petcare">
-                <PetCare />
-            </Route>
-            <Route path="/login">
-                <Login />
-            </Route>
-            <PrivateRoute path="/userprofile" component={UserProfile} />
-            <Route path="/">
-                <Home />
-            </Route>
-        </Switch>
+            <Header />
+            <Switch>
+                <Route path ="/ForgotPassword">
+                    <ForgotPassword/>
+                </Route>
+                <Route path ="/CreatePetProfile">
+                    <NewListing/>
+                </Route>
+                <PrivateRoute path="/CreateAccountConfirmation" component={CreateAccountConfirmation} />
+                <Route path ="/CreateAccount">
+                    <CreateAccount />
+                </Route>
+                <Route path="/listings/:type/profile/:prefix-:id">
+                    <PetProfile />
+                </Route>
+                <Route path="/listings">
+                    <Listings />
+                </Route>
+                <Route path="/petcare">
+                    <PetCare />
+                </Route>
+                <Route path="/login">
+                    <Login />
+                </Route>
+                <Route path="/findahome">
+                    <NewListing />
+                </Route>
+                <Route path="/quiz">
+                    <PurrsonalityQuiz />
+                </Route>
+                <PrivateRoute path="/userprofile" component={UserProfile} />
+                <Route path="/">
+                    <Home />
+                </Route>
+            </Switch>
+            <Footer />
         </AuthProvider>
-        <Footer />
-
     </div>
 
   );

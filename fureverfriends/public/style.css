@@ -18,8 +18,8 @@ a {
   margin-left: 6vw;
   margin-right: 2vw;
   background: transparent;
-  position: absolute;
-  top: 0%;
+  /*position: absolute;
+    top: 30%;*/
 }
 .hdr-wrap .logo h2 {
   font-family: 'Grand Hotel', cursive;
@@ -27,6 +27,7 @@ a {
   font-size: 3vw;
   text-align: center;
   margin: 1vw 0vw 0.25vw -1vw;
+  color: #ffffff;
 }
 .hdr-wrap .primary-menu {
   margin-left: 15vw;
@@ -137,3 +138,16 @@ a {
 .ftr-wrap .social-wrap img:hover {
   cursor: pointer;
 }
+.mobile-menu-wrapper {
+  background: transparent !important;
+  border: none;
+  height: 0;
+  padding-top: 0.1vw;
+}
+.mobile-menu-wrapper .brand-logo {
+  font-family: 'Grand Hotel', cursive;
+  font-style: italic;
+  font-size: 2.5rem;
+  margin-left: 6vw;
+}
+

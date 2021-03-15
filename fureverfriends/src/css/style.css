@@ -1,10 +1,16 @@
+@font-face {
+  font-family: 'Grand Hotel';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/grandhotel/v8/7Au7p_IgjDKdCRWuR1azpmQN.ttf) format('truetype');
+}
 body {
-  font-family: 'Calibri', sans-serif;;
-  background:#ffffff;
+  font-family: 'Calibri', sans-serif;
 }
 a {
   text-decoration: none;
-  color: #ffffff;
+  color: #ffffff !important;
 }
 .hdr-wrap {
   display: flex;
@@ -12,15 +18,16 @@ a {
   margin-left: 6vw;
   margin-right: 2vw;
   background: transparent;
-  position: absolute;
-  top: 0%;
+  /*position: absolute;
+    top: 30%;*/
 }
 .hdr-wrap .logo h2 {
-  font-family: 'Segoe Script', 'Calibri', sans-serif;
+  font-family: 'Grand Hotel', cursive;
+  font-style: italic;
   font-size: 3vw;
   text-align: center;
-  color: white;
   margin: 1vw 0vw 0.25vw -1vw;
+  color: #ffffff;
 }
 .hdr-wrap .primary-menu {
   margin-left: 15vw;
@@ -32,6 +39,7 @@ a {
   text-transform: uppercase;
   font-weight: bold;
   margin-top: 2vw;
+  color: white;
 }
 .hdr-wrap .primary-menu img {
   width: 1.25vw;
@@ -47,6 +55,34 @@ a {
 .hdr-wrap .primary-menu img:active {
   cursor: pointer;
 }
+.mobile-ftr-wrap {
+  display: flex;
+  flex-direction: column;
+  color: #ffffff;
+  background-color: #379683;
+  padding-bottom: 2vw;
+  margin-top: -0.25vw;
+}
+.mobile-ftr-wrap .logo h2 {
+  font-family: 'Grand Hotel', cursive;
+  font-style: italic;
+  font-size: 2rem;
+  text-align: center;
+  margin: 2vw 0vw 0vw 0vw;
+}
+.mobile-ftr-wrap .all-accordion .collapsible {
+  /*text-align: center;*/
+}
+.mobile-ftr-wrap .all-accordion .collapsible .collapsible-header {
+  background-color: #379683;
+  font-size: 1.25rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  /*text-align: center;*/
+}
+.mobile-ftr-wrap .all-accordion .collapsible .collapsible-body {
+  font-size: 1rem;
+}
 .ftr-wrap {
   display: flex;
   flex-direction: column;
@@ -56,15 +92,11 @@ a {
   margin-top: -0.25vw;
 }
 .ftr-wrap .logo h2 {
-  font-family: 'Segoe Script', sans-serif;;
-  font-size: 3vw;
+  font-family: 'Grand Hotel', cursive;
+  font-style: italic;
+  font-size: 3rem;
   text-align: center;
-  margin: 1vw 0vw -2vw -2vw;
-}
-.ftr-wrap .footer-menu {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: flex-start;
+  margin: 2vw 0vw 0vw 0vw;
 }
 .ftr-wrap .footer-menu .pets-menu,
 .ftr-wrap .footer-menu .info-menu,
@@ -80,6 +112,7 @@ a {
   font-size: 1.5vw;
   text-transform: uppercase;
   margin-bottom: 0.25vw;
+  font-weight: bold;
 }
 .ftr-wrap .footer-menu .pets-menu a,
 .ftr-wrap .footer-menu .info-menu a,
@@ -96,7 +129,6 @@ a {
 .ftr-wrap .social-wrap {
   display: flex;
   align-self: center;
-  margin-left: -4vw;
 }
 .ftr-wrap .social-wrap img {
   width: 2.5vw;
@@ -105,4 +137,37 @@ a {
 }
 .ftr-wrap .social-wrap img:hover {
   cursor: pointer;
+}
+.mobile-menu-wrapper {
+  background: transparent !important;
+  border: none;
+  height: 0;
+  padding-top: 0.1vw;
+}
+.mobile-menu-wrapper .brand-logo {
+  font-family: 'Grand Hotel', cursive;
+  font-style: italic;
+  font-size: 2.5rem;
+  margin-right: 12vw;
+}
+.mobile-menu a{
+  color: black;
+}
+.mobile-menu .side-logo {
+  font-family: 'Grand Hotel', cursive;
+  font-style: italic;
+  font-size: 2.25rem;
+  text-align: center;
+  margin-top: 1vw;
+  color: #379683;
+}
+.mobile-menu .side-logo .brand-name {
+  padding: 0 1.25vw 0 0.75vw;
+  color: #379683;
+}
+.mobile-menu .actual-menu span {
+  color: black;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
 }

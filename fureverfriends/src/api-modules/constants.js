@@ -9,8 +9,61 @@ module.exports = Object.freeze ({
     STATUS : ["adoptable", "adopted", "found"],
     DISTANCE : [25, 50, 75, 100, 500],
 
+    // Pet Listing Structure
+    PET_PROFILE : {
+        pet_data: {
+            petfinder_listing: false,
+            pet_id: "",                 // Date.now().toString();
+            account_info: {             // private for account reference
+                id: "",
+                email: ""
+            },
+            listing_type: "",
+            name: "",
+            type: "",
+            age: "",
+            breed: "",
+            gender: "",
+            color: "",
+            fur_length: "",
+            photo_url: "",
+            additional_photos: [],
+            profile_url: "",
+            location: {
+                zipcode: "",
+                city: "",
+                state: ""
+            },
+            cared_by: "",
+            contact: {
+                name: "",
+                email: "",
+                phone: "",
+                website: ""
+            },
+            personality: [],
+            good_with_cats: false,
+            good_with_dogs: false,
+            kid_friendly: false,
+            vaccinated: false,
+            spayed_neutered: false,
+            bonded_pair: false,
+            allergy_friendly: false,
+            special_needs: false,
+            adoption_fee: 0.00,
+            tags: [],
+            description: "",
+            applicationForm: "",
+            listing_created: ""     // new Date().toJSON()
+        },
+        profileFiles: {
+            profilePhoto: "",
+            additionalPhotos: [],
+            applicationForm: ""
+        }
+    },
 
-
+    // petfinder animal types
     DOG :  {
     "name":"Dog",
     "coats":[

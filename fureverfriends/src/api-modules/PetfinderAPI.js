@@ -100,7 +100,6 @@ export async function getBreeds(animalType){
 // get profile info for a specific pet by id
 export async function getProfileInfo(petID){
     let typeURL = BASE_URL + "/v2/animals/" + petID;
-    console.log(typeURL);
     let listingResults = await getData(typeURL);
     return listingResults.animal;
 }
@@ -112,8 +111,47 @@ export async function getTypeListing(animalType, numListings, pageNum){
     return listingResults.animals;
 }
 
-export async function getFilteredListings(numListings, pageNum){
+export async function getFilteredListings(filters, numListings, pageNum){
     let typeURL = BASE_URL + "/v2/animals?limit=" + numListings + "&page=" + pageNum;
+    if(filters.type !== "all"){
+        typeURL += "&type=" + filters.type;
+        if(filters.size.length > 0){
+            typeURL += "&size="
+            filters.size.forEach(size => {
+                typeURL += size + ",";
+            });
+            typeURL = typeURL.slice(0, -1);
+        }
+        if(filters.gender.length > 0){
+            typeURL += "&gender="
+            filters.gender.forEach(gender => {
+                typeURL += gender + ",";
+            });
+            typeURL = typeURL.slice(0, -1);
+        }
+        if(filters.age.length > 0){
+            typeURL += "&age="
+            filters.age.forEach(age => {
+                typeURL += age + ",";
+            });
+            typeURL = typeURL.slice(0, -1);
+        }
+        if(filters.coat.length > 0){
+            typeURL += "&coat="
+            filters.coat.forEach(coat => {
+                typeURL += coat + ",";
+            });
+            typeURL = typeURL.slice(0, -1);
+        }
+        if(filters.color.length > 0){
+            typeURL += "&color="
+            filters.color.forEach(color => {
+                typeURL += color + ",";
+            });
+            typeURL = typeURL.slice(0, -1);
+        }
+    }
+    console.log(typeURL);
     let listingResults = await getData(typeURL);
     return listingResults.animals;
 }
