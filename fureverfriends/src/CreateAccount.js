@@ -62,7 +62,7 @@ export default function CreateAccount(){
         const id = e.target.id;
         const value = e.target.value;
         handleSetUSER(id,value);
-        console.log(USER)
+        console.log(USER);
     }
 
     async function handleSignUp(e) {

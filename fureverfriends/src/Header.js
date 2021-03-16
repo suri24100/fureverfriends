@@ -6,24 +6,22 @@ import M from "materialize-css";
 import './css/style.css';
 //need this for changing log in to log out in nav
 import { useAuth } from "./AuthContext";
+import {firestore} from "./ffdb";
 
 export default function Header() {
 
-    const [error, setError] = useState('')
-    const { currentUser, logout, USER, handleClearUSER} = useAuth();
+    const [error, setError] = useState('');
+    const { currentUser, logout, USER, handleClearUSER, setUSER} = useAuth();
     const [loading, setLoading] = useState(false);
 
     // loading has been initialized or changed, check for user info
     useEffect(() => {
         M.AutoInit();
-        // if(currentUser && username === ''){
-        //     getUsername();
-        // }
+        if(currentUser && USER.username === ""){
+            getUser();
+        }
         console.log("Reloaded");
     })
-
-    const [username, setUsername] = useState('')
-    const [email, setEmail] = useState('')
 
 
     async function handleLogOut()
@@ -38,17 +36,12 @@ export default function Header() {
         }
     }
 
-    // async function getUsername()
-    // {
-    //     setLoading(true);
-    //     setEmail(currentUser.email)
-    //     if(email){
-    //         const snapshot = await firestore.collection("UserInfo")
-    //             .where("Email", "==", email).get();
-    //         await setUsername(snapshot.docs[0].data()["Username"]);
-    //     }
-    //     setLoading(false);
-    // }
+    async function getUser()
+    {
+        const snapshot = await firestore.collection("UserInfo")
+            .where("email", "==", currentUser.email).get();
+        setUSER(snapshot.docs[0].data());
+    }
 
 
 
@@ -94,7 +87,7 @@ export default function Header() {
                 <li><Link to="/findahome"><span>Rehome</span></Link></li>
                 <li><Link to="/petcare"><span>Pet Care</span></Link></li>
                 <li>{currentUser ? <Link to="/Home" onClick={handleLogOut}><span>Log Out</span></Link> : <Link to="/login"><span>Log In</span></Link> }</li>
-                <li><a href="#"><span>My Account</span></a></li>
+                <li><Link to="/UserProfile"><span>My Account</span></Link></li>
                 </div>
             </ul>
         </div>
