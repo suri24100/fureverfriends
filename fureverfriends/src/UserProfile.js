@@ -72,7 +72,7 @@ export default function UserProfile() {
     }
 
     function updateUser(){
-         firestore.collection('UserInfo').doc(currentUser.uid).update(USER)
+         firestore.collection('UserInfo').doc(currentUser.email).update(USER)
             .then((docRef) => {
                 console.log("Document written with ID: ", docRef);
             })
