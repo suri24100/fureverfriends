@@ -20,7 +20,7 @@ export default function UserProfile() {
 
     useEffect(() => {
         M.AutoInit();
-        if(currentUser && username === ''){
+        if(username === ''){
             setUsername(USER.username);
         }
         console.log("Reloaded");

@@ -60,7 +60,6 @@ export default function Header() {
                     <img src={notification_icon} alt="Notifications"/>
                     <img src={messages_icon} alt="Messages"/>
                     {currentUser ? <Link disable = {loading} to="/UserProfile">{USER.username}</Link> : <></>}
-                    {currentUser? console.log(currentUser.uid) : console.log("no user")}
                 </div>
             </div>
             <div className="navbar hide-on-large-only">
