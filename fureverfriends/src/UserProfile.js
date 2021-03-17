@@ -7,6 +7,7 @@ import {Link} from "react-router-dom";
 import {firestore} from "./ffdb";
 import {useAuth} from "./AuthContext";
 import {Alert} from "react-bootstrap";
+import M from "materialize-css";
 
 
 export default function UserProfile() {
@@ -15,7 +16,15 @@ export default function UserProfile() {
     const [error, setError] = useState('');
     const [usernameError, setUsernameError] = useState('');
     const [emailError, setEmailError] = useState('');
-    const [username, setUsername] = useState(USER.username);
+    const [username, setUsername] = useState('');
+
+    useEffect(() => {
+        M.AutoInit();
+        if(currentUser && username === ''){
+            setUsername(USER.username);
+        }
+        console.log("Reloaded");
+    })
 
     const clearErrors = () => {
         setError('');
@@ -34,13 +43,13 @@ export default function UserProfile() {
     async function saveUserProfile (e){
         e.preventDefault();
 
-        // const snapshot = await firestore.collection("UserInfo").where("username", "==", USER.username).get();
-        // if(!snapshot.empty && USER.username !== username)
-        // {
-        //     clearErrors();
-        //     setLoading(false);
-        //     return setUsernameError('Username already taken, please choose another one.');
-        // }
+        const snapshot = await firestore.collection("UserInfo").where("username", "==", USER.username).get();
+        if(!snapshot.empty && USER.username !== username)
+        {
+            clearErrors();
+            setLoading(false);
+            return setUsernameError('Username already taken, please choose another one.');
+        }
 
         try {
             clearErrors();
@@ -63,7 +72,7 @@ export default function UserProfile() {
     }
 
     function updateUser(){
-         firestore.collection('UserInfo').doc(USER.username).update(USER)
+         firestore.collection('UserInfo').doc(currentUser.uid).update(USER)
             .then((docRef) => {
                 console.log("Document written with ID: ", docRef);
             })
@@ -98,6 +107,7 @@ export default function UserProfile() {
                             <div className="userinfoform">
                                 <form id="userinfo">
                                     {error && <Alert variant="danger">{error}</Alert>}
+                                    {console.log(username)}
 
                                     <br/>
                                     <div className="input-field col s12">

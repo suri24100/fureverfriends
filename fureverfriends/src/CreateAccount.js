@@ -33,7 +33,7 @@ export default function CreateAccount(){
     const [passwordError, setPasswordError] = useState('');
     const [passwordErrorConfirm, setPasswordErrorConfirm] = useState('');
     const [loading, setLoading] = useState(false);
-    const { signup, USER, handleSetUSER } = useAuth();
+    const { signup, USER, handleSetUSER, currentUser } = useAuth();
     const history = useHistory();
 
 
@@ -74,7 +74,7 @@ export default function CreateAccount(){
             setLoading(false);
             return setPasswordErrorConfirm("Passwords do not match");
         }
-        const snapshot = await firestore.collection("UserInfo").where("Username", "==", USER.username).get();
+        const snapshot = await firestore.collection("UserInfo").where("username", "==", USER.username).get();
         if(!snapshot.empty)
         {
             clearErrors();
@@ -105,7 +105,7 @@ export default function CreateAccount(){
     }
 
     function saveUser(){
-        firestore.collection("UserInfo").doc(USER.username).set(USER)
+        firestore.collection("UserInfo").doc(USER.email).set(USER)
             .then(() => {
                 console.log("Document successfully written!");
             });

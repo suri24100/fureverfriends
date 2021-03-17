@@ -39,7 +39,7 @@ export function AuthProvider({ children }) {
             last_name: "",
             email: "",
             phone_number: "",
-            account_type: "",
+            account_type: "Adopter",
             user_zip: "",
             user_bio: "",
             pet_listings: [],
