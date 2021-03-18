@@ -23,6 +23,7 @@ import { AuthProvider } from "./AuthContext"
 import UserProfile from "./UserProfile";
 import PrivateRoute from "./PrivateRoute";
 import PurrsonalityQuiz from "./PurrsonalityQuiz";
+import DisplayUserProfile from "./DisplayUserProfile";
 
 
 /* This should load the header and footer on each page
@@ -75,6 +76,7 @@ export default function App() {
                     <PurrsonalityQuiz />
                 </Route>
                 <PrivateRoute path="/userprofile" component={UserProfile} />
+                <PrivateRoute path="/DisplayUserProfile" component= {DisplayUserProfile} />
                 <Route path="/">
                     <Home />
                 </Route>
