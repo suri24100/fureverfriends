@@ -85,10 +85,9 @@ export default function UserProfile() {
         <div className="actionsnav">
 
             <div className="listings-banner-wrap">
-                <div className="listings-banner-img-wrap"></div>
+                <Header/>
             </div>
-
-
+            {/*in order for this to work, would need to remove <Header/> in app.js*/}
 
             <div className = "container">
                 <div className="row">

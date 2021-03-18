@@ -23,7 +23,7 @@ export default function DisplayUserProfile() {
         console.log("Reloaded");
     })
 
-    async function DisaPlayProfile (e){
+    async function DisplayProfile (e){
         e.preventDefault();
 
         const snapshot = await firestore.collection("UserInfo").where("username", "==", USER.username).get();
@@ -44,7 +44,7 @@ export default function DisplayUserProfile() {
 
     return (
         <div className="actionsnav">
-
+            {/*in order for this to work, would need to remove <Header/> in app.js*/}
 
             <div className="listings-banner-wrap">
                 <Header/>
