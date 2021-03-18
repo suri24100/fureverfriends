@@ -44,7 +44,7 @@ export default function DisplayUserProfile() {
 
     return (
         <div className="actionsnav">
-            {/*in order for this to work, would need to remove <Header/> in app.js*/}
+            {/*in order for this to work, would need to remove <Header/> in app.js, need to fix the camel cases when user info is displayed*/}
 
             <div className="listings-banner-wrap">
                 <Header/>
