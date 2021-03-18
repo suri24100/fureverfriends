@@ -45,8 +45,9 @@ export default function DisplayUserProfile() {
     return (
         <div className="actionsnav">
 
+
             <div className="listings-banner-wrap">
-                <div className="listings-banner-img-wrap"></div>
+                <Header/>
             </div>
 
 
