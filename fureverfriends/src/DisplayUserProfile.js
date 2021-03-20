@@ -67,16 +67,44 @@ export default function DisplayUserProfile() {
 
                     <div className="col s12 m9" href="information">
                         <div className="collection">
-                            <ul>
-                                <li><span className="title">User Name :</span> {USER.username}</li>
-                                <li><span className="title">First Name :</span> {USER.first_name}</li>
-                                <li><span className="title">Last Name :</span> {USER.last_name}</li>
-                                <li><span className="title">Email :</span> {USER.email}</li>
-                                <li><span className="title">Phone Number :</span> {USER.phone_number}</li>
-                                <li><span className="title">Account Type :</span> {USER.account_type}</li>
-                                <li><span className="title">Location :</span> {USER.Location}</li>
-                                <li><span className="title">Bio :</span> {USER.user_bio}</li>
-                            </ul>
+                            <br/>
+                            <div>
+                                <span className="title " style={{color: " #379683"}}>User Name : </span> {USER.username}
+                            </div>
+
+                            <div>
+                                <div>
+
+                                    <span className="title" style={{color: " #379683"}} >First Name : </span> {USER.first_name}
+                                </div>
+
+                                <div>
+                                    <span className="title" style={{color: " #379683"}} >Last Name : </span> {USER.last_name}
+                                </div>
+                            </div>
+
+
+                            <div>
+                                <span className="title" style={{color: " #379683"}} >Email: </span> {USER.email}
+                            </div>
+
+                            <div>
+                                <span className="title" style={{color: " #379683"}} > Phone Number: </span> {USER.phone_number}
+                            </div>
+
+                            <div>
+                                <span className="title" style={{color: " #379683"}} > Account Type: </span> {USER.account_type}
+                            </div>
+
+                            <div>
+                                <span className="title" style={{color: " #379683"}} > Location: </span> {USER.user_zip}
+                            </div>
+
+
+                            <div>
+                                <span className="title" style={{color: " #379683"}} > Bio: </span> {USER.user_bio}
+                            </div>
+
                         </div>
                     </div>
                 </div>
