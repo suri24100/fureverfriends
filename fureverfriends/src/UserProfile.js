@@ -186,7 +186,7 @@ export default function UserProfile() {
 
                                     <div className="input-field col s12">
                                         <i className="material-icons prefix">border_color</i>
-                                            <textarea id="textarea1" className="materialize-textarea"
+                                            <textarea id="user_bio" className="materialize-textarea"
                                                       name="user_message"
                                                       defaultValue={USER.user_bio}
                                                       onChange={handleInput} />
