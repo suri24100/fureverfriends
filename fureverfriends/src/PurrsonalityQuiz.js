@@ -1,10 +1,22 @@
 import {useEffect, useState} from "react";
 import './css/style.css';
 import './css/quiz.css';
+import {useAuth} from './AuthContext';
 
 export default function PurrsonalityQuiz() {
 
+    const {USER} = useAuth();
+
     const question_data = {
+        q0: ["dog",
+            "cat",
+            "rabbit",
+            "small_furry",
+            "horse",
+            "bird",
+            "scales_fins_other",
+            "barnyard"
+        ],
         q1: ["Outside, enjoying a run, walk, or hike.",
             "Snuggled up in bed to sleep in.",
             "On the couch, time for some TV!",
@@ -30,31 +42,33 @@ export default function PurrsonalityQuiz() {
             "Relatively tidy, enough to be comfortable and lived-in.",
             "Clean? I have better things to do with my time."
         ],
-        q4: ["Indoors",
-            "Outdoors",
-            "No preference"
+        q4: ["indoors",
+            "outdoors",
+            "indoors or outdoors"
         ],
-        q5: ["Less than 10", "10-20", "20-30", "30-40", "40+"],
+        q5: ["Less than 10 hours at home", "10-20 hours at home", "20-30 hours at home", "30-40 hours at home", "40+ hours at home"],
         q6: ["Pretty quiet, Living with a partner, friend, or family member.",
             "Solitude! Living alone.",
             "It varies, I enjoy having people over",
             "Lively! Living with multiple friends, family members, or other roommates."
         ],
-        q7: ["0", "1", "2", "3", "4+"],
-        q8: [true, false],
-        q9: ["0", "1", "2", "3", "4+"],
-        q10: ["cat", "dog", "rabbit", "bird", "fish", "other"],
+        q7: ["0 kids", "1 kid", "2 kids", "3 kids", "4+ kids"],
+        q8: ["has pets", "has no pets"],
+        q9: ["0 pets", "1 pets", "2 pets", "3 pets", "4+ pets"],
+        q10: ["cat", "dog", "rabbit", "bird", "fish", "other pet"],
         q11: ["small", "medium", "large"],
-        q12: [true, false],
+        q12: ["yard", "no yard"],
         q13: ["allergic to cats",
             "allergic to dogs",
             "allergic to fur except hypoallergenic",
             "allergic to fur",
-            "other"],
+            "other allergy"],
     }
 
     const [quizData, setQuizData] = useState({
         user_email: "",
+        username: "",
+        interested_pet_types: [],
         hobbies: [],
         ideal_pet: [],
         cleanliness: "",
@@ -72,9 +86,65 @@ export default function PurrsonalityQuiz() {
         other_allergies: "",
         ai_data: [],
     });
+    useEffect(() => {
+        if((quizData.user_email === "") && USER.email !== ""){
+            setQuizData({
+                ...quizData,
+                user_email: USER.email,
+                username: USER.username
+            })
+            console.log("updated username");
+        }
+    })
 
     function saveQuiz(){
         console.log(quizData);
+
+        // make ai_data
+        let newAIData = [];
+        if(quizData.hobbies.length > 0){
+            quizData.hobbies.map(item => newAIData.push(item));
+        }
+        if(quizData.ideal_pet.length > 0){
+            quizData.ideal_pet.map(item => newAIData.push(item));
+        }
+        if(quizData.environment !== "" ){
+            newAIData.push(quizData.environment);
+        }
+        if(quizData.time_at_home !== "" ){
+            newAIData.push(quizData.time_at_home);
+        }
+        if(quizData.social_environment !== "" ){
+            newAIData.push(quizData.social_environment);
+        }
+        if(quizData.num_kids !== "" ){
+            newAIData.push(quizData.num_kids);
+        }
+        if(quizData.young_kids !== "" ){
+            newAIData.push(quizData.young_kids);
+        }
+        if(quizData.num_pets !== "" ){
+            newAIData.push(quizData.num_pets);
+        }
+        if(quizData.types_of_pets.length > 0){
+            quizData.types_of_pets.map(item => newAIData.push(item));
+        }
+        if(quizData.other_pets !== "" ){
+            newAIData.push(quizData.other_pets);
+        }
+        if(quizData.home_size !== "" ){
+            newAIData.push(quizData.home_size);
+        }
+        if(quizData.yard !== "" ){
+            newAIData.push(quizData.yard);
+        }
+        if(quizData.allergies.length > 0){
+            quizData.allergies.map(item => newAIData.push(item));
+        }
+        if(quizData.other_allergies.length > 0){
+            newAIData.push(quizData.other_allergies);
+        }
+        console.log(newAIData);
     }
 
     function handleChange(data){
@@ -83,7 +153,6 @@ export default function PurrsonalityQuiz() {
         const q_index = data.target.value;
         const field_name = data.target.name;
         let value = question_data[q_id][q_index];
-        console.log(field_name + " " + value + " " + data.target.type);
         if (data.target.type === "checkbox"){
             const curr_array = quizData[field_name];
             if(!curr_array.includes(value) && data.target.checked){
@@ -127,6 +196,59 @@ export default function PurrsonalityQuiz() {
                   </div>
               </div>
               <form className="row">
+                  <div id="q0" className="col s12 question">
+                      <p className="text">What kind of pet are you interested in adopting? (Select all that apply)</p>
+                      <ul>
+                          <li>
+                              <label>
+                                  <input id="q0-1" name="interested_pet_types" type="checkbox" value="0" onChange={handleChange}/>
+                                  <span>Dogs</span>
+                              </label>
+                          </li>
+                          <li>
+                              <label>
+                                  <input id="q0-2" name="interested_pet_types" type="checkbox" value="1" onChange={handleChange}/>
+                                  <span>Cats</span>
+                              </label>
+                          </li>
+                          <li>
+                              <label>
+                                  <input id="q0-3" name="interested_pet_types" type="checkbox" value="2" onChange={handleChange}/>
+                                  <span>Rabbits</span>
+                              </label>
+                          </li>
+                          <li>
+                              <label>
+                                  <input id="q0-4" name="interested_pet_types" type="checkbox" value="3" onChange={handleChange}/>
+                                  <span>Small furry animals</span>
+                              </label>
+                          </li>
+                          <li>
+                              <label>
+                                  <input id="q0-5" name="interested_pet_types" type="checkbox" value="4" onChange={handleChange}/>
+                                  <span>Hores</span>
+                              </label>
+                          </li>
+                          <li>
+                              <label>
+                                  <input id="q0-6" name="interested_pet_types" type="checkbox" value="5" onChange={handleChange}/>
+                                  <span>Birds</span>
+                              </label>
+                          </li>
+                          <li>
+                              <label>
+                                  <input id="q0-7" name="interested_pet_types" type="checkbox" value="6" onChange={handleChange}/>
+                                  <span>Scales, Fins, and others</span>
+                              </label>
+                          </li>
+                          <li>
+                              <label>
+                                  <input id="q0-8" name="interested_pet_types" type="checkbox" value="7" onChange={handleChange}/>
+                                  <span>Barnyard animals</span>
+                              </label>
+                          </li>
+                      </ul>
+                  </div>
                   <div id="q1" className="col s12 question" name="hobbies">
                       <p className="text">It’s your day off, what will you be doing? (Pick your top 3)</p>
                       <ul>
@@ -231,13 +353,13 @@ export default function PurrsonalityQuiz() {
                           </li>
                           <li>
                               <label>
-                                  <input id="q2-8" name="ideal_pet" type="checkbox" value="8" onChange={handleChange}/>
+                                  <input id="q2-9" name="ideal_pet" type="checkbox" value="8" onChange={handleChange}/>
                                   <span>Protective</span>
                               </label>
                           </li>
                           <li>
                               <label>
-                                  <input id="q2-8" name="ideal_pet" type="checkbox" value="9" onChange={handleChange}/>
+                                  <input id="q2-10" name="ideal_pet" type="checkbox" value="9" onChange={handleChange}/>
                                   <span>Social</span>
                               </label>
                           </li>
@@ -499,7 +621,7 @@ export default function PurrsonalityQuiz() {
                       </ul>
                   </div>
                   <div className="col s12 center">
-                      <button className="btn-large" type="button">Submit Your Answers</button>
+                      <button className="btn-large" type="button" onClick={saveQuiz}>Submit Your Answers</button>
                   </div>
               </form>
           </div>
