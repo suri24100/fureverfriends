@@ -158,31 +158,34 @@ export async function getFilteredListings(filters, numListings, pageNum){
 
 // query for training data
 export async function callTrainingData(){
-    let startFrom = 101;
-    let numPages = 200;
+    let startFrom = 1;
+    let numPages = 800;
     let animal = "dog";
+    let petURLS = {urls: []};
     let formattedData = "pet_id|type|species|description|tags\n";
     for(let index = startFrom; index <= numPages; index++){
-        let mainDataURL = BASE_URL + "/v2/animals?type=" + animal + "&limit=100&page=" + index;
+        let mainDataURL = BASE_URL + "/v2/animals?limit=100&page=" + index;
         let mainData = await getTrainingData(mainDataURL);
         for(let pet = 0; pet < mainData.length; pet++){
-            if(mainData[pet].tags.length > 0 && mainData[pet].description){
+            if(mainData[pet].description){
                 formattedData += mainData[pet].id + "|"
                     + mainData[pet].type + "|"
                     + mainData[pet].species + "|"
-                    + mainData[pet].description.replace(/\n/g, " ").replace(/\r/g, "") + "|"
+                    + "add description here" + "|"
                     + mainData[pet].tags.join("|") + "|"
                     + mainData[pet].gender + "|"
                     + mainData[pet].age + "|"
                     + mainData[pet].size + "|"
                     + mainData[pet].breeds.primary + "|"
                     + mainData[pet].coat + "\n";
+                petURLS.urls.push(mainData[pet].url.split("?")[0]);
             }
         }
     }
     const dataBlob = await new Blob([formattedData], {type: 'text/csv'});
-    console.log(dataBlob);
     await saveAs(dataBlob, "petfinder-profiledata.csv");
+    const urlBlob = await new Blob([JSON.stringify(petURLS)], {type: 'text/plain;charset=utf-8'});
+    await saveAs(urlBlob, "petfinder-urldata.json");
 }
 
 // get training data

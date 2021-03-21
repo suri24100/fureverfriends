@@ -186,7 +186,7 @@ export default function Home() {
     }
 
     return (
-    <div>
+    <div class="home-page">
         <div className="banner-wrap">
         <div className="banner-img-wrap">
             {/*<img className="banner-img" src="home-banner.png">*/}
