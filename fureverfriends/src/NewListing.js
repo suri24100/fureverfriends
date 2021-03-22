@@ -46,12 +46,14 @@ export default function NewListing() {
 
     const {USER} = useAuth();
 
-    let [pageLoaded, setPageLoaded] = useState(false);
-    let [loggedIn, setLoggedIn] = useState(false);
-    let [listingSaved, setListingSaved] = useState(false);
-    let [petInfo, setPetInfo] = useState({
+    const [pageLoaded, setPageLoaded] = useState(false);
+    const [loggedIn, setLoggedIn] = useState(false);
+    const [listingSaved, setListingSaved] = useState(false);
+    let processing = false;
+    const [petInfo, setPetInfo] = useState({
         pet_name: "",
-        profile_url: ""
+        profile_url: "",
+        pet_id: ""
     });
 
     const [formState, setFormState] = useState(null);
@@ -90,7 +92,8 @@ export default function NewListing() {
                 url_count++;
             }
             // correct number received
-            if(url_count === fileState.total_urls){
+            if(url_count === fileState.total_urls && !processing){
+                processing = true;
                 let newListing = {
                     pet_data: formState,
                     profileFiles: {
@@ -102,8 +105,9 @@ export default function NewListing() {
                 console.log(newListing);
                 createPetListing(newListing);
             }
-        } else if (fileState.total_urls === 0){
+        } else if (fileState.total_urls === 0 && !processing){
             console.log("No files");
+            processing = true;
             let newListing = {
                 pet_data: {formState},
                 profileFiles: {
@@ -129,6 +133,14 @@ export default function NewListing() {
             .then((docRef) => {
                 console.log("Document written");
                 setListingSaved(true);
+                let newPetListings = USER.pet_listings.map(item => item);
+                newPetListings.push(petInfo.pet_id);
+                console.log(newPetListings);
+                const userRef = firestore.collection("UserInfo")
+                    .doc(USER.email);
+                let setWithMerge = userRef.set({
+                    pet_listings: newPetListings
+                }, {merge: true});
             })
             .catch((error) => {
                 console.error("Error adding document: ", error);
@@ -387,7 +399,8 @@ export default function NewListing() {
 
         setPetInfo({
             pet_name: newPetListing.name,
-            profile_url: "/listings/" + newPetListing.type + "/profile/FF-" + newPetListing.pet_id
+            profile_url: "/listings/" + newPetListing.type + "/profile/FF-" + newPetListing.pet_id,
+            pet_id: newPetListing.pet_id
         })
 
         createPetListingData(new_pet_id, profileFiles);
@@ -745,7 +758,7 @@ export default function NewListing() {
                                     </div>
                                     <div className="listings-submit-button-wrap  center-align">
                                         <button className="btn waves-effect waves-light btn-large" type="button"
-                                                name="action" onClick={() => processFormContents()}>Create Profile
+                                                name="action" onClick={processFormContents}>Create Profile
                                             <i className="material-icons right">send</i>
                                         </button>
                                     </div>
