@@ -3,10 +3,9 @@
     margin-bottom: 5% !important;
 }
 
-.profile-page .container a.text-link{
-    color: #00acc1;
+.profile-page .container .text-link{
+    color: #00acc1!important;
 }
-
 
 .profile-page .banner-wrap{
     background-image: none;
@@ -49,15 +48,22 @@
     font-weight: bold;
     font-size: 14pt!important;
     margin-top: 8%;
+    color: #fff!important;
+}
+
+.profile-page .btn{
+    color: #fff!important;
 }
 
 .profile-page .submit-button a{
     margin-top: 8%;
     font-size: 14pt!important;
+    color: #fff!important;
 }
 
 .profile-page .scan-button{
     margin-left: 5%;
+    color: #fff!important;
 }
 
 .profile-page .main-photo {
