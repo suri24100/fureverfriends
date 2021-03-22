@@ -643,7 +643,7 @@ export default function Listings(){
                                         <select id="filter-distance" name="distance" onChange={updateFilters}>
                                         <label htmlFor="filter-distance">Distance</label>
                                         {PFdata.DISTANCE.map(item =>
-                                            <option name="distance" value={item}>{item} miles</option>
+                                            <option name="distance" value={item} id="dist-filt">{item} miles</option>
                                         )}
                                         </select>
                                     </div>

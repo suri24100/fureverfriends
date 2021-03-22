@@ -130,7 +130,13 @@ export async function getFilteredListings(filters, numListings, pageNum){
     let formZipCode = testEl.value;*/
     if (filters.zipcode != "") {
         console.log("got here")
+        console.log("filters.distance: " + filters.distance);
         typeURL += "&location=" + filters.zipcode;
+        if (filters.distance == 0) {
+            typeURL += "&distance=25";
+        } else {
+            typeURL += "&distance=" + filters.distance;
+        }
     }
     if(filters.type !== "all"){
         typeURL += "&type=" + filters.type;
