@@ -41,6 +41,8 @@ img {
   background-image: url(./new-listings-banner.jpg);
   background-size: 100%;
   background-attachment: fixed;
+  margin-top: -6vw; /*added when nav was moved out to its own div */
+  z-index: -99;
 }
 .listings-heading.container {
   margin-bottom: 3rem;
@@ -119,4 +121,8 @@ li {
 #output_image
 {
  max-width: 20%;
+}
+
+.create-profile form.row{
+  background: none;
 }
