@@ -154,6 +154,9 @@ export default function UserProfile() {
                                                onChange={handleInput}/>
                                         <label className="active" htmlFor="last_name"> Last Name: </label>
                                     </div>
+
+                                    {/*When updating email it states "failed to create account, we should
+                                    change it to " Account already exists under that email, please try a different email or login using the existing email */}
                                     <div className="input-field col s12">
                                         <i className="material-icons prefix"> email </i>
                                         <input type="email" id="email" name="email"
@@ -212,8 +215,6 @@ export default function UserProfile() {
                                 <p> </p>
                                 <a disabled={loading}  onClick={cancelchanges}  className="waves-effect btn"> Cancel</a>
                             </div>
-
-
                 </div>
                 </div>
                 </div>

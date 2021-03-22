@@ -28,23 +28,6 @@ export default function Displaylisting() {
         console.log("Reloaded");
     })
 
-    async function Displaylisting(e){
-        e.preventDefault();
-
-        const snapshot = await firestore.collection("UserInfo").where("username", "==", USER.username).get();
-        if(!snapshot.empty && USER.username !== username)
-        {
-            setLoading(false);
-        }
-
-        try {
-            setLoading(true);
-        }catch(err) {
-            setLoading(true);
-        }
-
-        setLoading(false);
-    }
 
 
     return (
