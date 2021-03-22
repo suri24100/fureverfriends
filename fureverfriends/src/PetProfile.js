@@ -40,10 +40,10 @@ export default function PetProfile(){
                },
                cared_by: initialData.pet_data.cared_by,
                contact: {
-                   name: initialData.pet_data.contact.name,
-                   email: initialData.pet_data.contact.email,
-                   phone: initialData.pet_data.contact.phone,
-                   website: initialData.pet_data.website
+                   name: (initialData.pet_data.contact.name) ? initialData.pet_data.contact.name : "N/A",
+                   email: initialData.pet_data.contact.email ? initialData.pet_data.contact.email : "N/A",
+                   phone: initialData.pet_data.contact.phone ? initialData.pet_data.contact.phone : "N/A",
+                   website: initialData.pet_data.website ? initialData.pet_data.contact.website : "N/A",
                },
                personality: initialData.pet_data.personality,
                good_with_cats: (initialData.pet_data.good_with_cats) ? "Yes" : "No",

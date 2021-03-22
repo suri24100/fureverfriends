@@ -8,3 +8,84 @@
     background-size: 100%;
     background-attachment: fixed;
 }
+
+.quiz-page form.row{
+    background-image: none;
+}
+
+.quiz-banner-wrap .heading {
+    font-size: 2em;
+    text-transform: uppercase;
+    font-weight: bold;
+    position: absolute;
+    width: 100%;
+    bottom: 15%;
+}
+.quiz-banner-wrap .subheading {
+    font-size: 1.5em;
+    position: absolute;
+    width: 100%;
+    bottom: 5%;
+}
+
+.quiz-page{
+    /*background-image: url("./quiz-banner.jpg");*/
+    /*background-repeat: no-repeat;*/
+    /*background-size: cover;*/
+    /*background-attachment: fixed;*/
+}
+
+.quiz-page .container {
+    margin-top: 30px;
+    margin-bottom: 60px;
+    font-size: 1.2em;
+}
+
+.quiz-page .question{
+    border: 4px solid #379683;
+    border-radius: 30px;
+    margin-bottom: 30px;
+    padding: 15px 30px 15px 30px;
+    background: #fff;
+}
+
+.quiz-page .question .text{
+    color: #379683;
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+.quiz-page .btn-large{
+    border-radius: 15px;
+    font-weight: bold;
+}
+
+.quiz-page form [type="checkbox"]+span:not(.lever),
+.quiz-page form [type="radio"]:not(:checked)+span,
+.quiz-page form [type="radio"]:not(:checked)+span, [type="radio"]:checked+span {
+    font-size: 1.5em;
+    color: #000;
+}
+
+.quiz-page .submitError{
+    color:red;
+    font-weight: bold;
+    font-size: 12pt;
+}
+
+.quiz-page .success-page{
+    margin-top: 10%;
+    margin-bottom: 10%;
+    font-size: 1.4em;
+}
+
+.quiz-page .success-page h4{
+    color: #379683;
+    font-weight: bold;
+}
+
+@media only screen and (min-width: 993px) {
+    .listings-page .container{
+        width:90%;
+    }
+}
