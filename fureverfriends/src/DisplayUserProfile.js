@@ -57,12 +57,12 @@ export default function DisplayUserProfile() {
                 <div className="row">
                     <div className="col s12 m3" id = "sidenav">
                         <div className = "collection">
-                            <a href="msg" className = "collection-item">Messages</a>
-                            <a href="ntf" className ="collection-item">Notifications</a>
-                            <a href="yl" className = "collection-item">Your Listings</a>
-                            <a href="information" className = "collection-item">Account Info</a>
-                            <a href="ss" className = "collection-item">Safe Spawts</a>
-                            <a href="favs" className = "collection-item">Favorites</a>
+                            <a href="msg" className = "collection-item" >Messages</a>
+                            <a href="ntf" className ="collection-item"  >Notifications</a>
+                            <a href="yl" className = "collection-item"  >Your Listings</a>
+                            <a href="information" className = "collection-item"  >Account Info</a>
+                            <a href="ss" className = "collection-item" >Safe Spawts</a>
+                            <a href="favs" className = "collection-item" >Favorites</a>
                         </div>
                     </div>
 
@@ -71,7 +71,7 @@ export default function DisplayUserProfile() {
                             <br/>
                             <div className="col s12">
                                 <i className="small material-icons prefix">assignment_ind</i>
-                                <span className="title " style={{color: " #379683", }}>  User Name : </span> {USER.username}
+                                <span className="title "  style={{color: " #379683"}}>  User Name : </span> {USER.username}
                             </div>
                                 <div className="col s6">
                                     <i className="small material-icons prefix">account_circle</i>
