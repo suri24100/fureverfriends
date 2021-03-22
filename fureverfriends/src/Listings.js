@@ -188,7 +188,7 @@ export default function Listings(){
         breed: []
     });
     useEffect( () => {
-        console.log("type has changed to " + filters.type);
+        console.log("type has changed to " + userSelections.type);
         generateFilters("filter-age");
         generateFilters("filter-gender");
         generateFilters("filter-size");
@@ -241,7 +241,8 @@ export default function Listings(){
     const prevCardList = usePrevious(cardList);
 
     async function getListingData(pageNum){
-        let newPFListings = await getFilteredListings(userSelections,10, pageNum);
+        console.log(userSelections);
+        let newPFListings = await getFilteredListings(userSelections,100, pageNum);
         let newFFListings = await getFFListings(userSelections, pageNum);
         setPFListings(newPFListings);
     }
@@ -409,8 +410,6 @@ export default function Listings(){
                 break;
         }
     }
-
-    var zipCode = filters.location.zipcode;
 
     function generateFilters(filterID) {
         const filterUL = document.getElementById(filterID);

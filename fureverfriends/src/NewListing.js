@@ -41,6 +41,8 @@ export default function NewListing() {
         if(USER.email){
             setLoggedIn(true);
             setPageLoaded(true);
+        } else{
+            setPageLoaded(true);
         }
     });
 
