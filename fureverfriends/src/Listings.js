@@ -197,6 +197,7 @@ export default function Listings(){
         generateFilters("filter-furlen");
         generateFilters("filter-color");
         generateFilters("filter-breed");
+        generateFilters("filter-zipcode");
     }, [filters.type]);
 
     const [applyFilter, setApplyFilter] = useState(false);
@@ -391,22 +392,23 @@ export default function Listings(){
                 });
                 break;
             case "zipcode":
-                typeArr = filters.zipcode;
                 setFilters({
                     ...filters,
-                    zipcode: typeArr
+                    location: {zipcode: value, distance: filters.location.distance}
                 });
-                break
+                break;
             case "distance":
                 setFilters({
                     ...filters,
-                    distance: value
+                    location: {zipcode: filters.location.zipcode, distance: value}
                 });
                 break;
             default:
                 break;
         }
     }
+
+    console.log("test: " + filters.location.zipcode);
 
     function generateFilters(filterID) {
         const filterUL = document.getElementById(filterID);
