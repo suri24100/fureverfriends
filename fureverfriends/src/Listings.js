@@ -2,7 +2,7 @@ import React, {useEffect, useState, Component, useReducer, useRef} from 'react';
 import Header from "./Header";
 import './css/style.css';
 import './css/listings.css';
-import {getFilteredListings, getTypeListing} from "./api-modules/PetfinderAPI";
+import {getFilteredListings, getTypeListing, doLocationStuff} from "./api-modules/PetfinderAPI";
 import {forEach} from "react-bootstrap/ElementChildren";
 import {Link, useRouteMatch} from "react-router-dom";
 import PFdata from "./api-modules/constants.js";
@@ -15,7 +15,7 @@ function PetCard(props){
     let formattedPetInfo = {};
     // FF pet listing
     if(petInfo.pet_data){
-        console.log(petInfo);
+        //console.log(petInfo);
         formattedPetInfo = {
             petfinder_listing: false,
             pet_id: petInfo.pet_data.pet_id,
@@ -234,7 +234,7 @@ export default function Listings(){
         if(ffListings && pfListings && (prevFFListings !== ffListings)){
             let newCombinedListings = ffListings.concat(pfListings);
             setPetListings(newCombinedListings);
-            console.log(newCombinedListings)
+            //console.log(newCombinedListings)
         }
     }, [ffListings, pfListings]);
 
@@ -250,7 +250,7 @@ export default function Listings(){
     async function getFFListings(filters, pageNum) {
         let listingData = [];
         if(filters.type === "all"){
-            console.log("FF all")
+            //console.log("FF all")
             firestore.collection("PetInfo")
                 .doc("PublicListings")
                 .collection("AdoptionList")
@@ -269,8 +269,9 @@ export default function Listings(){
                             querySnapshot.forEach((doc) => {
                                 // doc.data() is never undefined for query doc snapshots
                                 listingData.push(doc.data());
-                                console.log(doc.data());
-                            })}).then(() => {setFFListings(listingData); console.log(listingData)});
+                                //console.log(doc.data());
+                            })}).then(() => {setFFListings(listingData); //console.log(listingData)
+                            });
                 }
                 )
         } else {
@@ -286,7 +287,9 @@ export default function Listings(){
                         //console.log(doc.id, " => ", doc.data());
                         listingData.push(doc.data());
                     })
-                }).then(() => {setFFListings(listingData); console.log(listingData)});
+                }).then(() => {setFFListings(listingData); 
+                    //console.log(listingData)
+                });
         }
     }
 
@@ -315,6 +318,7 @@ export default function Listings(){
     function applyFilters(){
         setApplyFilter(true);
         let prom = getListingData(pageNumber);
+        doLocationStuff(zipCode);
     }
 
     function updateFilters(props){
@@ -408,7 +412,7 @@ export default function Listings(){
         }
     }
 
-    console.log("test: " + filters.location.zipcode);
+    var zipCode = filters.location.zipcode;
 
     function generateFilters(filterID) {
         const filterUL = document.getElementById(filterID);
