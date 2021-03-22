@@ -134,32 +134,32 @@ export default function UserProfile() {
 
                                     <div className="input-field inline col s12">
                                         <i className="material-icons prefix">assignment_ind</i>
-
-                                        <input  type="text" id="username" name="username"
+                                        <label className="active" htmlFor="username"> User Name: </label>
+                                        <input  id= "icon_prefix" type="text" id="username" name="username"
                                                defaultValue={USER.username}
                                                onChange={handleInput}/>
-                                        <label htmlFor="username">Enter New Username</label>
                                         <p className="errorMsg">{usernameError}</p>
                                     </div>
+
                                     <div className="input-field col s6">
                                         <i className="material-icons prefix">account_circle</i>
                                         <input type="text" id="first_name" name="first_name"
                                                defaultValue={USER.first_name}
                                                onChange={handleInput}/>
-                                        <label htmlFor="first_name">Enter Your First Name:</label>
+                                        <label className="active" htmlFor="first_name"> First Name: </label>
                                     </div>
                                     <div className="input-field col s6">
                                         <input type="text" id="last_name" name="last_name"
                                                defaultValue={USER.last_name}
                                                onChange={handleInput}/>
-                                        <label htmlFor="last_name">Enter Your Last Name:</label>
+                                        <label className="active" htmlFor="last_name"> Last Name: </label>
                                     </div>
                                     <div className="input-field col s12">
-                                        <i className="material-icons prefix">email</i>
+                                        <i className="material-icons prefix"> email </i>
                                         <input type="email" id="email" name="email"
                                                defaultValue={USER.email}
                                                onChange={handleInput}/>
-                                        <label htmlFor="email">Enter Your Email Address:</label>
+                                        <label className="active" htmlFor="email"> Email: </label>
                                         <p className="errorMsg">{emailError}</p>
                                     </div>
                                     <div className="input-field col s12">
@@ -167,7 +167,7 @@ export default function UserProfile() {
                                         <input type="tel" id="phone_number" name="phone_number"
                                                defaultValue={USER.phone_number}
                                                onChange={handleInput}/>
-                                        <label htmlFor="phone_number">Enter Your Phone Number:</label>
+                                        <label className="active" htmlFor="phone_number">Enter Your Phone Number:</label>
                                     </div>
                                     <div className="input-field col s6">
                                         <i className="material-icons prefix">pets</i>
@@ -184,7 +184,7 @@ export default function UserProfile() {
 
                                                defaultValue={USER.user_zip}
                                                onChange={handleInput}/>
-                                        <label htmlFor="user_zip">Enter Your Zip Code:</label>
+                                        <label className="active" htmlFor="user_zip">Enter Your Zip Code:</label>
                                     </div>
 
 
@@ -209,8 +209,8 @@ export default function UserProfile() {
                                 </form>
                                 {/*<button disabled={loading}  onClick={saveUserProfile}> Save Changes</button>*/}
                                 <a disabled={loading}  onClick={saveUserProfile} className="waves-effect btn">Save Chances</a>
-
-                                <a disabled={loading}  onClick={cancelchanges} style={{marginLeft: 350}} className="waves-effect btn"> Cancel</a>
+                                <p> </p>
+                                <a disabled={loading}  onClick={cancelchanges}  className="waves-effect btn"> Cancel</a>
                             </div>
 
 
