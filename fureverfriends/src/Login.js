@@ -67,7 +67,6 @@ export default function Login(){
     return (
         <div className="create-account-body">
             <div className="signing-banner-wrap">
-                <Header/>
             </div>
             <div className="create-account container">
                 <div className="row">
