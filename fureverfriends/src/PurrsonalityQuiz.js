@@ -34,7 +34,6 @@ export default function PurrsonalityQuiz() {
             "independent",
             "energetic",
             "calm",
-            "cuddly",
             "protective",
             "quiet",
             "social"
