@@ -2,7 +2,7 @@ import React, {useEffect, useState, Component, useReducer, useRef} from 'react';
 import Header from "./Header";
 import './css/style.css';
 import './css/listings.css';
-import {getFilteredListings, getTypeListing} from "./api-modules/PetfinderAPI";
+import {getFilteredListings, getTypeListing, doLocationStuff} from "./api-modules/PetfinderAPI";
 import {forEach} from "react-bootstrap/ElementChildren";
 import {Link, useRouteMatch} from "react-router-dom";
 import PFdata from "./api-modules/constants.js";
@@ -15,7 +15,7 @@ function PetCard(props){
     let formattedPetInfo = {};
     // FF pet listing
     if(petInfo.pet_data){
-        console.log(petInfo);
+        //console.log(petInfo);
         formattedPetInfo = {
             petfinder_listing: false,
             pet_id: petInfo.pet_data.pet_id,
@@ -115,8 +115,24 @@ function PetCard(props){
     }
     const [petDetails, setPetDetails] = useState(formattedPetInfo);
 
-    function calculateDistance(){
-        // TODO: to be filled in later when we have Maps api setup
+    function toRad(deg) {
+        return deg * (Math.PI/180);
+    }
+
+    function calculateDistance(x1, y1, x2, y2) {
+        var R = 3956; // mi
+        var dLat = toRad(x2-x1);
+        var dLon = toRad(y2-y1);
+        var xr1 = toRad(x1);
+        var xr2 = toRad(x2);
+        console.log("latitude2 in radians: " + xr2);
+
+        var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+          Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(xr1) * Math.cos(xr2);
+
+        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        var d = R * c;
+        return d;
     }
 
     let match = useRouteMatch();
@@ -172,7 +188,7 @@ export default function Listings(){
         breed: []
     });
     useEffect( () => {
-        console.log("type:" + userSelections.type)
+        console.log("type has changed to " + filters.type);
         generateFilters("filter-age");
         generateFilters("filter-gender");
         generateFilters("filter-size");
@@ -197,7 +213,6 @@ export default function Listings(){
     // after getting pets, do it there
     useEffect(() => {
         if(!pageLoaded){
-            console.log("got here")
             let promise = getListingData(pageNumber);
             setApplyFilter(true);
             setPageLoaded(true);
@@ -218,7 +233,7 @@ export default function Listings(){
         if(ffListings && pfListings && (prevFFListings !== ffListings)){
             let newCombinedListings = ffListings.concat(pfListings);
             setPetListings(newCombinedListings);
-            console.log(newCombinedListings)
+            //console.log(newCombinedListings)
         }
     }, [ffListings, pfListings]);
 
@@ -253,8 +268,9 @@ export default function Listings(){
                             querySnapshot.forEach((doc) => {
                                 // doc.data() is never undefined for query doc snapshots
                                 listingData.push(doc.data());
-                                console.log(doc.data());
-                            })}).then(() => {setFFListings(listingData); console.log(listingData)});
+                                //console.log(doc.data());
+                            })}).then(() => {setFFListings(listingData); //console.log(listingData)
+                            });
                 }
                 )
         } else {
@@ -267,10 +283,12 @@ export default function Listings(){
                 .then((querySnapshot) => {
                     querySnapshot.forEach((doc) => {
                         // doc.data() is never undefined for query doc snapshots
-                        console.log(doc.id, " => ", doc.data());
+                        //console.log(doc.id, " => ", doc.data());
                         listingData.push(doc.data());
                     })
-                }).then(() => {setFFListings(listingData); console.log(listingData)});
+                }).then(() => {setFFListings(listingData);
+                    //console.log(listingData)
+                });
         }
     }
 
@@ -305,9 +323,6 @@ export default function Listings(){
         const filterID = props.target.name;
         const value = props.target.value;
         const checked = props.target.checked;
-        console.log(filterID);
-        console.log(value);
-        console.log(checked);
         let typeArr = [];
         let index = -1;
         let newArr = [];
@@ -379,7 +394,6 @@ export default function Listings(){
                 });
                 break;
             case "zipcode":
-                console.log(pageNumber)
                 setFilters({
                     ...userSelections,
                     zipcode: value
@@ -395,6 +409,8 @@ export default function Listings(){
                 break;
         }
     }
+
+    var zipCode = filters.location.zipcode;
 
     function generateFilters(filterID) {
         const filterUL = document.getElementById(filterID);

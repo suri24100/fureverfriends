@@ -10,6 +10,7 @@
 
 import axios from "axios";
 import { saveAs } from 'file-saver';
+import locationInfo from "../Listings";
 
 const CLIENT_ID = "ygcuWhnebW0MHgMwxny1ThmJ3OeJzIzMUaF9b3IeviUmOJVsYy";
 const KEY = "RsPfXnm5hAVCghknjJjCOyxFp4jwh0cHHgAZ8eUD";
@@ -18,6 +19,7 @@ let token = {
     valid_to: null,
     h: {}
 }
+
 
 // used for all api queries
 const BASE_URL = "https://api.petfinder.com";
@@ -111,8 +113,21 @@ export async function getTypeListing(animalType, numListings, pageNum){
     return listingResults.animals;
 }
 
+var formZipCode = "";
+
+export function doLocationStuff(zipCode) {
+    formZipCode = zipCode;
+}
+
+console.log("testing from pfapi" + formZipCode);
+
 export async function getFilteredListings(filters, numListings, pageNum){
     let typeURL = BASE_URL + "/v2/animals?limit=" + numListings + "&page=" + pageNum;
+    console.log("testing from pfapi" + formZipCode);
+    if (formZipCode != "") {
+        console.log("got here")
+        typeURL += "&location=" + formZipCode;
+    }
     if(filters.type !== "all"){
         typeURL += "&type=" + filters.type;
         if(filters.size.length > 0){
@@ -150,6 +165,7 @@ export async function getFilteredListings(filters, numListings, pageNum){
             });
             typeURL = typeURL.slice(0, -1);
         }
+        console.log("got here hjhkj");
     }
     console.log(typeURL);
     let listingResults = await getData(typeURL);
