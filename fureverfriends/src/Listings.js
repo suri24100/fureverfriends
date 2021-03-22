@@ -115,8 +115,24 @@ function PetCard(props){
     }
     const [petDetails, setPetDetails] = useState(formattedPetInfo);
 
-    function calculateDistance(){
-        // TODO: to be filled in later when we have Maps api setup
+    function toRad(deg) {
+        return deg * (Math.PI/180);
+    }
+
+    function calculateDistance(x1, y1, x2, y2) {
+        var R = 3956; // mi
+        var dLat = toRad(x2-x1);
+        var dLon = toRad(y2-y1);
+        var xr1 = toRad(x1);
+        var xr2 = toRad(x2);
+        console.log("latitude2 in radians: " + xr2);
+  
+        var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+          Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(xr1) * Math.cos(xr2);
+  
+        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+        var d = R * c;
+        return d;
     }
 
     let match = useRouteMatch();
@@ -266,7 +282,7 @@ export default function Listings(){
                 .then((querySnapshot) => {
                     querySnapshot.forEach((doc) => {
                         // doc.data() is never undefined for query doc snapshots
-                        console.log(doc.id, " => ", doc.data());
+                        //console.log(doc.id, " => ", doc.data());
                         listingData.push(doc.data());
                     })
                 }).then(() => {setFFListings(listingData); console.log(listingData)});
@@ -375,9 +391,10 @@ export default function Listings(){
                 });
                 break;
             case "zipcode":
+                typeArr = filters.zipcode;
                 setFilters({
                     ...filters,
-                    zipcode: value
+                    zipcode: typeArr
                 });
                 break
             case "distance":
