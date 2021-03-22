@@ -124,6 +124,10 @@ console.log("testing from pfapi" + formZipCode);
 export async function getFilteredListings(filters, numListings, pageNum){
     let typeURL = BASE_URL + "/v2/animals?limit=" + numListings + "&page=" + pageNum;
     console.log("testing from pfapi" + formZipCode);
+    if (formZipCode != "") {
+        console.log("got here")
+        typeURL += "&location=" + formZipCode;
+    }
     if(filters.type !== "all"){
         typeURL += "&type=" + filters.type;
         if(filters.size.length > 0){
@@ -162,10 +166,6 @@ export async function getFilteredListings(filters, numListings, pageNum){
             typeURL = typeURL.slice(0, -1);
         }
         console.log("got here hjhkj");
-        if (formZipCode != "") {
-            console.log("got here")
-            typeURL += "&location=" + formZipCode;
-        }
     }
     console.log(typeURL);
     let listingResults = await getData(typeURL);
