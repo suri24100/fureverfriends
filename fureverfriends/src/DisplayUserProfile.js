@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from "react";
 import Header from "./Header";
-import './css/style.css';
 import './css/home.css';
+import './css/style.css'
+
 import Footer from "./Footer";
 import {Link} from "react-router-dom";
 import {firestore} from "./ffdb";
@@ -55,57 +56,60 @@ export default function DisplayUserProfile() {
             <div className = "container">
                 <div className="row">
                     <div className="col s12 m3" id = "sidenav">
-                        <div class = "collection">
-                            <a href="msg" class = "collection-item">Messages</a>
-                            <a href="ntf" class ="collection-item">Notifications</a>
-                            <a href="yl" class = "collection-item">Your Listings</a>
-                            <a href="information" class = "collection-item">Account Info</a>
-                            <a href="ss" class= "collection-item">Safe Spawts</a>
-                            <a href="favs" class = "collection-item">Favorites</a>
+                        <div className = "collection">
+                            <a href="msg" className = "collection-item">Messages</a>
+                            <a href="ntf" className ="collection-item">Notifications</a>
+                            <a href="yl" className = "collection-item">Your Listings</a>
+                            <a href="information" className = "collection-item">Account Info</a>
+                            <a href="ss" className = "collection-item">Safe Spawts</a>
+                            <a href="favs" className = "collection-item">Favorites</a>
                         </div>
                     </div>
 
                     <div className="col s12 m9" href="information">
                         <div className="collection">
                             <br/>
-                            <div>
-                                <span className="title " style={{color: " #379683"}}>User Name : </span> {USER.username}
+                            <div className="col s12">
+                                <i className="small material-icons prefix">assignment_ind</i>
+                                <span className="title " style={{color: " #379683", }}>  User Name : </span> {USER.username}
                             </div>
-
-                            <div>
-                                <div>
-
-                                    <span className="title" style={{color: " #379683"}} >First Name : </span> {USER.first_name}
+                                <div className="col s6">
+                                    <i className="small material-icons prefix">account_circle</i>
+                                    <span className="title" style={{color: " #379683"}} >  First Name : </span> {USER.first_name}
                                 </div>
 
-                                <div>
-                                    <span className="title" style={{color: " #379683"}} >Last Name : </span> {USER.last_name}
+                                <div className="col s6">
+                                    <span className="title" style={{color: " #379683"}} >  Last Name : </span> {USER.last_name}
                                 </div>
+
+                            <div className="col s12">
+                                <i className="small material-icons prefix">email </i>
+                                <span className="title" style={{color: " #379683"}} >  Email: </span> {USER.email}
                             </div>
 
-
-                            <div>
-                                <span className="title" style={{color: " #379683"}} >Email: </span> {USER.email}
-                            </div>
-
-                            <div>
+                            <div className="col s12">
+                                <i className="small material-icons prefix">local_phone</i>
                                 <span className="title" style={{color: " #379683"}} > Phone Number: </span> {USER.phone_number}
                             </div>
 
-                            <div>
+                            <div className="col s12">
+                                <i className="small material-icons prefix"> pets </i>
                                 <span className="title" style={{color: " #379683"}} > Account Type: </span> {USER.account_type}
                             </div>
 
-                            <div>
+                            <div className="col s12">
+                                <i className="small material-icons prefix">add_location</i>
                                 <span className="title" style={{color: " #379683"}} > Location: </span> {USER.user_zip}
                             </div>
 
 
-                            <div>
-                                <span className="title" style={{color: " #379683"}} > Bio: </span> {USER.user_bio}
+                            <div className="col s12">
+                                <i className="small material-icons prefix"> border_color </i>
+                                <span className="title" style={{color: " #379683"}} >  Bio: </span> {USER.user_bio}
                             </div>
 
                         </div>
+                        <Link to ="/userprofile"  className="waves-effect btn"> Edit Profile </Link>
                     </div>
                 </div>
             </div>
