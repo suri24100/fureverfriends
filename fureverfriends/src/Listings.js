@@ -160,12 +160,10 @@ export default function Listings(){
     const [petListings, setPetListings] = useState( null);
 
 
-    const [filters, setFilters] = useState({
+    const [userSelections, setFilters] = useState({
         type: "all",
-        location:{
-            zipcode: "",
-            distance: 0,
-        },
+        zipcode: "",
+        distance: 0,
         age: [],
         gender: [],
         size: [],
@@ -174,14 +172,17 @@ export default function Listings(){
         breed: []
     });
     useEffect( () => {
-        console.log("type has changed to " + filters.type);
+        console.log("type:" + userSelections.type)
         generateFilters("filter-age");
         generateFilters("filter-gender");
         generateFilters("filter-size");
         generateFilters("filter-furlen");
         generateFilters("filter-color");
         generateFilters("filter-breed");
-    }, [filters.type]);
+    }, [userSelections.type]);
+    useEffect(() =>{
+        console.log(userSelections);
+    })
 
     const [applyFilter, setApplyFilter] = useState(false);
 
@@ -196,11 +197,11 @@ export default function Listings(){
     // after getting pets, do it there
     useEffect(() => {
         if(!pageLoaded){
+            console.log("got here")
             let promise = getListingData(pageNumber);
-            generateFilters("filter-type");
-            generateFilters("filter-location");
             setApplyFilter(true);
             setPageLoaded(true);
+            M.AutoInit();
         }
         else if(prevPage !== pageNumber){
             getListingData(pageNumber);
@@ -225,14 +226,14 @@ export default function Listings(){
     const prevCardList = usePrevious(cardList);
 
     async function getListingData(pageNum){
-        let newPFListings = await getFilteredListings(filters,10, pageNum);
-        let newFFListings = await getFFListings(filters, pageNum);
+        let newPFListings = await getFilteredListings(userSelections,10, pageNum);
+        let newFFListings = await getFFListings(userSelections, pageNum);
         setPFListings(newPFListings);
     }
 
-    async function getFFListings(filters, pageNum) {
+    async function getFFListings(userSelections, pageNum) {
         let listingData = [];
-        if(filters.type === "all"){
+        if(userSelections.type === "all"){
             console.log("FF all")
             firestore.collection("PetInfo")
                 .doc("PublicListings")
@@ -257,11 +258,11 @@ export default function Listings(){
                 }
                 )
         } else {
-            console.log("FF " + filters.type)
+            console.log("FF " + userSelections.type)
             let docRef =  firestore.collection("PetInfo")
                 .doc("PublicListings")
                 .collection("AdoptionList")
-                .doc("PetTypes").collection(filters.type);
+                .doc("PetTypes").collection(userSelections.type);
             docRef.get()
                 .then((querySnapshot) => {
                     querySnapshot.forEach((doc) => {
@@ -290,7 +291,7 @@ export default function Listings(){
         setPageNumber(newPageNum);
     }
 
-    // SURI: This is called when someone clicks apply filters
+    // SURI: This is called when someone clicks apply userSelections
     // It is async so if you need to do something before getting listings
     // from database/petfinder, do that here.
     // if you need to do something AFTER listings retrieved, that can be called
@@ -304,86 +305,90 @@ export default function Listings(){
         const filterID = props.target.name;
         const value = props.target.value;
         const checked = props.target.checked;
+        console.log(filterID);
+        console.log(value);
+        console.log(checked);
         let typeArr = [];
         let index = -1;
         let newArr = [];
         switch (filterID){
             case "type":
                 setFilters({
-                    ...filters,
+                    ...userSelections,
                     type: value
                 });
                 break;
             case "furlen":
-                typeArr = filters.coat;
+                typeArr = userSelections.coat;
                 index = typeArr.indexOf(value);
                 if(checked && index < 0) {newArr = typeArr.push(value)}
                 else if(index >= 0) {newArr = typeArr.splice(index, 1)}
                 setFilters({
-                    ...filters,
+                    ...userSelections,
                     coat: typeArr
                 });
                 break;
             case "size":
-                typeArr = filters.size;
+                typeArr = userSelections.size;
                 index = typeArr.indexOf(value);
                 if(checked && index < 0) {newArr = typeArr.push(value)}
                 else if(index >= 0) {newArr = typeArr.splice(index, 1)}
                 setFilters({
-                    ...filters,
+                    ...userSelections,
                     size: typeArr
                 });
                 break;
             case "age":
-                typeArr = filters.age;
+                typeArr = userSelections.age;
                 index = typeArr.indexOf(value);
                 if(checked && index < 0) {newArr = typeArr.push(value)}
                 else if(index >= 0) {newArr = typeArr.splice(index, 1)}
                 setFilters({
-                    ...filters,
+                    ...userSelections,
                     age: typeArr
                 });
                 break;
             case "gender":
-                typeArr = filters.gender;
+                typeArr = userSelections.gender;
                 index = typeArr.indexOf(value);
                 if(checked && index < 0) {newArr = typeArr.push(value)}
                 else if(index >= 0) {newArr = typeArr.splice(index, 1)}
                 setFilters({
-                    ...filters,
+                    ...userSelections,
                     gender: typeArr
                 });
                 break;
             case "color":
-                typeArr = filters.color;
+                typeArr = userSelections.color;
                 index = typeArr.indexOf(value);
                 if(checked && index < 0) {newArr = typeArr.push(value)}
                 else if(index >= 0) {newArr = typeArr.splice(index, 1)}
                 setFilters({
-                    ...filters,
+                    ...userSelections,
                     color: typeArr
                 });
                 break;
             case "breed":
-                typeArr = filters.breed;
+                typeArr = userSelections.breed;
                 index = typeArr.indexOf(value);
                 if(checked && index < 0) {newArr = typeArr.push(value)}
                 else if(index >= 0) {newArr = typeArr.splice(index, 1)}
                 setFilters({
-                    ...filters,
+                    ...userSelections,
                     breed: typeArr
                 });
                 break;
             case "zipcode":
+                console.log(pageNumber)
                 setFilters({
-                    ...filters,
-                    location: {zipcode: value, distance: filters.location.distance}
+                    ...userSelections,
+                    zipcode: value
                 });
-                break
+                break;
             case "distance":
                 setFilters({
-                    ...filters,
-                    location: {zipcode: filters.location.zipcode, distance: value}
+                    ...userSelections,
+                    distance: value
                 });
                 break;
             default:
@@ -396,39 +401,11 @@ export default function Listings(){
         if(filterUL){
             let typeVar = "";
             switch (filterID){
-                case "filter-type":
-                    let typeli = document.createElement("li");
-                    typeli.classList.add("input-field");
-                    let typeSelect = document.createElement("select");
-                    typeSelect.setAttribute("id", "filter-type");
-                    typeSelect.setAttribute("name", "type");
-                    typeSelect.addEventListener("change", updateFilters, false);
-                    let option = document.createElement("option");;
-                    option.setAttribute("value", "all")
-                    option.setAttribute("name", "type");
-                    let span = document.createElement("span");
-                    span.innerText = "All"
-                    option.appendChild(span);
-                    typeSelect.appendChild(option);
-                    PFdata.TYPES.map(ptype => {
-                        option = document.createElement("option");;
-                        option.setAttribute("value", ptype)
-                        option.setAttribute("name", "type");
-                        span = document.createElement("span");
-                        if(ptype === "small_furry") {span.innerText = "Small and Furry";}
-                        else if(ptype === "scales_fins_other") {span.innerText = "Scales, Fins, and Other";}
-                        else {span.innerText = ptype}
-                        option.appendChild(span);
-                        typeSelect.appendChild(option);
-                    });
-                    typeli.appendChild(typeSelect);
-                    filterUL.appendChild(typeli);
-                    break;
                 case "filter-furlen":
                     while (filterUL.firstChild) {
                         filterUL.removeChild(filterUL.firstChild);
                     }
-                    typeVar = filters.type.toUpperCase();
+                    typeVar = userSelections.type.toUpperCase();
                     PFdata[typeVar].coats.map(ptype => {
                         let li = document.createElement("li");
                         let label = document.createElement("label");
@@ -448,7 +425,7 @@ export default function Listings(){
                     });
                     break;
                 case "filter-size":
-                    typeVar = filters.type.toUpperCase();
+                    typeVar = userSelections.type.toUpperCase();
                     while (filterUL.firstChild) {
                         filterUL.removeChild(filterUL.firstChild);
                     }
@@ -496,7 +473,7 @@ export default function Listings(){
                     while (filterUL.firstChild) {
                         filterUL.removeChild(filterUL.firstChild);
                     }
-                    typeVar = filters.type.toUpperCase();
+                    typeVar = userSelections.type.toUpperCase();
                     PFdata[typeVar].genders.map(ptype => {
                         let li = document.createElement("li");
                         let label = document.createElement("label");
@@ -519,7 +496,7 @@ export default function Listings(){
                     while (filterUL.firstChild) {
                         filterUL.removeChild(filterUL.firstChild);
                     }
-                    typeVar = filters.type.toUpperCase();
+                    typeVar = userSelections.type.toUpperCase();
                     PFdata[typeVar].colors.map(ptype => {
                         let li = document.createElement("li");
                         let label = document.createElement("label");
@@ -542,7 +519,7 @@ export default function Listings(){
                     while (filterUL.firstChild) {
                         filterUL.removeChild(filterUL.firstChild);
                     }
-                    typeVar = filters.type.toUpperCase();
+                    typeVar = userSelections.type.toUpperCase();
                     PFdata[typeVar].breeds.map(ptype => {
                         let li = document.createElement("li");
                         let label = document.createElement("label");
@@ -560,46 +537,6 @@ export default function Listings(){
                         li.appendChild(label);
                         filterUL.appendChild(li);
                     });
-                    break;
-                case "filter-location":
-                    // zip code
-                    let li = document.createElement("li");
-                    li.classList.add("input-field");
-                    let input = document.createElement("input");
-                    input.setAttribute("type", "number");
-                    input.setAttribute("name", "zipcode");
-                    input.setAttribute("id", "filter-zipcode");
-                    input.setAttribute("placeholder", "12345");
-                    input.addEventListener("change", updateFilters, false);
-                    let label = document.createElement("label");
-                    label.classList.add("active");
-                    label.setAttribute("for", "filter-zipcode");
-                    label.innerText = "Zip Code";
-                    li.appendChild(input);
-                    li.appendChild(label);
-                    filterUL.appendChild(li);
-
-                    // distance
-                    li = document.createElement("li");
-                    li.classList.add("input-field");
-                    let select = document.createElement("select");
-                    select.setAttribute("id", "filter-distance");
-                    select.setAttribute("name", "distance");
-                    select.addEventListener("change", updateFilters, false);
-                    label = document.createElement("label");
-                    label.innerText = "Distance";
-                    PFdata.DISTANCE.map(ptype => {
-                        let option = document.createElement("option");;
-                        option.setAttribute("value", ptype)
-                        option.setAttribute("name", "distance");
-                        let span = document.createElement("span");
-                        span.innerText = ptype + " miles";
-                        option.appendChild(span);
-                        select.appendChild(option);
-                    });
-                    li.appendChild(select);
-                    li.appendChild(label);
-                    filterUL.appendChild(li);
                     break;
                 default:
                     console.log("Error: Undefined filter type.")
@@ -665,16 +602,45 @@ export default function Listings(){
                         <div className="col s12">
                             <h6>Type of Pet</h6>
                             <ul id="filter-type">
+                                <div className="input-field">
+                                    <select id="pet-type" name="type" onChange={updateFilters}>
+                                        <label htmlFor="pet-type">Distance</label>
+                                        <option name="type" value="all">All</option>
+                                        {PFdata.TYPES.map(item =>
+                                            <option name="type" value={item}>
+                                                {(item === "small_furry") && "Small and Furry"}
+                                                {(item === "scales_fins_other") && "Scales, Fins, and Other"}
+                                                {(!(item === "small_furry") && !(item === "scales_fins_other")) && item}
+                                            </option>
+                                        )}
+                                    </select>
+                                </div>
                             </ul>
                         </div>
                         <div className="col s12">
                             <h6>Location</h6>
                             <ul id="filter-location">
+                                <li>
+                                    <div className="input-field">
+                                        <input placeholder="12345" id="filter-zipcode" name="zipcode" type="number" className="validate" onChange={updateFilters}/>
+                                            <label htmlFor="filter-zipcode" className="active">Zip Code</label>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div className="input-field">
+                                        <select id="filter-distance" name="distance" onChange={updateFilters}>
+                                        <label htmlFor="filter-distance">Distance</label>
+                                        {PFdata.DISTANCE.map(item =>
+                                            <option name="distance" value={item}>{item} miles</option>
+                                        )}
+                                        </select>
+                                    </div>
+                                </li>
                             </ul>
                         </div>
                         <div className="col s12">
                             <h6>Characteristics</h6>
-                            {(filters.type === "all") ?
+                            {(userSelections.type === "all") ?
                                 <p>Select a pet type to choose characteristics.</p>
                                 :
                                 <div>
