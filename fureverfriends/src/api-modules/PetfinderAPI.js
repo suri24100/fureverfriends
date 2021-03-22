@@ -122,11 +122,15 @@ export function doLocationStuff(zipCode) {
 console.log("testing from pfapi" + formZipCode);
 
 export async function getFilteredListings(filters, numListings, pageNum){
+    //let typeURL = BASE_URL + "/v2/animals?limit=" + numListings + "&page=" + pageNum + "&location=" + 17050 + "&distance=5";
     let typeURL = BASE_URL + "/v2/animals?limit=" + numListings + "&page=" + pageNum;
     console.log("testing from pfapi" + formZipCode);
-    if (formZipCode != "") {
+    /*let testEl = document.getElementById('filter-zipcode');
+    console.log("Suri dom testing: " + testEl.value);
+    let formZipCode = testEl.value;*/
+    if (filters.zipcode != "") {
         console.log("got here")
-        typeURL += "&location=" + formZipCode;
+        typeURL += "&location=" + filters.zipcode;
     }
     if(filters.type !== "all"){
         typeURL += "&type=" + filters.type;
