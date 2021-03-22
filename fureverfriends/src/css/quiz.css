@@ -61,14 +61,10 @@
 }
 
 .quiz-page form [type="checkbox"]+span:not(.lever),
-.quiz-page form [type="radio"]:not(:checked)+span{
+.quiz-page form [type="radio"]:not(:checked)+span,
+.quiz-page form [type="radio"]:not(:checked)+span, [type="radio"]:checked+span {
     font-size: 1.5em;
     color: #000;
-}
-
-.quiz-page form .input-field.inline input,
-.quiz-page form .input-field.inline .select-dropdown{
-    margin-left:15px;
 }
 
 .quiz-page .submitError{
