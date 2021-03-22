@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import Header from "./Header";
-import './css/style.css';
+import './css/displayprofile.css';
 import './css/home.css';
 import Footer from "./Footer";
 import {Link} from "react-router-dom";
@@ -79,6 +79,10 @@ export default function UserProfile() {
             .catch((error) => {
                 console.error("Error adding document: ", error);
             });
+    }
+
+    function cancelchanges(){
+        window.location.reload(false);
     }
 
     return (
@@ -205,6 +209,8 @@ export default function UserProfile() {
                                 </form>
                                 {/*<button disabled={loading}  onClick={saveUserProfile}> Save Changes</button>*/}
                                 <a disabled={loading}  onClick={saveUserProfile} className="waves-effect btn">Save Chances</a>
+
+                                <a disabled={loading}  onClick={cancelchanges} style={{marginLeft: 350}} className="waves-effect btn"> Cancel</a>
                             </div>
 
 
