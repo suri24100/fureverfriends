@@ -186,15 +186,15 @@ export default function Home() {
     }
 
     return (
-    <div>
+    <div class="home-page">
         <div className="banner-wrap">
         <div className="banner-img-wrap">
             {/*<img className="banner-img" src="home-banner.png">*/}
         </div>
-        <div className="heading">
+        <div className="heading hide-on-small-only">
             <span>Let us help you find your best friend</span>
         </div>
-        <div className="subheading">
+        <div className="subheading hide-on-small-only">
             <span>Simply search below or take our quiz</span>
         </div>
     </div>
@@ -253,6 +253,64 @@ export default function Home() {
                 </div>
             </div>
         </form>
+    </div>
+    <div className="search-or-quiz-wrap-mobile container center-align hide-on-med-and-up">
+        <h4>Let us help you find your best friend!</h4>
+        <a class="waves-effect waves-light btn q-btn ">Take The Quiz!</a>
+        <p className="subheading-mobile">OR search below!</p>
+        <div className="search-wrap container">
+            <div className="row1 row">
+                <div className="listings-form-row">
+                    <label for="type-of-pet">Type of Pet</label>
+                    <select id="type-of-pet" name="type-of-pet" onChange={e => handleChange(e)}>
+                        <option disabled selected></option>
+                        {/*populated using JavaScript (see function petType()*/}
+                        {type.map((address, key) => <option value={key}>{address}</option>)}
+                    </select>
+                </div>
+            </div>
+            <div className="row2 row">
+                <div className="listings-form-row">
+                    <label for="age">Age</label>
+                    <select id="age" name="age">
+                        <option disabled selected></option>
+                        <option value="Young">Young</option>
+                        <option value="Teen">Teen</option>
+                        <option value="Adult">Adult</option>
+                        <option value="NoPreference">No Preference</option>
+                    </select>
+                </div>
+            </div>
+            <div className="row3 row">
+                <div className="listings-form-row">
+                    <label for="breed">Breed</label>
+                    <select id="breed" name="breed">
+                        {/*populated using JavaScript*/}
+                    </select>
+                </div>
+            </div>
+            <p>Location:</p>
+            <div className="row4 row"> 
+                <div className="listings-form-row col s12 left-align">
+                    <label>
+                        <input className="home-radio with-gap" name="group1" type="radio" onClick={() => enableCurrent()}/>
+                        <span className="lc">Use Current Location</span>
+                    </label>
+                </div>
+            </div>
+            <div className="row5 row">
+                <div className="listings-form-row col s12 left-align">
+                    <label>
+                        <input className="home-radio with-gap" name="group1" type="radio" onClick={() => enableZip()}/>
+                        <span className="lc" id="addPadding">Enter Zip Code</span>
+                    </label>
+                    <input type="number" name="location" id="location" className="locationInput"/> 
+                </div>
+            </div>
+            <div className="search-btn-wrap container">
+                <button className="search-btn" type="button" name="action" onClick={() => getLocation()}>Find My Furever Friend!</button>
+            </div>
+        </div>
     </div>
     <div className="testimonial-wrap">
         <div className="testimonial-background">
