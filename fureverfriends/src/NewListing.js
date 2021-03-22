@@ -37,14 +37,26 @@ export default function NewListing() {
         $(document).ready(function(){
             $('select').select();
           });
-        
           M.textareaAutoResize($('#about-me'));
-      });
+        if(USER.email){
+            setLoggedIn(true);
+            setPageLoaded(true);
+        }
+    });
 
-    const {currentUser} = useAuth();
+    const {USER} = useAuth();
+
+    const [pageLoaded, setPageLoaded] = useState(false);
+    const [loggedIn, setLoggedIn] = useState(false);
+    const [listingSaved, setListingSaved] = useState(false);
+    let processing = false;
+    const [petInfo, setPetInfo] = useState({
+        pet_name: "",
+        profile_url: "",
+        pet_id: ""
+    });
 
     const [formState, setFormState] = useState(null);
-
     const [fileState, setFileState] = useState({
         has_profile_img: false,
         num_additional: false,
@@ -54,19 +66,15 @@ export default function NewListing() {
     useEffect(() => {
         checkFiles();
     });
-
     const [profilePhotoURL, setProfilePhotoURL] = useState("");
     useEffect(() => {
         checkFiles();
     });
-
     const [additionalPhotoURLS, setAdditionalProfileURLS] = useState([]);
     useEffect(() => {
         checkFiles();
     });
-
     const [applicationFileURL, setApplicationFileURL] = useState("");
-
     useEffect(() => {
         checkFiles();
     });
@@ -84,7 +92,8 @@ export default function NewListing() {
                 url_count++;
             }
             // correct number received
-            if(url_count === fileState.total_urls){
+            if(url_count === fileState.total_urls && !processing){
+                processing = true;
                 let newListing = {
                     pet_data: formState,
                     profileFiles: {
@@ -96,8 +105,9 @@ export default function NewListing() {
                 console.log(newListing);
                 createPetListing(newListing);
             }
-        } else if (fileState.total_urls === 0){
+        } else if (fileState.total_urls === 0 && !processing){
             console.log("No files");
+            processing = true;
             let newListing = {
                 pet_data: {formState},
                 profileFiles: {
@@ -122,6 +132,15 @@ export default function NewListing() {
             .set(listingData)
             .then((docRef) => {
                 console.log("Document written");
+                setListingSaved(true);
+                let newPetListings = USER.pet_listings.map(item => item);
+                newPetListings.push(petInfo.pet_id);
+                console.log(newPetListings);
+                const userRef = firestore.collection("UserInfo")
+                    .doc(USER.email);
+                let setWithMerge = userRef.set({
+                    pet_listings: newPetListings
+                }, {merge: true});
             })
             .catch((error) => {
                 console.error("Error adding document: ", error);
@@ -327,9 +346,9 @@ export default function NewListing() {
         const newPetListing = {
                 petfinder_listing: false,
                 pet_id: new_pet_id,
-                account_info: { // implement after account structure finalized
-                    id: "",
-                    email: ""
+                account_info: {
+                    username: USER.username,
+                    email: USER.email
                 },
                 listing_type: "AdoptionList",
                 name: petname,
@@ -378,17 +397,20 @@ export default function NewListing() {
             pet_data: newPetListing
         });
 
+        setPetInfo({
+            pet_name: newPetListing.name,
+            profile_url: "/listings/" + newPetListing.type + "/profile/FF-" + newPetListing.pet_id,
+            pet_id: newPetListing.pet_id
+        })
+
         createPetListingData(new_pet_id, profileFiles);
     }
 
     let typeArray = PFdata.TYPES;
-    typeArray.unshift("");
-    const [petType, setPetType] = useState(typeArray);
-    const type = petType.map(type => type)
+    const type = typeArray.map(type => type)
     const handleChange = (e) => {
-        console.log(currentUser);
-          //petColor(petType[e.target.value])
-        let petTypeSelected = petType[e.target.value];
+
+        let petTypeSelected = type[e.target.value];
         let petColorArray = [];
         let furLengthArray = [];
         let breedArray = [];
@@ -501,233 +523,263 @@ export default function NewListing() {
                     That information will help us find the purrfect match.
                 </p>
             </div>
-            {currentUser ?
-                <div className="row form-container">
-                    <div className="listings-profile-pic-wrap listings-section">
-                        <h5>Set Profile Picture</h5>
-                        <h6>This picture will be the main image for your pet and will be seen in the listings page</h6>
-                        <form action="#">
-                            <div className="file-field input-field">
-                            <div className="btn">
-                                <i className="material-icons">perm_media</i>
-                                <input type="file" accept=".gif,.jpg,.jpeg,.png" id="pet-profile-img" onChange={e => preview_image(e)}/>
-                            </div>
-                            <div className="file-path-wrapper">
-                                <input className="file-path validate" type="text" placeholder="Upload an image (.gif,.jpg,.jpeg,.png)"/>
-                            </div>
-                            </div>
-                        </form>
-                        <img id="output_image"/>
-                    </div>
-                    <div className="listings-add-pic-wrap listings-section">
-                        <h5>Set Additional Picture</h5>
-                        <h6>These are any additional pictures of your pet and can be seen in the pet profile page</h6>
-                        <form action="#">
-                            <div className="file-field input-field">
-                            <div className="btn">
-                                <i className="material-icons">perm_media</i>
-                                <input type="file" accept=".jpg,.jpeg,.png" id="pet-add-img" multiple/>
-                            </div>
-                            <div className="file-path-wrapper">
-                                <input className="file-path validate" type="text" placeholder="Upload additional image(s) (.gif,.jpg,.jpeg,.png)"/>
-                            </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div className="listings-pet-info listings-section">
-                        <h5>Pet Information</h5>
-                        <h6>Some dropdowns will autofill upon pet type selection</h6>
-                        <form className="row">
-                            <div className="left-filter col s12 m6 l6 x6">
-
-                                <div className="listings-form-row">
-                                    <label for="petname">Name: </label>
-                                    <input type="text" id="petname" name="petname"/>
-                                </div>
-
-                                <div className="listings-form-row">
-                                    <label for="type-of-pet">Type of Pet</label>
-                                    <select id="type-of-pet" name="type-of-pet" onChange={e => handleChange(e)}>
-                                        {/*populated using JavaScript (see function petType()*/}
-                                        {type.map((address, key) => <option value={key}>{address}</option>)}
-                                    </select>
-                                </div>
-
-                                <div className="listings-form-row">
-                                    <label for="age">Age</label>
-                                    <select id="age" name="age">
-                                        <option value="Young">Young</option>
-                                        <option value="Teen">Teen</option>
-                                        <option value="Adult">Adult</option>
-                                    </select>
-                                </div>
-
-                                <div className="listings-form-row">
-                                    <label for="gender">Gender</label>
-                                    <select id="gender" name="gender">
-                                        <option value="Female">Female</option>
-                                        <option value="Male">Male</option>
-                                    </select>
-                                </div>
-
-                                <div className="listings-form-row">
-                                <label for="breed">Breed</label>
-                                <select id="breed" name="breed">
-                                    {/*populated using JavaScript*/}
-                                </select>
-                                </div>
-
-                                <div className="listings-form-row">
-                                    <label for="color">Color</label>
-                                    <select id="color" name="color">
-                                    {/*populated using JavaScript*/}
-                                    </select>
-                                </div>
-
-                                <div className="listings-form-row">
-                                    <label for="cared-by">Cared By</label>
-                                    <select id="cared-by" name="cared-by">
-                                        <option value="Private Owner">Private Owner</option>
-                                        <option value="Organization/Rescue">Organization/Rescue</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div className="right-filter col s12 m6 l6 x6">
-                                <div className="listings-form-row">
-                                    <label for="furLength">Fur Length</label>
-                                    <select id="furLength" name="furLength">
-                                        {/*populated using JavaScript*/}
-                                    </select>
-                                </div>
-
-                                <div className="listings-form-row">
-                                    <label for="personality">Personality</label>
-                                    <select id="personality" name="personality" multiple>
-                                        <option value="Quiet">Quiet</option>
-                                        <option value="Talkative">Talkative</option>
-                                        <option value="Social">Social</option>
-                                        <option value="Playful">Playful</option>
-                                        <option value="Independent">Independent</option>
-                                        <option value="Curious/Adventurous">Curious/Adventurous</option>
-                                        <option value="Loves to snuggle">Loves to snuggle</option>
-                                        <option value="Protective">Protective</option>
-                                        <option value="Energetic">Energetic</option>
-                                    </select>
-                                </div>
-
-                                <div className="listings-form-row">
-                                    <label for="adoptionFee">Adoption Fee </label>
-                                    <input type="text" id="adoptionFee" name="adoptionFee"/>
-                                </div>
-
-                                <div className="listings-form-row">
-                                    <label for="city">City </label>
-                                    <input type="text" id="city" name="city"/>
-                                </div>
-
-                                <div className="listings-form-row">
-                                    <label for="state">State  </label>
-                                    <input type="text" id="state" name="state"/>
-                                </div>
-
-                                <div className="listings-form-row">
-                                    <label for="zip">Zip Code </label>
-                                    <input type="number" id="zip" name="zip"/>
-                                </div>
-
-                                <div className="listings-form-row">
-                                    <label for="attributes">Pet Attributes</label>
-                                    <select id="attributes" name="attributes" multiple="multiple">
-                                        <option value="vaccinated">Vaccinated</option>
-                                        <option value="spayed_neutered">Neutered/Spayed</option>
-                                        <option value="good_with_cats">Good with Cats</option>
-                                        <option value="good_with_dogs">Good with Dogs</option>
-                                        <option value="kid_friendly">Good with Kids</option>
-                                        <option value="special_needs">Special Needs</option>
-                                        <option value="special_needs">Allergy Friendly</option>
-                                        <option value="bonded_pair">Bonded Pair</option>
-                                    </select>
-                                </div>
-
-                            </div>
-                        </form>
-                    </div>
-                    <div className="listings-about-me listings-section ">
-                        <h5>About me section</h5>
-                        <h6>Please fill out this section regarding any additional info (such as a backstory!)</h6>
-                        <form className="row">
-                            <div className="input-field col s12">
-                                <label for="textarea1">Pet Bio</label>
-                                <textarea id="about-me" className="materialize-textarea"></textarea>
-                            </div>
-                        </form>
-                    </div>
-                    <div className="listings-contact-info listings-section ">
-                        <h5>Contact Information</h5>
-                        <h6>This contact information will be posted publicly on the profile to allow potential
-                            adopters to contact you with questions and inquiries.</h6>
-                        <form className="listings-contact-form">
+                {pageLoaded ?
+                    <>{loggedIn ?
+                        <>
+                        {listingSaved ?
                             <div className="row">
-                                <div className="left-filter col s12 m6 l6 x6">
-                                    <div className="input-field contact-input-wrap">
-                                        <i className="material-icons prefix">account_circle</i>
-                                        <input id="contact-name" type="text" className="validate"/>
-                                        <label for="contact-name">Name </label>
-                                    </div>
-                                    <div className="input-field contact-input-wrap">
-                                        <i className="material-icons prefix">phone</i>
-                                        <input id="contact-phone" type="text" className="validate"/>
-                                        <label for="contact-phone">Phone </label>
-                                    </div>
-                                </div>
-                                <div className="right-filter col s12 m6 l6 x6">
-                                    <div className="input-field contact-input-wrap">
-                                        <i className="material-icons prefix">mail</i>
-                                        <input id="contact-email" type="text" className="validate"/>
-                                        <label for="contact-email">Email </label>
-                                    </div>
-                                    <div className="input-field contact-input-wrap">
-                                        <i className="material-icons prefix">language</i>
-                                        <input id="contact-website" type="text" className="validate"/>
-                                        <label for="contact-website">Website </label>
+                                <div className="col s12 m8 offset-m2 login-required">
+                                    <div className="col s12 center">
+                                        <h5>{petInfo.pet_name}'s profile has been created!</h5>
+                                        <Link className="btn-large" to={petInfo.profile_url}>Check it Out</Link>
                                     </div>
                                 </div>
                             </div>
-                        </form>
-                    </div>
-                    <div className="listings-application-info listings-section ">
-                        <h5>Application Information</h5>
-                        <h6>Upload the file that the applicant will be filling out</h6>
-                        <form action="#">
-                            <div className="file-field input-field">
-                            <div className="btn">
-                                <i className="material-icons">file_present</i>
-                                <input type="file" accept=".doc,.docx,.pdf" id="pet-app-form"/>
+                            :
+                            <div className="row form-container">
+                                    <div className="listings-profile-pic-wrap listings-section">
+                                        <h5>Set Profile Picture</h5>
+                                        <h6>This picture will be the main image for your pet and will be seen in the
+                                            listings page</h6>
+                                        <form action="#">
+                                            <div className="file-field input-field">
+                                                <div className="btn">
+                                                    <i className="material-icons">perm_media</i>
+                                                    <input type="file" accept=".gif,.jpg,.jpeg,.png"
+                                                           id="pet-profile-img" onChange={e => preview_image(e)}/>
+                                                </div>
+                                                <div className="file-path-wrapper">
+                                                    <input className="file-path validate" type="text"
+                                                           placeholder="Upload an image (.gif,.jpg,.jpeg,.png)"/>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <img id="output_image"/>
+                                    </div>
+                                    <div className="listings-add-pic-wrap listings-section">
+                                        <h5>Set Additional Picture</h5>
+                                        <h6>These are any additional pictures of your pet and can be seen in the pet
+                                            profile page</h6>
+                                        <form action="#">
+                                            <div className="file-field input-field">
+                                                <div className="btn">
+                                                    <i className="material-icons">perm_media</i>
+                                                    <input type="file" accept=".jpg,.jpeg,.png" id="pet-add-img"
+                                                           multiple/>
+                                                </div>
+                                                <div className="file-path-wrapper">
+                                                    <input className="file-path validate" type="text"
+                                                           placeholder="Upload additional image(s) (.gif,.jpg,.jpeg,.png)"/>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div className="listings-pet-info listings-section">
+                                        <h5>Pet Information</h5>
+                                        <h6>Some dropdowns will autofill upon pet type selection</h6>
+                                        <form className="row">
+                                            <div className="left-filter col s12 m6 l6 x6">
+
+                                                <div className="listings-form-row">
+                                                    <label htmlFor="petname">Name: </label>
+                                                    <input type="text" id="petname" name="petname"/>
+                                                </div>
+
+                                                <div className="listings-form-row">
+                                                    <label htmlFor="type-of-pet">Type of Pet</label>
+                                                    <select id="type-of-pet" name="type-of-pet"
+                                                            onChange={e => handleChange(e)}>
+                                                        <option value="" disabled selected> </option>
+                                                        {type.map((address, key) =>
+                                                            <option value={key}>{address}</option>)}
+                                                    </select>
+                                                </div>
+
+                                                <div className="listings-form-row">
+                                                    <label htmlFor="age">Age</label>
+                                                    <select id="age" name="age">
+                                                        <option value="Young">Young</option>
+                                                        <option value="Teen">Teen</option>
+                                                        <option value="Adult">Adult</option>
+                                                    </select>
+                                                </div>
+
+                                                <div className="listings-form-row">
+                                                    <label htmlFor="gender">Gender</label>
+                                                    <select id="gender" name="gender">
+                                                        <option value="Female">Female</option>
+                                                        <option value="Male">Male</option>
+                                                    </select>
+                                                </div>
+
+                                                <div className="listings-form-row">
+                                                    <label htmlFor="breed">Breed</label>
+                                                    <select id="breed" name="breed">
+                                                        {/*populated using JavaScript*/}
+                                                    </select>
+                                                </div>
+
+                                                <div className="listings-form-row">
+                                                    <label htmlFor="color">Color</label>
+                                                    <select id="color" name="color">
+                                                        {/*populated using JavaScript*/}
+                                                    </select>
+                                                </div>
+
+                                                <div className="listings-form-row">
+                                                    <label htmlFor="cared-by">Cared By</label>
+                                                    <select id="cared-by" name="cared-by">
+                                                        <option value="Private Owner">Private Owner</option>
+                                                        <option value="Organization/Rescue">Organization/Rescue</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div className="right-filter col s12 m6 l6 x6">
+                                                <div className="listings-form-row">
+                                                    <label htmlFor="furLength">Fur Length</label>
+                                                    <select id="furLength" name="furLength">
+                                                        {/*populated using JavaScript*/}
+                                                    </select>
+                                                </div>
+
+                                                <div className="listings-form-row">
+                                                    <label htmlFor="personality">Personality</label>
+                                                    <select id="personality" name="personality" multiple>
+                                                        <option value="playful">Playful</option>
+                                                        <option value="talkative">Talkative</option>
+                                                        <option value="adventurous">Adventurous</option>
+                                                        <option value="affectionate">Affectionate</option>
+                                                        <option value="independent">Independent</option>
+                                                        <option value="energetic">Energetic</option>
+                                                        <option value="calm">Calm</option>
+                                                        <option value="protective">Protective</option>
+                                                        <option value="quiet">Quiet</option>
+                                                        <option value="social">Social</option>
+                                                    </select>
+                                                </div>
+
+                                                <div className="listings-form-row">
+                                                    <label htmlFor="adoptionFee">Adoption Fee </label>
+                                                    <input type="text" id="adoptionFee" name="adoptionFee"/>
+                                                </div>
+
+                                                <div className="listings-form-row">
+                                                    <label htmlFor="city">City </label>
+                                                    <input type="text" id="city" name="city"/>
+                                                </div>
+
+                                                <div className="listings-form-row">
+                                                    <label htmlFor="state">State </label>
+                                                    <input type="text" id="state" name="state"/>
+                                                </div>
+
+                                                <div className="listings-form-row">
+                                                    <label htmlFor="zip">Zip Code </label>
+                                                    <input type="number" id="zip" name="zip"/>
+                                                </div>
+
+                                                <div className="listings-form-row">
+                                                    <label htmlFor="attributes">Pet Attributes</label>
+                                                    <select id="attributes" name="attributes" multiple="multiple">
+                                                        <option value="vaccinated">Vaccinated</option>
+                                                        <option value="spayed_neutered">Neutered/Spayed</option>
+                                                        <option value="good_with_cats">Good with Cats</option>
+                                                        <option value="good_with_dogs">Good with Dogs</option>
+                                                        <option value="kid_friendly">Good with Kids</option>
+                                                        <option value="special_needs">Special Needs</option>
+                                                        <option value="special_needs">Allergy Friendly</option>
+                                                        <option value="bonded_pair">Bonded Pair</option>
+                                                    </select>
+                                                </div>
+
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div className="listings-about-me listings-section ">
+                                        <h5>About me section</h5>
+                                        <h6>Please fill out this section regarding any additional info (such as a
+                                            backstory!)</h6>
+                                        <form className="row">
+                                            <div className="input-field col s12">
+                                                <label htmlFor="textarea1">Pet Bio</label>
+                                                <textarea id="about-me" className="materialize-textarea"></textarea>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div className="listings-contact-info listings-section ">
+                                        <h5>Contact Information</h5>
+                                        <h6>This contact information will be posted publicly on the profile to allow
+                                            potential
+                                            adopters to contact you with questions and inquiries.</h6>
+                                        <form className="listings-contact-form">
+                                            <div className="row">
+                                                <div className="left-filter col s12 m6 l6 x6">
+                                                    <div className="input-field contact-input-wrap">
+                                                        <i className="material-icons prefix">account_circle</i>
+                                                        <input id="contact-name" type="text" className="validate"/>
+                                                        <label htmlFor="contact-name">Name </label>
+                                                    </div>
+                                                    <div className="input-field contact-input-wrap">
+                                                        <i className="material-icons prefix">phone</i>
+                                                        <input id="contact-phone" type="text" className="validate"/>
+                                                        <label htmlFor="contact-phone">Phone </label>
+                                                    </div>
+                                                </div>
+                                                <div className="right-filter col s12 m6 l6 x6">
+                                                    <div className="input-field contact-input-wrap">
+                                                        <i className="material-icons prefix">mail</i>
+                                                        <input id="contact-email" type="text" className="validate"/>
+                                                        <label htmlFor="contact-email">Email </label>
+                                                    </div>
+                                                    <div className="input-field contact-input-wrap">
+                                                        <i className="material-icons prefix">language</i>
+                                                        <input id="contact-website" type="text" className="validate"/>
+                                                        <label htmlFor="contact-website">Website </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div className="listings-application-info listings-section ">
+                                        <h5>Application Information</h5>
+                                        <h6>Upload the file that the applicant will be filling out</h6>
+                                        <form action="#">
+                                            <div className="file-field input-field">
+                                                <div className="btn">
+                                                    <i className="material-icons">file_present</i>
+                                                    <input type="file" accept=".doc,.docx,.pdf" id="pet-app-form"/>
+                                                </div>
+                                                <div className="file-path-wrapper">
+                                                    <input className="file-path validate" type="text"
+                                                           placeholder="Upload application form"/>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div className="listings-submit-button-wrap  center-align">
+                                        <button className="btn waves-effect waves-light btn-large" type="button"
+                                                name="action" onClick={processFormContents}>Create Profile
+                                            <i className="material-icons right">send</i>
+                                        </button>
+                                    </div>
+                                </div>
+                        }</>
+                        :
+                        <div className="row">
+                            <div className="col s12 m8 offset-m2 login-required">
+                                <div className="col s12 center">
+                                    <p className="intro-text">To create a profile, please login or create an account.</p>
+                                    <Link to="/login" className="btn-large">Login</Link>
+                                    <p>OR</p>
+                                    <Link to="/CreateAccount" className="btn-large">Create an Account</Link>
+                                </div>
                             </div>
-                            <div className="file-path-wrapper">
-                                <input className="file-path validate" type="text" placeholder="Upload application form"/>
-                            </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div className="listings-submit-button-wrap  center-align">
-                        <button className="btn waves-effect waves-light btn-large" type="button" name="action" onClick={() => processFormContents()}>Create Profile
-                            <i className="material-icons right">send</i>
-                        </button>
-                    </div>
-                </div>
-                :
-                <div className="row">
-                    <div className="col s12 m8 offset-m2 login-required">
-                        <div className="col s12 center">
-                            <p className="intro-text">To create a profile, please login or create an account.</p>
-                            <Link to="/login" className="btn-large">Login</Link>
-                            <p>OR</p>
-                            <Link to="/CreateAccount" className="btn-large">Create an Account</Link>
                         </div>
-                    </div>
-                </div>
-            }
+                    }</>
+                    :
+                    <div className="row"></div>
+                }
+
             </div>
         </div>
     )

@@ -377,13 +377,13 @@ export default function Listings(){
             case "zipcode":
                 setFilters({
                     ...filters,
-                    zipcode: value
+                    location: {zipcode: value, distance: filters.location.distance}
                 });
                 break
             case "distance":
                 setFilters({
                     ...filters,
-                    distance: value
+                    location: {zipcode: filters.location.zipcode, distance: value}
                 });
                 break;
             default:
