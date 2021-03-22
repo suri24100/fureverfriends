@@ -55,7 +55,7 @@
     font-size: 1.5em;
 }
 
-.quiz-page form .btn-large{
+.quiz-page .btn-large{
     border-radius: 15px;
     font-weight: bold;
 }
@@ -64,6 +64,28 @@
 .quiz-page form [type="radio"]:not(:checked)+span{
     font-size: 1.5em;
     color: #000;
+}
+
+.quiz-page form .input-field.inline input,
+.quiz-page form .input-field.inline .select-dropdown{
+    margin-left:15px;
+}
+
+.quiz-page .submitError{
+    color:red;
+    font-weight: bold;
+    font-size: 12pt;
+}
+
+.quiz-page .success-page{
+    margin-top: 10%;
+    margin-bottom: 10%;
+    font-size: 1.4em;
+}
+
+.quiz-page .success-page h4{
+    color: #379683;
+    font-weight: bold;
 }
 
 @media only screen and (min-width: 993px) {
