@@ -49,7 +49,9 @@ export default function Displaylisting() {
                             <a href="favs" className = "collection-item" >Favorites</a>
                         </div>
                     </div>
-
+                    <br/>
+                    <Link to ="/listings"  style={{marginLeft: 750}} className="waves-effect btn material-icons prefix" > Add New Listing</Link>
+                    <br/>
                     <div className="col s12 m9" href="information">
                         <div className="collection">
                             <br/>
@@ -63,7 +65,7 @@ export default function Displaylisting() {
                             </div>
 
                         </div>
-                        <Link to ="/userprofile"  className="waves-effect btn"> Edit Profile </Link>
+
                     </div>
                 </div>
             </div>
