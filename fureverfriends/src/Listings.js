@@ -188,7 +188,6 @@ export default function Listings(){
         breed: []
     });
     useEffect( () => {
-        console.log("type has changed to " + filters.type);
         generateFilters("filter-age");
         generateFilters("filter-gender");
         generateFilters("filter-size");
@@ -409,9 +408,6 @@ export default function Listings(){
                 break;
         }
     }
-
-    var zipCode = filters.location.zipcode;
-
     function generateFilters(filterID) {
         const filterUL = document.getElementById(filterID);
         if(filterUL){
