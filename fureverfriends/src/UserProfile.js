@@ -50,7 +50,7 @@ export default function UserProfile() {
             setLoading(false);
             return setUsernameError('Username already taken, please choose another one.');
         }
-
+//this is a test
         try {
             clearErrors();
             setLoading(true);
