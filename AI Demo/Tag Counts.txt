@@ -1,0 +1,3283 @@
+medium: 40213
+null: 37024
+male: 31413
+female: 29922
+adult: 28322
+short: 19277
+young: 17965
+domestic short hair: 17322
+large: 13111
+small: 10693
+baby: 10290
+senior: 4892
+pit bull terrier: 4526
+labrador retriever: 3829
+loving: 3066
+playful: 2841
+mixed breed: 2578
+sweet: 2172
+chihuahua: 1806
+german shepherd dog: 1605
+terrier: 1590
+shepherd: 1490
+domestic long hair: 1416
+domestic medium hair: 1413
+long: 1350
+tabby: 1296
+boxer: 1216
+hound: 1177
+active: 1152
+american staffordshire terrier: 1119
+affectionate: 904
+friendly: 891
+extra large: 877
+beagle: 702
+australian cattle dog / blue heeler: 690
+american bulldog: 620
+shy: 580
+husky: 559
+guinea pig: 500
+australian shepherd: 451
+border collie: 445
+great pyrenees: 432
+american shorthair: 415
+dachshund: 377
+siamese: 362
+cattle dog: 360
+gentle: 355
+calico: 345
+cuddly: 342
+smart: 342
+catahoula leopard dog: 339
+rottweiler: 334
+energetic: 326
+tuxedo: 323
+siberian husky: 299
+bunny rabbit: 293
+staffordshire bull terrier: 289
+retriever: 286
+calm: 281
+tortoiseshell: 263
+happy: 253
+black labrador retriever: 251
+jack russell terrier: 249
+curious: 221
+great dane: 221
+bonded: 216
+quiet: 211
+mastiff: 207
+pointer: 206
+lionhead: 192
+dog friendly: 189
+black mouth cur: 185
+doberman pinscher: 181
+maine coon: 163
+good with cats: 163
+poodle: 161
+plott hound: 159
+fun: 154
+hamster: 147
+english bulldog: 146
+russian blue: 145
+rat terrier: 145
+loyal: 144
+shih tzu: 143
+adult only home preferred: 143
+treeing walker coonhound: 142
+miniature pinscher: 142
+social: 140
+good with dogs: 140
+shar-pei: 137
+rat: 134
+coonhound: 132
+good with kids: 130
+wire: 128
+snuggly: 124
+yorkshire terrier: 122
+basset hound: 120
+american: 119
+anatolian shepherd: 118
+single dog home: 117
+golden retriever: 117
+belgian shepherd / malinois: 116
+pomeranian: 114
+ playful: 110
+american bully: 110
+cute: 106
+bull terrier: 106
+collie: 104
+outgoing: 99
+mountain cur: 99
+pug: 98
+dutch: 94
+yellow labrador retriever: 94
+goofy: 94
+akita: 93
+chow chow: 91
+timid: 90
+greyhound: 89
+new zealand: 88
+cat friendly: 87
+adorable: 86
+mellow: 85
+laid back: 85
+silly: 83
+crate trained: 82
+corgi: 79
+ sweet: 79
+fiv positive: 79
+handsome: 79
+schnauzer: 79
+cane corso: 78
+funny: 78
+intelligent: 76
+cuddler: 75
+puppy: 74
+maltese: 73
+bluetick coonhound: 73
+english spot: 72
+torbie: 72
+mouse: 70
+independent: 70
+lap cat: 70
+bombay: 68
+beautiful: 68
+boston terrier: 68
+australian kelpie: 66
+weimaraner: 66
+dilute calico: 65
+short-haired: 64
+pigeon: 64
+bengal: 63
+talkative: 62
+curly: 62
+tiger: 62
+german shorthaired pointer: 61
+rex: 61
+chocolate labrador retriever: 61
+cocker spaniel: 61
+spaniel: 59
+manx: 59
+dalmatian: 58
+lovable: 57
+vocal: 57
+abyssinian: 53
+saint bernard: 53
+kind: 53
+feist: 53
+dilute tortoiseshell: 52
+californian: 52
+rhodesian ridgeback: 52
+pot bellied: 52
+redbone coonhound: 51
+dutch shepherd: 51
+chicken: 51
+wirehaired terrier: 49
+heartworm positive: 49
+jindo: 49
+high energy: 48
+chiweenie: 47
+ loving: 46
+quarterhorse: 46
+easy going: 45
+house trained: 45
+english pointer: 44
+chill: 43
+foxhound: 43
+unknown: 43
+chinchilla: 42
+mini rex: 42
+ affectionate: 41
+holland lop: 41
+snuggler: 40
+declawed: 40
+bichon frise: 39
+gerbil: 39
+no cats: 39
+good with children: 38
+good with other dogs: 38
+ active: 37
+bloodhound: 37
+snowshoe: 37
+spayed neutered: 37
+lop eared: 37
+adventurous: 35
+shiba inu: 35
+duck: 35
+mini lop: 34
+spunky: 33
+ferret: 33
+potty trained: 33
+carolina dog: 33
+confident: 32
+relaxed: 32
+companion: 32
+extra-toes cat / hemingway polydactyl: 32
+neutered: 31
+soft: 30
+leash trained: 30
+lhasa apso: 30
+couch potato: 29
+persian: 29
+budgie / budgerigar: 29
+sassy: 29
+food motivated: 29
+obedient: 29
+alaskan malamute: 29
+cuddle bug: 29
+special needs: 29
+athletic: 28
+bullmastiff: 28
+french bulldog: 28
+people friendly: 28
+cairn terrier: 27
+turkish van: 27
+strong: 27
+pig: 27
+harlequin: 27
+black and tan coonhound: 26
+whippet: 26
+bonded pair: 26
+netherland dwarf: 26
+basenji: 26
+ friendly: 26
+american bobtail: 26
+protective: 26
+florida white: 26
+ fun: 26
+ gentle: 26
+hotot: 25
+good with other cats: 25
+shetland sheepdog / sheltie: 25
+microchipped: 24
+easygoing: 24
+nervous: 24
+ calm: 24
+rescue: 24
+kitten: 24
+himalayan: 24
+loves attention: 24
+housebroken: 24
+litterbox trained: 24
+dwarf: 24
+current on vaccinations: 23
+papillon: 23
+vizsla: 23
+shy at first: 23
+havana: 23
+turtle: 22
+kid friendly: 22
+ragdoll: 22
+litter box trained: 22
+spayed: 22
+well behaved: 22
+the animal community center in kona: 22
+dogo argentino: 22
+pekingese: 21
+parakeet (other): 21
+newfoundland dog: 21
+hairless: 21
+pretty: 21
+reserved: 21
+cuddles: 21
+flat-coated retriever: 20
+eager to please: 20
+inquisitive: 20
+parson russell terrier: 20
+chatty: 20
+housetrained: 20
+gorgeous: 19
+loving playful active: 19
+lazy: 19
+no small children: 19
+ cuddly: 19
+loves toys: 19
+loves people: 19
+blue lacy: 18
+cockatiel: 18
+heartworm negative: 18
+healthy: 18
+miniature poodle: 18
+very sweet: 18
+super sweet: 18
+cautious: 18
+ shy: 18
+brittany spaniel: 17
+cuddle: 17
+loves to cuddle: 17
+laidback: 17
+ehrlichia positive: 17
+west highland white terrier / westie: 16
+ happy: 16
+loveable: 16
+english coonhound: 16
+no cats or small animals: 16
+italian greyhound: 16
+lived with cats: 16
+well mannered: 16
+medium energy: 15
+turkish angora: 15
+scared: 15
+ energetic: 15
+charming: 15
+american eskimo dog: 15
+trained: 15
+special dietary needs: 15
+skittish: 15
+heartworm treatment needed: 15
+british shorthair: 14
+english setter: 14
+family friendly: 14
+sensitive: 14
+single cat adoption: 14
+fox terrier: 14
+border terrier: 14
+lapcat: 14
+submissive: 14
+ quiet: 14
+backyard buddy: 14
+dog selective: 14
+easy: 14
+not good with cats: 13
+fearful: 13
+angora rabbit: 13
+macaw: 13
+cockatoo: 13
+low energy: 13
+great with other dogs: 13
+maltipoo: 13
+lived with dogs: 13
+saluki: 13
+fifty adoption fee: 13
+attentive: 13
+good on leash: 13
+needs training: 13
+ curious: 13
+fluffy: 13
+social butterfly: 13
+thoroughbred: 13
+english lop: 12
+labradoodle: 12
+amazon: 12
+goldendoodle: 12
+experienced dog owners only: 12
+german wirehaired pointer: 12
+keaau: 12
+white german shepherd: 12
+hw positive: 12
+dove: 12
+kid compatibility yes: 11
+physical stamina enjoys short walks: 11
+ well mannered: 11
+no dogs: 11
+needs a kitty buddy: 11
+puggle: 11
+manchester terrier: 11
+norwegian forest cat: 11
+microfilaria negative: 11
+airedale terrier: 11
+sweetheart: 11
+snuggle: 11
+bully good dog certified: 11
+has potential to live with other dogs: 11
+dog social friendly: 11
+sociable: 11
+ house trained: 11
+arabian: 11
+ loyal: 11
+nice: 11
+purr machine: 11
+trainable: 10
+cardigan welsh corgi: 10
+one hundred adoption fee: 10
+deaf: 10
+cat friendly unknown: 10
+must be an only pet: 10
+adult only home required: 10
+standard poodle: 10
+blind: 10
+lovebug: 10
+gentle and friendly: 10
+smooth fox terrier: 10
+must be kept indoors: 10
+very active: 10
+polite: 10
+petite: 10
+appears to be housebroken: 10
+loving playful: 10
+cockapoo: 10
+ mellow: 10
+hyper: 10
+unique: 10
+older respectful children: 10
+gecko: 10
+pharaoh hound: 10
+red-eared slider: 10
+stairs no: 9
+dominant: 9
+miniature schnauzer: 9
+kid friendly unknown: 9
+loves to play: 9
+chinese crested dog: 9
+big: 9
+bernese mountain dog: 9
+polydactyl: 9
+conure: 9
+joyful: 9
+talker: 9
+exotic shorthair: 9
+older children only: 9
+lap kitty: 9
+flemish giant: 9
+loves walks: 9
+felv positive: 9
+lap dog: 9
+egyptian mau: 9
+good natured: 9
+havanese: 9
+take me on a field trip: 9
+even tempered: 9
+ silly: 9
+neapolitan mastiff: 9
+working cat: 9
+cow: 9
+moderate energy: 9
+ intelligent: 9
+ good with children: 9
+ laid back: 9
+ super smart: 9
+ great with other dogs: 9
+ good on leash: 9
+ loves to snuggle: 9
+cat free home: 9
+barn cat: 9
+urgent: 9
+sugar glider: 9
+mountain dog: 8
+lapdog: 8
+loves to snuggle: 8
+loves dogs: 8
+rambunctious: 8
+brave: 8
+wheaten terrier: 8
+fiv: 8
+norwegian elkhound: 8
+toy fox terrier: 8
+ snuggly: 8
+schipperke: 8
+good with kids unknown: 8
+dog match potential: 8
+likes being pet: 8
+ good with cats: 8
+cuddlebug: 8
+hospice: 8
+american curl: 8
+spitz: 8
+treat motivated: 8
+loves pets: 8
+friendly social: 8
+playful goofy: 8
+ advanced behavior skills: 8
+ loads of character: 8
+love: 8
+mischievous: 8
+standardbred: 8
+not cat friendly: 8
+amazing: 8
+child friendly: 8
+has basic training: 8
+playful active: 7
+bright: 7
+oriental short hair: 7
+fun loving: 7
+lovely: 7
+old english sheepdog: 7
+low maintenance: 7
+litter trained: 7
+a little shy: 7
+a real lover: 7
+paint / pinto: 7
+older children preferred: 7
+appears housebroken: 7
+fiesty: 7
+freindly: 7
+dislikes cats: 7
+personable: 7
+ social: 7
+praise motivated: 7
+bouncy: 7
+jersey wooly: 7
+prey drive no cats no small animals: 7
+active outgoing: 7
+patient: 7
+ cute: 7
+indoor only: 7
+lizard: 7
+ confident: 7
+ goofy: 7
+ outgoing: 7
+home with older kids: 7
+has lived with other cats: 7
+ athletic: 7
+special: 7
+snuggle bug: 7
+knows sit: 7
+sponsored animal: 7
+walks well on a leash: 7
+fifty one one hundred pounds: 7
+grade: 7
+pygmy: 7
+caring: 7
+stairs yes: 6
+people oriented: 6
+brussels griffon: 6
+excited: 6
+princess: 6
+wirehaired pointing griffon: 6
+affenpinscher: 6
+two hundred adoption fee: 6
+great companion: 6
+good with cats yes: 6
+good with dogs yes: 6
+playfull: 6
+foster appointment needed: 6
+gentle giant: 6
+small dog friendly: 6
+silky terrier: 6
+love bug: 6
+ timid: 6
+single cat home: 6
+microchiped: 6
+up to date on shots: 6
+stranger danger: 6
+not spayed not neutered: 6
+lover: 6
+rhinelander: 6
+spicy: 6
+quirky: 6
+available for foster to adopt: 6
+free obedience courses: 6
+not a fan of cats: 6
+excitable: 6
+goat: 6
+special medical needs: 6
+paso fino: 6
+sweet and friendly nature: 6
+never ending purr: 6
+boerboel: 6
+palomino: 6
+ handsome: 6
+loves play: 6
+sweet natured: 6
+i can sit: 6
+bio in the works: 6
+polish: 6
+sweet and gentle: 6
+lap loving: 6
+eclectus: 6
+kisser: 6
+disclaimer: 6
+knows basic commands: 6
+ puppy: 6
+pet playmates preferred: 6
+hunter: 6
+sweet with people: 6
+snake: 6
+stubborn: 6
+does well in the car: 6
+velcro: 6
+loves cat trees: 6
+snugglebug: 6
+kid friendly all ages: 6
+grooming needs low: 6
+pair: 6
+orange tabby: 6
+doesn t like to be picked up: 6
+vietnamese pot bellied: 6
+  sweet: 6
+needs an experienced cat owner: 6
+american sable: 6
+regal: 6
+enjoys car rides: 5
+bashful: 5
+snuggles: 5
+delightful: 5
+belgian shepherd / tervuren: 5
+loves other dogs: 5
+indoor outdoor ok: 5
+dwarf hamster: 5
+loves toys treats: 5
+dtwod required: 5
+silky: 5
+large dog friendly: 5
+wire fox terrier: 5
+portuguese podengo: 5
+entertaining: 5
+satin: 5
+ gorgeous: 5
+enthusiastic: 5
+outdoorsy: 5
+good for children: 5
+good with other rats: 5
+loves car rides: 5
+very affectionate: 5
+kisses: 5
+canaan dog: 5
+nebelung: 5
+good with dogs no: 5
+good with other rabbits: 5
+good with large dogs: 5
+super affectionate: 5
+boss cat: 5
+sheep dog: 5
+quite: 5
+good boy: 5
+very playful: 5
+loves treats: 5
+good interactions with dogs: 5
+wiggly: 5
+my adoption fee has been sponsored: 5
+stunning: 5
+super loving: 5
+rough collie: 5
+long hair: 5
+irish setter: 5
+only cat: 5
+ chill: 5
+ healthy: 5
+ lovable: 5
+ quirky: 5
+purry: 5
+other dogs selective: 5
+needs a yard: 5
+ smart: 5
+companionable: 5
+enjoys meeting new dogs: 5
+smooth collie: 5
+kids friendly: 5
+does well in social environments outside of the home: 5
+enjoys attention: 5
+bio coming soon: 5
+sleepy: 5
+deserving: 5
+ polite: 5
+anaplasma positive: 5
+attention seeking: 5
+giant schnauzer: 5
+busy: 5
+eager: 5
+good with cats unknown: 5
+good w car ride: 5
+ongoing medical needs: 5
+energy level moderate: 5
+black: 5
+explorer: 5
+anxious: 5
+ independent: 5
+shots: 5
+english springer spaniel: 5
+endearing: 5
+very loving: 5
+cavalier king charles spaniel: 5
+no small dogs: 5
+diabetic: 5
+low key: 5
+home without cats: 5
+degu: 5
+indoor outdoor: 5
+has potential to live with teenagers: 5
+good with cats no: 5
+docile: 5
+cat: 5
+family pet: 5
+chesapeake bay retriever: 5
+patterdale terrier / fell terrier: 5
+shy with new people: 5
+does well in a car: 5
+knows stay: 5
+energy level high: 5
+senior seven positive: 5
+good with kids all ages: 5
+good with dogs selective: 5
+silver fox: 4
+ talkative: 4
+ clever: 4
+tonkinese: 4
+done well with cats: 4
+done well with children: 4
+cat compatibility yes: 4
+cuddley: 4
+very shy: 4
+tosa inu: 4
+devoted: 4
+no kids under six: 4
+ adult: 4
+front declawed: 4
+snuggle buddy: 4
+loves playing fetch: 4
+medium sized: 4
+dumbo: 4
+lived with children: 4
+nova scotia duck tolling retriever: 4
+trusting: 4
+irish wolfhound: 4
+german pinscher: 4
+loves everyone: 4
+loves the water: 4
+feisty: 4
+older children: 4
+sponsored adoption fee: 4
+  playful: 4
+african grey: 4
+tiny: 4
+older kids only: 4
+norfolk terrier: 4
+silver paws: 4
+active playful: 4
+foster to adopt only: 4
+quick learner: 4
+fifty one lbs or more: 4
+content: 4
+no kitty friends: 4
+ good with dogs: 4
+ purring: 4
+ relaxed: 4
+ unique: 4
+house preferred: 4
+funloving: 4
+go fetch program: 4
+appaloosa: 4
+sweet and loving: 4
+hiking buddy exercise partner: 4
+lively: 4
+silver: 4
+dsh: 4
+low shedding: 4
+tolerant: 4
+purring: 4
+great on leash: 4
+loves to be petted: 4
+bearded collie: 4
+medical needs: 4
+akbash: 4
+willing: 4
+good with litter box: 4
+should not live with cats: 4
+shy but sweet: 4
+aloof: 4
+other dogs friendly: 4
+training knows basics: 4
+walks well on leash: 4
+walks on leash: 4
+willing to learn: 4
+plauful: 4
+tibetan spaniel: 4
+flight risk: 4
+shy fearful: 4
+ragamuffin: 4
+clever: 4
+moldable: 4
+good with people: 4
+cats possibly: 4
+gaited: 4
+special diet: 4
+purrs: 4
+no young children: 4
+resource guarding: 4
+perfect: 4
+interactive: 4
+loves to purr: 4
+loves rubs: 4
+great family pet: 4
+great pet: 4
+canine ality category wallflower: 4
+kids older kids please: 4
+only dog: 4
+dog social required: 4
+affecionate: 4
+medical team consult required: 4
+greater swiss mountain dog: 4
+other cats coexist: 4
+no cats please: 4
+mcnab: 4
+separation anxiety: 4
+lovebird: 4
+good family pet: 4
+i am part of a pair and cannot be adopted as a single cat: 4
+loving and playful: 4
+likes to play with toys: 4
+home no cats: 4
+ mischievous: 4
+sun lover: 4
+american foxhound: 4
+introvert: 4
+ginger: 4
+dogue de bordeaux: 4
+likes toys: 4
+no children home preferred: 4
+older respectful children only: 4
+window watcher: 4
+good litter box habits: 4
+playful puppy: 4
+good with bunny friendly cats: 4
+good with bunny friendly dogs: 4
+good with gentle children: 4
+family: 4
+companion only: 4
+fenced in yard recommended: 4
+physical stamina loves to hike: 3
+pembroke welsh corgi: 3
+very friendly: 3
+balinese: 3
+dogs yes please: 3
+attention hog: 3
+hesitant: 3
+behavior meet and greet required with adopters and their dogs: 3
+leonberger: 3
+australian terrier: 3
+no children: 3
+bird watcher: 3
+playful and loving: 3
+kids under ten meet first: 3
+brothers: 3
+only cat home: 3
+adoption fee waived: 3
+soulful: 3
+survivor: 3
+feral: 3
+available to foster: 3
+sleek: 3
+loving sweet: 3
+long haired: 3
+bouvier des flandres: 3
+sweet girl: 3
+loves to play with other dogs: 3
+loves belly rubs: 3
+cratetrained: 3
+multiple visits required: 3
+elevator friendly: 3
+frisky: 3
+cheerful: 3
+beveren: 3
+gets along with other dogs: 3
+bearded dragon: 3
+responsive: 3
+xoloitzcuintli / mexican hairless: 3
+ funny: 3
+kidfriendly: 3
+manners: 3
+good girl: 3
+mustang: 3
+american fuzzy lop: 3
+presa canario: 3
+chonky: 3
+precious: 3
+needs quiet home: 3
+green eyes: 3
+playful active loving: 3
+donkey: 3
+belgian: 3
+birman: 3
+friendly with dogs yes: 3
+tripod: 3
+darling: 3
+assertive: 3
+clean: 3
+standard schnauzer: 3
+kids twelve and over: 3
+engaged: 3
+alert: 3
+cinnamon: 3
+good with small kids: 3
+needy: 3
+only pet home: 3
+loves cats: 3
+ alert: 3
+ amusing: 3
+ behaved: 3
+ easy going: 3
+ huggable: 3
+ personable: 3
+ rubbing: 3
+cymric: 3
+one yr three yrs old: 3
+timid and or shy: 3
+eskimo dog: 3
+ adorable: 3
+ clean: 3
+ soft: 3
+pomsky: 3
+likes dogs: 3
+not good with dogs: 3
+likes water: 3
+stay tuned for bio: 3
+training recommended: 3
+no pet left behind: 3
+kid friendly twelve positive: 3
+mischievious: 3
+foster to adopt: 3
+shy timid: 3
+ball dog: 3
+handsome guy: 3
+super friendly: 3
+loving playful sweet: 3
+finch: 3
+ kind: 3
+very smart: 3
+mule: 3
+happy go lucky: 3
+hard working: 3
+extremely loving: 3
+high prey drive: 3
+needs another dog in the home: 3
+ spunky: 3
+loves to go swimming: 3
+cats unknown: 3
+fenced yard: 3
+ fluffy: 3
+chubby: 3
+good temperament: 3
+munchkin: 3
+ideal family teens thirteen positive: 3
+good with older kids: 3
+naps: 3
+other dogs nope: 3
+white: 3
+socialized: 3
+ideal family older kids seven positive: 3
+friendy: 3
+respectful: 3
+needs patient experienced home: 3
+ loveable: 3
+ cuddle bug: 3
+playgroup approved: 3
+sponsored adoption peaches pays: 3
+nube: 3
+observant: 3
+nigerian dwarf: 3
+playful and active: 3
+bossy: 3
+cats no thank you: 3
+karmicrescue: 3
+org: 3
+scottish fold: 3
+snuggle bud: 3
+mouthy: 3
+dog interaction neutral: 3
+energy medium: 3
+good w new people: 3
+mushy: 3
+adult only home: 3
+obese: 3
+resilient: 3
+i ve lived with cats: 3
+i ve lived with kids: 3
+faithful: 3
+ibizan hound: 3
+bold: 3
+good with kids older: 3
+not recommended for kids five and under: 3
+obedient quick learner: 3
+iguana: 3
+dogfriendly: 3
+mellow calm: 3
+tennessee walker: 3
+likes petting: 3
+cuddles a lot: 3
+fence required: 3
+quaker parakeet: 3
+burmese: 3
+has lived with dogs: 3
+loving and sweet: 3
+not dog friendly: 3
+slightly shy: 3
+loveing: 3
+best friend: 3
+careful: 3
+mouser: 3
+demanding: 3
+energy level couch potato: 3
+painted: 3
+klee kai: 3
+purr: 3
+quick: 3
+preexsisting conditions: 3
+silver marten: 3
+house trained yes: 3
+herbivore: 3
+home no small animals: 3
+attends moderate play playgroups: 3
+semi feral: 3
+activity sleepover eligible: 3
+floofy: 3
+no children under twelve years of age: 3
+purrer: 3
+dog social: 3
+napper: 3
+knows down: 3
+likely housebroken: 3
+energy low: 3
+good companion: 3
+chipped: 3
+flex fitness adopt one save three: 3
+kids ten positive years only: 3
+saddlebred: 3
+agile: 3
+great walking buddy: 3
+cat compatibility no: 2
+old soul: 2
+should be only pet in home: 2
+canine ality category goofball: 2
+kids yes please: 2
+tibetan terrier: 2
+needs foster: 2
+good with dog savvy cats: 2
+gets along with other cats: 2
+out going: 2
+would be ok as only dog: 2
+intellegent: 2
+energy level average: 2
+happiest with another dog: 2
+likes to sleep: 2
+twins: 2
+cornish rex: 2
+kittens: 2
+ male: 2
+done well with dogs: 2
+platful: 2
+javanese: 2
+hugger: 2
+hopeful: 2
+very social: 2
+spry: 2
+oriental tabby: 2
+no other cats: 2
+shih poo: 2
+gentle and dainty play style: 2
+ strong: 2
+busy bee: 2
+loves playing tug of war: 2
+social outgoing: 2
+vaccinated: 2
+not good with other cats: 2
+must be adopted to a home with an existing feline or be adopted with another cat kitten: 2
+no cats small animals: 2
+siberian: 2
+one hundred fifty adoption fee: 2
+charmer: 2
+enjoys walks: 2
+rowdy: 2
+only animal home: 2
+short hair: 2
+english cocker spaniel: 2
+rascal: 2
+likes to ride: 2
+wild: 2
+pen pal: 2
+blue: 2
+clingy: 2
+acitve: 2
+shy but loving: 2
+sweet loving: 2
+energy high: 2
+older child friendly: 2
+delicate: 2
+pre adoption dental needed: 2
+skye terrier: 2
+attention: 2
+big guy: 2
+nurturing: 2
+coat length medium: 2
+single animal home: 2
+explorative: 2
+love children: 2
+toy possessive: 2
+handleable: 2
+boisterous: 2
+freckles: 2
+quiet shy: 2
+super soft: 2
+ cuddlebug: 2
+ beautiful: 2
+mainecoon: 2
+ protective: 2
+crate trained yes: 2
+energy level medium: 2
+golden girl: 2
+youthful: 2
+foodie: 2
+companionship: 2
+three yrs or older: 2
+cat match potential: 2
+small dog: 2
+well socialized: 2
+full of puppy kisses: 2
+pyrenean shepherd: 2
+goofball: 2
+ russian blue: 2
+only pet in home: 2
+grey: 2
+ lap lover: 2
+ trainable: 2
+ trusting: 2
+ willing: 2
+playful and fun: 2
+morgan: 2
+loves his people: 2
+chausie: 2
+ideal family all ages: 2
+geriatric: 2
+fast: 2
+seeks attention: 2
+not recommended for cats: 2
+playgroup rockstar: 2
+new mix girl: 2
+bio on the way: 2
+know commands: 2
+should go to multi cat home: 2
+toothless: 2
+local adoption only this animal can only be adopted out within twenty miles of buffalo ny: 2
+other: 2
+does not like being picked up: 2
+loves food: 2
+new boy: 2
+new to westside: 2
+ senior: 2
+peaceful: 2
+good company: 2
+lab life: 2
+reactive: 2
+puppy playful: 2
+female spayed: 2
+puppy energy: 2
+hiker: 2
+thankful: 2
+ocicat: 2
+bobtail: 2
+two years old: 2
+wonderful: 2
+willing to please: 2
+ very shy: 2
+good listener: 2
+meek: 2
+gorgeous girl: 2
+intense: 2
+loving playful affectionate: 2
+loving active playful: 2
+energy level active: 2
+cavachon: 2
+lancashire heeler: 2
+lowkey: 2
+maine coon mix: 2
+seems good with dogs: 2
+orthopedic case: 2
+demure: 2
+ideal family adults only: 2
+sweet and playful: 2
+brown: 2
+pittie: 2
+eager to learn: 2
+ adventurous: 2
+good family dog: 2
+independant: 2
+lots of energy: 2
+lilac: 2
+need a fenced in yard: 2
+kennel trained: 2
+wants to please: 2
+affectionate and playful: 2
+shots up to date: 2
+lovin: 2
+big boy: 2
+dog friendly unknown: 2
+toys: 2
+other cats friendly: 2
+boys: 2
+mustafa: 2
+training requirement obedience level one training required: 2
+sponsored adoption other: 2
+tidy: 2
+purr machines: 2
+belly rubs: 2
+chronic herpes virus fhv one: 2
+ sassy: 2
+seeking a calm household: 2
+setter: 2
+engaging: 2
+norwich terrier: 2
+unique looking: 2
+cool: 2
+apartment friendly: 2
+loves naps: 2
+i d do best in an adult only home: 2
+chartreux: 2
+idexx heartworm negative: 2
+loving companion: 2
+gentleman: 2
+vocal chatty: 2
+ lazy: 2
+gray: 2
+recommended with teens fourteen positive only: 2
+medical consult required before adoption: 2
+fospice: 2
+belgian shepherd / laekenois: 2
+very clean: 2
+requires home with another dog: 2
+wonderful family pet: 2
+coat length short: 2
+owner experience: 2
+snugglers: 2
+chirper: 2
+ lap sitter: 2
+beautiful tabico coloring: 2
+jet black silky fur: 2
+upbeat: 2
+snuggley: 2
+loving playful friendly: 2
+catfriendly: 2
+loving lap cat: 2
+flex fitness adopt one to save three: 2
+i ve lived with dogs: 2
+play: 2
+treats: 2
+hiking buddy: 2
+cuddling: 2
+extremely affectionate: 2
+good: 2
+a bit shy: 2
+lap sitter: 2
+needs a job: 2
+ big: 2
+available for foster: 2
+craves attention: 2
+pretty girl: 2
+not a fan of dogs: 2
+cute as a button: 2
+dynamic duo: 2
+not good with kids: 2
+canine ality category constant companion: 2
+dogs selective making friends: 2
+ hilarious: 2
+big baby: 2
+car rides: 2
+pleasant: 2
+tender: 2
+snugly: 2
+humble: 2
+no kids: 2
+kid compatibility older children okay: 2
+no young kids: 2
+helpful: 2
+black cat: 2
+lover boy: 2
+mature: 2
+adult home only: 2
+felv negative: 2
+proper introduction recommended: 2
+proud: 2
+indoor: 2
+animal friendly: 2
+physical stamina coach potato: 2
+aggressive: 2
+fenced yard required: 2
+treat lover: 2
+crunchy muffin: 2
+courageous: 2
+up to date: 2
+adventerous: 2
+needs companion animal: 2
+medium size: 2
+in a foster home: 2
+not yet altered: 2
+poicephalus / senegal: 2
+energy level triathlete: 2
+moderately active: 2
+dogs to be determined: 2
+companion cat: 2
+passed initial cat test: 2
+canine ality category teacher s pet: 2
+scottish terrier: 2
+frightened: 2
+hedgehog: 2
+mid energy: 2
+seniors: 2
+social with other cats: 2
+adults and older children preferred: 2
+lap kitten: 2
+good with other nice dogs: 2
+french lop: 2
+reclusive: 2
+shy quiet: 2
+african spur thigh sulcata tortoise: 2
+large size: 2
+needs winter shelter: 2
+house panther: 2
+ringneck / psittacula: 2
+ likes people: 2
+knows commands: 2
+mild mannered: 2
+sweet demeanor: 2
+obidient: 2
+rescued: 2
+puppy breath: 2
+no cats in household: 2
+fluff: 2
+family cat: 2
+toy driven: 2
+playful and friendly: 2
+megacolon: 2
+loving  playful active: 2
+attends rough and rowdy playgroups: 2
+fifty percent off adoption: 2
+shadow: 2
+initially shy: 2
+shy needs playmate: 2
+playfu: 2
+sweet and petite: 2
+neighborhood environment with minimal people traffic: 2
+protector: 2
+only pet: 2
+lap: 2
+gentle soul: 2
+has lived with kids: 2
+tame: 2
+loving active: 2
+orange: 2
+declawed front: 2
+shy needs time to warm up: 2
+nubian: 2
+big dog: 2
+pitty: 2
+brother: 2
+cozy: 2
+listens: 2
+kids over the age of ten only: 2
+no dogs please: 2
+ talker: 2
+age of kids eight positive: 2
+extremely timid: 2
+may do best in an experienced home: 2
+may grunt box or lunge: 2
+great personality: 2
+ submissive: 2
+active home: 2
+people loving: 2
+ deserving: 2
+bondable with other rabbits: 2
+behavior team consult required: 2
+sisters: 2
+pony: 2
+prefers to be a single cat: 2
+loves to play with toys: 2
+wary: 2
+miniature horse: 2
+boer: 2
+a little shy at first: 2
+careful adoption: 2
+enjoys petting: 2
+purr monster: 2
+amusing: 2
+dog friendly large: 2
+kid friendly older: 2
+kid friendly young: 2
+located in lakewood nj: 2
+not located in philadelphia: 2
+ bashful: 2
+ mysterious: 2
+personality: 2
+purrs a lot: 2
+loves petting: 2
+ joyful: 2
+sweet and shy: 2
+likes people: 2
+shy and sweet: 2
+solitary: 2
+not very active: 2
+needs a feline friend: 2
+small precious older female: 2
+aka orca: 2
+good with cats selective: 2
+bobtailed boy: 2
+box sitter: 2
+samoyed: 1
+white and gray: 1
+introvert loving playful: 1
+energectic: 1
+canine ality category life of the party: 1
+cats to be determined: 1
+mill dog: 1
+senior dog: 1
+intelligent active: 1
+loving sweet  chill pup: 1
+hypoallergenic: 1
+needs regular grooming: 1
+silkie / sheltie: 1
+a gem: 1
+playful and active young ladies: 1
+enjoys lounging in my cat bed: 1
+adores belly rubs: 1
+loves being petted: 1
+intercative: 1
+playful affectionate sweet gentle: 1
+ enjoys people: 1
+wirehaired dachshund: 1
+coton de tulear: 1
+friendly but frightened: 1
+miniature dachshund: 1
+no cat home: 1
+no small child home: 1
+needs time to warm up: 1
+timid at first but very sweet and loving: 1
+wanting affection: 1
+senior citizen: 1
+good with kids yes: 1
+panthers: 1
+purr factory: 1
+purrbaby: 1
+ready to go home: 1
+ siamese: 1
+ lynx point: 1
+ loves cats: 1
+ loves people: 1
+ hit by car: 1
+devon rex: 1
+sweet playful: 1
+super energetic: 1
+has a brother named chowder: 1
+likes to meet nee people: 1
+beautiful swirl markings: 1
+beautiful green eyes: 1
+unusual coloring: 1
+loves high places: 1
+loves to window watch: 1
+loves boxes: 1
+buff tabby male: 1
+old: 1
+crooked: 1
+possum: 1
+grandpa: 1
+continent: 1
+do not pick him up: 1
+only if morty says ok: 1
+sweet tabby older kitten: 1
+outgoing and playful: 1
+colorful personality: 1
+simply a sweet soul: 1
+large tiger tabby: 1
+so patient: 1
+great with kiddos: 1
+super nice: 1
+beagleface: 1
+ beaglesnout: 1
+ beaglestout: 1
+miniature bull terrier: 1
+mellow temperament: 1
+puppy enthusiasm: 1
+huey: 1
+ dewey: 1
+ louie: 1
+ bonded trio: 1
+ three boys: 1
+ sweet and shy: 1
+territorial: 1
+affectionate playful easy going: 1
+feather chaser: 1
+catnip addict: 1
+netflix fan: 1
+observer: 1
+lots of personality: 1
+ok with other cats: 1
+outgoing social: 1
+playful cute: 1
+sleeps all night under covers with his people: 1
+japanese bobtail: 1
+needs a special person: 1
+huge: 1
+bonded siblings: 1
+playfyl: 1
+headbumps: 1
+kneedler: 1
+full of puppy energy: 1
+needs work on manners: 1
+loves dentastix: 1
+great on car rides: 1
+enjoys walks but pulls: 1
+very affetionate: 1
+wants to be wherever you are: 1
+ well rounded: 1
+brindle: 1
+blue fawn: 1
+loving and gentle: 1
+affactionate: 1
+special diet or treatment: 1
+loads of personality: 1
+pending heartworm test: 1
+cute playful living: 1
+german shepard: 1
+love chicken nuggets: 1
+loves peanut butter: 1
+loving with people: 1
+lovig: 1
+sponsored: 1
+beatiful: 1
+temperamental: 1
+enjoys attention to a point: 1
+loving girl: 1
+no children fourteen under: 1
+no young children five under: 1
+no children under five: 1
+very active energtic busy boy: 1
+sometimes playful: 1
+loving friendly sweet: 1
+ lapcat: 1
+ sedate: 1
+beautiful sweet loving: 1
+follower: 1
+petfriendly: 1
+parrot (other): 1
+prefers a house with a yard: 1
+great kisser: 1
+rescued from paws: 1
+ playfull: 1
+loving soul: 1
+small guy: 1
+ quirky personality: 1
+spumky: 1
+great: 1
+loves: 1
+cute comical cuddly: 1
+enjoys walk: 1
+loving with time: 1
+non barker: 1
+herding dog: 1
+loves kids: 1
+plauyful: 1
+nice to handle: 1
+easy to catch: 1
+has lived with children: 1
+loving polite kind: 1
+advertous: 1
+lovey: 1
+dog like: 1
+even natured: 1
+clam: 1
+affetionate: 1
+loves making friends with dogs and people: 1
+adult full grown estimate medium twenty six sixty lbs: 1
+sweet and adorable: 1
+ok with dogs: 1
+love walks: 1
+love you: 1
+  loving: 1
+ loves being cuddled: 1
+laid back loving: 1
+super adorable: 1
+joie de vivre: 1
+kids under twelve meet first: 1
+experienced: 1
+just a puppy: 1
+loving sweet happy: 1
+huggy: 1
+gregarious: 1
+super friendly and affectionate: 1
+can be fearful at first but warms up: 1
+big affectionate lab dog: 1
+shelter favorite: 1
+loving  calm: 1
+ground dwelling: 1
+bubbly: 1
+afraid: 1
+ready to blossum: 1
+beautiful caramel eyes: 1
+stealthy: 1
+dapper older gentleman: 1
+vampire teeth: 1
+loves to meet new people: 1
+meet and greet recommended: 1
+lovebug extraordinaire: 1
+likes to be picked up: 1
+lots of stripes: 1
+strong work drive: 1
+ready for her own childhood: 1
+ friendly and playful: 1
+ most affectionate: 1
+ gentle and playful: 1
+vibrant calico colors: 1
+fancy fur: 1
+king of the naps: 1
+sweet and affectionate: 1
+healthy and clean: 1
+is nuetered: 1
+elegant: 1
+friendly with cats yes: 1
+loves to play with his brother: 1
+previously lived with kids: 1
+has not been around dogs: 1
+likes to please owner: 1
+energetic active: 1
+active strong energetic: 1
+special needs behavior: 1
+ likes big and small dogs: 1
+physical limitation: 1
+all puppy: 1
+happy  active interested: 1
+cudler: 1
+loves napping: 1
+friendly with people: 1
+petit basset griffon vendeen: 1
+creme d'argent: 1
+looking for a good time: 1
+puppy all puppy: 1
+active loving playful: 1
+walks great on leash: 1
+snugglemania: 1
+buff: 1
+active requires daily exercise: 1
+ requires lots of exercise: 1
+ engaged: 1
+declaw: 1
+cuddlie: 1
+affectionate playful inquisitive: 1
+loving playful young: 1
+sweet as pie: 1
+loves everyone and everything: 1
+dog friendly cat friendly: 1
+grateful to be rescued and it shows: 1
+playful and afffectionate: 1
+active intelligent: 1
+needs structure: 1
+loves the outdoors: 1
+shy to men at first: 1
+sweet personality: 1
+english shepherd: 1
+affectionste: 1
+playful and extremely affectionate: 1
+gus and sterling are sweethearts: 1
+twenty six fifty lbs: 1
+yertle has a bob tail: 1
+wants to help: 1
+sweet lovimg: 1
+bonded with alley: 1
+sweet and goofy: 1
+sweet friendly playful energetic calm: 1
+pityluv: 1
+smart sweet beautiful: 1
+friendly affectionate: 1
+special dog savvy home: 1
+playful and affectionate: 1
+purrbox: 1
+peoplelover: 1
+spayed or neutered: 1
+bonded with gypsy: 1
+belgian shepherd / sheepdog: 1
+ very laid back: 1
+ good natures: 1
+ neat: 1
+ perfect: 1
+zoomie: 1
+smol: 1
+good manners: 1
+gives great kisses: 1
+wants to snuggle: 1
+dog park all star: 1
+sassy like a puppy: 1
+loving quiet swett: 1
+likes kids: 1
+see my video: 1
+bio in underwriting: 1
+low activity level: 1
+lovinfg: 1
+affrectionate: 1
+ awesome: 1
+ch: 1
+beautiful new long haired mix: 1
+bio in the making: 1
+new long haired mix: 1
+new youngster: 1
+biddable: 1
+seventeen pounds: 1
+outgoing and happy pup: 1
+best for active home: 1
+lounge lizard: 1
+walks fair on leash: 1
+loves tennis balls: 1
+needs proper introductions and decompression time with new dogs: 1
+best with children eight and up: 1
+zen: 1
+grumpy face: 1
+huge heart: 1
+ball python: 1
+box turtle: 1
+friendly outgoing: 1
+omnivore: 1
+easily spooked: 1
+micro lowrider: 1
+bio soon: 1
+a masterpiece in the making: 1
+happy and polite with other dogs: 1
+lovely mature lady: 1
+new beau: 1
+doing well in his learning curve: 1
+everything is new to him: 1
+neutral with other dogs: 1
+new boy in town: 1
+bio under construction: 1
+new mix: 1
+new dog: 1
+handsome new boy: 1
+body and baja little chihuahua are very attached: 1
+bios in the works: 1
+lap lover: 1
+keeshond: 1
+beautiful shy sweet: 1
+shy nervous beautiful semi feral: 1
+curious playful loving: 1
+kids under fifteen meet first: 1
+no kids under twelve: 1
+no other dogs: 1
+friesian: 1
+adorkable: 1
+tripping hazard: 1
+strong personality: 1
+it is a good personality: 1
+will love you with every single fiber of her being: 1
+requires protection: 1
+mostly from herself: 1
+loving active and playful: 1
+loving playful and smart: 1
+melllow: 1
+does not like loud noises or cats: 1
+otherwise very loving: 1
+attentive and loyal: 1
+amazing temperament: 1
+needs active family or yard: 1
+angelic: 1
+exciable: 1
+powerful: 1
+spoiled: 1
+head butts and spooning: 1
+afffectionate: 1
+relax: 1
+likes to be petted: 1
+pettable: 1
+purrfect: 1
+dmh: 1
+affectionaate: 1
+soical: 1
+looking for a special home: 1
+blind vision impairment: 1
+pocket sized: 1
+must have another dog: 1
+cheeto is a sweetheart: 1
+shy until he know you: 1
+ very cute: 1
+special needs deaf: 1
+loving laid back quiet: 1
+ cutie: 1
+snuggly companion: 1
+sweetest boy ever: 1
+loves sitting with you: 1
+loyal lap kitty: 1
+adorable silent meows: 1
+nice guy: 1
+good interactions with children: 1
+loving shy: 1
+playfully cuddles: 1
+large dogs only: 1
+handler protective: 1
+territorial severe: 1
+gentke: 1
+serene: 1
+ charming: 1
+friendly to family: 1
+seem good with children: 1
+good with dogs and cats: 1
+tan: 1
+good with everyone: 1
+loving playful loves kids and dogs: 1
+engergy: 1
+driven: 1
+speacial needs: 1
+separation axiety: 1
+food possessive: 1
+other dogs coexist: 1
+tripod three legs: 1
+purringmachine: 1
+sweet playful friendly: 1
+ high energy: 1
+pure white: 1
+playful   active: 1
+good with women: 1
+needs a confident dog friend: 1
+loving  not playful: 1
+not active: 1
+needs calm homes: 1
+likes opening cupboards and drawers: 1
+freshwater fish: 1
+welsh springer spaniel: 1
+strongwilled: 1
+knows sit command: 1
+sleek coat is low maintenance: 1
+tested negative for heart worms and takes heart worms prevention: 1
+leader: 1
+dog social with right match: 1
+typical kitten energy: 1
+high drive: 1
+jack russell: 1
+ female: 1
+ small: 1
+would do best with another large dog: 1
+plaful: 1
+chilled: 1
+headbutt: 1
+loyal and hardworking: 1
+needs engaging and active owner: 1
+cheerful boy: 1
+prefers easy going dogs: 1
+does well in off leash playgroups: 1
+long haired beauty: 1
+walks well with other dogs: 1
+gentle and endearing personality: 1
+loves to greet people and dogs: 1
+fostered: 1
+new handsome gent: 1
+no horses or cats: 1
+new gent: 1
+western and english: 1
+not dominant: 1
+wants owner around all the time: 1
+likes to hang out: 1
+ spoiled: 1
+night owl: 1
+early riser: 1
+this is the one: 1
+early bird: 1
+expressive: 1
+purrful: 1
+ personality: 1
+ooliie from: 1
+ chilled: 1
+ big boy: 1
+great with kids: 1
+good companionable cat: 1
+petite pocket pit bull: 1
+playful happy lovable: 1
+curious and playful: 1
+mild disposition: 1
+loves snuggling: 1
+connected: 1
+icelandic sheepdog: 1
+friedly: 1
+juvenile: 1
+sheepish: 1
+unsure: 1
+cuddles sweet head bumps: 1
+long wiskers: 1
+kids: 1
+fetch: 1
+bones: 1
+rescue dog: 1
+queen: 1
+likes his groceries: 1
+loves back scratches: 1
+attention starved: 1
+nap time: 1
+together forever: 1
+playtime: 1
+certified lap cat: 1
+lap dogs: 1
+dog day out adventure dog: 1
+love bugs: 1
+loves going for walks: 1
+ polydactyl: 1
+friendly playful: 1
+ dainty: 1
+alpine: 1
+playful and affectionate once comfortable: 1
+oving: 1
+requires a short comfortable leash on indoors for confidence: 1
+requires a long leash outdoors for potty time for privacy and safety: 1
+affectionate with his people: 1
+good with other dogs after a proper introduction: 1
+t: 1
+adorable sweet calm: 1
+loves giving kisses: 1
+lucky: 1
+good in car: 1
+dog and cat friendly: 1
+bonded to her brother justin: 1
+nervous around new faces: 1
+couch bunny: 1
+best in a home with a neutral adult dog if any: 1
+best with older dog savvy kids age sixteen and older: 1
+adventure buddy: 1
+seeking a child free home: 1
+seeking a cat and small animal free home: 1
+fun happy girl: 1
+likes to snuggle: 1
+could use some confidence building and a leader: 1
+teddy bear: 1
+needs another cat companion: 1
+gives kisses: 1
+medium engergy: 1
+dogs possibly: 1
+finnish spitz: 1
+initial felv fiv heartworm test negative: 1
+loving at times: 1
+cuddle at times: 1
+sweet companion: 1
+friendly wiggly sweet loving: 1
+must be an only animal: 1
+good with cats dogs and kids: 1
+application is online at: 1
+grandpa is husky: 1
+not good with other animals: 1
+chillax: 1
+thirty adoption fee: 1
+playfyul: 1
+loving with those she knows: 1
+sweeeeet: 1
+ snuggler: 1
+ heart melter: 1
+has done well with dogs: 1
+good w kids: 1
+undemanding: 1
+all shots: 1
+stout: 1
+ obedient: 1
+ bouncy: 1
+loves kale: 1
+engaging and good energy: 1
+applications online at: 1
+around forty pounds full grown: 1
+almost one hundred percent house trained: 1
+assumed adult weight over fifty lbs: 1
+unaltered animal: 1
+giver: 1
+kissable: 1
+sweet potato: 1
+chill master: 1
+selkirk rex: 1
+water dog: 1
+purdiest girl: 1
+worlds best snuggler: 1
+very happy: 1
+love snuggles: 1
+playmate for your cat: 1
+super cute: 1
+ready to be raised up right: 1
+dogs: 1
+sweet protective quiet well behaved: 1
+lovely senior: 1
+playfuk: 1
+food driven: 1
+karelian bear dog: 1
+hairy: 1
+needs to be only pet: 1
+limited vision: 1
+older children home preferred: 1
+best in home with another dog: 1
+requires knowledgeable and skilled dog owner: 1
+petting junkie: 1
+sweet little meow: 1
+perfect kitty: 1
+medium soft beautiful hair: 1
+pure breed: 1
+lovable curious cuddly: 1
+ loves all people and all dogs: 1
+very pretty: 1
+ one on one: 1
+one eye: 1
+needs confidence: 1
+playful sometimes: 1
+couch potato the rest of the time: 1
+master snuggler: 1
+people lovers: 1
+friendly companion: 1
+likes to be held: 1
+abused: 1
+ ready for a second chance: 1
+ underbite: 1
+love good head rubs: 1
+enjoy playing with toys: 1
+dwarf eared: 1
+warm harted: 1
+pleaser: 1
+happy boy: 1
+ the best cat ever: 1
+has lived with cats: 1
+takes medicine: 1
+deafness: 1
+walking partner: 1
+loving  sweet  active: 1
+adventuresome: 1
+love people: 1
+dandie dinmont terrier: 1
+want a be lap dog: 1
+good with small dogs: 1
+excellent litter box habits: 1
+willow is lovable: 1
+sweet soul: 1
+loving p: 1
+playful and attentive: 1
+ wiggly: 1
+ ready to rumble: 1
+ bonded: 1
+ lovey: 1
+walks well: 1
+dignified: 1
+motherly instincts: 1
+needs breed experience: 1
+ meows for attention: 1
+ sweet baby: 1
+ laid back and chill: 1
+ independent player: 1
+ cat tree sitter: 1
+ likes petting: 1
+ needs a few days to adjust: 1
+ clean bill of health: 1
+ loves to play: 1
+ handsome boy: 1
+ love my siblings: 1
+ a bit shy: 1
+ like head scratches and rubs: 1
+good with kids cats dogs: 1
+easy on leash: 1
+aaffectionate: 1
+social and friendly: 1
+love cuddles: 1
+super senior: 1
+lived w kids: 1
+head butter: 1
+playing: 1
+ wrestling exploring: 1
+ climbing: 1
+total lapcat: 1
+would thrive with all of the attention: 1
+receptive: 1
+lounger: 1
+physical: 1
+tx only: 1
+psweet: 1
+thoughtful: 1
+barncat: 1
+mildly energetic: 1
+incredibly smart: 1
+active playful happy: 1
+super easy: 1
+well mannored: 1
+love hiking: 1
+lab: 1
+house and crate trained: 1
+i need to be an only pet: 1
+houndy: 1
+super love: 1
+give me love: 1
+i am a great sidekick: 1
+let me be the robin to your batman: 1
+professional door greeter: 1
+oh were you walking here: 1
+sweet calm: 1
+disciplined: 1
+yellow-bellied slider: 1
+needs cat buddy or brother: 1
+excellent conversationalist: 1
+spirit cat: 1
+loves walks and car rides: 1
+fast learner: 1
+silky soft girl: 1
+soccer champion: 1
+loves spa days with scratches and massages: 1
+loves her playmates: 1
+disabled: 1
+handsome boy: 1
+love my siblings: 1
+like head scratches and rubs: 1
+dog: 1
+cat tree sitter: 1
+needs a few days to adjust: 1
+clean bill of health: 1
+beautiful long haired tuxedo: 1
+meows for attention: 1
+sweet baby: 1
+laid back and chill: 1
+independent player: 1
+best buddies: 1
+learning to play: 1
+flirty: 1
+herding breed: 1
+likes to chat: 1
+big smile: 1
+likes children: 1
+timid at first: 1
+white russian: 1
+intelliegent: 1
+loves chin scratches: 1
+very funny: 1
+so happy: 1
+very outgoing once comfortable: 1
+great with other animals: 1
+loving playful sociable intelligent strong athlete active: 1
+love rubs: 1
+shiny: 1
+warm: 1
+ dog friendly: 1
+mushmellows: 1
+ambassadors for breed: 1
+good with dogs cats kids: 1
+those: 1
+ears: 1
+sweatheart: 1
+best with kids six positive: 1
+orange girl: 1
+quail: 1
+ cutest: 1
+squeaky: 1
+super smart: 1
+human centered: 1
+ stunning: 1
+ does not like other cats: 1
+affectioonate: 1
+forty three pounds: 1
+redirects well: 1
+application at: 1
+warms up quickly: 1
+ rough: 1
+young acting: 1
+ attention seeking: 1
+loves his fleece toy: 1
+needs loving big brother: 1
+needs a quiet home: 1
+likes to cuddle: 1
+handsome buff color: 1
+older kids: 1
+frenchie: 1
+no animals: 1
+needs lots of attention: 1
+adoreable: 1
+odd eyed: 1
+enjoys bird watching: 1
+trustworthy: 1
+apartment not recommended: 1
+children over six recommended: 1
+meet and greet pending: 1
+appenzell mountain dog: 1
+pet friendly: 1
+loving playful active intelligent grateful: 1
+loving snuggly: 1
+little: 1
+ does good with other cats: 1
+needs attention: 1
+ special needs: 1
+mystery mutt: 1
+ likes dogs: 1
+study buddy: 1
+cute ears: 1
+flexible: 1
+heartfelt: 1
+needs companion cat: 1
+no dog home: 1
+active dog: 1
+loves to play with chew toys: 1
+engergetic: 1
+found with other dog gets along: 1
+does very well on a leash: 1
+does well walking on a leash: 1
+liability waiver: 1
+immediate transfer needed: 1
+very calm: 1
+shy personality: 1
+loves attention and affection: 1
+treat fanatic: 1
+walks on a leash easily: 1
+loves dog chew ropes: 1
+fort connoisseur: 1
+expert biscuit maker: 1
+amber eyed hunk: 1
+kids unknown: 1
+loving  loves attention: 1
+adoption sponsored: 1
+loving playful enjoys attention: 1
+eyes: 1
+loviing: 1
+opinionated: 1
+likes her space: 1
+creative: 1
+scritches: 1
+sweet and loving personality: 1
+loves humans: 1
+loves to be groomed: 1
+indoor and outdoor: 1
+drop dead gorgeous: 1
+houstrained: 1
+family companion: 1
+disclamer: 1
+complicated: 1
+loving playful social shy active: 1
+belly scratches: 1
+conservative: 1
+loving playfull active shy sociable: 1
+kid lover: 1
+legs for days: 1
+medical diagnosis: 1
+lovable sweet playful: 1
+charismatic: 1
+calm away from the shelter: 1
+likes laps: 1
+chubby cheeks: 1
+biscuit maker: 1
+ black: 1
+percheron: 1
+people centered: 1
+matia: 1
+dog cat: 1
+requires experience: 1
+chameleon: 1
+ partially blind: 1
+runt: 1
+water: 1
+lap pet: 1
+she wants to be with you when she wants the attention: 1
+meet and greet required: 1
+snuggle kitty: 1
+passionate: 1
+happy playful obedient sweet: 1
+loves children: 1
+bed hog: 1
+mannerly: 1
+playful loyal social: 1
+rambunctous: 1
+loving curious: 1
+aussiedoodle: 1
+loves to be pet: 1
+ kisser: 1
+ hugger: 1
+ loves everyone: 1
+playfful: 1
+loving sociable active playful: 1
+good with kitties: 1
+cat tolerant: 1
+quiet gentle loving: 1
+protecting: 1
+loving and playfull: 1
+loves playing with a ball: 1
+inexperienced: 1
+gets along well: 1
+laps are great places to sit: 1
+very sweet boy with laid back nauture: 1
+good with males dogs only: 1
+gsd: 1
+adoptable: 1
+great temperment: 1
+petsconnect: 1
+special food needed: 1
+smiling: 1
+canine ality category busy bee: 1
+canine ality category free spirit: 1
+great with people: 1
+dogs no thank you: 1
+ scratchable: 1
+chirpy: 1
+tweety: 1
+sweer: 1
+friendly to people: 1
+does not do well with other cats: 1
+pets: 1
+  smart: 1
+lover of cats and dogs and kids: 1
+super chill and cuddly: 1
+loving playful sensitive sweet well behaved: 1
+easy going sweetheart: 1
+likes hikes: 1
+jogger: 1
+outgoing and charming: 1
+so full of life and joy: 1
+loves to be with people and dogs: 1
+a sweetheart: 1
+curious and carefree: 1
+does great in playgroups: 1
+sweet and gentle nature: 1
+part of bonded pair: 1
+smaller gsd: 1
+calm easy going: 1
+great temperament: 1
+good leash manners: 1
+adores human affection: 1
+prefers the company of calm canines: 1
+binded with mishka: 1
+sweet and easygoing: 1
+socializes very nicely with other dogs: 1
+undersocialized: 1
+independently: 1
+needs a lot of patience and space until she adusts: 1
+heartworm negiative: 1
+lab mix: 1
+plyaful: 1
+ patient: 1
+ conversationalist: 1
+sweeet: 1
+nervous at first: 1
+urgent need: 1
+home without other animals: 1
+has potential to live with children: 1
+should not interact with poultry: 1
+box trained: 1
+has potential to live with children over five: 1
+loving active playful fun: 1
+wobbly: 1
+wobbly cat syndrome: 1
+needs to be only dog: 1
+occasionally grumpy: 1
+precious tripod kitten: 1
+kitten with attitude: 1
+cat savvy people please apply: 1
+rico suave: 1
+good w cats: 1
+good w young kids: 1
+loves to be the center of attention: 1
+maremma sheepdog: 1
+no fear: 1
+acyive: 1
+blossoming: 1
+furry: 1
+gets along with cats: 1
+children must be at least ten years old: 1
+mischief maker: 1
+fat but happy: 1
+extremely sweet: 1
+fearless: 1
+strong independent woman: 1
+cuddle bug at heart: 1
+tiny but mighty: 1
+galloping little ball of energy: 1
+full of the best kitten love you could ever have: 1
+schnoodle: 1
+dilute tortie: 1
+cream orange: 1
+orange and white: 1
+courtesy listing: 1
+contact owner in ad: 1
+dislikes kids: 1
+seems good with cats: 1
+elderly: 1
+caucasian sheepdog / caucasian ovtcharka: 1
+needs special person to give her attention: 1
+russian tortoise: 1
+very sweet and loving boy: 1
+playful and smart: 1
+actuve: 1
+bed buddy: 1
+hip hugger: 1
+brushing a fav: 1
+chin scratching a must: 1
+only kitty: 1
+good hiking buddy: 1
+great  hiking buddy: 1
+loves to play ball: 1
+super cuddly: 1
+very chill: 1
+ cute and silly: 1
+well behaved when home alone: 1
+active smart handsome loyal: 1
+playful loving social gentle: 1
+energentic: 1
+cat s cat needs a kitty friend: 1
+will do well with kids: 1
+loves catnip: 1
+obediant: 1
+plqyful: 1
+gebtle: 1
+wallflower: 1
+ dramatic: 1
+ demanding: 1
+south russian ovtcharka: 1
+insecure: 1
+ leukemia and feline aids positive: 1
+not a barker: 1
+menace is a parvo survivor she was surrendered to us after a few of her littermates had already passed away we took her and got her vetted and she is now as healthy as can be: 1
+was mommy to eight pups: 1
+ advanced behavior skills for his age: 1
+nervous shy: 1
+cat free home needed: 1
+calm and affectionate: 1
+friendlly: 1
+happy playful smart: 1
+accrobat: 1
+older kids preferred: 1
+quiet home preferred: 1
+strong active friendly: 1
+healing hearts: 1
+beautiful shiny coat: 1
+heathy: 1
+sharpei: 1
+inappropriate urination: 1
+unimposing: 1
+likes to sit on couch: 1
+likes to go for walks: 1
+likes a good play session: 1
+calm but spunky: 1
+desires to please: 1
+likes to learn: 1
+loves fetch: 1
+active playful loving: 1
+marshmallow: 1
+blue collar cat: 1
+sweet from afar: 1
+sweet loving boy: 1
+amazing : 1
+ best breed in the world: 1
+good with big dogs: 1
+loving lapcat: 1
+loving and mellow: 1
+ likes to walk: 1
+hilarious: 1
+ loves walks: 1
+trained loyal loving: 1
+ridge: 1
+tough: 1
+injured: 1
+sugar pie: 1
+flame point: 1
+entergetic: 1
+shy kitty: 1
+roger: 1
+poppa: 1
+best friends: 1
+house broken: 1
+playful loving spirited self assured endearing: 1
+purrmachine: 1
+  cuddly: 1
+pouncy: 1
+grey tabby: 1
+obeys some commands: 1
+lab shepherd mix: 1
+tabby and white: 1
+escape artist: 1
+hound dog: 1
+pectus excavatum: 1
+thor: 1
+loves other cats: 1
+loves laser pointers: 1
+playful active fun sweet: 1
+hunky: 1
+nice leash manners: 1
+people and dog friendly: 1
+smart loving: 1
+likes to snuggle at bedtime: 1
+loves to climb cat trees: 1
+vocal for attention: 1
+good snuggler: 1
+mississippi map turtle: 1
+playful loving active: 1
+a little bit shy: 1
+loves laps: 1
+draft: 1
+comical: 1
+cgc ready in training: 1
+chi weenie: 1
+loves belly scratches: 1
+overall a sweet cat: 1
+plays fetch: 1
+skiddish shy: 1
+loving happy playful: 1
+a very sweet: 1
+large sweet handsome boy: 1
+knows his leash manners: 1
+huge love bug: 1
+bully: 1
+low rider: 1
+rides good in the vehicle: 1
+i can climb fences: 1
+age of kids fifteen positive: 1
+purr box: 1
+a terrific dog: 1
+meets and walks well with other dogs: 1
+great with other cats: 1
+read my refreshed bio: 1
+delightful and social gal: 1
+comfortable meeting friendly people and dogs: 1
+foster needed for socializing kittens: 1
+loving affectionate: 1
+lovign: 1
+featured pet: 1
+not a fan of other cats: 1
+happpy: 1
+loves cuddles and head rubs: 1
+irish terrier: 1
+this wonderful girl is house trained knows basic commands and is very well behaved: 1
+non aggressive: 1
+ likes other cats and dogs: 1
+beautiful princess: 1
+puppy love: 1
+happy girl: 1
+listens well: 1
+attends gentle and dainty playgroups: 1
+healthy weight: 1
+perfect weight: 1
+little shy: 1
+lived with other cats: 1
+happy loving playful: 1
+barn cat working cat: 1
+loves water: 1
+loves attention and tummy rubs: 1
+shy in a new home but great when acclimates: 1
+affectionate sweet: 1
+older kids only please: 1
+foodies: 1
+wise: 1
+snuggle butt: 1
+harrier: 1
+fence jumper: 1
+high  energy: 1
+playful energetic puppy: 1
+nap taker: 1
+pet me please: 1
+sweet outgoing: 1
+will need time to trust you: 1
+affectionate lap car: 1
+cuddle buddy: 1
+timid and sweet: 1
+matriarch: 1
+boxer mix: 1
+ super sweet: 1
+best with older children: 1
+actie: 1
+very appreciative: 1
+loving loyal: 1
+loving purring sweet friendly: 1
+miss kitty loves attention: 1
+she is shy: 1
+loves other pets: 1
+easygoing personality: 1
+loving dog: 1
+only cat in household: 1
+wellbehaved: 1
+absolute sweetheart: 1
+lovable loves people but notother dogs: 1
+keeper of the pillow: 1
+super  loving: 1
+loving playful healthy affectionate: 1
+dog reactive on leash: 1
+needs plenty of daily exercise: 1
+fearful of certain men: 1
+needs a friend: 1
+self entertainer: 1
+playful energy: 1
+lover playful: 1
+rides well in cars: 1
+shy but warms up quickly: 1
+love other dogs: 1
+shollie: 1
+unique characteristics: 1
+looking for foster: 1
+loving and affectionate: 1
+dumb: 1
+good with female cat: 1
+butterscotch: 1
+underbite for days: 1
+requires daily grooming: 1
+chunky: 1
+tail wag tag a long eligible: 1
+pocketsized: 1
+pottytrained: 1
+good with dogs unknown: 1
+shy nervous: 1
+babyfaced: 1
+loving quiet: 1
+loves hiking: 1
+all black: 1
+moderate activity: 1
+ loves human love: 1
+sweet  loving: 1
+shepherd husky mix: 1
+needs experienced adopter: 1
+purring machine: 1
+giving: 1
+not recommended with children: 1
+apartment appropriate: 1
+needs time to adjust in home: 1
+lower energy: 1
+not recommended for a home with small dogs: 1
+rough and rowdy play style: 1
+laperm: 1
+a treasure: 1
+loving senior: 1
+loves the sun: 1
+loves the yard: 1
+overcomer: 1
+adventurer: 1
+gentle funny: 1
+doesn t like being picked up: 1
+loves to give hugs: 1
+muscular: 1
+loving gentle mellow: 1
+loving gentle affectionate: 1
+sweet nature: 1
+semi tame: 1
+japanese chin: 1
+loving friendly playful: 1
+playful outside: 1
+ball chaser: 1
+good house manners: 1
+training scholarship provided: 1
+single cat household: 1
+left to freeze in abandoned building: 1
+loves to be brushed: 1
+good one cat home: 1
+shots and spayed: 1
+loner: 1
+likes to be rubbed and scratched: 1
+large breed: 1
+likes to hide: 1
+loving cat: 1
+prefers to be a one cat home: 1
+prefers a quiet corner or window: 1
+good companion cat: 1
+can be sassy: 1
+pest control: 1
+full of fun: 1
+loves water and baby pools: 1
+walking buddy: 1
+ laidback: 1
+herding: 1
+senior dog in need of a retirement home: 1
+loveswalks: 1
+stoic: 1
+likes to be rubbed and petted: 1
+a little lazy: 1
+loves adult humans: 1
+prefers a stroll: 1
+ahletic: 1
+well trained: 1
+intriguing: 1
+hands off: 1
+loves to sleep: 1
+collective: 1
+nokids: 1
+dogselective: 1
+nosework: 1
+dynamic: 1
+older: 1
+comfy: 1
+kennel aggressive: 1
+long term shelter dog: 1
+neighborhood environment with minimal dog traffic: 1
+free roam: 1
+trio: 1
+freerange: 1
+three cute pets: 1
+ wary: 1
+loving and somewhat playful: 1
+a work in progress: 1
+peaceful heart: 1
+hopeful eyes: 1
+loves to play with cat teasers: 1
+diva at times: 1
+ spirited: 1
+playful and eager to please: 1
+gorgeous brindle: 1
+frightened fear aggressive: 1
+ smiley: 1
+very personable: 1
+likes to petted: 1
+wants someone to love and trust: 1
+dog free home: 1
+super snuggly: 1
+on medication: 1
+playful with other dogs and easygoing with cats: 1
+lapcats: 1
+sulcata: 1
+walks well on leash and listens well: 1
+a sensitive girl: 1
+nursing mama: 1
+medication: 1
+loves cuddles: 1
+loyal companion: 1
+ladies man: 1
+high energy good boy: 1
+needs introduction to possible fur siblings or needs to be an only dog: 1
+learning basic obedience: 1
+senior sweetheart: 1
+swee: 1
+great w kids: 1
+easy going and loving: 1
+calme: 1
+affectueuse: 1
+sweet adult tortoiseshell: 1
+unique look: 1
+from walton county: 1
+loves the couch and  being outside: 1
+cuddler sweet loving: 1
+loving cuddlers: 1
+bonded sisters: 1
+bonded sister: 1
+fawn: 1
+graybie: 1
+ loves toys: 1
+ ball crazy: 1
+long naps: 1
+loving and affectionate with other male cats: 1
+shy with humans: 1
+very playful and can be quite chatty on occasion: 1
+excellent mate for another male or two: 1
+loving playful full affections and sweet: 1
+a bit timid at first: 1
+learning to like petting: 1
+scared but sweet: 1
+singer: 1
+outdoor: 1
+goose: 1
+needs exercise: 1
+better together: 1
+two is better than one: 1
+mother of litter: 1
+dog meet required: 1
+loves snuggles: 1
+wheelchair: 1
+ a little shy: 1
+ likes cats: 1
+ good first time dog: 1
+good on a leash: 1
+norwegian buhund: 1
+caique: 1
+needs a house with a privacy fence: 1
+chicken nugget: 1
+minpin: 1
+low key sweety: 1
+probably under a blanket: 1
+lovinng: 1
+flaxen: 1
+trail: 1
+needs heavy duty kennel: 1
+axtive: 1
+ food addict: 1
+pal to other cats and humans alike: 1
+personable and friendly: 1
+desperately needs a foster family: 1
+champagne d'argent: 1
+a year old: 1
+bratty: 1
+get to know me: 1
+likes to please: 1
+needs experienced owner: 1
+smart and responsive: 1
+sweet and loving with his people: 1
+knows his basic commands: 1
+full of life: 1
+leash reactivity: 1
+professional training recommended: 1
+loves to have his head petted: 1
+loves canned food: 1
+owner needs to have patience to work with him: 1
+affectinate: 1
+super intelligent: 1
+timid initially: 1
+lover not a fighter: 1
+cuddlers: 1
+active upon meeting but calms and likes to be with people: 1
+loving and active: 1
+special diet required: 1
+playful loyal: 1
+good cuddler: 1
+congenial: 1
+loyal sweet loving: 1
+has head tilt with balance and coordination issues: 1
+exploratory: 1
+cute af: 1
+no tail: 1
+playful adverturous: 1
+loves nipsy the cat: 1
+gentle heart: 1
+toy lover: 1
+  curious: 1
+adoption fee two hundred: 1
+brave and bold: 1
+ champion napper: 1
+welsh terrier: 1
+boykin spaniel: 1
+love adventures: 1
+nice energy: 1
+sheepadoodle: 1
+likes kids and women: 1
+loves to talk: 1
+handicap: 1
+  lazy: 1
+  vocal: 1
+overweight obese: 1
+loves to run: 1
+best in a home with no young children: 1
+cat friendly is unknown: 1
+flight risk needs a fully fenced yard: 1
+good with all people: 1
+local adoptions only: 1
+potty trained in foster home: 1
+walks great on a leash: 1
+weirdo: 1
+toggenburg: 1
+myotonic / fainting: 1
+moderate activity level: 1
+loves bones: 1
+loves belly rubs and watching movies: 1
+not a real bear: 1
+gentle and loving: 1
+teddy: 1
+no small animals: 1
+megaesophagus: 1
+worth it: 1
+shy calm: 1
+suggler: 1
+a puppy: 1
+tabby twins: 1
+outgoing but chill: 1
+approx nine months old: 1
+hugs: 1
+little voice: 1
+odd: 1
+one of a kind: 1
+super playful: 1
+outspoken: 1
+bonded with millie: 1
+dog loving: 1
+talk talk talker: 1
+black and white: 1
+cutie: 1
+mini lion: 1
+can be rude: 1
+chunk of love: 1
+dapper  blue tuxedo handsomeness: 1
+must have cheek kisses and hugs: 1
+perfect purr: 1
+athletic build: 1
+milkshake lover: 1
+slim: 1
+couchpotato: 1
+uses hand signials: 1
+lovey pie: 1
+apprehensive: 1
+thai ridgeback: 1
+athlete: 1
+likes other cats: 1
+loves outdoors: 1
+running buddy: 1
+bonds with people: 1
+care: 1
+enthuastic: 1
+skeptical: 1
+runner: 1
+spooky: 1
+escapist: 1
+special needs does not require medical treatment: 1
+nice looking boy: 1
+typically calm: 1
+outside: 1
+mousers: 1
+porch cats: 1
+strong willed: 1
+low allergen: 1
+adorabull: 1
+silly rabbit: 1
+strong on a leash: 1
+has interacted well with other dogs: 1
+perfect solo cat: 1
+fenced yard preferred: 1
+i d like to be an only cat please: 1
+sweetnatured: 1
+bonded brothers: 1
+beautiful and shy: 1
+seatbelt: 1
+friend: 1
+walk: 1
+run: 1
+lounge: 1
+math: 1
+good with older children: 1
+mild: 1
+cooperative: 1
+hungry: 1
+appreciative: 1
+slow to warm up: 1
+secluded: 1
+self sufficient: 1
+wiley: 1
+squirrely: 1
+jumpy: 1
+different: 1
+working cats: 1
+handsome playful: 1
+building confidence: 1
+velcro dog: 1
+sweet calm quiet: 1
+foster: 1
+cats: 1
+fosters: 1
+dlh: 1
+muffins: 1
+belly rub: 1
+abandoned: 1
+prefers being only pet: 1
+playful cute sweet: 1
+ragdoll like: 1
+likes other dogs: 1
+york chocolate: 1
+headstrong: 1
+box: 1
+chewer: 1
+want to be your valentine: 1
+playul: 1
+adroable: 1
+from wcas: 1
+snuggle monster: 1
+see my new photos: 1
+big loving boy: 1
+ muscular: 1
+foody: 1
+ loves kids: 1
+ loves all cats: 1
+ very clean: 1
+begs: 1
+carefree: 1
+exceptionally smart: 1
+good with strangers: 1
+good with small children: 1
+ pretty markings: 1
+ loves petting: 1
+ sunbather: 1
+ initiates play with toys: 1
+ needs a buddy: 1
+alpha male: 1
+playful young boy: 1
+does tricks: 1
+extra toes: 1
+loving friendly snuggler: 1
+coming along nicely: 1
+needs calm home: 1
+sweet couple: 1
+sleep together: 1
+chirps: 1
+fun and active: 1
+but not too shy: 1
+eats out of your hand: 1
+cavapoo: 1
+overweight: 1
+needs activity: 1
+selective: 1
+coy: 1
+dog meet and greet required: 1
+likes to be near person: 1
+friendly with children: 1
+fine with calm dogs: 1
+shy and submissive at first: 1
+flight risk  secure fenced yard is an adoption requirement: 1
+jumper needs tall fencing: 1
+high energy but settles: 1
+pasture sound: 1
+perfect for groundwork: 1
+warmblood: 1
+in training: 1
+very willing: 1
+good mover: 1
+previously feral: 1
+needs experienced trainer: 1
+easy to handle: 1
+playful energetic: 1
+enjoys head rubs: 1
+fun personality: 1
+bonded with june: 1
+ graceful: 1
+bonded with patsy: 1
+wonderful tempermant: 1
+initiates play with toys: 1
+needs a buddy: 1
+pretty markings: 1
+sunbather: 1
+unique color morph: 1
+interesting background: 1
+some anxiety: 1
+treat driven: 1
+playful loves to learn: 1
+enegetic: 1
+kuvasz: 1
+testy: 1
+chocolate lab: 1
+adult lab: 1
+jappy: 1
+enjoys long walks: 1
+likes cats: 1
+friendly outgoing  fun: 1
+sweet playful curious: 1
+active smart: 1
+american water spaniel: 1
+family dog: 1
+high activity: 1
+derpy: 1
+goodest boy ever: 1
+sensitive boy on the shy side: 1
+ooking for an experienced adult home: 1
+amazing job on leash: 1
+social and always exhibiting his manners in playgroup: 1
+big and handsome: 1
+morkie: 1
+loving playful very sweet: 1
+silver tabby: 1
+boy: 1
+has successfully lived with cats: 1
+no small dogs please: 1
+wants to work: 1
+loving and snuggly: 1
+prettt: 1
+low keyed: 1
+super special: 1
+new girl: 1
+loves basketball: 1
+nibbler: 1
+ bossy: 1
+ daring: 1
+ dominate: 1
+ fast: 1
+ frisky: 1
+ queenly: 1
+sometime shy: 1
+sometimes vocal: 1
+enjoys chilling by your side: 1
+meets other dogs politely: 1
+walks and mingles well in her playgroups: 1
+tibetan mastiff: 1
+ grateful: 1
+perceptive: 1
+ball of love: 1
+goats: 1
+jumping: 1
+foster candidate: 1
+timid with other animals: 1
+sneeze: 1
+nervous at times: 1
+needs another dog: 1
+relaxed calm attentive: 1
+sweet and playful once he get used to new place and people: 1
+eneretic: 1
+door darter: 1
+unpredictable with dogs: 1
+gentle demeaner: 1
+looving: 1
+connecting: 1
+up to date on vaccinations: 1
+great with everyone: 1
+fetch champion: 1
+selective with canine companions: 1
+other cats nope: 1
+other cats selective: 1
+likes head scratches: 1
+likes chin scratches: 1
+battle scars: 1
+foster needed: 1
+shy with people at first: 1
+playful with other dogs: 1
+couch potatoe: 1
+dilute: 1
+mama: 1
+mom of seven puppies: 1
+jovial: 1
+affectionate  calm: 1
+quixotic: 1
+playful sweet: 1
+awesome: 1
+flashy: 1
+best with no dogs: 1
+good with submissive dogs: 1
+good running buddy: 1
+no dominant dogs: 1
+no apartments: 1
+entergenic: 1
+energenic: 1
+cute face: 1
+settled: 1
+recommended for flat or slow arena work: 1
+rocky mountain horse: 1
+likes attention: 1
+interested in visitors: 1
+likes walks: 1
+learning to walk on leash: 1
+home with other dog s preferred: 1
+adorbale: 1
+wiggle butt: 1
+pup extraordinaire: 1
+emotional support: 1
+calm and quiet: 1
+loyal loving sweet: 1
+ultrasweet: 1
+blind vision impaired: 1
+medicat: 1
+high engery: 1
+tennessee treeing brindle: 1
+needs companion: 1
+loving loyal sweet: 1
+loving life: 1
+big grins: 1
+cats yes: 1
+dog friendly small: 1
+read bio for details: 1
+lovespeople: 1
+good with kids no: 1
+special needs behavioral: 1
+allergies: 1
+hearing impaired: 1
+special needs medical: 1
+gets along well with cats: 1
+pet: 1
+this beautiful girl is very well mannered and loves to run so a fence would be good she is also very loveable and gets along with everyone: 1
+colorful: 1
+good with all: 1
+loves to travel: 1
+calm and shy: 1
+enjoys meeting other pups: 1
+a little shy at the moment: 1
+long haired cat: 1
+gordon setter: 1
+prefers calm dogs: 1
+applehead siamese: 1
+inside dog: 1
+young whippersnapper: 1
+aching for someone to love her: 1
+tenderhearted: 1
+ambitious: 1
+knockout in looks: 1
+whirlwind of play: 1
+cuddly when finally worn out: 1
+gets bored easily needs lots of enrichment: 1
+good family companions: 1
+playful protective: 1
+asthmatic: 1
+confident kitty: 1
+running: 1
+hiking: 1
+nutty: 1
+affewctionate: 1
+enjoys being petted: 1
+housebroke: 1
+obedience trained: 1
+still learning: 1
+scared and shy: 1
+good on walks: 1
+likes tennis balls: 1
+andventuresome: 1
+craves affection: 1
+sphynx / hairless cat: 1
+shy at first but then likes to cuddle: 1
+musk: 1
+honey: 1
+bee: 1
+babies: 1
+permanent disfigurement: 1
+good in the car: 1
+likes hiking: 1
+no aggression whatsoever: 1
+best pitty smile award winner: 1
+cat interested: 1
+loves soft beds: 1
+learning: 1
+velcrodog: 1
+lonely: 1
+working breed: 1
+alert  athletic: 1
+pit mix: 1
+toy maniac: 1
+huggable: 1
+big teddy bear: 1
+ great markings: 1
+ king of the castle: 1
+slow moving: 1
+ laser pointer chaser: 1
+ sweet little calico: 1
+ petite: 1
+mans cat: 1
+grumpy cat look: 1
+prefers to be the only cat: 1
+may be good with male dogs: 1
+no experience with children: 1
+quiet low traffic home: 1
+bonded to sophia: 1
+great markings: 1
+king of the castle: 1
+intellegant: 1
+laser pointer chaser: 1
+sweet little calico: 1
+energy level recreational athlete: 1
+sweet chunky mama: 1
+big love: 1
+mama cat: 1
+ agile: 1
+snoozer: 1
+loving and happily active: 1
+sweet cats: 1
+bonded pair adopted together: 1
+potato: 1
+people pleaser: 1
+engergtic: 1
+ok with calm dogs and other cats: 1
+attached: 1
+no stairs: 1
+shetland pony: 1
+plalyful: 1
+one of our special souls to save: 1
+nipper: 1
+catnip lover: 1
+purrrr: 1
+loves kittens: 1
+grampa: 1
+affection: 1
+neat: 1
+unique appearance: 1
+faerie ears: 1
+sable coat: 1
+kind hearted: 1
+good guard dog: 1
+demonstrative: 1
+ companionable: 1
+sweet hearten: 1
+cautions: 1
+unique markings: 1
+gentle spirit: 1
+ exceptionally smart: 1
+ good with kids: 1
+ good with strangers: 1
+experienced household: 1
+food aggression: 1
+prefers to be only dog: 1
+quiet home: 1
+middle aged: 1
+forgiving: 1
+fetch lover: 1
+motivated: 1
+cats yes please: 1
+feline ality category private investigator: 1
+feline ality category secret admirer: 1
+kids no thank you: 1
+labrador: 1
+pit: 1
+does not like dogs: 1
+feral to semi feral: 1
+young adult: 1
+is housebroken: 1
+pg thirteen: 1
+sweet natured and affectionate: 1
+curious and active: 1
+beautiful mackerel tabby coat and golden eyes: 1
+good in a crate: 1
+great energy: 1
+adventure: 1
+currently in foster: 1
+barn cats: 1
+diva: 1
+needs a fenced yard: 1
+food lover: 1
+seems to like to play with a feather wand: 1
+active playful shy: 1
+very energetic: 1
+can get overstimulated: 1
+very gentle accepting treats: 1
+on the calm side: 1
+basketball player in training: 1
+tense with new people: 1
+loving calm dog in the home: 1
+will play but a lazy cuddly boy: 1
+loving purrs alot: 1
