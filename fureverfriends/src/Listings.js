@@ -188,13 +188,6 @@ export default function Listings(){
         breed: []
     });
     useEffect( () => {
-        console.log("type has changed to " + userSelections.type);
-        generateFilters("filter-age");
-        generateFilters("filter-gender");
-        generateFilters("filter-size");
-        generateFilters("filter-furlen");
-        generateFilters("filter-color");
-        generateFilters("filter-breed");
     }, [userSelections.type]);
     useEffect(() =>{
         console.log(userSelections);
@@ -462,51 +455,6 @@ export default function Listings(){
                         filterUL.appendChild(li);
                     });
                     break;
-                case "filter-age":
-                    while (filterUL.firstChild) {
-                        filterUL.removeChild(filterUL.firstChild);
-                    }
-                    PFdata.AGE.map(ptype => {
-                        let li = document.createElement("li");
-                        let label = document.createElement("label");
-                        let input = document.createElement("input");
-                        input.classList.add("filled-in");
-                        input.setAttribute("type", "checkbox");
-                        input.setAttribute("value", ptype)
-                        input.setAttribute("name", "age");
-                        input.setAttribute("id", "age-" + ptype);
-                        input.addEventListener("change", updateFilters, false);
-                        let span = document.createElement("span");
-                        span.innerText = ptype;
-                        label.appendChild(input);
-                        label.appendChild(span);
-                        li.appendChild(label);
-                        filterUL.appendChild(li);
-                    });
-                    break;
-                case "filter-gender":
-                    while (filterUL.firstChild) {
-                        filterUL.removeChild(filterUL.firstChild);
-                    }
-                    typeVar = userSelections.type.toUpperCase();
-                    PFdata[typeVar].genders.map(ptype => {
-                        let li = document.createElement("li");
-                        let label = document.createElement("label");
-                        let input = document.createElement("input");
-                        input.classList.add("filled-in");
-                        input.setAttribute("type", "checkbox");
-                        input.setAttribute("value", ptype)
-                        input.setAttribute("name", "gender");
-                        input.setAttribute("id", "gender-" + ptype);
-                        input.addEventListener("change", updateFilters, false);
-                        let span = document.createElement("span");
-                        span.innerText = ptype;
-                        label.appendChild(input);
-                        label.appendChild(span);
-                        li.appendChild(label);
-                        filterUL.appendChild(li);
-                    });
-                    break;
                 case "filter-color":
                     while (filterUL.firstChild) {
                         filterUL.removeChild(filterUL.firstChild);
@@ -597,7 +545,7 @@ export default function Listings(){
             <div className="row">
                 <div className="input-field col s3 right">
                     <select>
-                        <option value="" disabled selected>Sort By</option>
+                        <option defaultValue="">Sort By</option>
                         <option value="1">Newest</option>
                         <option value="2">Most Viewed</option>
                         <option value="3">Least Viewed</option>
@@ -619,10 +567,9 @@ export default function Listings(){
                             <ul id="filter-type">
                                 <div className="input-field">
                                     <select id="pet-type" name="type" onChange={updateFilters}>
-                                        <label htmlFor="pet-type">Distance</label>
                                         <option name="type" value="all">All</option>
                                         {PFdata.TYPES.map(item =>
-                                            <option name="type" value={item}>
+                                            <option key={item} name="type" value={item}>
                                                 {(item === "small_furry") && "Small and Furry"}
                                                 {(item === "scales_fins_other") && "Scales, Fins, and Other"}
                                                 {(!(item === "small_furry") && !(item === "scales_fins_other")) && item}
@@ -644,11 +591,11 @@ export default function Listings(){
                                 <li>
                                     <div className="input-field">
                                         <select id="filter-distance" name="distance" onChange={updateFilters}>
-                                        <label htmlFor="filter-distance">Distance</label>
                                         {PFdata.DISTANCE.map(item =>
                                             <option name="distance" value={item}>{item} miles</option>
                                         )}
                                         </select>
+                                        <label htmlFor="filter-distance">Distance</label>
                                     </div>
                                 </li>
                             </ul>
@@ -661,21 +608,89 @@ export default function Listings(){
                                 <div>
                                     <span className="title">Age</span>
                                     <ul id="filter-age">
+                                        {PFdata.AGE.map(item =>
+                                                <li key={item}>
+                                                    <label>
+                                                    <input className="filled-in" type="checkbox"
+                                                           value="item" name="age" id={'age-' + item}
+                                                           onChange={updateFilters} />
+                                                    <span>{item.toString()}</span>
+                                                    </label>
+                                                </li>
+                                            )
+                                        }
                                     </ul>
                                     <span className="title">Gender</span>
                                     <ul id="filter-gender">
+                                        {PFdata.GENDERS.map(item =>
+                                            <li key={item}>
+                                                <label>
+                                                    <input className="filled-in" type="checkbox"
+                                                           value="item" name="gender" id={'gender-' + item}
+                                                           onChange={updateFilters} />
+                                                    <span>{item.toString()}</span>
+                                                </label>
+                                            </li>
+                                        )}
                                     </ul>
                                     <span className="title">Size</span>
                                     <ul id="filter-size">
+                                        {PFdata.SIZE.map(item =>
+                                            <li key={item}>
+                                                <label>
+                                                    <input className="filled-in" type="checkbox"
+                                                           value="item" name="size" id={'size-' + item}
+                                                           onChange={updateFilters} />
+                                                    <span>{item.toString()}</span>
+                                                </label>
+                                            </li>
+                                        )}
                                     </ul>
-                                    <span className="title">Fur Length</span>
+                                    {PFdata[userSelections.type.toUpperCase()].coats.length > 0
+                                    && <span className="title">Fur Length</span>
+                                    }
                                     <ul id="filter-furlen">
+                                        {PFdata[userSelections.type.toUpperCase()].coats.map(item =>
+                                            <li key={item}>
+                                                <label>
+                                                    <input className="filled-in" type="checkbox"
+                                                           value="item" name="coat" id={'coat-' + item}
+                                                           onChange={updateFilters} />
+                                                    <span>{item.toString()}</span>
+                                                </label>
+                                            </li>
+                                        )}
                                     </ul>
-                                    <span className="title">Colors</span>
+                                    {PFdata[userSelections.type.toUpperCase()].colors.length > 0
+                                    && <span className="title">Colors</span>
+                                    }
                                     <ul id="filter-color">
+                                        {PFdata[userSelections.type.toUpperCase()].colors.map(item =>
+                                            <li key={item}>
+                                                <label>
+                                                    <input className="filled-in" type="checkbox"
+                                                           value="item" name="color" id={'color-' + item}
+                                                           onChange={updateFilters} />
+                                                    <span>{item.toString()}</span>
+                                                </label>
+                                            </li>
+                                        )}
                                     </ul>
-                                    <span className="title">Breeds</span>
+                                    {PFdata[userSelections.type.toUpperCase()].breeds.length > 0
+                                    && <span className="title">Breeds</span>
+                                    }
                                     <ul id="filter-breed">
+                                        {PFdata[userSelections.type.toUpperCase()].breeds.map(item =>
+                                            <li key={item.name}>
+                                                <label>
+                                                    <input className="filled-in" type="checkbox"
+                                                           value="item" name="breed" id={'breed-' + item.name}
+                                                           onChange={updateFilters}
+                                                    />
+                                                    <span>{item.name.toString()}</span>
+                                                </label>
+                                            </li>
+                                        )}
                                     </ul>
                                 </div>
                             }
