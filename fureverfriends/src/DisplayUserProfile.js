@@ -55,14 +55,14 @@ export default function DisplayUserProfile() {
 
             <div className = "container">
                 <div className="row">
-                    <div className="col s12 m3" id = "sidenav">
-                        <div className = "collection">
-                            <a href="msg" className = "collection-item" >Messages</a>
-                            <a href="ntf" className ="collection-item"  >Notifications</a>
-                            <a href="yl" className = "collection-item"  >Your Listings</a>
-                            <a href="information" className = "collection-item"  >Account Info</a>
-                            <a href="ss" className = "collection-item" >Safe Spawts</a>
-                            <a href="favs" className = "collection-item" >Favorites</a>
+                    <div className="col s12 m3" id="sidenav">
+                        <div className="collection">
+                            {/*<Link to="/" class = "collection-item">Messages</Link>*/}
+                            <Link to="/" class="collection-item">Notifications</Link>
+                            <Link to="/Displaylisting" class="collection-item">Your Listings</Link>
+                            <Link to="/DisplayUserProfile" class="collection-item">Account Info</Link>
+                            {/*Link <Link to="/" class= "collection-item">Safe Spawts</Link>*/}
+                            <Link to="/DisplayFavorites" class="collection-item">Favorites</Link>
                         </div>
                     </div>
 

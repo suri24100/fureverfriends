@@ -92,17 +92,17 @@ export default function UserProfile() {
 
             </div>
             {/*in order for this to work, would need to remove <Header/> in app.js*/}
-
+            <li><Link to="/"><span>Home</span></Link></li>
             <div className = "container">
                 <div className="row">
                     <div className="col s12 m3" id = "sidenav">
                         <div class = "collection">
-                            <a href="msg" class = "collection-item">Messages</a>
-                            <a href="ntf" class ="collection-item">Notifications</a>
-                            <a href="yl" class = "collection-item">Your Listings</a>
-                            <a href="information" class = "collection-item">Account Info</a>
-                            <a href="ss" class= "collection-item">Safe Spawts</a>
-                            <a href="favs" class = "collection-item">Favorites</a>
+                            {/*<Link to="/" class = "collection-item">Messages</Link>*/}
+                            <Link to="/" class ="collection-item">Notifications</Link>
+                            <Link to="/Displaylisting" class = "collection-item">Your Listings</Link>
+                            <Link to="/DisplayUserProfile" class = "collection-item">Account Info</Link>
+                           {/*Link <Link to="/" class= "collection-item">Safe Spawts</Link>*/}
+                            <Link to="/DisplayFavorites" class = "collection-item">Favorites</Link>
                         </div>
                     </div>
 

@@ -9,10 +9,19 @@ import M from "materialize-css";
 // test code for creating a listing
 import db, {firestore, storage} from "./ffdb";
 import 'firebase/storage';
-import {useAuth} from "./AuthContext";
-import {Link} from "react-router-dom";
+
 import Header from "./Header";
 import Listings from "./Listings";
+
+
+import './css/home.css';
+import './css/style.css'
+
+import Footer from "./Footer";
+import {Link} from "react-router-dom";
+import {useAuth} from "./AuthContext";
+
+
 
 
 export default function Displaylisting() {
@@ -28,47 +37,70 @@ export default function Displaylisting() {
         console.log("Reloaded");
     })
 
+    async function DisplayProfile (e){
+        e.preventDefault();
+
+        const snapshot = await firestore.collection("UserInfo").where("username", "==", USER.username).get();
+        if(!snapshot.empty && USER.username !== username)
+        {
+            setLoading(false);
+        }
+
+        try {
+            setLoading(true);
+        }catch(err) {
+            setLoading(true);
+        }
+
+        setLoading(false);
+    }
 
 
     return (
-        <div className="actionsnav">
-            {/*in order for this to work, would need to remove <Header/> in app.js, need to fix the camel cases when user info is displayed*/}
 
-            <div className="listings-banner-wrap">
-                <Header/>
-            </div>
-            <div className = "container">
-                <div className="row">
-                    <div className="col s12 m3" id = "sidenav">
-                        <div className = "collection">
-                            <a href="msg" className = "collection-item" >Messages</a>
-                            <a href="ntf" className ="collection-item"  >Notifications</a>
-                            <a href="yl" className = "collection-item"  >Your Listings</a>
-                            <a href="information" className = "collection-item"  >Account Info</a>
-                            <a href="ss" className = "collection-item" >Safe Spawts</a>
-                            <a href="favs" className = "collection-item" >Favorites</a>
-                        </div>
+
+    <div className="actionsnav">
+        {/*in order for this to work, would need to remove <Header/> in app.js, need to fix the camel cases when user info is displayed*/}
+
+        <div className="listings-banner-wrap">
+
+        </div>
+
+
+
+        <div className = "container">
+            <div className="row">
+                <div className="col s12 m3" id="sidenav">
+                    <div className="collection">
+                        {/*<Link to="/" class = "collection-item">Messages</Link>*/}
+                        <Link to="/" class="collection-item">Notifications</Link>
+                        <Link to="/Displaylisting" class="collection-item">Your Listings</Link>
+                        <Link to="/DisplayUserProfile" class="collection-item">Account Info</Link>
+                        {/*Link <Link to="/" class= "collection-item">Safe Spawts</Link>*/}
+                        <Link to="/DisplayFavorites" class="collection-item">Favorites</Link>
                     </div>
-                    <br/>
-                    <Link to ="/listings"  style={{marginLeft: 750}} className="waves-effect btn material-icons prefix" > Add New Listing</Link>
-                    <br/>
-                    <div className="col s12 m9" href="information">
-                        <div className="collection">
-                            <br/>
-                            <div className="listing-card col s12 m6 l4">
-                                <div className="card">
-                                    <div className="card-content">
-                                        <span className="name">{USER.pet_listings}</span>
-                                        <span className="location">{USER.location}</span>
-                                    </div>
+                </div>
+
+                <div className="field col s12 m9" href="information">
+                    <div className="collection">
+                        <br/>
+                        <div className="listing-card col s12 m6 l4">
+                            <div className="card">
+                                <div className="card-image">
+                                    <a className="btn-floating halfway-fab">
+                                        <i className="material-icons">favorite_border</i>
+                                    </a>
+                                </div>
+                                <div className="card-content">
+                                    <span className="name">{USER.pet_listings}</span>
                                 </div>
                             </div>
-
                         </div>
-
                     </div>
+                    <Link to ="/userprofile"  className="waves-effect btn"> Add New Listing </Link>
                 </div>
             </div>
         </div>
+    </div>
     )
 }

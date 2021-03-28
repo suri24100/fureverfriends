@@ -26,6 +26,7 @@ import PurrsonalityQuiz from "./PurrsonalityQuiz";
 import AIDataButton from "./AIDataButton";
 import Displaylisting from "./Displaylisting";
 import DisplayUserProfile from "./DisplayUserProfile";
+import DisplayFavorites from "./DisplayFavorites";
 
 
 /* This should load the header and footer on each page
@@ -79,11 +80,10 @@ export default function App() {
                 </Route>
                 <PrivateRoute path="/userprofile" component={UserProfile} />
                 <PrivateRoute path="/Displaylisting" component={Displaylisting} />
+                <PrivateRoute path="/DisplayUserProfile" component={DisplayUserProfile} />
+                <PrivateRoute path="/DisplayFavorites" component={DisplayFavorites} />
                 <Route path="/download-data-private-for-sarah">
                     <AIDataButton />
-                </Route>
-                <Route path="/DisplayUserProfile">
-                    <DisplayUserProfile/>
                 </Route>
                 <Route path="/">
                     <Home />

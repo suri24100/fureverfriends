@@ -59,7 +59,7 @@ export default function Header() {
                     {currentUser ? <Link to="/Home" onClick={handleLogOut}>Log Out</Link> : <Link to="/login">Log In</Link> }
                     <img src={notification_icon} alt="Notifications"/>
                     <img src={messages_icon} alt="Messages"/>
-                    {currentUser ? <Link disable = {loading} to="/UserProfile">{USER.username}</Link> : <></>}
+                    {currentUser ? <Link disable = {loading} to="/DisplayUserProfile">{USER.username}</Link> : <></>}
                 </div>
             </div>
             <div className="navbar hide-on-large-only">
@@ -87,7 +87,7 @@ export default function Header() {
                 <li><Link to="/findahome"><span>Rehome</span></Link></li>
                 <li><Link to="/petcare"><span>Pet Care</span></Link></li>
                 <li>{currentUser ? <Link to="/Home" onClick={handleLogOut}><span>Log Out</span></Link> : <Link to="/login"><span>Log In</span></Link> }</li>
-                <li><Link to="/UserProfile"><span>My Account</span></Link></li>
+                <li><Link to="/DisplayUserProfile"><span>My Account</span></Link></li>
                 </div>
             </ul>
         </div>
