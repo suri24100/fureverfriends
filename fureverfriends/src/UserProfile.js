@@ -89,7 +89,7 @@ export default function UserProfile() {
         <div className="actionsnav">
 
             <div className="listings-banner-wrap">
-                <Header/>
+
             </div>
             {/*in order for this to work, would need to remove <Header/> in app.js*/}
 
@@ -213,7 +213,7 @@ export default function UserProfile() {
                                 {/*<button disabled={loading}  onClick={saveUserProfile}> Save Changes</button>*/}
                                 <a disabled={loading}  onClick={saveUserProfile} className="waves-effect btn">Save Chances</a>
                                 <p> </p>
-                                <a disabled={loading}  onClick={cancelchanges}  className="waves-effect btn"> Cancel</a>
+                                <Link to ="/DisplayUserProfile" className="waves-effect btn" > Cancel </Link>
                             </div>
                 </div>
                 </div>
