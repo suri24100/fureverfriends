@@ -259,3 +259,6 @@
 .listings-page .results-wrap .pet-container .info-wrap .name:hover {
   cursor: pointer;
 }
+
+.listings-page ul#filter-breed{
+}
