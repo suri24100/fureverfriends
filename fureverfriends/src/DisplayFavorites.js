@@ -52,7 +52,7 @@ export default function DisplayFavorites() {
             {/*in order for this to work, would need to remove <Header/> in app.js, need to fix the camel cases when user info is displayed*/}
 
             <div className="listings-banner-wrap">
-                <Header/>
+
             </div>
             <div className = "container">
                 <div className="row">
