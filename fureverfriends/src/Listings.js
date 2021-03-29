@@ -115,26 +115,6 @@ function PetCard(props){
     }
     const [petDetails, setPetDetails] = useState(formattedPetInfo);
 
-    function toRad(deg) {
-        return deg * (Math.PI/180);
-    }
-
-    function calculateDistance(x1, y1, x2, y2) {
-        var R = 3956; // mi
-        var dLat = toRad(x2-x1);
-        var dLon = toRad(y2-y1);
-        var xr1 = toRad(x1);
-        var xr2 = toRad(x2);
-        console.log("latitude2 in radians: " + xr2);
-
-        var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-          Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(xr1) * Math.cos(xr2);
-
-        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-        var d = R * c;
-        return d;
-    }
-
     let match = useRouteMatch();
     let prefix = petDetails.petfinder_listing ? "PF-" : "FF-";
     let newURL = `${match.url}/` + petDetails.type + "/profile/" + prefix + petDetails.pet_id;
@@ -176,6 +156,14 @@ export default function Listings(){
     const [petListings, setPetListings] = useState( null);
 
     const [geoData, setGeoData] = useState({});
+
+    const prevGeoData = usePrevious(geoData);
+
+      useEffect(() => {
+        if(prevGeoData !== geoData){
+            processLocation();
+        }
+      })
 
     const [userSelections, setFilters] = useState({
         type: "all",
@@ -239,6 +227,59 @@ export default function Listings(){
         let newFFListings = await getFFListings(userSelections, pageNum);
         setPFListings(newPFListings);
     }
+
+    //FINDING LONG AND LAT FOR ZIP CODE (API STUFF)
+    function getLocationAsync(zip) {
+        const apikey = '317f5c81a3241fbb45bbf57e335d466d';
+        const path = `http://api.openweathermap.org/data/2.5/forecast?zip=${zip}&units=imperial&appid=${apikey}`;
+    
+        return fetch(path)
+        .then((res) => {
+            return res.json()
+        }).then((json) => {
+            //console.log(JSON.stringify(json,null,2))
+            //console.log(json)
+            //console.log(json.city.coord);
+            //getLocation(json.city.coord)
+            setGeoData(json.city.coord);
+            
+        }).catch((err) => {
+            console.log(err.message)
+        })
+    }
+
+    function getLocation() {
+        let location = document.getElementById("filter-zipcode").value;
+        getLocationAsync(location);
+    }
+
+    function processLocation() {
+        console.log("got here yay");
+        console.log(geoData);
+    }
+
+    //function to change deg to radians (used for calculating distance)
+    function toRad(deg) {
+        return deg * (Math.PI/180);
+    }
+
+    //calculating distance between two pairs of longitude and latitude
+    function calculateDistance(x1, y1, x2, y2) {
+        var R = 3956; // mi
+        var dLat = toRad(x2-x1);
+        var dLon = toRad(y2-y1);
+        var xr1 = toRad(x1);
+        var xr2 = toRad(x2);
+        console.log("latitude2 in radians: " + xr2);
+
+        var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+          Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(xr1) * Math.cos(xr2);
+
+        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        var d = R * c;
+        return d;
+    }
+
 
     //script to add longitude, latitude and distance to pets in firestore
     function modifyFFListings() {
@@ -348,6 +389,7 @@ export default function Listings(){
     // at useEffect above (see comment)
     function applyFilters(){
         setApplyFilter(true);
+        getLocation();
         let prom = getListingData(pageNumber);
     }
 
