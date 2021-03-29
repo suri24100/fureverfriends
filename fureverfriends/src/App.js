@@ -23,7 +23,7 @@ import { AuthProvider } from "./AuthContext"
 import UserProfile from "./UserProfile";
 import PrivateRoute from "./PrivateRoute";
 import PurrsonalityQuiz from "./PurrsonalityQuiz";
-import AIDataButton from "./AIDataButton";
+import AIDataButton from "./api-modules/AIDataButton";
 
 
 /* This should load the header and footer on each page
