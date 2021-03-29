@@ -366,8 +366,87 @@ export default function Listings(){
                                 //console.log(doc.data());
                             })}).then(() => {setFFListings(listingData); //console.log(listingData)
                             });
-                }
-                )
+                }).then(() => {
+                    firestore.collection("PetInfo")
+                        .doc("PublicListings")
+                        .collection("AdoptionList")
+                        .doc("PetTypes").collection("bird").get()
+                        .then((querySnapshot) => {
+                            querySnapshot.forEach((doc) => {
+                                // doc.data() is never undefined for query doc snapshots
+                                if (userSelections.zipcode) {
+                                    let distance = calculateDistance(userLat, userLong, doc.data().lat, doc.data().lon);
+                                    console.log("distance between userinput and " + doc.data().pet_data.name + " of id: " + doc.id + " is " + distance);
+                                    let filtDistance = userSelections.distance;
+                                    //console.log(filtDistance);
+                                    if (distance <= filtDistance) {
+                                        listingData.push(doc.data());
+                                    }
+                                } else listingData.push(doc.data());
+                                //console.log(doc.data());
+                            })}).then(() => {setFFListings(listingData); //console.log(listingData)
+                            });
+                }).then(() => {
+                    firestore.collection("PetInfo")
+                        .doc("PublicListings")
+                        .collection("AdoptionList")
+                        .doc("PetTypes").collection("rabbit").get()
+                        .then((querySnapshot) => {
+                            querySnapshot.forEach((doc) => {
+                                // doc.data() is never undefined for query doc snapshots
+                                if (userSelections.zipcode) {
+                                    let distance = calculateDistance(userLat, userLong, doc.data().lat, doc.data().lon);
+                                    console.log("distance between userinput and " + doc.data().pet_data.name + " of id: " + doc.id + " is " + distance);
+                                    let filtDistance = userSelections.distance;
+                                    //console.log(filtDistance);
+                                    if (distance <= filtDistance) {
+                                        listingData.push(doc.data());
+                                    }
+                                } else listingData.push(doc.data());
+                                //console.log(doc.data());
+                            })}).then(() => {setFFListings(listingData); //console.log(listingData)
+                            });
+                }).then(() => {
+                    firestore.collection("PetInfo")
+                        .doc("PublicListings")
+                        .collection("AdoptionList")
+                        .doc("PetTypes").collection("scales_fins_other").get()
+                        .then((querySnapshot) => {
+                            querySnapshot.forEach((doc) => {
+                                // doc.data() is never undefined for query doc snapshots
+                                if (userSelections.zipcode) {
+                                    let distance = calculateDistance(userLat, userLong, doc.data().lat, doc.data().lon);
+                                    console.log("distance between userinput and " + doc.data().pet_data.name + " of id: " + doc.id + " is " + distance);
+                                    let filtDistance = userSelections.distance;
+                                    //console.log(filtDistance);
+                                    if (distance <= filtDistance) {
+                                        listingData.push(doc.data());
+                                    }
+                                } else listingData.push(doc.data());
+                                //console.log(doc.data());
+                            })}).then(() => {setFFListings(listingData); //console.log(listingData)
+                            });
+                }).then(() => {
+                    firestore.collection("PetInfo")
+                        .doc("PublicListings")
+                        .collection("AdoptionList")
+                        .doc("PetTypes").collection("small_furry").get()
+                        .then((querySnapshot) => {
+                            querySnapshot.forEach((doc) => {
+                                // doc.data() is never undefined for query doc snapshots
+                                if (userSelections.zipcode) {
+                                    let distance = calculateDistance(userLat, userLong, doc.data().lat, doc.data().lon);
+                                    console.log("distance between userinput and " + doc.data().pet_data.name + " of id: " + doc.id + " is " + distance);
+                                    let filtDistance = userSelections.distance;
+                                    //console.log(filtDistance);
+                                    if (distance <= filtDistance) {
+                                        listingData.push(doc.data());
+                                    }
+                                } else listingData.push(doc.data());
+                                //console.log(doc.data());
+                            })}).then(() => {setFFListings(listingData); //console.log(listingData)
+                            });
+                })
         } else {
             console.log("FF " + userSelections.type)
             let docRef =  firestore.collection("PetInfo")
