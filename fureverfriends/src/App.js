@@ -23,7 +23,10 @@ import { AuthProvider } from "./AuthContext"
 import UserProfile from "./UserProfile";
 import PrivateRoute from "./PrivateRoute";
 import PurrsonalityQuiz from "./PurrsonalityQuiz";
-import AIDataButton from "./AIDataButton";
+import Displaylisting from "./Displaylisting";
+import DisplayUserProfile from "./DisplayUserProfile";
+import DisplayFavorites from "./DisplayFavorites";
+import AIDataButton from "./api-modules/AIDataButton";
 
 
 /* This should load the header and footer on each page
@@ -76,6 +79,9 @@ export default function App() {
                     <PurrsonalityQuiz />
                 </Route>
                 <PrivateRoute path="/userprofile" component={UserProfile} />
+                <PrivateRoute path="/Displaylisting" component={Displaylisting} />
+                <PrivateRoute path="/DisplayUserProfile" component={DisplayUserProfile} />
+                <PrivateRoute path="/DisplayFavorites" component={DisplayFavorites} />
                 <Route path="/download-data-private-for-sarah">
                     <AIDataButton />
                 </Route>
