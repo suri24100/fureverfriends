@@ -336,7 +336,15 @@ export default function Listings(){
                 .then((querySnapshot) => {
                     querySnapshot.forEach((doc) => {
                         // doc.data() is never undefined for query doc snapshots
-                        listingData.push(doc.data());
+                        if (userSelections.zipcode) {
+                            let distance = calculateDistance(userLat, userLong, doc.data().lat, doc.data().lon);
+                            console.log("distance between userinput and " + doc.data().pet_data.name + " of id: " + doc.id + " is " + distance);
+                            let filtDistance = userSelections.distance;
+                            //console.log(filtDistance);
+                            if (distance <= filtDistance) {
+                                listingData.push(doc.data());
+                            }
+                        } else listingData.push(doc.data());
                     })
                 }).then(() => {
                     firestore.collection("PetInfo")
@@ -346,7 +354,15 @@ export default function Listings(){
                         .then((querySnapshot) => {
                             querySnapshot.forEach((doc) => {
                                 // doc.data() is never undefined for query doc snapshots
-                                listingData.push(doc.data());
+                                if (userSelections.zipcode) {
+                                    let distance = calculateDistance(userLat, userLong, doc.data().lat, doc.data().lon);
+                                    console.log("distance between userinput and " + doc.data().pet_data.name + " of id: " + doc.id + " is " + distance);
+                                    let filtDistance = userSelections.distance;
+                                    //console.log(filtDistance);
+                                    if (distance <= filtDistance) {
+                                        listingData.push(doc.data());
+                                    }
+                                } else listingData.push(doc.data());
                                 //console.log(doc.data());
                             })}).then(() => {setFFListings(listingData); //console.log(listingData)
                             });
@@ -373,7 +389,7 @@ export default function Listings(){
                         //console.log("userLat = doc's lat? " + (userLat == doc.data().lat) + " for " + doc.data().pet_data.name);
                         if (userSelections.zipcode) {
                             let distance = calculateDistance(userLat, userLong, doc.data().lat, doc.data().lon);
-                            console.log("distance between userinput and " + doc.data().pet_data.name + " is " + distance);
+                            console.log("distance between userinput and " + doc.data().pet_data.name + " of id: " + doc.id + " is " + distance);
                             let filtDistance = userSelections.distance;
                             //console.log(filtDistance);
                             if (distance <= filtDistance) {
