@@ -3,6 +3,8 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
+    margin-top: -6vw; /*added when nav was moved out to its own div */
+    z-index: -99;
 }
 .create-account-body .row{
     margin-bottom: 0;

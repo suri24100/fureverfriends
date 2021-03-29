@@ -10,6 +10,8 @@ import M from "materialize-css";
 import placeholder_image from "./images/petProfiles/default-placeholder-image.png";
 import {firestore} from "./ffdb";
 
+var userLong, userLat;
+
 function PetCard(props){
     const petInfo = props.petInfo;
     let formattedPetInfo = {};
@@ -115,26 +117,6 @@ function PetCard(props){
     }
     const [petDetails, setPetDetails] = useState(formattedPetInfo);
 
-    function toRad(deg) {
-        return deg * (Math.PI/180);
-    }
-
-    function calculateDistance(x1, y1, x2, y2) {
-        var R = 3956; // mi
-        var dLat = toRad(x2-x1);
-        var dLon = toRad(y2-y1);
-        var xr1 = toRad(x1);
-        var xr2 = toRad(x2);
-        console.log("latitude2 in radians: " + xr2);
-
-        var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-          Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(xr1) * Math.cos(xr2);
-
-        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-        var d = R * c;
-        return d;
-    }
-
     let match = useRouteMatch();
     let prefix = petDetails.petfinder_listing ? "PF-" : "FF-";
     let newURL = `${match.url}/` + petDetails.type + "/profile/" + prefix + petDetails.pet_id;
@@ -175,11 +157,20 @@ export default function Listings(){
     const [pfListings, setPFListings] = useState(null);
     const [petListings, setPetListings] = useState( null);
 
+    const [geoData, setGeoData] = useState({});
+
+    const prevGeoData = usePrevious(geoData);
+
+      useEffect(() => {
+        if(prevGeoData !== geoData){
+            processLocation();
+        }
+      })
 
     const [userSelections, setFilters] = useState({
         type: "all",
         zipcode: "",
-        distance: 0,
+        distance: 25,
         age: [],
         gender: [],
         size: [],
@@ -188,12 +179,6 @@ export default function Listings(){
         breed: []
     });
     useEffect( () => {
-        generateFilters("filter-age");
-        generateFilters("filter-gender");
-        generateFilters("filter-size");
-        generateFilters("filter-furlen");
-        generateFilters("filter-color");
-        generateFilters("filter-breed");
     }, [userSelections.type]);
     useEffect(() =>{
         console.log(userSelections);
@@ -245,6 +230,101 @@ export default function Listings(){
         setPFListings(newPFListings);
     }
 
+    //FINDING LONG AND LAT FOR ZIP CODE (API STUFF)
+    function getLocationAsync(zip) {
+        if (zip) {
+            const apikey = '317f5c81a3241fbb45bbf57e335d466d';
+            const path = `http://api.openweathermap.org/data/2.5/forecast?zip=${zip}&units=imperial&appid=${apikey}`;
+        
+            return fetch(path)
+            .then((res) => {
+                return res.json()
+            }).then((json) => {
+                //console.log(JSON.stringify(json,null,2))
+                //console.log(json)
+                //console.log(json.city.coord);
+                //getLocation(json.city.coord)
+                setGeoData(json.city.coord);
+                
+            }).catch((err) => {
+                console.log(err.message)
+            })
+        } else console.log("blank zip");
+    }
+
+    function getLocation() {
+        let location = document.getElementById("filter-zipcode").value;
+        getLocationAsync(location);
+    }
+
+    function processLocation() {
+        //console.log("got here yay");
+        console.log(geoData);
+        userLong = geoData.lon;
+        userLat = geoData.lat;
+    }
+
+    //function to change deg to radians (used for calculating distance)
+    function toRad(deg) {
+        return deg * (Math.PI/180);
+    }
+
+    //calculating distance between two pairs of longitude and latitude
+    //order is lat1, lon1, lat2, lon2
+    function calculateDistance(x1, y1, x2, y2) {
+        var R = 3956; // mi
+        var dLat = toRad(x2-x1);
+        var dLon = toRad(y2-y1);
+        var xr1 = toRad(x1);
+        var xr2 = toRad(x2);
+
+        var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+          Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(xr1) * Math.cos(xr2);
+
+        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        var d = R * c;
+        return d;
+    }
+
+
+    //script to add longitude, latitude and distance to pets in firestore
+    function modifyFFListings() {
+                var zip;
+                firestore.collection("PetInfo")
+                .doc("PublicListings")
+                .collection("AdoptionList")
+                .doc("PetTypes").collection("bird").get()
+                .then((querySnapshot) => {
+                    querySnapshot.forEach((doc) => {
+                        zip = doc.data().pet_data.location.zipcode;
+                        //console.log("zip2: " + zip);
+                        const apikey = '317f5c81a3241fbb45bbf57e335d466d';
+                        fetch(
+                            `http://api.openweathermap.org/data/2.5/forecast?zip=${zip}&units=imperial&appid=${apikey}`
+                        )
+                        .then((res) => res.json())
+                        .then((json) => {
+
+                            //console.log(json.city.coord.lat);
+                            //console.log(doc.data().pet_data.pet_id);
+                            var id = doc.data().pet_data.pet_id;
+                            var pet = firestore.collection("PetInfo")
+                            .doc("PublicListings")
+                            .collection("AdoptionList")
+                            .doc("PetTypes")
+                            .collection("bird")
+                            .doc(id).set({
+                                lat: json.city.coord.lat,
+                                lon: json.city.coord.lon,
+                                distance: 2000
+                            }, { merge: true });
+                        });
+                    })
+                });
+
+
+    }
+
     async function getFFListings(userSelections, pageNum) {
         let listingData = [];
         if(userSelections.type === "all"){
@@ -256,7 +336,15 @@ export default function Listings(){
                 .then((querySnapshot) => {
                     querySnapshot.forEach((doc) => {
                         // doc.data() is never undefined for query doc snapshots
-                        listingData.push(doc.data());
+                        if (userSelections.zipcode) {
+                            let distance = calculateDistance(userLat, userLong, doc.data().lat, doc.data().lon);
+                            console.log("distance between userinput and " + doc.data().pet_data.name + " of id: " + doc.id + " is " + distance);
+                            let filtDistance = userSelections.distance;
+                            //console.log(filtDistance);
+                            if (distance <= filtDistance) {
+                                listingData.push(doc.data());
+                            }
+                        } else listingData.push(doc.data());
                     })
                 }).then(() => {
                     firestore.collection("PetInfo")
@@ -266,12 +354,99 @@ export default function Listings(){
                         .then((querySnapshot) => {
                             querySnapshot.forEach((doc) => {
                                 // doc.data() is never undefined for query doc snapshots
-                                listingData.push(doc.data());
+                                if (userSelections.zipcode) {
+                                    let distance = calculateDistance(userLat, userLong, doc.data().lat, doc.data().lon);
+                                    console.log("distance between userinput and " + doc.data().pet_data.name + " of id: " + doc.id + " is " + distance);
+                                    let filtDistance = userSelections.distance;
+                                    //console.log(filtDistance);
+                                    if (distance <= filtDistance) {
+                                        listingData.push(doc.data());
+                                    }
+                                } else listingData.push(doc.data());
                                 //console.log(doc.data());
                             })}).then(() => {setFFListings(listingData); //console.log(listingData)
                             });
-                }
-                )
+                }).then(() => {
+                    firestore.collection("PetInfo")
+                        .doc("PublicListings")
+                        .collection("AdoptionList")
+                        .doc("PetTypes").collection("bird").get()
+                        .then((querySnapshot) => {
+                            querySnapshot.forEach((doc) => {
+                                // doc.data() is never undefined for query doc snapshots
+                                if (userSelections.zipcode) {
+                                    let distance = calculateDistance(userLat, userLong, doc.data().lat, doc.data().lon);
+                                    console.log("distance between userinput and " + doc.data().pet_data.name + " of id: " + doc.id + " is " + distance);
+                                    let filtDistance = userSelections.distance;
+                                    //console.log(filtDistance);
+                                    if (distance <= filtDistance) {
+                                        listingData.push(doc.data());
+                                    }
+                                } else listingData.push(doc.data());
+                                //console.log(doc.data());
+                            })}).then(() => {setFFListings(listingData); //console.log(listingData)
+                            });
+                }).then(() => {
+                    firestore.collection("PetInfo")
+                        .doc("PublicListings")
+                        .collection("AdoptionList")
+                        .doc("PetTypes").collection("rabbit").get()
+                        .then((querySnapshot) => {
+                            querySnapshot.forEach((doc) => {
+                                // doc.data() is never undefined for query doc snapshots
+                                if (userSelections.zipcode) {
+                                    let distance = calculateDistance(userLat, userLong, doc.data().lat, doc.data().lon);
+                                    console.log("distance between userinput and " + doc.data().pet_data.name + " of id: " + doc.id + " is " + distance);
+                                    let filtDistance = userSelections.distance;
+                                    //console.log(filtDistance);
+                                    if (distance <= filtDistance) {
+                                        listingData.push(doc.data());
+                                    }
+                                } else listingData.push(doc.data());
+                                //console.log(doc.data());
+                            })}).then(() => {setFFListings(listingData); //console.log(listingData)
+                            });
+                }).then(() => {
+                    firestore.collection("PetInfo")
+                        .doc("PublicListings")
+                        .collection("AdoptionList")
+                        .doc("PetTypes").collection("scales_fins_other").get()
+                        .then((querySnapshot) => {
+                            querySnapshot.forEach((doc) => {
+                                // doc.data() is never undefined for query doc snapshots
+                                if (userSelections.zipcode) {
+                                    let distance = calculateDistance(userLat, userLong, doc.data().lat, doc.data().lon);
+                                    console.log("distance between userinput and " + doc.data().pet_data.name + " of id: " + doc.id + " is " + distance);
+                                    let filtDistance = userSelections.distance;
+                                    //console.log(filtDistance);
+                                    if (distance <= filtDistance) {
+                                        listingData.push(doc.data());
+                                    }
+                                } else listingData.push(doc.data());
+                                //console.log(doc.data());
+                            })}).then(() => {setFFListings(listingData); //console.log(listingData)
+                            });
+                }).then(() => {
+                    firestore.collection("PetInfo")
+                        .doc("PublicListings")
+                        .collection("AdoptionList")
+                        .doc("PetTypes").collection("small_furry").get()
+                        .then((querySnapshot) => {
+                            querySnapshot.forEach((doc) => {
+                                // doc.data() is never undefined for query doc snapshots
+                                if (userSelections.zipcode) {
+                                    let distance = calculateDistance(userLat, userLong, doc.data().lat, doc.data().lon);
+                                    console.log("distance between userinput and " + doc.data().pet_data.name + " of id: " + doc.id + " is " + distance);
+                                    let filtDistance = userSelections.distance;
+                                    //console.log(filtDistance);
+                                    if (distance <= filtDistance) {
+                                        listingData.push(doc.data());
+                                    }
+                                } else listingData.push(doc.data());
+                                //console.log(doc.data());
+                            })}).then(() => {setFFListings(listingData); //console.log(listingData)
+                            });
+                })
         } else {
             console.log("FF " + userSelections.type)
             let docRef =  firestore.collection("PetInfo")
@@ -283,12 +458,29 @@ export default function Listings(){
                     querySnapshot.forEach((doc) => {
                         // doc.data() is never undefined for query doc snapshots
                         //console.log(doc.id, " => ", doc.data());
-                        listingData.push(doc.data());
+                        //console.log(geoData);
+                        /*if (doc.data().lat == geoData.lat) {
+                            listingData.push(doc.data());
+                        }*/
+                        //console.log("doc's latitude: " + doc.data().lat + typeof + doc.data().lat);
+                        //console.log("geoData's latitude: " + geoData.lat);
+                        //console.log("userLat: " + userLat + typeof + userLat);
+                        //console.log("userLat = doc's lat? " + (userLat == doc.data().lat) + " for " + doc.data().pet_data.name);
+                        if (userSelections.zipcode) {
+                            let distance = calculateDistance(userLat, userLong, doc.data().lat, doc.data().lon);
+                            console.log("distance between userinput and " + doc.data().pet_data.name + " of id: " + doc.id + " is " + distance);
+                            let filtDistance = userSelections.distance;
+                            //console.log(filtDistance);
+                            if (distance <= filtDistance) {
+                                listingData.push(doc.data());
+                            }
+                        } else listingData.push(doc.data());
                     })
                 }).then(() => {setFFListings(listingData);
-                    //console.log(listingData)
+                    console.log(listingData)
                 });
         }
+        
     }
 
     function generateCards(){
@@ -315,6 +507,7 @@ export default function Listings(){
     // at useEffect above (see comment)
     function applyFilters(){
         setApplyFilter(true);
+        getLocation();
         let prom = getListingData(pageNumber);
     }
 
@@ -408,6 +601,7 @@ export default function Listings(){
                 break;
         }
     }
+
     function generateFilters(filterID) {
         const filterUL = document.getElementById(filterID);
         if(filterUL){
@@ -450,51 +644,6 @@ export default function Listings(){
                         input.setAttribute("value", ptype)
                         input.setAttribute("name", "size");
                         input.setAttribute("id", "size-" + ptype);
-                        input.addEventListener("change", updateFilters, false);
-                        let span = document.createElement("span");
-                        span.innerText = ptype;
-                        label.appendChild(input);
-                        label.appendChild(span);
-                        li.appendChild(label);
-                        filterUL.appendChild(li);
-                    });
-                    break;
-                case "filter-age":
-                    while (filterUL.firstChild) {
-                        filterUL.removeChild(filterUL.firstChild);
-                    }
-                    PFdata.AGE.map(ptype => {
-                        let li = document.createElement("li");
-                        let label = document.createElement("label");
-                        let input = document.createElement("input");
-                        input.classList.add("filled-in");
-                        input.setAttribute("type", "checkbox");
-                        input.setAttribute("value", ptype)
-                        input.setAttribute("name", "age");
-                        input.setAttribute("id", "age-" + ptype);
-                        input.addEventListener("change", updateFilters, false);
-                        let span = document.createElement("span");
-                        span.innerText = ptype;
-                        label.appendChild(input);
-                        label.appendChild(span);
-                        li.appendChild(label);
-                        filterUL.appendChild(li);
-                    });
-                    break;
-                case "filter-gender":
-                    while (filterUL.firstChild) {
-                        filterUL.removeChild(filterUL.firstChild);
-                    }
-                    typeVar = userSelections.type.toUpperCase();
-                    PFdata[typeVar].genders.map(ptype => {
-                        let li = document.createElement("li");
-                        let label = document.createElement("label");
-                        let input = document.createElement("input");
-                        input.classList.add("filled-in");
-                        input.setAttribute("type", "checkbox");
-                        input.setAttribute("value", ptype)
-                        input.setAttribute("name", "gender");
-                        input.setAttribute("id", "gender-" + ptype);
                         input.addEventListener("change", updateFilters, false);
                         let span = document.createElement("span");
                         span.innerText = ptype;
@@ -581,7 +730,7 @@ export default function Listings(){
 
     return (
     <div className="listings-page">
-        <div className="banner-wrap">
+        <div className="listings-page-banner-wrap">
             <div className="banner-img-wrap"></div>
             <div className="heading">
                 <span>Listing your potential new friend</span>
@@ -594,7 +743,7 @@ export default function Listings(){
             <div className="row">
                 <div className="input-field col s3 right">
                     <select>
-                        <option value="" disabled selected>Sort By</option>
+                        <option defaultValue="">Sort By</option>
                         <option value="1">Newest</option>
                         <option value="2">Most Viewed</option>
                         <option value="3">Least Viewed</option>
@@ -602,6 +751,7 @@ export default function Listings(){
                     </select>
                 </div>
             </div>
+            
             <div className="row">
                 <div className="col s12 m4 l3">
                     <form>
@@ -616,10 +766,9 @@ export default function Listings(){
                             <ul id="filter-type">
                                 <div className="input-field">
                                     <select id="pet-type" name="type" onChange={updateFilters}>
-                                        <label htmlFor="pet-type">Distance</label>
                                         <option name="type" value="all">All</option>
                                         {PFdata.TYPES.map(item =>
-                                            <option name="type" value={item}>
+                                            <option key={item} name="type" value={item}>
                                                 {(item === "small_furry") && "Small and Furry"}
                                                 {(item === "scales_fins_other") && "Scales, Fins, and Other"}
                                                 {(!(item === "small_furry") && !(item === "scales_fins_other")) && item}
@@ -641,11 +790,11 @@ export default function Listings(){
                                 <li>
                                     <div className="input-field">
                                         <select id="filter-distance" name="distance" onChange={updateFilters}>
-                                        <label htmlFor="filter-distance">Distance</label>
                                         {PFdata.DISTANCE.map(item =>
                                             <option name="distance" value={item} id="dist-filt">{item} miles</option>
                                         )}
                                         </select>
+                                        <label htmlFor="filter-distance">Distance</label>
                                     </div>
                                 </li>
                             </ul>
@@ -658,21 +807,89 @@ export default function Listings(){
                                 <div>
                                     <span className="title">Age</span>
                                     <ul id="filter-age">
+                                        {PFdata.AGE.map(item =>
+                                                <li key={item}>
+                                                    <label>
+                                                    <input className="filled-in" type="checkbox"
+                                                           value="item" name="age" id={'age-' + item}
+                                                           onChange={updateFilters} />
+                                                    <span>{item.toString()}</span>
+                                                    </label>
+                                                </li>
+                                            )
+                                        }
                                     </ul>
                                     <span className="title">Gender</span>
                                     <ul id="filter-gender">
+                                        {PFdata.GENDERS.map(item =>
+                                            <li key={item}>
+                                                <label>
+                                                    <input className="filled-in" type="checkbox"
+                                                           value="item" name="gender" id={'gender-' + item}
+                                                           onChange={updateFilters} />
+                                                    <span>{item.toString()}</span>
+                                                </label>
+                                            </li>
+                                        )}
                                     </ul>
                                     <span className="title">Size</span>
                                     <ul id="filter-size">
+                                        {PFdata.SIZE.map(item =>
+                                            <li key={item}>
+                                                <label>
+                                                    <input className="filled-in" type="checkbox"
+                                                           value="item" name="size" id={'size-' + item}
+                                                           onChange={updateFilters} />
+                                                    <span>{item.toString()}</span>
+                                                </label>
+                                            </li>
+                                        )}
                                     </ul>
-                                    <span className="title">Fur Length</span>
+                                    {PFdata[userSelections.type.toUpperCase()].coats.length > 0
+                                    && <span className="title">Fur Length</span>
+                                    }
                                     <ul id="filter-furlen">
+                                        {PFdata[userSelections.type.toUpperCase()].coats.map(item =>
+                                            <li key={item}>
+                                                <label>
+                                                    <input className="filled-in" type="checkbox"
+                                                           value="item" name="coat" id={'coat-' + item}
+                                                           onChange={updateFilters} />
+                                                    <span>{item.toString()}</span>
+                                                </label>
+                                            </li>
+                                        )}
                                     </ul>
-                                    <span className="title">Colors</span>
+                                    {PFdata[userSelections.type.toUpperCase()].colors.length > 0
+                                    && <span className="title">Colors</span>
+                                    }
                                     <ul id="filter-color">
+                                        {PFdata[userSelections.type.toUpperCase()].colors.map(item =>
+                                            <li key={item}>
+                                                <label>
+                                                    <input className="filled-in" type="checkbox"
+                                                           value="item" name="color" id={'color-' + item}
+                                                           onChange={updateFilters} />
+                                                    <span>{item.toString()}</span>
+                                                </label>
+                                            </li>
+                                        )}
                                     </ul>
-                                    <span className="title">Breeds</span>
+                                    {PFdata[userSelections.type.toUpperCase()].breeds.length > 0
+                                    && <span className="title">Breeds</span>
+                                    }
                                     <ul id="filter-breed">
+                                        {PFdata[userSelections.type.toUpperCase()].breeds.map(item =>
+                                            <li key={item.name}>
+                                                <label>
+                                                    <input className="filled-in" type="checkbox"
+                                                           value="item" name="breed" id={'breed-' + item.name}
+                                                           onChange={updateFilters}
+                                                    />
+                                                    <span>{item.name.toString()}</span>
+                                                </label>
+                                            </li>
+                                        )}
                                     </ul>
                                 </div>
                             }

@@ -50,7 +50,7 @@
   display: block;
 }
 
-.listings-page.banner-wrap {
+.listings-page-banner-wrap {
   text-align: center;
   color: #ffffff;
   position: relative;
@@ -59,8 +59,10 @@
   background-image: url(./listings-banner-full.jpg);
   background-size: 100%;
   background-attachment: fixed;
+  margin-top: -6vw; /*added when nav was moved out to its own div */
+  z-index: -99;
 }
-.listings-page.banner-wrap .heading {
+.listings-page-banner-wrap .heading {
   font-size: 2.5vw;
   text-transform: uppercase;
   font-weight: bold;
@@ -68,7 +70,7 @@
   left: 30%;
   top: 77%;
 }
-.listings-page.banner-wrap .subheading {
+.listings-page-banner-wrap .subheading {
   font-size: 1.5vw;
   position: absolute;
   left: 40%;
@@ -258,4 +260,7 @@
 }
 .listings-page .results-wrap .pet-container .info-wrap .name:hover {
   cursor: pointer;
+}
+
+.listings-page ul#filter-breed{
 }

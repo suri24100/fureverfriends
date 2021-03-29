@@ -1,0 +1,42 @@
+Below is the login information for test user accounts:
+
+Username: PetLover123
+Email: petlover123@fureverfriends.com
+Password: password123
+
+Username: Dogs4Ever
+Email: dogs4ever@fureverfriends.com
+Password: password123
+
+Username: FuzzyPetRescue
+Email: fuzzypetrescue@fureverfriends.com
+Password: password123
+
+Username: CatNaps
+Email: catnaps@fureverfriends.com
+Password: password123
+
+Username: MiceRCuteToo
+Email: micercutetoo@fureverfriends.com
+Password: password123
+
+Username: DogBiscuits
+Email: dogbiscuits@fureverfriends.com
+Password: password123
+
+Username: RiseAndMeow
+Email: riseandmeow@fureverfriends.com
+Password: password123
+
+Username: RabbitEars34
+Email: rabbitears34@fureverfriends.com
+Password: password123
+
+Username: KittenPaws
+Email: kittenpaws@fureverfriends.com
+Password: password123
+
+Username: LazySundayFurball
+Email: lazysundayfurball@fureverfriends.com
+Password: password123
+

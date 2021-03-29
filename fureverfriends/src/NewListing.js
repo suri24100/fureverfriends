@@ -37,9 +37,11 @@ export default function NewListing() {
         $(document).ready(function(){
             $('select').select();
           });
-          M.textareaAutoResize($('#about-me'));
         if(USER.email){
+            M.textareaAutoResize($('#about-me'));
             setLoggedIn(true);
+            setPageLoaded(true);
+        } else{
             setPageLoaded(true);
         }
     });
@@ -102,7 +104,6 @@ export default function NewListing() {
                         applicationForm: {applicationFileURL}
                     }
                 };
-                console.log(newListing);
                 createPetListing(newListing);
             }
         } else if (fileState.total_urls === 0 && !processing){
@@ -116,13 +117,11 @@ export default function NewListing() {
                     applicationForm: ""
                 }
             };
-            console.log(newListing);
             createPetListing(newListing);
         }
     }
 
     function createPetListing(listingData){
-        console.log(listingData);
         firestore.collection("PetInfo")
             .doc("PublicListings")
             .collection("AdoptionList")
