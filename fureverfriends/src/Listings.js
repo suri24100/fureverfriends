@@ -170,7 +170,7 @@ export default function Listings(){
     const [userSelections, setFilters] = useState({
         type: "all",
         zipcode: "",
-        distance: 0,
+        distance: 25,
         age: [],
         gender: [],
         size: [],
@@ -373,6 +373,8 @@ export default function Listings(){
                         //console.log("userLat = doc's lat? " + (userLat == doc.data().lat) + " for " + doc.data().pet_data.name);
                         let distance = calculateDistance(userLat, userLong, doc.data().lat, doc.data().lon);
                         console.log("distance between userinput and " + doc.data().pet_data.name + " is " + distance);
+                        let filtDistance = document.getElementById('dist-filt').value;
+                        console.log(filtDistance);
                     })
                 }).then(() => {setFFListings(listingData);
                     console.log(listingData)
