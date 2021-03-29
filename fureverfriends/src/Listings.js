@@ -373,8 +373,11 @@ export default function Listings(){
                         //console.log("userLat = doc's lat? " + (userLat == doc.data().lat) + " for " + doc.data().pet_data.name);
                         let distance = calculateDistance(userLat, userLong, doc.data().lat, doc.data().lon);
                         console.log("distance between userinput and " + doc.data().pet_data.name + " is " + distance);
-                        let filtDistance = document.getElementById('dist-filt').value;
-                        console.log(filtDistance);
+                        let filtDistance = userSelections.distance;
+                        //console.log(filtDistance);
+                        if (distance <= filtDistance) {
+                            listingData.push(doc.data());
+                        }
                     })
                 }).then(() => {setFFListings(listingData);
                     console.log(listingData)
