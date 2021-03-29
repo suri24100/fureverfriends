@@ -234,8 +234,7 @@ export default function Listings(){
     const prevCardList = usePrevious(cardList);
 
     async function getListingData(pageNum){
-        console.log(userSelections);
-        let newPFListings = await getFilteredListings(userSelections,100, pageNum);
+        let newPFListings = await getFilteredListings(userSelections,10, pageNum);
         let newFFListings = await getFFListings(userSelections, pageNum);
         setPFListings(newPFListings);
     }
@@ -592,7 +591,7 @@ export default function Listings(){
                                     <div className="input-field">
                                         <select id="filter-distance" name="distance" onChange={updateFilters}>
                                         {PFdata.DISTANCE.map(item =>
-                                            <option name="distance" value={item}>{item} miles</option>
+                                            <option name="distance" value={item} id="dist-filt">{item} miles</option>
                                         )}
                                         </select>
                                         <label htmlFor="filter-distance">Distance</label>
