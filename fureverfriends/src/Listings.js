@@ -246,151 +246,43 @@ export default function Listings(){
         setPFListings(newPFListings);
     }
 
+    //script to add longitude, latitude and distance to pets in firestore
     function modifyFFListings() {
-        /*firestore.collection("PetInfo")
+                var zip;
+                firestore.collection("PetInfo")
                 .doc("PublicListings")
                 .collection("AdoptionList")
-                .doc("PetTypes").collection("small_furry").get()
+                .doc("PetTypes").collection("bird").get()
                 .then((querySnapshot) => {
                     querySnapshot.forEach((doc) => {
-                        // doc.data() is never undefined for query doc snapshots
-                        console.log(doc.data())
-                    })
-                })*/
-                /*firestore.collection("PetInfo")
-                .doc("PublicListings")
-                .collection("AdoptionList")
-                .doc("PetTypes").collection("small_furry").doc("50882068").get()
-                .then((doc) => {
-                    //querySnapshot.forEach((doc) => {
-                        // doc.data() is never undefined for query doc snapshots
-                        console.log("full data");
-                        console.log(doc.data());
-                        //let zip = doc.data().location.zipcode;
-                        //console.log("zip: " + zip);
-                        var pet = doc.data();
-                        var zip = pet.pet_data.location.zipcode;
-                        console.log("zip: " + pet.pet_data.location.zipcode);
-                        let x = getLocationAsync(zip);
-                        console.log(x);
-
+                        zip = doc.data().pet_data.location.zipcode;
+                        //console.log("zip2: " + zip);
                         const apikey = '317f5c81a3241fbb45bbf57e335d466d';
                         fetch(
                             `http://api.openweathermap.org/data/2.5/forecast?zip=${zip}&units=imperial&appid=${apikey}`
                         )
                         .then((res) => res.json())
                         .then((json) => {
-                            //console.log(json);
-                            console.log("-------------------------");
-                            console.log(json.city.coord);
-                            console.log("-------------------------");
-                            
+
+                            //console.log(json.city.coord.lat);
+                            //console.log(doc.data().pet_data.pet_id);
+                            var id = doc.data().pet_data.pet_id;
+                            var pet = firestore.collection("PetInfo")
+                            .doc("PublicListings")
+                            .collection("AdoptionList")
+                            .doc("PetTypes")
+                            .collection("bird")
+                            .doc(id).set({
+                                lat: json.city.coord.lat,
+                                lon: json.city.coord.lon,
+                                distance: 2000
+                            }, { merge: true });
                         });
-                    //})
-                })*/
-                
-                
-                
-                
-                /*var testPet = firestore.collection("PetInfo")
-                .doc("PublicListings")
-                .collection("AdoptionList")
-                .doc("PetTypes").collection("small_furry").doc("50882068");
-
-                var zip = testPet.pet_data.location.zipcode;
-
-                const apikey = '317f5c81a3241fbb45bbf57e335d466d';
-                fetch(
-                    `http://api.openweathermap.org/data/2.5/forecast?zip=${zip}&units=imperial&appid=${apikey}`
-                )
-                .then((res) => res.json())
-                .then((json) => {
-                    //console.log(json);
-                    console.log("-------------------------");
-                    console.log(json.city.coord);
-                    console.log("-------------------------");
-                    testPet.set({
-                        lat: json.city.coord.lat,
-                        lon: json.city.coord.lon,
-                        distance: 0
-                    }, { merge: true });
-                });*/
-
-
-
-
-                var zip;
-                firestore.collection("PetInfo")
-                .doc("PublicListings")
-                .collection("AdoptionList")
-                .doc("PetTypes").collection("small_furry").doc("50882068").get()
-                .then((doc) => {
-                    zip = doc.data().pet_data.location.zipcode;
-                    //console.log("zip2: " + zip)
-                    const apikey = '317f5c81a3241fbb45bbf57e335d466d';
-                fetch(
-                    `http://api.openweathermap.org/data/2.5/forecast?zip=${zip}&units=imperial&appid=${apikey}`
-                )
-                .then((res) => res.json())
-                .then((json) => {
-                    //console.log(json);
-                    console.log("-------------------------");
-                    console.log(json.city.coord);
-                    console.log("-------------------------");
-                    firestore.collection("PetInfo")
-                .doc("PublicListings")
-                .collection("AdoptionList")
-                .doc("PetTypes").collection("small_furry").doc("50882068").set({
-                        lat: json.city.coord.lat,
-                        lon: json.city.coord.lon,
-                        distance: 0
-                    }, { merge: true });
+                    })
                 });
-                });
-
-                //console.log("zip: " + zip)
-
-                /*const apikey = '317f5c81a3241fbb45bbf57e335d466d';
-                fetch(
-                    `http://api.openweathermap.org/data/2.5/forecast?zip=${zip}&units=imperial&appid=${apikey}`
-                )
-                .then((res) => res.json())
-                .then((json) => {
-                    //console.log(json);
-                    console.log("-------------------------");
-                    console.log(json.city.coord);
-                    console.log("-------------------------");
-                    firestore.collection("PetInfo")
-                .doc("PublicListings")
-                .collection("AdoptionList")
-                .doc("PetTypes").collection("small_furry").doc("50882068").set({
-                        lat: json.city.coord.lat,
-                        lon: json.city.coord.lon,
-                        distance: 0
-                    }, { merge: true });
-                });*/
-
-
 
 
     }
-
-    //FINDING LONG AND LAT FOR ZIP CODE (API STUFF)
-    function getLocationAsync(zip) {
-        const apikey = '317f5c81a3241fbb45bbf57e335d466d';
-        fetch(
-            `http://api.openweathermap.org/data/2.5/forecast?zip=${zip}&units=imperial&appid=${apikey}`
-          )
-          .then((res) => res.json())
-          .then((json) => {
-            //console.log(json);
-            console.log("-------------------------");
-            console.log(json);
-            console.log("-------------------------");
-            return json.city.coord;
-          });
-    }
-
 
     async function getFFListings(userSelections, pageNum) {
         let listingData = [];
