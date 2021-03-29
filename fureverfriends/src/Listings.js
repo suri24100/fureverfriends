@@ -371,13 +371,15 @@ export default function Listings(){
                         //console.log("geoData's latitude: " + geoData.lat);
                         //console.log("userLat: " + userLat + typeof + userLat);
                         //console.log("userLat = doc's lat? " + (userLat == doc.data().lat) + " for " + doc.data().pet_data.name);
-                        let distance = calculateDistance(userLat, userLong, doc.data().lat, doc.data().lon);
-                        console.log("distance between userinput and " + doc.data().pet_data.name + " is " + distance);
-                        let filtDistance = userSelections.distance;
-                        //console.log(filtDistance);
-                        if (distance <= filtDistance) {
-                            listingData.push(doc.data());
-                        }
+                        if (userSelections.zipcode) {
+                            let distance = calculateDistance(userLat, userLong, doc.data().lat, doc.data().lon);
+                            console.log("distance between userinput and " + doc.data().pet_data.name + " is " + distance);
+                            let filtDistance = userSelections.distance;
+                            //console.log(filtDistance);
+                            if (distance <= filtDistance) {
+                                listingData.push(doc.data());
+                            }
+                        } else listingData.push(doc.data());
                     })
                 }).then(() => {setFFListings(listingData);
                     console.log(listingData)
