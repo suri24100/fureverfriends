@@ -10,6 +10,8 @@ import M from "materialize-css";
 import placeholder_image from "./images/petProfiles/default-placeholder-image.png";
 import {firestore} from "./ffdb";
 
+var userLong, userLat;
+
 function PetCard(props){
     const petInfo = props.petInfo;
     let formattedPetInfo = {};
@@ -230,22 +232,24 @@ export default function Listings(){
 
     //FINDING LONG AND LAT FOR ZIP CODE (API STUFF)
     function getLocationAsync(zip) {
-        const apikey = '317f5c81a3241fbb45bbf57e335d466d';
-        const path = `http://api.openweathermap.org/data/2.5/forecast?zip=${zip}&units=imperial&appid=${apikey}`;
-    
-        return fetch(path)
-        .then((res) => {
-            return res.json()
-        }).then((json) => {
-            //console.log(JSON.stringify(json,null,2))
-            //console.log(json)
-            //console.log(json.city.coord);
-            //getLocation(json.city.coord)
-            setGeoData(json.city.coord);
-            
-        }).catch((err) => {
-            console.log(err.message)
-        })
+        if (zip) {
+            const apikey = '317f5c81a3241fbb45bbf57e335d466d';
+            const path = `http://api.openweathermap.org/data/2.5/forecast?zip=${zip}&units=imperial&appid=${apikey}`;
+        
+            return fetch(path)
+            .then((res) => {
+                return res.json()
+            }).then((json) => {
+                //console.log(JSON.stringify(json,null,2))
+                //console.log(json)
+                //console.log(json.city.coord);
+                //getLocation(json.city.coord)
+                setGeoData(json.city.coord);
+                
+            }).catch((err) => {
+                console.log(err.message)
+            })
+        } else console.log("blank zip");
     }
 
     function getLocation() {
@@ -254,8 +258,10 @@ export default function Listings(){
     }
 
     function processLocation() {
-        console.log("got here yay");
+        //console.log("got here yay");
         console.log(geoData);
+        userLong = geoData.lon;
+        userLat = geoData.lat;
     }
 
     //function to change deg to radians (used for calculating distance)
@@ -264,13 +270,13 @@ export default function Listings(){
     }
 
     //calculating distance between two pairs of longitude and latitude
+    //order is lat1, lon1, lat2, lon2
     function calculateDistance(x1, y1, x2, y2) {
         var R = 3956; // mi
         var dLat = toRad(x2-x1);
         var dLon = toRad(y2-y1);
         var xr1 = toRad(x1);
         var xr2 = toRad(x2);
-        console.log("latitude2 in radians: " + xr2);
 
         var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
           Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(xr1) * Math.cos(xr2);
@@ -357,12 +363,22 @@ export default function Listings(){
                     querySnapshot.forEach((doc) => {
                         // doc.data() is never undefined for query doc snapshots
                         //console.log(doc.id, " => ", doc.data());
-                        listingData.push(doc.data());
+                        //console.log(geoData);
+                        /*if (doc.data().lat == geoData.lat) {
+                            listingData.push(doc.data());
+                        }*/
+                        //console.log("doc's latitude: " + doc.data().lat + typeof + doc.data().lat);
+                        //console.log("geoData's latitude: " + geoData.lat);
+                        //console.log("userLat: " + userLat + typeof + userLat);
+                        //console.log("userLat = doc's lat? " + (userLat == doc.data().lat) + " for " + doc.data().pet_data.name);
+                        let distance = calculateDistance(userLat, userLong, doc.data().lat, doc.data().lon);
+                        console.log("distance between userinput and " + doc.data().pet_data.name + " is " + distance);
                     })
                 }).then(() => {setFFListings(listingData);
-                    //console.log(listingData)
+                    console.log(listingData)
                 });
         }
+        
     }
 
     function generateCards(){
