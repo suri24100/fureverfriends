@@ -140,7 +140,13 @@ export async function getFilteredListings(filters, numListings, pageNum){
     }
     if(filters.type !== "all"){
         // typeURL += "&type=" + filters.type;
-        typeURL += "&type=" + "scales-fins-other";
+        if(filters.type === "small_furry") {
+            typeURL += "&type=small-furry";
+        } else if (filters.type === "scales_fins_other") {
+            typeURL += "&type=scales-fins-other";
+        } else {
+            typeURL += "&type=" + filters.type;
+        }
         if(filters.size.length > 0){
             typeURL += "&size="
             filters.size.forEach(size => {

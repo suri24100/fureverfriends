@@ -8,7 +8,7 @@ export default function AIDataButton(){
 
     return (
         <div className="container">
-            <button onClick={testFunc}>Get Data</button>
+            {/*<button onClick={testFunc}>Get Data</button>*/}
         </div>
     )
 }
