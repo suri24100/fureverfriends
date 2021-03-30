@@ -81,3 +81,9 @@
 .profile-page .side-info{
     min-width: 250px;
 }
+
+.profile-page .disclaimer{
+    margin-top: 40px;
+    font-size: 1.2em;
+    font-style: italic;
+}

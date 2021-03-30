@@ -139,7 +139,8 @@ export async function getFilteredListings(filters, numListings, pageNum){
         }
     }
     if(filters.type !== "all"){
-        typeURL += "&type=" + filters.type;
+        // typeURL += "&type=" + filters.type;
+        typeURL += "&type=" + "scales-fins-other";
         if(filters.size.length > 0){
             typeURL += "&size="
             filters.size.forEach(size => {

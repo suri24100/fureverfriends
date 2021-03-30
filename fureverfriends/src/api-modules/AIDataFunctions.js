@@ -4,6 +4,8 @@ import {sampleListings} from "./sample-listings";
 import { saveAs } from 'file-saver';
 import placeholder_image from "../images/petProfiles/default-placeholder-image.png";
 import {storage, firestore} from "../ffdb";
+import {updateListings} from "./user_listings";
+import {fixed_listings} from "./fixedListings";
 
 // pick from randomly to assign an account for each profile created
 const TEST_ACCOUNTS = [
@@ -255,6 +257,20 @@ const IMG_URLS = [
 ]
 
 const SAMPLE_PROFILES = sampleListings;
+
+const OLD_LIST = updateListings;
+
+const fixed = fixed_listings;
+
+export function getAllUsers(){
+        firestore.collection("UserInfo").doc(fixed[0].email)
+            .set(fixed[0])
+            .then((docRef) => {
+                console.log("Document written");
+            }).catch((error) => {
+                console.log("Error getting document:", error);
+            });
+}
 
 export async function compileProfileData() {
     let final_data = [];

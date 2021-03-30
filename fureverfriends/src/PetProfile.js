@@ -263,6 +263,9 @@ export default function PetProfile(){
                         </div>
                     }
                     </div>
+                <div className="col s12 center disclaimer">
+                    <p><span className="title">Notice:</span> The above listing is for demonstration purposes only and the animal cannot be adopted from this website.</p>
+                </div>
             </div>
         )
     }
