@@ -56,16 +56,27 @@ export default function DisplayFavorites() {
             </div>
             <div className = "container">
                 <div className="row">
-                    <div className="col s12 m3" id="sidenav">
-                        <div className="collection">
-                            {/*<Link to="/" class = "collection-item">Messages</Link>*/}
-                            <Link to="/" class="collection-item">Notifications</Link>
-                            <Link to="/Displaylisting" class="collection-item">Your Listings</Link>
-                            <Link to="/DisplayUserProfile" class="collection-item">Account Info</Link>
-                            {/*Link <Link to="/" class= "collection-item">Safe Spawts</Link>*/}
-                            <Link to="/DisplayFavorites" class="collection-item">Favorites</Link>
-                        </div>
+                    <div className="sub-nav col s12 m3" id="side-nav full">
+                        <ul className="sub-nav-options collection">
+                            <li className="card-content collection-item active card-panel hoverable">
+                                {/*<i className="small material-icons prefix"> notifications </i>*/}
+                                <Link to="/">NOTIFICATIONS </Link>
+                            </li>
+                            <li className="card-content collection-item active card-panel hoverable">
+                                {/*<i className="small material-icons prefix">list </i>*/}
+                                <Link to="/Displaylisting"> YOUR LISTINGS </Link>
+                            </li>
+                            <li className="card-content collection-item active card-panel hoverable">
+                                {/*<i className="small material-icons prefix">account_circle </i>*/}
+                                <Link to="/DisplayUserProfile"> ACCOUNT </Link>
+                            </li>
+                            <li className="card-content collection-item card active card-panel hoverable">
+                                {/*<i className="small material-icons prefix">account_circle </i>*/}
+                                <Link to="/DisplayFavorites"> FAVORITES </Link>
+                            </li>
+                        </ul>
                     </div>
+
 
                     <div className="col s12 m9" href="information">
                         <div className="collection">

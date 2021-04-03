@@ -10,16 +10,16 @@ import M from "materialize-css";
 import db, {firestore, storage} from "./ffdb";
 import 'firebase/storage';
 
-import Header from "./Header";
 import Listings from "./Listings";
 
 
 import './css/home.css';
 import './css/style.css'
 
-import Footer from "./Footer";
 import {Link} from "react-router-dom";
 import {useAuth} from "./AuthContext";
+import {PET_PROFILE as petDetails} from "./api-modules/constants";
+
 
 
 
@@ -37,27 +37,21 @@ export default function Displaylisting() {
         console.log("Reloaded");
     })
 
-    async function DisplayProfile (e){
-        e.preventDefault();
 
-        const snapshot = await firestore.collection("UserInfo").where("username", "==", USER.username).get();
-        if(!snapshot.empty && USER.username !== username)
-        {
-            setLoading(false);
-        }
+    async function listing(id, type) {
+        let profileData = {};
+        let docRef = firestore.collection("PetInfo")
+            .doc.data("PublicListings")
+            .collection("AdoptionList")
+            .doc.data("PetTypes")
+            .collection(type)
+            .doc.data(id);
 
-        try {
-            setLoading(true);
-        }catch(err) {
-            setLoading(true);
-        }
-
-        setLoading(false);
+        return profileData;
     }
-
+    console.log(petDetails)
 
     return (
-
 
     <div className="actionsnav">
         {/*in order for this to work, would need to remove <Header/> in app.js, need to fix the camel cases when user info is displayed*/}
@@ -70,15 +64,24 @@ export default function Displaylisting() {
 
         <div className = "container">
             <div className="row">
-                <div className="col s12 m3" id="sidenav">
-                    <div className="collection">
-                        {/*<Link to="/" class = "collection-item">Messages</Link>*/}
-                        <Link to="/" class="collection-item">Notifications</Link>
-                        <Link to="/Displaylisting" class="collection-item">Your Listings</Link>
-                        <Link to="/DisplayUserProfile" class="collection-item">Account Info</Link>
-                        {/*Link <Link to="/" class= "collection-item">Safe Spawts</Link>*/}
-                        <Link to="/DisplayFavorites" class="collection-item">Favorites</Link>
-                    </div>
+                <div className="sub-nav col s12 m3" id="side-nav full">
+                    <ul className="sub-nav-options collection">
+                        <li className="card-content collection-item active card-panel hoverable">
+                            {/*<i className="small material-icons prefix"> notifications </i>*/}
+                            <Link to="/">NOTIFICATIONS </Link>
+                        </li>
+                        <li className="card-content collection-item card active card-panel hoverable">
+                            {/*<i className="small material-icons prefix">list </i>*/}
+                            <Link to="/Displaylisting"> YOUR LISTINGS </Link>
+                        </li>
+                        <li className="card-content collection-item active card-panel hoverable">
+                            {/*<i className="small material-icons prefix">account_circle </i>*/}
+                            <Link to="/DisplayUserProfile"> ACCOUNT </Link>
+                        </li>
+                        <li className="card-content collection-item active card-panel hoverable">
+                            {/*<i className="small material-icons prefix">favorite  </i>*/}
+                            <Link to="/DisplayFavorites"> FAVORITES </Link></li>
+                    </ul>
                 </div>
 
                 <div className="field col s12 m9" href="information">
@@ -92,12 +95,12 @@ export default function Displaylisting() {
                                     </a>
                                 </div>
                                 <div className="card-content">
-                                    <span className="name">{USER.pet_listings}</span>
+                                    <span className="name">{}</span>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <Link to ="/userprofile"  className="waves-effect btn"> Add New Listing </Link>
+                    <Link to ="/findahome"  className="waves-effect btn"> Add New Listing </Link>
                 </div>
             </div>
         </div>
