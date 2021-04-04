@@ -15,12 +15,15 @@ body, .create-profile {
 .create-profile h4 {
   text-transform: uppercase;
 }
-
+.create-profile .form-hidden{
+  visibility: hidden;
+}
 .create-profile .req-mark{
   color: #05668d;
 }
 
-.create-profile .left-filter .input-field{
+.create-profile .left-filter .input-field,
+.create-profile .right-filter .input-field{
   margin-bottom: 40px;
 }
 

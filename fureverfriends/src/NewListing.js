@@ -614,6 +614,7 @@ export default function NewListing() {
                                                         <option value="Teen">Teen</option>
                                                         <option value="Adult">Adult</option>
                                                     </select>
+                                                    <span className="helper-text"></span>
                                                 </div>
 
                                                 <div className="input-field">
@@ -621,41 +622,70 @@ export default function NewListing() {
                                                     <select id="gender" name="gender">
                                                         <option value="Female">Female</option>
                                                         <option value="Male">Male</option>
+                                                        <option value="Unknown">Unknown</option>
                                                     </select>
+                                                    <span className="helper-text"></span>
                                                 </div>
 
                                                 <div className="input-field">
                                                     <label htmlFor="breed" className="active">Breed</label>
-                                                    <select id="breed" name="breed">
-                                                        {/*populated using JavaScript*/}
+                                                    <select id="breed" name="breed" disabled="disabled">
                                                     </select>
+                                                    <span className="helper-text"></span>
                                                 </div>
 
                                                 <div className="input-field">
                                                     <label htmlFor="color" className="active">Color</label>
-                                                    <select id="color" name="color">
+                                                    <select id="color" name="color" disabled="disabled">
                                                         {/*populated using JavaScript*/}
                                                     </select>
+                                                    <span className="helper-text"></span>
                                                 </div>
-
                                                 <div className="input-field">
-                                                    <label htmlFor="cared-by" className="active">Cared By</label>
-                                                    <select id="cared-by" name="cared-by">
-                                                        <option value="Private Owner">Private Owner</option>
-                                                        <option value="Organization/Rescue">Organization/Rescue</option>
+                                                    <label htmlFor="furLength">Fur Length</label>
+                                                    <select id="furLength" name="furLength" disabled="disabled">
+                                                        {/*populated using JavaScript*/}
                                                     </select>
+                                                    <span className="helper-text"></span>
                                                 </div>
                                             </div>
                                             <div className="right-filter col s12 m6 l6 x6">
-                                                <div className="listings-form-row">
-                                                    <label htmlFor="furLength">Fur Length</label>
-                                                    <select id="furLength" name="furLength">
-                                                        {/*populated using JavaScript*/}
+                                                <div className="input-field">
+                                                    <label htmlFor="cared-by" className="active">Cared By</label>
+                                                    <select id="cared-by" name="cared-by" className="validate">
+                                                        <option value="Private Owner">Private Owner</option>
+                                                        <option value="Organization/Rescue">Organization or Rescue</option>
                                                     </select>
+                                                    <span className="helper-text" data-error="Required">Required</span>
                                                 </div>
 
-                                                <div className="listings-form-row">
-                                                    <label htmlFor="personality">Personality</label>
+
+                                                <div className="input-field">
+                                                    <label htmlFor="adoptionFee" className="active">Adoption Fee </label>
+                                                    <input type="text" id="adoptionFee" name="adoptionFee" className="validate"/>
+                                                    <span className="helper-text" data-error="Required">Required</span>
+                                                </div>
+
+                                                <div className="input-field">
+                                                    <label htmlFor="city" className="active">City </label>
+                                                    <input type="text" id="city" name="city" className="validate"/>
+                                                    <span className="helper-text" data-error="Required">Required</span>
+                                                </div>
+
+                                                <div className="input-field" >
+                                                    <label htmlFor="state" className="active">State </label>
+                                                    <input type="text" id="state" name="state" className="validate"/>
+                                                    <span className="helper-text" data-error="Required">Required</span>
+                                                </div>
+
+                                                <div className="input-field">
+                                                    <label htmlFor="zip" className="active">Zip Code </label>
+                                                    <input type="number" id="zip" name="zip" className="validate"/>
+                                                    <span className="helper-text" data-error="Required">Required</span>
+                                                </div>
+
+                                                <div className="input-field">
+                                                    <label htmlFor="personality" className="active">Personality</label>
                                                     <select id="personality" name="personality" multiple>
                                                         <option value="playful">Playful</option>
                                                         <option value="talkative">Talkative</option>
@@ -668,30 +698,11 @@ export default function NewListing() {
                                                         <option value="quiet">Quiet</option>
                                                         <option value="social">Social</option>
                                                     </select>
+                                                    <span className="helper-text"></span>
                                                 </div>
 
-                                                <div className="listings-form-row">
-                                                    <label htmlFor="adoptionFee">Adoption Fee </label>
-                                                    <input type="text" id="adoptionFee" name="adoptionFee"/>
-                                                </div>
-
-                                                <div className="listings-form-row">
-                                                    <label htmlFor="city">City </label>
-                                                    <input type="text" id="city" name="city"/>
-                                                </div>
-
-                                                <div className="listings-form-row">
-                                                    <label htmlFor="state">State </label>
-                                                    <input type="text" id="state" name="state"/>
-                                                </div>
-
-                                                <div className="listings-form-row">
-                                                    <label htmlFor="zip">Zip Code </label>
-                                                    <input type="number" id="zip" name="zip"/>
-                                                </div>
-
-                                                <div className="listings-form-row">
-                                                    <label htmlFor="attributes">Pet Attributes</label>
+                                                <div className="input-field">
+                                                    <label htmlFor="attributes" className="active">Pet Attributes</label>
                                                     <select id="attributes" name="attributes" multiple="multiple">
                                                         <option value="vaccinated">Vaccinated</option>
                                                         <option value="spayed_neutered">Neutered/Spayed</option>
@@ -702,6 +713,7 @@ export default function NewListing() {
                                                         <option value="special_needs">Allergy Friendly</option>
                                                         <option value="bonded_pair">Bonded Pair</option>
                                                     </select>
+                                                    <span className="helper-text"></span>
                                                 </div>
 
                                             </div>
