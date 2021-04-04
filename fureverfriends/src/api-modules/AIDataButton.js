@@ -1,13 +1,14 @@
 import React from "react";
 import {callTrainingData} from "./PetfinderAPI";
-import {compileProfileData, saveProfileImages, saveSampleListings} from "./AIDataFunctions"
+import {compileProfileData, getAllUsers, saveProfileImages, saveSampleListings} from "./AIDataFunctions"
+import {testFunc} from "../ffdb";
 
 
 export default function AIDataButton(){
 
     return (
         <div className="container">
-            <button onClick={saveSampleListings}>Get Data</button>
+            {/*<button onClick={testFunc}>Get Data</button>*/}
         </div>
     )
 }

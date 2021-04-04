@@ -133,7 +133,7 @@ export default function NewListing() {
                 console.log("Document written");
                 setListingSaved(true);
                 let newPetListings = USER.pet_listings.map(item => item);
-                newPetListings.push(petInfo.pet_id);
+                newPetListings.push({id: petInfo.pet_id, type: listingData.pet_data.type});
                 console.log(newPetListings);
                 const userRef = firestore.collection("UserInfo")
                     .doc(USER.email);
