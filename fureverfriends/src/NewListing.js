@@ -57,7 +57,13 @@ export default function NewListing() {
         profile_url: "",
         pet_id: ""
     });
-
+    const [dynamicDescription, setDynamicDescription] = useState({
+        content: "",
+        rating: 1,
+    });
+    useEffect(() => {
+        console.log(dynamicDescription.content)
+    }, [dynamicDescription.content])
     const [formState, setFormState] = useState(null);
     const [fileState, setFileState] = useState({
         has_profile_img: false,
@@ -509,6 +515,13 @@ export default function NewListing() {
 
     M.AutoInit();
   }
+    const handleDescription = (info) => {
+        const userInput = info.target.value;
+        setDynamicDescription({
+            ...dynamicDescription,
+            content: userInput
+        });
+    }
 
     return (
         <div className="create-profile">
@@ -536,10 +549,10 @@ export default function NewListing() {
                             </div>
                             :
                             <div className="row form-container">
+                                    <div className="divider"></div>
                                     <div className="listings-profile-pic-wrap listings-section">
                                         <h5>Set Profile Picture</h5>
-                                        <h6>This picture will be the main image for your pet and will be seen in the
-                                            listings page</h6>
+                                        <p>This will be the most prominent picture of your pet. Choose your favorite to go here!</p>
                                         <form action="#">
                                             <div className="file-field input-field">
                                                 <div className="btn">
@@ -557,8 +570,7 @@ export default function NewListing() {
                                     </div>
                                     <div className="listings-add-pic-wrap listings-section">
                                         <h5>Set Additional Picture</h5>
-                                        <h6>These are any additional pictures of your pet and can be seen in the pet
-                                            profile page</h6>
+                                        <p>Got more photos you want to display? Add them here.</p>
                                         <form action="#">
                                             <div className="file-field input-field">
                                                 <div className="btn">
@@ -573,29 +585,30 @@ export default function NewListing() {
                                             </div>
                                         </form>
                                     </div>
+                                    <div className="divider"></div>
                                     <div className="listings-pet-info listings-section">
                                         <h5>Pet Information</h5>
-                                        <h6>Some dropdowns will autofill upon pet type selection</h6>
+                                        <p>This section provides an overview about your pet. Many of the fields, including personality, help your pet show up more in searches and matches.</p>
                                         <form className="row">
                                             <div className="left-filter col s12 m6 l6 x6">
-
-                                                <div className="listings-form-row">
-                                                    <label htmlFor="petname">Name: </label>
-                                                    <input type="text" id="petname" name="petname"/>
+                                                <div className="input-field">
+                                                    <label htmlFor="petname" className="active">Name</label>
+                                                    <input type="text" id="petname" name="petname" className="validate"/>
+                                                    <span className="helper-text" data-error="Required">Required</span>
                                                 </div>
-
-                                                <div className="listings-form-row">
-                                                    <label htmlFor="type-of-pet">Type of Pet</label>
-                                                    <select id="type-of-pet" name="type-of-pet"
+                                                <div className="input-field">
+                                                    <label htmlFor="type-of-pet" className="active">Type of Pet</label>
+                                                    <select id="type-of-pet" name="type-of-pet" className="validate"
                                                             onChange={e => handleChange(e)}>
                                                         <option value="" disabled selected> </option>
                                                         {type.map((address, key) =>
                                                             <option value={key}>{address}</option>)}
                                                     </select>
+                                                    <span className="helper-text" data-error="Required">Required</span>
                                                 </div>
 
-                                                <div className="listings-form-row">
-                                                    <label htmlFor="age">Age</label>
+                                                <div className="input-field">
+                                                    <label htmlFor="age" className="active">Age</label>
                                                     <select id="age" name="age">
                                                         <option value="Young">Young</option>
                                                         <option value="Teen">Teen</option>
@@ -603,30 +616,30 @@ export default function NewListing() {
                                                     </select>
                                                 </div>
 
-                                                <div className="listings-form-row">
-                                                    <label htmlFor="gender">Gender</label>
+                                                <div className="input-field">
+                                                    <label htmlFor="gender" className="active">Gender</label>
                                                     <select id="gender" name="gender">
                                                         <option value="Female">Female</option>
                                                         <option value="Male">Male</option>
                                                     </select>
                                                 </div>
 
-                                                <div className="listings-form-row">
-                                                    <label htmlFor="breed">Breed</label>
+                                                <div className="input-field">
+                                                    <label htmlFor="breed" className="active">Breed</label>
                                                     <select id="breed" name="breed">
                                                         {/*populated using JavaScript*/}
                                                     </select>
                                                 </div>
 
-                                                <div className="listings-form-row">
-                                                    <label htmlFor="color">Color</label>
+                                                <div className="input-field">
+                                                    <label htmlFor="color" className="active">Color</label>
                                                     <select id="color" name="color">
                                                         {/*populated using JavaScript*/}
                                                     </select>
                                                 </div>
 
-                                                <div className="listings-form-row">
-                                                    <label htmlFor="cared-by">Cared By</label>
+                                                <div className="input-field">
+                                                    <label htmlFor="cared-by" className="active">Cared By</label>
                                                     <select id="cared-by" name="cared-by">
                                                         <option value="Private Owner">Private Owner</option>
                                                         <option value="Organization/Rescue">Organization/Rescue</option>
@@ -694,22 +707,52 @@ export default function NewListing() {
                                             </div>
                                         </form>
                                     </div>
+                                    <div className="divider"></div>
                                     <div className="listings-about-me listings-section ">
-                                        <h5>About me section</h5>
-                                        <h6>Please fill out this section regarding any additional info (such as a
-                                            backstory!)</h6>
                                         <form className="row">
+                                            <h5>About Me</h5>
+                                            <p>Just like humans, all animals have their own unique personality, likes, dislikes, and backstory.
+                                                Sharing those details here will help your pet find a human that can give them them the
+                                                kind of life they need and want.
+                                            </p>
                                             <div className="input-field col s12">
-                                                <label htmlFor="textarea1">Pet Bio</label>
-                                                <textarea id="about-me" className="materialize-textarea"></textarea>
+                                                <label htmlFor="about-me">Pet Description</label>
+                                                <textarea id="about-me" className="materialize-textarea validate"
+                                                          required="required"
+                                                          onBlur={handleDescription}></textarea>
+                                                <span className="helper-text" data-error="Required">Required</span>
+                                            </div>
+                                            <div className="col s12 description-note">
+                                                <span className="match-title">Matchability Rating: </span>
+                                                <span className="match-stars tooltipped" data-position="bottom" data-html="true" data-tooltip={(dynamicDescription.rating + 1) + " out of 5 stars"}>
+                                                    <i className={"material-icons " + ((dynamicDescription.rating < 0) ? "" : "filled-star")}>{(dynamicDescription.rating < 0) ? 'star_outline' : 'star' }</i>
+                                                    <i className={"material-icons " + ((dynamicDescription.rating < 1) ? "" : "filled-star")}>{(dynamicDescription.rating < 1) ? 'star_outline' : 'star' }</i>
+                                                    <i className={"material-icons " + ((dynamicDescription.rating < 2) ? "" : "filled-star")}>{(dynamicDescription.rating < 2) ? 'star_outline' : 'star' }</i>
+                                                    <i className={"material-icons " + ((dynamicDescription.rating < 3) ? "" : "filled-star")}>{(dynamicDescription.rating < 3) ? 'star_outline' : 'star' }</i>
+                                                    <i className={"material-icons " + ((dynamicDescription.rating < 4) ? "" : "filled-star")}>{(dynamicDescription.rating < 4) ? 'star_outline' : 'star' }</i>
+                                                </span>
+                                                <a className="material-icons right modal-trigger" href="#rating_modal">help_outline</a>
+                                                <div id="rating_modal" className="modal">
+                                                    <div className="modal-content">
+                                                        <h4>What is a Matchability Rating?</h4>
+                                                        <p>Research suggests that certain types of profile content can help a pet get adopted more quickly.
+                                                        Using that research, combined with our Artificial Intelligence software, FureverFriends analyzes your pet's About Me description and gives it
+                                                        a rating based on how well it matches other successful adoption profiles. The higher the rating, the better
+                                                        the odds that your pet will find their Furever Friend.</p>
+                                                    </div>
+                                                    <div className="modal-footer">
+                                                        <a href="#!"
+                                                           className="modal-close btn-flat">Done</a>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </form>
                                     </div>
+                                    <div className="divider"></div>
                                     <div className="listings-contact-info listings-section ">
                                         <h5>Contact Information</h5>
-                                        <h6>This contact information will be posted publicly on the profile to allow
-                                            potential
-                                            adopters to contact you with questions and inquiries.</h6>
+                                        <p>This contact information will be posted publicly on the profile to allow
+                                            potential adopters to contact you with questions and inquiries. </p>
                                         <form className="listings-contact-form">
                                             <div className="row">
                                                 <div className="left-filter col s12 m6 l6 x6">
@@ -739,9 +782,10 @@ export default function NewListing() {
                                             </div>
                                         </form>
                                     </div>
+                                    <div className="divider"></div>
                                     <div className="listings-application-info listings-section ">
                                         <h5>Application Information</h5>
-                                        <h6>Upload the file that the applicant will be filling out</h6>
+                                        <p>Upload a file for the applicant to fill out when they're interested in adopting.</p>
                                         <form action="#">
                                             <div className="file-field input-field">
                                                 <div className="btn">
@@ -755,6 +799,7 @@ export default function NewListing() {
                                             </div>
                                         </form>
                                     </div>
+                                    <div className="divider"></div>
                                     <div className="listings-submit-button-wrap  center-align">
                                         <button className="btn waves-effect waves-light btn-large" type="button"
                                                 name="action" onClick={processFormContents}>Create Profile

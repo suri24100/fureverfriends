@@ -55,7 +55,7 @@ export default function Header() {
                     <Link to="/">Home</Link>
                     <Link to="/listings">Adopt</Link>
                     <Link to="/findahome">Rehome</Link>
-                    <Link to="/petcare">Pet Care</Link>
+                    {/*<Link to="/petcare">Pet Care</Link>*/}
                     {currentUser ? <Link to="/Home" onClick={handleLogOut}>Log Out</Link> : <Link to="/login">Log In</Link> }
                     <img src={notification_icon} alt="Notifications"/>
                     <img src={messages_icon} alt="Messages"/>

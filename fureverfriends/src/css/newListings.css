@@ -1,12 +1,71 @@
-body {
+body, .create-profile {
   font-family: 'Calibri', sans-serif;
 }
-img {
+.create-profile img {
   width: 100%;
 }
 
+.create-profile .divider{
+  width: 100%;
+  height: 2px;
+  background: #379683;
+  margin-top:60px;
+  margin-bottom:60px;
+}
 .create-profile h4 {
   text-transform: uppercase;
+}
+
+.create-profile .req-mark{
+  color: #05668d;
+}
+
+.create-profile .left-filter .input-field{
+  margin-bottom: 40px;
+}
+
+.create-profile a{
+  color: #4C4C4C!important;
+}
+.create-profile .modal-content h4{
+  text-transform: none;
+  color: #379683!important;
+}
+.create-profile .modal-content p{
+  margin-top:30px;
+  font-size: 12pt;
+}
+.create-profile .modal-close{
+  color: #379683!important;
+  font-weight: bold;
+}
+.material-tooltip > .backdrop {
+  background-color:#cc0000!important;
+}
+
+.material-tooltip > span {
+  font-size:22px!important;
+  padding:10px!important;
+}
+
+.create-profile .description-note .match-title{
+  font-weight: bold;
+  color: #379683;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  line-height: 1.3rem;
+  margin-right: 15px;
+}
+.create-profile .description-note i{
+  font-size: 1.3rem;
+  line-height: 1.3rem;
+  top:3px;
+  position: relative;
+  color: darkgray;
+  cursor: default;
+}
+.create-profile .description-note i.filled-star{
+  color: #f28482;
 }
 
 .create-profile .login-required{
@@ -105,6 +164,8 @@ img {
 .listings-section,
 .listings-submit-button-wrap {
   margin-bottom: 5%;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 .listings-section button,
 .listings-submit-button-wrap button {
