@@ -42,10 +42,10 @@
     margin-top: 60px!important;
 }
 
-.listings-heading{
+.quiz-page .listings-heading{
     margin-bottom: 3rem;
 }
-.listings-heading h4 {
+.quiz-page .listings-heading h4 {
     color: #379683;
     text-transform: uppercase;
     margin-bottom: 60px;

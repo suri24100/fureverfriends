@@ -132,28 +132,29 @@ export default function NewListing() {
         console.log(listingData);
         console.log(listingData.pet_data.type);
         console.log(listingData.pet_data.pet_id);
-         firestore.collection("PetInfo")
-             .doc("PublicListings")
-             .collection("AdoptionList")
-             .doc("PetTypes")
-             .collection(listingData.pet_data.type)
-             .doc(listingData.pet_data.pet_id)
-             .set(listingData)
-             .then((docRef) => {
-                 console.log("Document written");
-                 setListingSaved(true);
-                 let newPetListings = USER.pet_listings.map(item => item);
-                 newPetListings.push({id: petInfo.pet_id, type: listingData.pet_data.type});
-                 console.log(newPetListings);
-                 const userRef = firestore.collection("UserInfo")
-                     .doc(USER.email);
-                 let setWithMerge = userRef.set({
-                     pet_listings: newPetListings
-                 }, {merge: true});
-             })
-             .catch((error) => {
-                 console.error("Error adding document: ", error);
-         });
+
+        firestore.collection("PetInfo")
+            .doc("PublicListings")
+            .collection("AdoptionList")
+            .doc("PetTypes")
+            .collection(listingData.pet_data.type)
+            .doc(listingData.pet_data.pet_id)
+            .set(listingData)
+            .then((docRef) => {
+                console.log("Document written");
+                setListingSaved(true);
+                let newPetListings = USER.pet_listings.map(item => item);
+                newPetListings.push({id: petInfo.pet_id, type: listingData.pet_data.type});
+                console.log(newPetListings);
+                const userRef = firestore.collection("UserInfo")
+                    .doc(USER.email);
+                let setWithMerge = userRef.set({
+                    pet_listings: newPetListings
+                }, {merge: true});
+            })
+            .catch((error) => {
+                console.error("Error adding document: ", error);
+        });
     }
 
     async function uploadFile(file, metadata, filepath, listingReference){
