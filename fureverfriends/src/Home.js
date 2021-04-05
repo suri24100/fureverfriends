@@ -4,6 +4,7 @@ import './css/home.css';
 import $ from 'jquery';
 import M from "materialize-css";
 import PFdata from "./api-modules/constants.js";
+import {Link} from "react-router-dom";
 
 export default function Home() {
     useEffect(() => {
@@ -201,7 +202,7 @@ export default function Home() {
     <div className="search-or-quiz-wrap container hide-on-small-only">
         <form className="row">
             <div className="center-align quiz-wrap col s12 m6 l6 x6">
-            <a class="waves-effect waves-light btn q-btn">Take The Quiz!</a>
+                <Link class="waves-effect waves-light btn q-btn" to="/quiz">Take The Quiz!</Link>
             </div>
             <div className="search-wrap container col s12 m6 l6 x6">
                 <div className="search">
