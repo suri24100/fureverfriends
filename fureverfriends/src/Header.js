@@ -84,7 +84,6 @@ export default function Header() {
                 <li><Link to="/"><span>Home</span></Link></li>
                 <li><Link to="/listings"><span>Adopt</span></Link></li>
                 <li><Link to="/findahome"><span>Rehome</span></Link></li>
-                <li><Link to="/petcare"><span>Pet Care</span></Link></li>
                 <li>{currentUser ? <Link to="/Home" onClick={handleLogOut}><span>Log Out</span></Link> : <Link to="/login"><span>Log In</span></Link> }</li>
                 <li><Link to="/DisplayUserProfile"><span>My Account</span></Link></li>
                 </div>
