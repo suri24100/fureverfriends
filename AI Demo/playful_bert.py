@@ -90,13 +90,11 @@ model = TFDistilBertForSequenceClassification.from_pretrained('distilbert-base-u
 optimizer = tf.keras.optimizers.Adam(learning_rate=5e-5)
 model.compile(optimizer=optimizer, loss=model.compute_loss, metrics=['accuracy'])
 
-print(tf.keras.utils.plot_model(model))
-
-model.fit(train_dataset.shuffle(1000).batch(16), epochs=3, batch_size=16,
+model.fit(train_dataset.shuffle(1000).batch(16), epochs=5, batch_size=16,
           validation_data=val_dataset.shuffle(1000).batch(16))
 
-print(model.eval())
-
+# print(model.eval())
+print(model.summary())
 save_directory = "./playful_model"
 
 model.save_pretrained(save_directory)
