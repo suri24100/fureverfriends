@@ -506,8 +506,31 @@ export default function Listings(){
                             
                             if (userSelections.breed.length > 0) {
                                 userSelections.breed.forEach(breed => {
+                                    console.log("age test: " + breed)
                                     for (let i = 0; i < listingData.length; i++) {
                                         if (listingData[i].pet_data.breed != breed) {
+                                            listingData.splice(i,1);
+                                        }
+                                    }
+                                })
+                            }
+
+                            if (userSelections.age.length > 0) {
+                                userSelections.age.forEach(age => {
+                                    //console.log("age test: " + age)
+                                    for (let i = 0; i < listingData.length; i++) {
+                                        console.log(listingData[i].pet_data.age + " and " + capitalize(age) + (listingData[i].pet_data.age == capitalize(age)))
+                                        if (listingData[i].pet_data.age != capitalize(age)) {
+                                            listingData.splice(i,1);
+                                        }
+                                    }
+                                })
+                            }
+
+                            if (userSelections.gender.length > 0) {
+                                userSelections.gender.forEach(gender => {
+                                    for (let i = 0; i < listingData.length; i++) {
+                                        if (listingData[i].pet_data.gender != capitalize(gender)) {
                                             listingData.splice(i,1);
                                         }
                                     }
@@ -580,6 +603,10 @@ export default function Listings(){
                 });
         }
         
+    }
+
+    function capitalize(word) {
+        return word.charAt(0).toUpperCase() + word.slice(1);
     }
 
     function generateCards(){
@@ -910,7 +937,7 @@ export default function Listings(){
                                                 <li key={item}>
                                                     <label>
                                                     <input className="filled-in" type="checkbox"
-                                                           value="item" name="age" id={'age-' + item}
+                                                           value={item.toString()} name="age" id={'age-' + item}
                                                            onChange={updateFilters} />
                                                     <span>{item.toString()}</span>
                                                     </label>
@@ -924,7 +951,7 @@ export default function Listings(){
                                             <li key={item}>
                                                 <label>
                                                     <input className="filled-in" type="checkbox"
-                                                           value="item" name="gender" id={'gender-' + item}
+                                                           value={item.toString()} name="gender" id={'gender-' + item}
                                                            onChange={updateFilters} />
                                                     <span>{item.toString()}</span>
                                                 </label>
