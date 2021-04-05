@@ -259,7 +259,7 @@ export default function Listings(){
 
     function processLocation() {
         //console.log("got here yay");
-        console.log(geoData);
+        //console.log(geoData);
         userLong = geoData.lon;
         userLat = geoData.lat;
     }
@@ -326,6 +326,9 @@ export default function Listings(){
     }
 
     async function getFFListings(userSelections, pageNum) {
+        userSelections.breed.forEach(breed => {
+            console.log("breed test: " + breed)
+        });
         let listingData = [];
         if(userSelections.type === "all"){
             console.log("FF all")
@@ -338,7 +341,7 @@ export default function Listings(){
                         // doc.data() is never undefined for query doc snapshots
                         if (userSelections.zipcode) {
                             let distance = calculateDistance(userLat, userLong, doc.data().lat, doc.data().lon);
-                            console.log("distance between userinput and " + doc.data().pet_data.name + " of id: " + doc.id + " is " + distance);
+                            //console.log("distance between userinput and " + doc.data().pet_data.name + " of id: " + doc.id + " is " + distance);
                             let filtDistance = userSelections.distance;
                             //console.log(filtDistance);
                             if (distance <= filtDistance) {
@@ -468,7 +471,7 @@ export default function Listings(){
                         //console.log("userLat = doc's lat? " + (userLat == doc.data().lat) + " for " + doc.data().pet_data.name);
                         if (userSelections.zipcode) {
                             let distance = calculateDistance(userLat, userLong, doc.data().lat, doc.data().lon);
-                            console.log("distance between userinput and " + doc.data().pet_data.name + " of id: " + doc.id + " is " + distance);
+                            //console.log("distance between userinput and " + doc.data().pet_data.name + " of id: " + doc.id + " is " + distance);
                             let filtDistance = userSelections.distance;
                             //console.log(filtDistance);
                             if (distance <= filtDistance) {
@@ -883,7 +886,7 @@ export default function Listings(){
                                             <li key={item.name}>
                                                 <label>
                                                     <input className="filled-in" type="checkbox"
-                                                           value="item" name="breed" id={'breed-' + item.name}
+                                                           value={item.name.toString()} name="breed" id={'breed-' + item.name}
                                                            onChange={updateFilters}
                                                     />
                                                     <span>{item.name.toString()}</span>
