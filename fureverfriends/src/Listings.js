@@ -288,39 +288,225 @@ export default function Listings(){
 
 
     //script to add longitude, latitude and distance to pets in firestore
-    function modifyFFListings() {
-                var zip;
-                firestore.collection("PetInfo")
-                .doc("PublicListings")
-                .collection("AdoptionList")
-                .doc("PetTypes").collection("bird").get()
-                .then((querySnapshot) => {
-                    querySnapshot.forEach((doc) => {
-                        zip = doc.data().pet_data.location.zipcode;
-                        //console.log("zip2: " + zip);
-                        const apikey = '317f5c81a3241fbb45bbf57e335d466d';
-                        fetch(
-                            `http://api.openweathermap.org/data/2.5/forecast?zip=${zip}&units=imperial&appid=${apikey}`
-                        )
-                        .then((res) => res.json())
-                        .then((json) => {
+    window.onload = function modifyFFListings() {
+        console.log("modifyFFListings function ran successfully")
+        var zip;
+        firestore.collection("PetInfo")
+        .doc("PublicListings")
+        .collection("AdoptionList")
+        .doc("PetTypes").collection("cat").get()
+        .then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                zip = doc.data().pet_data.location.zipcode;
+                if (doc.data().lat == null) {
+                    //console.log("missing lat for " + doc.data().pet_data.pet_id)
 
-                            //console.log(json.city.coord.lat);
-                            //console.log(doc.data().pet_data.pet_id);
-                            var id = doc.data().pet_data.pet_id;
+                    const apikey = '317f5c81a3241fbb45bbf57e335d466d';
+                    fetch(
+                        `http://api.openweathermap.org/data/2.5/forecast?zip=${zip}&units=imperial&appid=${apikey}`
+                    )
+                    .then((res) => res.json())
+                    .then((json) => {
+
+                        //console.log(json.city.coord.lat);
+                        //console.log(doc.data().pet_data.pet_id);
+                        var id = doc.data().pet_data.pet_id;
+                        var pet = firestore.collection("PetInfo")
+                        .doc("PublicListings")
+                        .collection("AdoptionList")
+                        .doc("PetTypes")
+                        .collection("cat")
+                        .doc(id).set({
+                            lat: json.city.coord.lat,
+                            lon: json.city.coord.lon,
+                            distance: 2000
+                        }, { merge: true });
+                    });
+                }
+            })
+        });
+
+        firestore.collection("PetInfo")
+        .doc("PublicListings")
+        .collection("AdoptionList")
+        .doc("PetTypes").collection("dog").get()
+        .then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                zip = doc.data().pet_data.location.zipcode;
+                //console.log("zip2: " + zip);
+                if (doc.data().lat == null) {
+                    //console.log("missing lat for " + doc.data().pet_data.pet_id)
+
+                    const apikey = '317f5c81a3241fbb45bbf57e335d466d';
+                    fetch(
+                        `http://api.openweathermap.org/data/2.5/forecast?zip=${zip}&units=imperial&appid=${apikey}`
+                    )
+                    .then((res) => res.json())
+                    .then((json) => {
+
+                        //console.log(json.city.coord.lat);
+                        //console.log(doc.data().pet_data.pet_id);
+                        var id = doc.data().pet_data.pet_id;
+                        try {
                             var pet = firestore.collection("PetInfo")
                             .doc("PublicListings")
                             .collection("AdoptionList")
                             .doc("PetTypes")
-                            .collection("bird")
+                            .collection("cat")
                             .doc(id).set({
                                 lat: json.city.coord.lat,
                                 lon: json.city.coord.lon,
                                 distance: 2000
                             }, { merge: true });
-                        });
-                    })
-                });
+                        } catch (e) {
+                            //some error occured
+                        }
+                        //console.log("test: " + json.city)
+                    });
+                }
+            })
+        });
+
+        firestore.collection("PetInfo")
+        .doc("PublicListings")
+        .collection("AdoptionList")
+        .doc("PetTypes").collection("bird").get()
+        .then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                zip = doc.data().pet_data.location.zipcode;
+                if (doc.data().lat == null) {
+                    //console.log("missing lat for " + doc.data().pet_data.pet_id)
+
+                    const apikey = '317f5c81a3241fbb45bbf57e335d466d';
+                    fetch(
+                        `http://api.openweathermap.org/data/2.5/forecast?zip=${zip}&units=imperial&appid=${apikey}`
+                    )
+                    .then((res) => res.json())
+                    .then((json) => {
+
+                        //console.log(json.city.coord.lat);
+                        //console.log(doc.data().pet_data.pet_id);
+                        var id = doc.data().pet_data.pet_id;
+                        var pet = firestore.collection("PetInfo")
+                        .doc("PublicListings")
+                        .collection("AdoptionList")
+                        .doc("PetTypes")
+                        .collection("bird")
+                        .doc(id).set({
+                            lat: json.city.coord.lat,
+                            lon: json.city.coord.lon,
+                            distance: 2000
+                        }, { merge: true });
+                    });
+                }
+            })
+        });
+
+        firestore.collection("PetInfo")
+        .doc("PublicListings")
+        .collection("AdoptionList")
+        .doc("PetTypes").collection("rabbit").get()
+        .then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                zip = doc.data().pet_data.location.zipcode;
+                if (doc.data().lat == null) {
+                    //console.log("missing lat for " + doc.data().pet_data.pet_id)
+
+                    const apikey = '317f5c81a3241fbb45bbf57e335d466d';
+                    fetch(
+                        `http://api.openweathermap.org/data/2.5/forecast?zip=${zip}&units=imperial&appid=${apikey}`
+                    )
+                    .then((res) => res.json())
+                    .then((json) => {
+
+                        //console.log(json.city.coord.lat);
+                        //console.log(doc.data().pet_data.pet_id);
+                        var id = doc.data().pet_data.pet_id;
+                        var pet = firestore.collection("PetInfo")
+                        .doc("PublicListings")
+                        .collection("AdoptionList")
+                        .doc("PetTypes")
+                        .collection("rabbit")
+                        .doc(id).set({
+                            lat: json.city.coord.lat,
+                            lon: json.city.coord.lon,
+                            distance: 2000
+                        }, { merge: true });
+                    });
+                }
+            })
+        });
+
+        firestore.collection("PetInfo")
+        .doc("PublicListings")
+        .collection("AdoptionList")
+        .doc("PetTypes").collection("scales_fins_other").get()
+        .then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                zip = doc.data().pet_data.location.zipcode;
+                if (doc.data().lat == null) {
+                    //console.log("missing lat for " + doc.data().pet_data.pet_id)
+
+                    const apikey = '317f5c81a3241fbb45bbf57e335d466d';
+                    fetch(
+                        `http://api.openweathermap.org/data/2.5/forecast?zip=${zip}&units=imperial&appid=${apikey}`
+                    )
+                    .then((res) => res.json())
+                    .then((json) => {
+
+                        //console.log(json.city.coord.lat);
+                        //console.log(doc.data().pet_data.pet_id);
+                        var id = doc.data().pet_data.pet_id;
+                        var pet = firestore.collection("PetInfo")
+                        .doc("PublicListings")
+                        .collection("AdoptionList")
+                        .doc("PetTypes")
+                        .collection("scales_fins_other")
+                        .doc(id).set({
+                            lat: json.city.coord.lat,
+                            lon: json.city.coord.lon,
+                            distance: 2000
+                        }, { merge: true });
+                    });
+                }
+            })
+        });
+
+        firestore.collection("PetInfo")
+        .doc("PublicListings")
+        .collection("AdoptionList")
+        .doc("PetTypes").collection("small_furry").get()
+        .then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                zip = doc.data().pet_data.location.zipcode;
+                if (doc.data().lat == null) {
+                    //console.log("missing lat for " + doc.data().pet_data.pet_id)
+
+                    const apikey = '317f5c81a3241fbb45bbf57e335d466d';
+                    fetch(
+                        `http://api.openweathermap.org/data/2.5/forecast?zip=${zip}&units=imperial&appid=${apikey}`
+                    )
+                    .then((res) => res.json())
+                    .then((json) => {
+
+                        //console.log(json.city.coord.lat);
+                        //console.log(doc.data().pet_data.pet_id);
+                        var id = doc.data().pet_data.pet_id;
+                        var pet = firestore.collection("PetInfo")
+                        .doc("PublicListings")
+                        .collection("AdoptionList")
+                        .doc("PetTypes")
+                        .collection("small_furry")
+                        .doc(id).set({
+                            lat: json.city.coord.lat,
+                            lon: json.city.coord.lon,
+                            distance: 2000
+                        }, { merge: true });
+                    });
+                }
+            })
+        });
+
 
 
     }
@@ -841,6 +1027,7 @@ export default function Listings(){
             
             <div className="row">
                 <div className="col s12 m4 l3">
+                
                     <form>
                         <div className="col s12">
                         <button className="btn-small" type="button" onClick={applyFilters}>
