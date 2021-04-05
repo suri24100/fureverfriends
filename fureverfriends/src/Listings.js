@@ -537,12 +537,22 @@ export default function Listings(){
                                 })
                             }
 
-                            console.log(userSelections.coat.legnth + " test length of fur");
+                            /*console.log(userSelections.coat.legnth + " test length of fur");
                             if (userSelections.coat.length > 0) {
                                 userSelections.coat.forEach(coat => {
                                     for (let i = 0; i < listingData.length; i++) {
                                         console.log(listingData[i].pet_data.fur_length + " and " + capitalize(coat) + (listingData[i].pet_data.fur_length == capitalize(coat)))
                                         if (listingData[i].pet_data.fur_length != capitalize(coat)) {
+                                            listingData.splice(i,1);
+                                        }
+                                    }
+                                })
+                            }*/
+
+                            if (userSelections.color.length > 0) {
+                                userSelections.color.forEach(color => {
+                                    for (let i = 0; i < listingData.length; i++) {
+                                        if (listingData[i].pet_data.color != capitalize(color)) {
                                             listingData.splice(i,1);
                                         }
                                     }
@@ -976,7 +986,7 @@ export default function Listings(){
                                             <li key={item}>
                                                 <label>
                                                     <input className="filled-in" type="checkbox"
-                                                           value="item" name="size" id={'size-' + item}
+                                                           value={item.toString()} name="size" id={'size-' + item}
                                                            onChange={updateFilters} />
                                                     <span>{item.toString()}</span>
                                                 </label>
@@ -991,7 +1001,7 @@ export default function Listings(){
                                             <li key={item}>
                                                 <label>
                                                     <input className="filled-in" type="checkbox"
-                                                           value="item" name="coat" id={'coat-' + item}
+                                                           value={item.toString()} name="coat" id={'coat-' + item}
                                                            onChange={updateFilters} />
                                                     <span>{item.toString()}</span>
                                                 </label>
@@ -1006,7 +1016,7 @@ export default function Listings(){
                                             <li key={item}>
                                                 <label>
                                                     <input className="filled-in" type="checkbox"
-                                                           value="item" name="color" id={'color-' + item}
+                                                           value={item.toString()} name="color" id={'color-' + item}
                                                            onChange={updateFilters} />
                                                     <span>{item.toString()}</span>
                                                 </label>
