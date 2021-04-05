@@ -181,7 +181,7 @@ export default function Listings(){
     useEffect( () => {
     }, [userSelections.type]);
     useEffect(() =>{
-        //console.log(userSelections);
+        console.log(userSelections);
     })
 
     const [applyFilter, setApplyFilter] = useState(false);
@@ -531,6 +531,18 @@ export default function Listings(){
                                 userSelections.gender.forEach(gender => {
                                     for (let i = 0; i < listingData.length; i++) {
                                         if (listingData[i].pet_data.gender != capitalize(gender)) {
+                                            listingData.splice(i,1);
+                                        }
+                                    }
+                                })
+                            }
+
+                            console.log(userSelections.coat.legnth + " test length of fur");
+                            if (userSelections.coat.length > 0) {
+                                userSelections.coat.forEach(coat => {
+                                    for (let i = 0; i < listingData.length; i++) {
+                                        console.log(listingData[i].pet_data.fur_length + " and " + capitalize(coat) + (listingData[i].pet_data.fur_length == capitalize(coat)))
+                                        if (listingData[i].pet_data.fur_length != capitalize(coat)) {
                                             listingData.splice(i,1);
                                         }
                                     }
