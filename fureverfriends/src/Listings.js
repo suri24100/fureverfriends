@@ -181,7 +181,7 @@ export default function Listings(){
     useEffect( () => {
     }, [userSelections.type]);
     useEffect(() =>{
-        console.log(userSelections);
+        //console.log(userSelections);
     })
 
     const [applyFilter, setApplyFilter] = useState(false);
@@ -324,11 +324,22 @@ export default function Listings(){
 
 
     }
-
+    function filterMoreFF(listingData, argumentType, argument) {
+        let refinedData = [];
+        /*for (let i = 0; i < listingData.length; i++) {
+            console.log(JSON.stringify(listingData[i].pet_data.breed))
+        }*/
+        if (argumentType == "breed") {
+            for (let i = 0; i < listingData.length; i++) {
+                if (listingData[i].pet_data.breed == argument) {
+                    //console.log(listingData[i].pet_data.breed + " and " +  argument)
+                    refinedData.push(listingData[i])
+                }
+            }
+        }
+        return refinedData;
+    }
     async function getFFListings(userSelections, pageNum) {
-        userSelections.breed.forEach(breed => {
-            console.log("breed test: " + breed)
-        });
         let listingData = [];
         if(userSelections.type === "all"){
             console.log("FF all")
@@ -359,7 +370,7 @@ export default function Listings(){
                                 // doc.data() is never undefined for query doc snapshots
                                 if (userSelections.zipcode) {
                                     let distance = calculateDistance(userLat, userLong, doc.data().lat, doc.data().lon);
-                                    console.log("distance between userinput and " + doc.data().pet_data.name + " of id: " + doc.id + " is " + distance);
+                                    //console.log("distance between userinput and " + doc.data().pet_data.name + " of id: " + doc.id + " is " + distance);
                                     let filtDistance = userSelections.distance;
                                     //console.log(filtDistance);
                                     if (distance <= filtDistance) {
@@ -379,13 +390,15 @@ export default function Listings(){
                                 // doc.data() is never undefined for query doc snapshots
                                 if (userSelections.zipcode) {
                                     let distance = calculateDistance(userLat, userLong, doc.data().lat, doc.data().lon);
-                                    console.log("distance between userinput and " + doc.data().pet_data.name + " of id: " + doc.id + " is " + distance);
+                                    //console.log("distance between userinput and " + doc.data().pet_data.name + " of id: " + doc.id + " is " + distance);
                                     let filtDistance = userSelections.distance;
                                     //console.log(filtDistance);
                                     if (distance <= filtDistance) {
                                         listingData.push(doc.data());
                                     }
-                                } else listingData.push(doc.data());
+                                } else {
+                                    listingData.push(doc.data());
+                                }
                                 //console.log(doc.data());
                             })}).then(() => {setFFListings(listingData); //console.log(listingData)
                             });
@@ -399,7 +412,7 @@ export default function Listings(){
                                 // doc.data() is never undefined for query doc snapshots
                                 if (userSelections.zipcode) {
                                     let distance = calculateDistance(userLat, userLong, doc.data().lat, doc.data().lon);
-                                    console.log("distance between userinput and " + doc.data().pet_data.name + " of id: " + doc.id + " is " + distance);
+                                    //console.log("distance between userinput and " + doc.data().pet_data.name + " of id: " + doc.id + " is " + distance);
                                     let filtDistance = userSelections.distance;
                                     //console.log(filtDistance);
                                     if (distance <= filtDistance) {
@@ -419,7 +432,7 @@ export default function Listings(){
                                 // doc.data() is never undefined for query doc snapshots
                                 if (userSelections.zipcode) {
                                     let distance = calculateDistance(userLat, userLong, doc.data().lat, doc.data().lon);
-                                    console.log("distance between userinput and " + doc.data().pet_data.name + " of id: " + doc.id + " is " + distance);
+                                    //console.log("distance between userinput and " + doc.data().pet_data.name + " of id: " + doc.id + " is " + distance);
                                     let filtDistance = userSelections.distance;
                                     //console.log(filtDistance);
                                     if (distance <= filtDistance) {
@@ -439,7 +452,7 @@ export default function Listings(){
                                 // doc.data() is never undefined for query doc snapshots
                                 if (userSelections.zipcode) {
                                     let distance = calculateDistance(userLat, userLong, doc.data().lat, doc.data().lon);
-                                    console.log("distance between userinput and " + doc.data().pet_data.name + " of id: " + doc.id + " is " + distance);
+                                    //console.log("distance between userinput and " + doc.data().pet_data.name + " of id: " + doc.id + " is " + distance);
                                     let filtDistance = userSelections.distance;
                                     //console.log(filtDistance);
                                     if (distance <= filtDistance) {
@@ -451,7 +464,7 @@ export default function Listings(){
                             });
                 })
         } else {
-            console.log("FF " + userSelections.type)
+            //console.log("FF " + userSelections.type)
             let docRef =  firestore.collection("PetInfo")
                 .doc("PublicListings")
                 .collection("AdoptionList")
@@ -476,11 +489,94 @@ export default function Listings(){
                             //console.log(filtDistance);
                             if (distance <= filtDistance) {
                                 listingData.push(doc.data());
+                                if (userSelections.breed.length > 0) {
+                                    userSelections.breed.forEach(breed => {
+                                        if (doc.data().pet_data.breed != breed) {
+                                            let x = doc.data()
+                                            console.log(x)
+                                            console.log(doc.data().pet_data.breed + " and " +  breed);
+                                            let idx = listingData.indexOf(doc.data())
+                                            console.log("idx not matching " + idx);
+                                        }
+                                    })
+                                }
                             }
-                        } else listingData.push(doc.data());
+                        } else {
+                            listingData.push(doc.data()); }
+                            
+                            if (userSelections.breed.length > 0) {
+                                userSelections.breed.forEach(breed => {
+                                    for (let i = 0; i < listingData.length; i++) {
+                                        if (listingData[i].pet_data.breed != breed) {
+                                            listingData.splice(i,1);
+                                        }
+                                    }
+                                })
+                            }
+                            
+                            
+                            /*
+                            //if breed exists
+                            if (userSelections.breed.length > 0) {
+                                userSelections.breed.forEach(breed => {
+                                    //first check breed
+                                    if (doc.data().pet_data.breed == breed) {
+                                        //if age exists
+                                        if (userSelections.age.length > 0) {
+                                            userSelections.age.forEach(age => {
+                                                //second check age
+                                                if (doc.data().pet_data.age == age) {
+                                                    //if gender exists
+                                                    if (userSelections.gender.length > 0) {
+                                                        userSelections.gender.forEach(gender => {
+                                                            //check gender
+                                                            if (doc.data().pet_data.gender == gender)
+
+
+                                                        })
+                                                    }
+                                                    //if gender does not exist
+                                                    else {
+                                                        
+                                                    }
+                                                }
+                                            })
+                                        }
+                                        //if age does not exist
+                                        else {
+
+                                        }
+                                    }
+                                })
+                            } //breed does not exist
+                            else {
+                                //if age exists
+                                if (userSelections.age.length > 0) {
+                                    userSelections.age.forEach(age => {
+                                        //second check age
+                                        if (doc.data().pet_data.age == age) {
+                                            //if gender exists
+                                            if (userSelections.gender.length > 0) {
+                                                userSelections.age.forEach(age => {
+
+                                                })
+                                            }
+                                            //if gender does not exist
+                                            else {
+
+                                            }
+                                        }
+                                    })
+                                }
+                                //if age does not exist
+                                else {
+
+                                }
+                            } 
+                        } */
                     })
                 }).then(() => {setFFListings(listingData);
-                    console.log(listingData)
+                    //console.log(listingData)
                 });
         }
         
