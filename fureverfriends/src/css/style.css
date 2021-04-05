@@ -10,14 +10,8 @@ body {
 }
 a {
   text-decoration: none;
-  color: #ffffff !important ;
-}
-
-.sub-nav .sub-nav-option li{
   color: #ffffff;
-  background-color: #379683;
 }
-
 .hdr-wrap {
   display: flex;
   justify-content: space-between;
@@ -38,8 +32,6 @@ a {
 .hdr-wrap .primary-menu {
   margin-left: 15vw;
 }
-
-
 .hdr-wrap .primary-menu a,
 .hdr-wrap .primary-menu img {
   margin: 0 1vw 0 1vw;

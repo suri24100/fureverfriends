@@ -37,11 +37,12 @@ export default function NewListing() {
         $(document).ready(function(){
             $('select').select();
           });
-        if(USER.email){
+        if(USER.email.length > 0){
             M.textareaAutoResize($('#about-me'));
             setLoggedIn(true);
             setPageLoaded(true);
-        } else{
+        }
+        else if(USER.email === ""){
             setPageLoaded(true);
         }
     });
@@ -57,7 +58,13 @@ export default function NewListing() {
         profile_url: "",
         pet_id: ""
     });
-
+    const [dynamicDescription, setDynamicDescription] = useState({
+        content: "",
+        rating: -1,
+    });
+    useEffect(() => {
+        console.log(dynamicDescription.content)
+    }, [dynamicDescription.content])
     const [formState, setFormState] = useState(null);
     const [fileState, setFileState] = useState({
         has_profile_img: false,
@@ -122,28 +129,31 @@ export default function NewListing() {
     }
 
     function createPetListing(listingData){
-        firestore.collection("PetInfo")
-            .doc("PublicListings")
-            .collection("AdoptionList")
-            .doc("PetTypes")
-            .collection(listingData.pet_data.type)
-            .doc(listingData.pet_data.pet_id)
-            .set(listingData)
-            .then((docRef) => {
-                console.log("Document written");
-                setListingSaved(true);
-                let newPetListings = USER.pet_listings.map(item => item);
-                newPetListings.push({id: petInfo.pet_id, type: listingData.pet_data.type});
-                console.log(newPetListings);
-                const userRef = firestore.collection("UserInfo")
-                    .doc(USER.email);
-                let setWithMerge = userRef.set({
-                    pet_listings: newPetListings
-                }, {merge: true});
-            })
-            .catch((error) => {
-                console.error("Error adding document: ", error);
-        });
+        console.log(listingData);
+        console.log(listingData.pet_data.type);
+        console.log(listingData.pet_data.pet_id);
+        // firestore.collection("PetInfo")
+        //     .doc("PublicListings")
+        //     .collection("AdoptionList")
+        //     .doc("PetTypes")
+        //     .collection(listingData.pet_data.type)
+        //     .doc(listingData.pet_data.pet_id)
+        //     .set(listingData)
+        //     .then((docRef) => {
+        //         console.log("Document written");
+        //         setListingSaved(true);
+        //         let newPetListings = USER.pet_listings.map(item => item);
+        //         newPetListings.push({id: petInfo.pet_id, type: listingData.pet_data.type});
+        //         console.log(newPetListings);
+        //         const userRef = firestore.collection("UserInfo")
+        //             .doc(USER.email);
+        //         let setWithMerge = userRef.set({
+        //             pet_listings: newPetListings
+        //         }, {merge: true});
+        //     })
+        //     .catch((error) => {
+        //         console.error("Error adding document: ", error);
+        // });
     }
 
     async function uploadFile(file, metadata, filepath, listingReference){
@@ -303,46 +313,119 @@ export default function NewListing() {
     }
 
     function processFormContents() {
+        const errorCheck = document.getElementById("form-error-contents");
+        document.getElementById("submit-button").disabled = true;
+        if(errorCheck) {errorCheck.remove()}
+        let requirementsMet = true;
         // pet information
-        let petname = (document.getElementById('petname')).value;
-        let pettype = (document.getElementById('type-of-pet')).value;
-        let age = (document.getElementById('age')).value;
-        let gender = (document.getElementById('gender')).value;
-        let breed = (document.getElementById('breed')).value;
-        let color = (document.getElementById('color')).value;
-        let caredBy = (document.getElementById('cared-by')).value;
-        let furLength = (document.getElementById('furLength')).value;
-        let adoptionFee = (document.getElementById('adoptionFee')).value;
-        let city = (document.getElementById('city')).value;
-        let state = (document.getElementById('state')).value;
-        let zip = (document.getElementById('zip')).value;
-        let aboutMe = (document.getElementById('about-me')).value;
-
-        // user contact information
-        let contactName = (document.getElementById('contact-name')).value;
-        let contactPhone = (document.getElementById('contact-phone')).value;
-        let contactEmail = (document.getElementById('contact-email')).value;
-        let contactWebsite = (document.getElementById('contact-website')).value;
-
-        // files from user
+        // REQUIRED
         let petProfileImg = (document.getElementById('pet-profile-img')).files;
-        let petAddImg = (document.getElementById('pet-add-img')).files;
-        let applicationForm = (document.getElementById('pet-app-form')).files;
+        console.log(petProfileImg)
+        if(petProfileImg.length === 0) {
+            document.getElementById('pet-profile-img-input').classList.add('invalid');
+            requirementsMet = false;
+        } else {
+            document.getElementById('pet-profile-img-input').classList.remove('invalid');
+        }
+        let petname = (document.getElementById('petname')).value;
+        if(petname === "") {
+            document.getElementById('petname').classList.add('invalid');
+            requirementsMet = false;
+        } else {
+            document.getElementById('petname').classList.remove('invalid');
+        }
+        let pettype = (document.getElementById('type-of-pet')).value;
+        if(pettype === "") {
+            document.getElementById('type-of-pet').parentElement.classList.add('invalid');
+            requirementsMet = false;
+        } else {
+            document.getElementById('type-of-pet').parentElement.classList.remove('invalid');
+        }
+        let caredBy = (document.getElementById('cared-by')).value;
+        if(caredBy === "") {
+            document.getElementById('cared-by').parentElement.classList.add('invalid');
+            requirementsMet = false;
+        } else {
+            document.getElementById('cared-by').parentElement.classList.remove('invalid');
+        }
+        let adoptionFee = (document.getElementById('adoptionFee')).value;
+        if(adoptionFee === "") {
+            document.getElementById('adoptionFee').classList.add('invalid');
+            requirementsMet = false;
+        } else {
+            document.getElementById('adoptionFee').classList.remove('invalid');
+        }
+        let city = (document.getElementById('city')).value;
+        if(city === "") {
+            document.getElementById('city').classList.add('invalid');
+            requirementsMet = false;
+        } else {
+            document.getElementById('city').classList.remove('invalid');
+        }
+        let state = (document.getElementById('state')).value;
+        if(state === "") {
+            document.getElementById('state').classList.add('invalid');
+            requirementsMet = false;
+        } else {
+            document.getElementById('state').classList.remove('invalid');
+        }
+        let zip = (document.getElementById('zip')).value;
+        if(zip === "") {
+            document.getElementById('zip').classList.add('invalid');
+            requirementsMet = false;
+        } else {
+            document.getElementById('zip').classList.remove('invalid');
+        }
+        let contactName = (document.getElementById('contact-name')).value;
+        if(contactName === "") {
+            document.getElementById('contact-name').classList.add('invalid');
+            requirementsMet = false;
+        } else {
+            document.getElementById('contact-name').classList.remove('invalid');
+        }
+        let contactEmail = (document.getElementById('contact-email')).value;
+        if(contactEmail === "") {
+            document.getElementById('contact-email').classList.add('invalid');
+            requirementsMet = false;
+        } else {
+            document.getElementById('contact-email').classList.remove('invalid');
+        }
+        let aboutMe = (document.getElementById('about-me')).value;
+        if(aboutMe === "") {
+            document.getElementById('about-me').classList.add('invalid');
+            requirementsMet = false;
+        } else {
+            document.getElementById('about-me').classList.remove('invalid');
+        }
 
-        // get attributes separately for database structure
-        const attributesField = document.getElementById('attributes')
-        const attributes = [...attributesField.options]
-            .filter(option => option.selected)
-            .map(option => option.value);
-        const personalityField = document.getElementById('personality');
-        const personality = [...personalityField.options]
-            .filter(option => option.selected)
-            .map(option => option.value);
+        if(requirementsMet) {
+            // NOT REQUIRED
+            let age = (document.getElementById('age')).value;
+            let gender = (document.getElementById('gender')).value;
+            let breed = (document.getElementById('breed')).value;
+            let color = (document.getElementById('color')).value;
+            let furLength = (document.getElementById('furLength')).value;
+            let contactPhone = (document.getElementById('contact-phone')).value;
+            let contactWebsite = (document.getElementById('contact-website')).value;
 
-        // create an ID for the pet
-        const new_pet_id = Date.now().toString();
+            // files from user
+            let petAddImg = (document.getElementById('pet-add-img')).files;
+            let applicationForm = (document.getElementById('pet-app-form')).files;
 
-        const newPetListing = {
+            // get attributes separately for database structure
+            const attributesField = document.getElementById('attributes')
+            const attributes = [...attributesField.options]
+                .filter(option => option.selected)
+                .map(option => option.value);
+            const personalityField = document.getElementById('personality');
+            const personality = [...personalityField.options]
+                .filter(option => option.selected)
+                .map(option => option.value);
+
+            // create an ID for the pet
+            const new_pet_id = Date.now().toString();
+
+            const newPetListing = {
                 petfinder_listing: false,
                 pet_id: new_pet_id,
                 account_info: {
@@ -383,26 +466,36 @@ export default function NewListing() {
                 tags: [],
                 description: aboutMe,
                 listing_created: new Date().toJSON()
+            }
+            const profileFiles = {
+                profilePhoto: petProfileImg,
+                additionalPhotos: petAddImg,
+                applicationForm: applicationForm
+            }
+
+            setFormState(newPetListing);
+            setFileState({
+                ...fileState,
+                pet_data: newPetListing
+            });
+
+            setPetInfo({
+                pet_name: newPetListing.name,
+                profile_url: "/listings/" + newPetListing.type + "/profile/FF-" + newPetListing.pet_id,
+                pet_id: newPetListing.pet_id
+            })
+
+            createPetListingData(new_pet_id, profileFiles);
         }
-        const profileFiles = {
-            profilePhoto: petProfileImg,
-            additionalPhotos: petAddImg,
-            applicationForm: applicationForm
+        else{
+            document.getElementById("submit-button").disabled = false;
+            const errorMessage = <p>Oops! You missed some required information above.
+                <br/>Please fill it in before submitting.</p>;
+            const newP = document.createElement("p");
+            newP.setAttribute("id", "form-error-contents");
+            newP.innerHTML = "Oops! You missed some required information above. <br/> Please fill it in before submitting.";
+            document.getElementById("form-error-message").appendChild(newP);
         }
-
-        setFormState(newPetListing);
-        setFileState({
-            ...fileState,
-            pet_data: newPetListing
-        });
-
-        setPetInfo({
-            pet_name: newPetListing.name,
-            profile_url: "/listings/" + newPetListing.type + "/profile/FF-" + newPetListing.pet_id,
-            pet_id: newPetListing.pet_id
-        })
-
-        createPetListingData(new_pet_id, profileFiles);
     }
 
     let typeArray = PFdata.TYPES;
@@ -469,6 +562,7 @@ export default function NewListing() {
                 breedArray[i] = PFdata.BARNYARD.breeds[i].name;
             }
         }
+
     //console.log(petColorArray.length);
 
     let petColorSelect = document.getElementById('color');
@@ -482,6 +576,7 @@ export default function NewListing() {
         petOption.setAttribute("id", "petTypeOption");
         petColorSelect.appendChild(petOption);
     }
+    petColorSelect.disabled = false;
 
     let petFurSelect = document.getElementById('furLength');
     while (petFurSelect.firstChild) {
@@ -494,6 +589,7 @@ export default function NewListing() {
         petOption.setAttribute("id", "petTypeOption");
         petFurSelect.appendChild(petOption);
     }
+    petFurSelect.disabled = false;
 
     let breedSelect = document.getElementById('breed');
     while (breedSelect.firstChild) {
@@ -506,17 +602,46 @@ export default function NewListing() {
         petOption.setAttribute("id", "petTypeOption");
         breedSelect.appendChild(petOption);
     }
+    breedSelect.disabled = false;
 
     M.AutoInit();
   }
+    const handleDescription = (info) => {
+        const userInput = info.target.value;
+        setDynamicDescription({
+            ...dynamicDescription,
+            content: userInput
+        });
+        // DEMO ONLY, setting the ratings by length
+        let tempRating = -1;
+        if(userInput.length > 100){
+            tempRating = 4;
+        }
+        else if(userInput.length > 75){
+            tempRating = 3;
+        }
+        else if(userInput.length > 50){
+            tempRating = 2;
+        }
+        else if(userInput.length > 25){
+            tempRating = 1;
+        }
+        else if(userInput.length > 10){
+            tempRating = 0;
+        }
+        setDynamicDescription({
+            ...dynamicDescription,
+            rating: tempRating
+        });
+    }
 
     return (
         <div className="create-profile">
             <div className="listings-banner-wrap">
             </div>
             <div className="container">
-            <div className="listings-heading center">
-                <h4>Create a profile for your pet</h4>
+            <div className="listings-heading">
+                <h4 className="center">Create a profile for your pet</h4>
                 <p className="intro-text">Profiles are public listings that help your animal find its Furever Friend.
                     Please include as much information about him or her as possible.
                     That information will help us find the purrfect match.
@@ -536,11 +661,11 @@ export default function NewListing() {
                             </div>
                             :
                             <div className="row form-container">
+                                    <div className="divider"></div>
                                     <div className="listings-profile-pic-wrap listings-section">
                                         <h5>Set Profile Picture</h5>
-                                        <h6>This picture will be the main image for your pet and will be seen in the
-                                            listings page</h6>
-                                        <form action="#">
+                                        <p>This will be the most prominent picture of your pet. Choose your favorite to go here!</p>
+                                        <form>
                                             <div className="file-field input-field">
                                                 <div className="btn">
                                                     <i className="material-icons">perm_media</i>
@@ -548,8 +673,9 @@ export default function NewListing() {
                                                            id="pet-profile-img" onChange={e => preview_image(e)}/>
                                                 </div>
                                                 <div className="file-path-wrapper">
-                                                    <input className="file-path validate" type="text"
+                                                    <input className="file-path validate" type="text" id="pet-profile-img-input" className="validate"
                                                            placeholder="Upload an image (.gif,.jpg,.jpeg,.png)"/>
+                                                    <span className="helper-text" data-error="Required">Required</span>
                                                 </div>
                                             </div>
                                         </form>
@@ -557,8 +683,7 @@ export default function NewListing() {
                                     </div>
                                     <div className="listings-add-pic-wrap listings-section">
                                         <h5>Set Additional Picture</h5>
-                                        <h6>These are any additional pictures of your pet and can be seen in the pet
-                                            profile page</h6>
+                                        <p>Got more photos you want to display? Add them here.</p>
                                         <form action="#">
                                             <div className="file-field input-field">
                                                 <div className="btn">
@@ -573,76 +698,110 @@ export default function NewListing() {
                                             </div>
                                         </form>
                                     </div>
+                                    <div className="divider"></div>
                                     <div className="listings-pet-info listings-section">
                                         <h5>Pet Information</h5>
-                                        <h6>Some dropdowns will autofill upon pet type selection</h6>
+                                        <p>This section provides an overview about your pet. Many of the fields, including personality, help your pet show up more in searches and matches.</p>
                                         <form className="row">
                                             <div className="left-filter col s12 m6 l6 x6">
-
-                                                <div className="listings-form-row">
-                                                    <label htmlFor="petname">Name: </label>
-                                                    <input type="text" id="petname" name="petname"/>
+                                                <div className="input-field">
+                                                    <label htmlFor="petname" className="active">Name</label>
+                                                    <input type="text" id="petname" name="petname" className="validate"/>
+                                                    <span className="helper-text" data-error="Required">Required</span>
                                                 </div>
-
-                                                <div className="listings-form-row">
-                                                    <label htmlFor="type-of-pet">Type of Pet</label>
-                                                    <select id="type-of-pet" name="type-of-pet"
+                                                <div className="input-field">
+                                                    <label htmlFor="type-of-pet" className="active">Type of Pet</label>
+                                                    <select id="type-of-pet" name="type-of-pet" className="validate"
                                                             onChange={e => handleChange(e)}>
                                                         <option value="" disabled selected> </option>
                                                         {type.map((address, key) =>
                                                             <option value={key}>{address}</option>)}
                                                     </select>
+                                                    <span className="helper-text" data-error="Required">Required</span>
                                                 </div>
 
-                                                <div className="listings-form-row">
-                                                    <label htmlFor="age">Age</label>
+                                                <div className="input-field">
+                                                    <label htmlFor="age" className="active">Age</label>
                                                     <select id="age" name="age">
+                                                        <option value="" disabled selected></option>
                                                         <option value="Young">Young</option>
                                                         <option value="Teen">Teen</option>
                                                         <option value="Adult">Adult</option>
                                                     </select>
+                                                    <span className="helper-text"></span>
                                                 </div>
 
-                                                <div className="listings-form-row">
-                                                    <label htmlFor="gender">Gender</label>
+                                                <div className="input-field">
+                                                    <label htmlFor="gender" className="active">Gender</label>
                                                     <select id="gender" name="gender">
+                                                        <option value="" disabled selected> </option>
                                                         <option value="Female">Female</option>
                                                         <option value="Male">Male</option>
+                                                        <option value="Unknown">Unknown</option>
                                                     </select>
+                                                    <span className="helper-text"></span>
                                                 </div>
 
-                                                <div className="listings-form-row">
-                                                    <label htmlFor="breed">Breed</label>
-                                                    <select id="breed" name="breed">
+                                                <div className="input-field">
+                                                    <label idhtmlFor="breed" className="active">Breed</label>
+                                                    <select id="breed" name="breed" disabled="disabled">
+                                                    </select>
+                                                    <span className="helper-text"></span>
+                                                </div>
+
+                                                <div className="input-field">
+                                                    <label htmlFor="color" className="active">Color</label>
+                                                    <select id="color" name="color" disabled="disabled">
                                                         {/*populated using JavaScript*/}
                                                     </select>
+                                                    <span className="helper-text"></span>
                                                 </div>
-
-                                                <div className="listings-form-row">
-                                                    <label htmlFor="color">Color</label>
-                                                    <select id="color" name="color">
+                                                <div className="input-field">
+                                                    <label htmlFor="furLength" className="active">Fur Length</label>
+                                                    <select id="furLength" name="furLength" disabled="disabled">
                                                         {/*populated using JavaScript*/}
-                                                    </select>
-                                                </div>
-
-                                                <div className="listings-form-row">
-                                                    <label htmlFor="cared-by">Cared By</label>
-                                                    <select id="cared-by" name="cared-by">
-                                                        <option value="Private Owner">Private Owner</option>
-                                                        <option value="Organization/Rescue">Organization/Rescue</option>
                                                     </select>
                                                 </div>
                                             </div>
+
                                             <div className="right-filter col s12 m6 l6 x6">
-                                                <div className="listings-form-row">
-                                                    <label htmlFor="furLength">Fur Length</label>
-                                                    <select id="furLength" name="furLength">
-                                                        {/*populated using JavaScript*/}
+                                                <div className="input-field">
+                                                    <label htmlFor="cared-by" className="active">Cared By</label>
+                                                    <select id="cared-by" name="cared-by" className="validate">
+                                                        <option value="" disabled selected> </option>
+                                                        <option value="Private Owner">Private Owner</option>
+                                                        <option value="Organization/Rescue">Organization or Rescue</option>
                                                     </select>
+                                                    <span className="helper-text" data-error="Required">Required</span>
                                                 </div>
 
-                                                <div className="listings-form-row">
-                                                    <label htmlFor="personality">Personality</label>
+
+                                                <div className="input-field">
+                                                    <label htmlFor="adoptionFee" className="active">Adoption Fee </label>
+                                                    <input type="text" id="adoptionFee" name="adoptionFee" className="validate"/>
+                                                    <span className="helper-text" data-error="Required">Required</span>
+                                                </div>
+
+                                                <div className="input-field">
+                                                    <label htmlFor="city" className="active">City </label>
+                                                    <input type="text" id="city" name="city" className="validate"/>
+                                                    <span className="helper-text" data-error="Required">Required</span>
+                                                </div>
+
+                                                <div className="input-field" >
+                                                    <label htmlFor="state" className="active">State </label>
+                                                    <input type="text" id="state" name="state" className="validate"/>
+                                                    <span className="helper-text" data-error="Required">Required</span>
+                                                </div>
+
+                                                <div className="input-field">
+                                                    <label htmlFor="zip" className="active">Zip Code </label>
+                                                    <input type="number" id="zip" name="zip" className="validate"/>
+                                                    <span className="helper-text" data-error="Required">Required</span>
+                                                </div>
+
+                                                <div className="input-field">
+                                                    <label htmlFor="personality" className="active">Personality</label>
                                                     <select id="personality" name="personality" multiple>
                                                         <option value="playful">Playful</option>
                                                         <option value="talkative">Talkative</option>
@@ -655,30 +814,11 @@ export default function NewListing() {
                                                         <option value="quiet">Quiet</option>
                                                         <option value="social">Social</option>
                                                     </select>
+                                                    <span className="helper-text"></span>
                                                 </div>
 
-                                                <div className="listings-form-row">
-                                                    <label htmlFor="adoptionFee">Adoption Fee </label>
-                                                    <input type="text" id="adoptionFee" name="adoptionFee"/>
-                                                </div>
-
-                                                <div className="listings-form-row">
-                                                    <label htmlFor="city">City </label>
-                                                    <input type="text" id="city" name="city"/>
-                                                </div>
-
-                                                <div className="listings-form-row">
-                                                    <label htmlFor="state">State </label>
-                                                    <input type="text" id="state" name="state"/>
-                                                </div>
-
-                                                <div className="listings-form-row">
-                                                    <label htmlFor="zip">Zip Code </label>
-                                                    <input type="number" id="zip" name="zip"/>
-                                                </div>
-
-                                                <div className="listings-form-row">
-                                                    <label htmlFor="attributes">Pet Attributes</label>
+                                                <div className="input-field">
+                                                    <label htmlFor="attributes" className="active">Pet Attributes</label>
                                                     <select id="attributes" name="attributes" multiple="multiple">
                                                         <option value="vaccinated">Vaccinated</option>
                                                         <option value="spayed_neutered">Neutered/Spayed</option>
@@ -689,60 +829,94 @@ export default function NewListing() {
                                                         <option value="special_needs">Allergy Friendly</option>
                                                         <option value="bonded_pair">Bonded Pair</option>
                                                     </select>
+                                                    <span className="helper-text"></span>
                                                 </div>
 
                                             </div>
                                         </form>
                                     </div>
-                                    <div className="listings-about-me listings-section ">
-                                        <h5>About me section</h5>
-                                        <h6>Please fill out this section regarding any additional info (such as a
-                                            backstory!)</h6>
-                                        <form className="row">
-                                            <div className="input-field col s12">
-                                                <label htmlFor="textarea1">Pet Bio</label>
-                                                <textarea id="about-me" className="materialize-textarea"></textarea>
+                                    <div className="divider"></div>
+                                    <div className="listings-about-me listings-section">
+                                            <h5>About Me</h5>
+                                            <p>Just like humans, all animals have their own unique personality, likes, dislikes, and backstory.
+                                                Sharing those details here will help your pet find a human that can give them them the
+                                                kind of life they need and want.
+                                            </p>
+                                            <form className="row">
+                                                <div className="input-field col s12">
+                                                <label htmlFor="about-me">Pet Description</label>
+                                                <textarea id="about-me" className="materialize-textarea validate"
+                                                          required="required"
+                                                          onChange={handleDescription}></textarea>
+                                                <span className="helper-text" data-error="Required">Required</span>
                                             </div>
-                                        </form>
+                                                <div className="col s12 description-note">
+                                                <span className="match-title">Matchability Rating: </span>
+                                                <span className="match-stars tooltipped" data-position="bottom" data-html="true" data-tooltip={(dynamicDescription.rating + 1) + " out of 5 stars"}>
+                                                    <i className={"material-icons " + ((dynamicDescription.rating < 0) ? "" : "filled-star")}>{(dynamicDescription.rating < 0) ? 'star_outline' : 'star' }</i>
+                                                    <i className={"material-icons " + ((dynamicDescription.rating < 1) ? "" : "filled-star")}>{(dynamicDescription.rating < 1) ? 'star_outline' : 'star' }</i>
+                                                    <i className={"material-icons " + ((dynamicDescription.rating < 2) ? "" : "filled-star")}>{(dynamicDescription.rating < 2) ? 'star_outline' : 'star' }</i>
+                                                    <i className={"material-icons " + ((dynamicDescription.rating < 3) ? "" : "filled-star")}>{(dynamicDescription.rating < 3) ? 'star_outline' : 'star' }</i>
+                                                    <i className={"material-icons " + ((dynamicDescription.rating < 4) ? "" : "filled-star")}>{(dynamicDescription.rating < 4) ? 'star_outline' : 'star' }</i>
+                                                </span>
+                                                <a className="material-icons right modal-trigger" href="#rating_modal">help_outline</a>
+                                                <div id="rating_modal" className="modal">
+                                                    <div className="modal-content">
+                                                        <h4>What is a Matchability Rating?</h4>
+                                                        <p>Research suggests that certain types of profile content can help a pet get adopted more quickly.
+                                                        Using that research, combined with our Artificial Intelligence software, FureverFriends analyzes your pet's About Me description and gives it
+                                                        a rating based on how well it matches other successful adoption profiles. The higher the rating, the better
+                                                        the odds that your pet will find their Furever Friend.</p>
+                                                    </div>
+                                                    <div className="modal-footer">
+                                                        <a href="#!"
+                                                           className="modal-close btn-flat">Done</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            </form>
                                     </div>
+                                    <div className="divider"></div>
                                     <div className="listings-contact-info listings-section ">
                                         <h5>Contact Information</h5>
-                                        <h6>This contact information will be posted publicly on the profile to allow
-                                            potential
-                                            adopters to contact you with questions and inquiries.</h6>
-                                        <form className="listings-contact-form">
-                                            <div className="row">
+                                        <p>This contact information will be posted publicly on the profile to allow
+                                            potential adopters to contact you with questions and inquiries. </p>
+                                        <form className="row">
                                                 <div className="left-filter col s12 m6 l6 x6">
-                                                    <div className="input-field contact-input-wrap">
+                                                    <div className="input-field">
                                                         <i className="material-icons prefix">account_circle</i>
                                                         <input id="contact-name" type="text" className="validate"/>
-                                                        <label htmlFor="contact-name">Name </label>
+                                                        <label htmlFor="contact-name">Name</label>
+                                                        <span className="helper-text" data-error="Required">Required</span>
                                                     </div>
-                                                    <div className="input-field contact-input-wrap">
+                                                    <div className="input-field">
                                                         <i className="material-icons prefix">phone</i>
                                                         <input id="contact-phone" type="text" className="validate"/>
-                                                        <label htmlFor="contact-phone">Phone </label>
+                                                        <label htmlFor="contact-phone">Phone</label>
+                                                        <span className="helper-text"></span>
                                                     </div>
                                                 </div>
                                                 <div className="right-filter col s12 m6 l6 x6">
-                                                    <div className="input-field contact-input-wrap">
+                                                    <div className="input-field">
                                                         <i className="material-icons prefix">mail</i>
                                                         <input id="contact-email" type="text" className="validate"/>
-                                                        <label htmlFor="contact-email">Email </label>
+                                                        <label htmlFor="contact-email">Email</label>
+                                                        <span className="helper-text" data-error="Required">Required</span>
                                                     </div>
-                                                    <div className="input-field contact-input-wrap">
+                                                    <div className="input-field">
                                                         <i className="material-icons prefix">language</i>
                                                         <input id="contact-website" type="text" className="validate"/>
-                                                        <label htmlFor="contact-website">Website </label>
+                                                        <label htmlFor="contact-website">Website</label>
+                                                        <span className="helper-text"></span>
                                                     </div>
                                                 </div>
-                                            </div>
                                         </form>
                                     </div>
-                                    <div className="listings-application-info listings-section ">
+                                    <div className="divider"></div>
+                                    <div className="listings-application-info listings-section">
                                         <h5>Application Information</h5>
-                                        <h6>Upload the file that the applicant will be filling out</h6>
-                                        <form action="#">
+                                        <p>Upload a file for the applicant to fill out when they're interested in adopting.</p>
+                                        <form className="row" action="#">
                                             <div className="file-field input-field">
                                                 <div className="btn">
                                                     <i className="material-icons">file_present</i>
@@ -755,12 +929,14 @@ export default function NewListing() {
                                             </div>
                                         </form>
                                     </div>
-                                    <div className="listings-submit-button-wrap  center-align">
-                                        <button className="btn waves-effect waves-light btn-large" type="button"
+                                    <div className="divider"></div>
+                                    <div className="listings-submit-button-wrap center-align">
+                                        <button className="btn btn-large" type="button" id="submit-button"
                                                 name="action" onClick={processFormContents}>Create Profile
                                             <i className="material-icons right">send</i>
                                         </button>
                                     </div>
+                                    <div id="form-error-message" className="row center red-text"></div>
                                 </div>
                         }</>
                         :

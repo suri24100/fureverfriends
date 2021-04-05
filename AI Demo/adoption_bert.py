@@ -23,7 +23,6 @@ import torch
 ########################################################
 # Set Up
 ########################################################
-print(torch.cuda.is_available())
 print("Num GPUs Available: ", len(tf.config.list_physical_devices('GPU')))
 print(tf.config.list_physical_devices('GPU'))
 ########################################################
@@ -31,8 +30,6 @@ print(tf.config.list_physical_devices('GPU'))
 ########################################################
 ##change path accordingly
 train_data_path='adoption_speed_train.csv'
-#train = pd.read_csv(train_data_path)
-#test = pd.read_csv('test.csv')
 data = pd.read_csv(train_data_path)
 
 print(data.head())
@@ -43,8 +40,8 @@ DATA_COLUMN = 'description'
 data_texts = [str(sent) for sent in data["Description"].to_list()] # Features (not-tokenized yet)
 words = set(nltk.corpus.words.words())
 
-# data_texts = [" ".join(w for w in nltk.wordpunct_tokenize(sent) \
-#          if w.lower() in words or not w.isalpha()) for sent in data_texts]
+data_texts = [" ".join(w for w in nltk.wordpunct_tokenize(sent) \
+         if w.lower() in words or not w.isalpha()) for sent in data_texts]
 data_labels = data["AdoptionSpeed"].to_list() # Labels
 print(data_texts[0])
 print(data_labels[0])
@@ -75,8 +72,9 @@ model = TFDistilBertForSequenceClassification.from_pretrained('distilbert-base-u
 optimizer = tf.keras.optimizers.Adam(learning_rate=5e-5)
 model.compile(optimizer=optimizer, loss=model.compute_loss, metrics=['accuracy'])
 
-model.fit(train_dataset.shuffle(1000).batch(16), epochs=3, batch_size=16,
+model.fit(train_dataset.shuffle(1000).batch(16), epochs=20, batch_size=16,
           validation_data=val_dataset.shuffle(1000).batch(16))
+print(model.summary())
 
 save_directory = "./adoption_model"
 

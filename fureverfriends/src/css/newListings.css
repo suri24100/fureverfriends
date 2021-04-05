@@ -1,12 +1,93 @@
-body {
-  font-family: 'Calibri', sans-serif;
+body, .create-profile {
+  font-family: 'Roboto', 'Calibri', sans-serif;
 }
-img {
+
+.create-profile .container{
+  margin-top: 60px;
+  margin-bottom: 60px;
+}
+.create-profile img {
   width: 100%;
 }
 
+.create-profile .divider{
+  width: 100%;
+  height: 2px;
+  background: #379683;
+  margin-top:10px;
+  margin-bottom:60px;
+}
 .create-profile h4 {
+  color: #379683;
   text-transform: uppercase;
+  margin-bottom: 60px;
+
+}
+.create-profile .form-hidden{
+  visibility: hidden;
+}
+.create-profile .req-mark{
+  color: #05668d;
+}
+
+.create-profile label.active{
+  color: #379683;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.create-profile .left-filter .input-field,
+.create-profile .right-filter .input-field{
+  margin-bottom: 40px;
+}
+
+.create-profile a{
+  color: #4C4C4C!important;
+}
+
+.create-profile #form-error-message{
+  font-weight: bold;
+}
+
+.create-profile .modal.open{
+  padding: 3%;
+  border: 5px solid #379683!important;
+}
+.create-profile .modal-content h4{
+  text-transform: none;
+  color: #379683!important;
+}
+.create-profile .modal-content p{
+  margin-top:30px;
+  font-size: 12pt;
+}
+.create-profile .modal-close{
+  color: #379683!important;
+  font-weight: bold;
+}
+
+.create-profile .description-note{
+  margin-bottom: 60px;
+}
+
+.create-profile .description-note .match-title{
+  font-weight: bold;
+  color: #379683;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  line-height: 1.3rem;
+  margin-right: 15px;
+}
+.create-profile .description-note i{
+  font-size: 1.3rem;
+  line-height: 1.3rem;
+  top:3px;
+  position: relative;
+  color: darkgray;
+  cursor: default;
+}
+.create-profile .description-note i.filled-star{
+  color: #f28482;
 }
 
 .create-profile .login-required{
@@ -29,6 +110,7 @@ img {
   margin-left: 5%;
   font-weight: bold;
   font-size: 14pt;
+  color:white!important;
   width: 300px;
 }
 
@@ -85,11 +167,8 @@ img {
 }
 .listings-profile-pic-wrap,
 .listings-add-pic-wrap,
-.listings-application-info,
-.listings-pet-info,
-.listings-about-me,
-.listings-contact-info {
-  margin-bottom: 10rem;
+.listings-application-info{
+  padding-bottom: 30px;
 }
 .listings-profile-pic-wrap h5,
 .listings-add-pic-wrap h5,
@@ -104,7 +183,9 @@ img {
 }
 .listings-section,
 .listings-submit-button-wrap {
-  margin-bottom: 5%;
+  margin-bottom: 0;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 .listings-section button,
 .listings-submit-button-wrap button {
