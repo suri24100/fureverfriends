@@ -233,7 +233,15 @@ export default function Listings(){
 
                 //sort alphabetically by pet name
                 if (event.target.value == 1) {
-
+                    //newCombinedListings.sort((a, b) => (a.pet_data.name > b.pet_data.name) ? 1 : -1)
+                   for (let i = 0; i < newCombinedListings.length; i++) {
+                       //console.log(newCombinedListings[i].pet_data.name);
+                       try {
+                         newCombinedListings.sort((a, b) => (a.pet_data.name > b.pet_data.name) ? 1 : -1)
+                       } catch (e) {
+                        console.log("Name does not exist for either ")
+                       }
+                   }
                 }
 
                 //sort by creation of listings (newest to oldest)
@@ -315,8 +323,8 @@ export default function Listings(){
         return d;
     }
 
-    useEffect(() => {  modifyFFListings();
-    });
+    /*useEffect(() => {  modifyFFListings();
+    });*/
 
     //script to add longitude, latitude and distance to pets in firestore
     function modifyFFListings() {
