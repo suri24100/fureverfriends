@@ -67,10 +67,10 @@ export async function getToken(){
                 valid_to: d,
                 h: {headers: {'Authorization': 'Bearer ' + response.data.access_token}}
             }
-            console.log(token);
+            //console.log(token);
         })
         .catch(function (error) {
-            console.log(error);
+           // console.log(error);
         });
 }
 
@@ -96,7 +96,7 @@ async function getData(dataURL){
 export async function getBreeds(animalType){
     let breedURL = BASE_URL + BREED_URLS[animalType];
     let data =  await getData(breedURL);
-    await console.log(JSON.stringify(data));
+    //await console.log(JSON.stringify(data));
 }
 
 // get profile info for a specific pet by id
@@ -122,13 +122,13 @@ export function doLocationStuff(zipCode) {
 export async function getFilteredListings(filters, numListings, pageNum){
     //let typeURL = BASE_URL + "/v2/animals?limit=" + numListings + "&page=" + pageNum + "&location=" + 17050 + "&distance=5";
     let typeURL = BASE_URL + "/v2/animals?limit=" + numListings + "&page=" + pageNum;
-    console.log("testing from pfapi" + formZipCode);
+    //console.log("testing from pfapi" + formZipCode);
     /*let testEl = document.getElementById('filter-zipcode');
     console.log("Suri dom testing: " + testEl.value);
     let formZipCode = testEl.value;*/
     if (filters.zipcode != "") {
-        console.log("got here")
-        console.log("filters.distance: " + filters.distance);
+        //console.log("got here")
+        //console.log("filters.distance: " + filters.distance);
         typeURL += "&location=" + filters.zipcode;
         if (filters.distance == 0) {
             typeURL += "&distance=25";
@@ -144,6 +144,13 @@ export async function getFilteredListings(filters, numListings, pageNum){
             typeURL += "&type=scales-fins-other";
         } else {
             typeURL += "&type=" + filters.type;
+        }
+        if(filters.breed.length > 0){
+            typeURL += "&breed="
+            filters.breed.forEach(breed => {
+                typeURL += breed + ",";
+            });
+            typeURL = typeURL.slice(0, -1);
         }
         if(filters.size.length > 0){
             typeURL += "&size="
@@ -180,7 +187,7 @@ export async function getFilteredListings(filters, numListings, pageNum){
             });
             typeURL = typeURL.slice(0, -1);
         }
-        console.log("got here hjhkj");
+        //console.log("got here hjhkj");
     }
     console.log(typeURL);
     let listingResults = await getData(typeURL);
