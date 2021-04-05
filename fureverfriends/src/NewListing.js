@@ -37,11 +37,12 @@ export default function NewListing() {
         $(document).ready(function(){
             $('select').select();
           });
-        if(USER.email){
+        if(USER.email.length > 0){
             M.textareaAutoResize($('#about-me'));
             setLoggedIn(true);
             setPageLoaded(true);
-        } else{
+        }
+        else if(USER.email === ""){
             setPageLoaded(true);
         }
     });
@@ -639,8 +640,8 @@ export default function NewListing() {
             <div className="listings-banner-wrap">
             </div>
             <div className="container">
-            <div className="listings-heading center">
-                <h4>Create a profile for your pet</h4>
+            <div className="listings-heading">
+                <h4 className="center">Create a profile for your pet</h4>
                 <p className="intro-text">Profiles are public listings that help your animal find its Furever Friend.
                     Please include as much information about him or her as possible.
                     That information will help us find the purrfect match.

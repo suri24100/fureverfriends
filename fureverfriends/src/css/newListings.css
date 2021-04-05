@@ -1,5 +1,5 @@
 body, .create-profile {
-  font-family: 'Calibri', sans-serif;
+  font-family: 'Roboto', 'Calibri', sans-serif;
 }
 
 .create-profile .container{
@@ -18,7 +18,10 @@ body, .create-profile {
   margin-bottom:60px;
 }
 .create-profile h4 {
+  color: #379683;
   text-transform: uppercase;
+  margin-bottom: 60px;
+
 }
 .create-profile .form-hidden{
   visibility: hidden;
@@ -107,6 +110,7 @@ body, .create-profile {
   margin-left: 5%;
   font-weight: bold;
   font-size: 14pt;
+  color:white!important;
   width: 300px;
 }
 

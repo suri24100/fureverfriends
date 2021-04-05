@@ -119,8 +119,6 @@ export function doLocationStuff(zipCode) {
     formZipCode = zipCode;
 }
 
-console.log("testing from pfapi" + formZipCode);
-
 export async function getFilteredListings(filters, numListings, pageNum){
     //let typeURL = BASE_URL + "/v2/animals?limit=" + numListings + "&page=" + pageNum + "&location=" + 17050 + "&distance=5";
     let typeURL = BASE_URL + "/v2/animals?limit=" + numListings + "&page=" + pageNum;
