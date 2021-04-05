@@ -1,10 +1,14 @@
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import './css/style.css';
 import './css/quiz.css';
 import {useAuth} from './AuthContext';
 import {firestore} from "./ffdb";
+import M from "materialize-css";
 
 export default function PurrsonalityQuiz() {
+    useEffect(() => {
+        M.AutoInit();
+    })
 
     const {USER} = useAuth();
 
@@ -263,17 +267,20 @@ export default function PurrsonalityQuiz() {
     return (
       <div className="quiz-page">
           <div className="quiz-banner-wrap">
-              <div class="quiz-banner-img-wrap"></div>
-              <div class="heading">
-                    <span>Purrsonality Quiz</span>
-              </div>
-              <div class="subheading">
-                    <span>Take the Quiz to Find Your Match</span>
-              </div>
           </div>
+          <div className="container">
+              <div className="listings-heading">
+                  <h4 className="center">Purrsonality Quiz</h4>
+                  <p className="intro-text">
+                      This quiz helps you find your purrfect Furever Friend. It goes beyond normal search features by taking what
+                      we learn about you and running it through our artificial intelligence software to find pets that have qualities that
+                      work well with your lifestyle and preferences.
+                  </p>
+              </div>
+              <div className="divider"></div>
           {infoLoaded ?
               <>{previousQuiz ?
-                      <div className="container success-page">
+                      <div className=" success-page">
                           <h4>Want to Take the Quiz Again?</h4>
                           <p>It looks like you've already taken the Purrsonality Quiz.</p>
                           <p>You're free to take it as many times as you like, especially if you think your preferences have changed.
@@ -284,12 +291,12 @@ export default function PurrsonalityQuiz() {
                       </div>
                       :
                       <>{submitSuccess ?
-                          <div className="container success-page">
+                          <div className="success-page">
                               <h4>Thank you for completing the Purrsonality Quiz!</h4>
                               <p>Check your MyMatches page to find some pets that may be your next Furever Friend.</p>
                           </div>
                           :
-                          <div className="container">
+                          <div>
                               <div className="row">
                                   <div className="col s12">
                                       <p>All questions below are option. The more you answer, the better your match
@@ -810,9 +817,9 @@ export default function PurrsonalityQuiz() {
                       }</>
               }</>
               :
-              <div className="container"></div>
+              <div></div>
           }
-
+          </div>
       </div>
     );
 }
