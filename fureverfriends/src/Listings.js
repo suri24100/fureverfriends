@@ -13,6 +13,13 @@ import {firestore} from "./ffdb";
 var userLong, userLat;
 
 function PetCard(props){
+
+    const [userFavorite, setUserFavorite] = useState(false);
+
+    function changeFavorite(){
+        setUserFavorite(!userFavorite);
+    }
+
     const petInfo = props.petInfo;
     let formattedPetInfo = {};
     // FF pet listing
@@ -37,7 +44,7 @@ function PetCard(props){
                 location: {
                 zipcode: petInfo.pet_data.location.zipcode,
                     city: petInfo.pet_data.location.city,
-                    state: petInfo.pet_data.state
+                    state: petInfo.pet_data.location.state
             },
             cared_by: petInfo.pet_data.cared_by,
                 contact: {
@@ -128,12 +135,12 @@ function PetCard(props){
                         <Link to={newURL} className="profile-link-overlay">
                             <img src={petDetails.profileFiles.profilePhoto} />
                         </Link>
-                        <a className="btn-floating halfway-fab">
-                            <i className="material-icons">favorite_border</i>
+                        <a className="btn-floating halfway-fab" onClick={changeFavorite}>
+                            <i className="material-icons">{userFavorite ? 'favorite' : 'favorite_border'}</i>
                         </a>
                     </div>
                     <div className="card-content">
-                        <span className="name">{petDetails.name}</span>
+                        <span className="name truncate">{petDetails.name}</span>
                         <span className="location">{petDetails.location.city}, {petDetails.location.state}</span>
                     </div>
                 </div>
