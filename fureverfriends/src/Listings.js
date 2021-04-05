@@ -558,67 +558,6 @@ export default function Listings(){
                                     }
                                 })
                             }
-                            
-                            
-                            /*
-                            //if breed exists
-                            if (userSelections.breed.length > 0) {
-                                userSelections.breed.forEach(breed => {
-                                    //first check breed
-                                    if (doc.data().pet_data.breed == breed) {
-                                        //if age exists
-                                        if (userSelections.age.length > 0) {
-                                            userSelections.age.forEach(age => {
-                                                //second check age
-                                                if (doc.data().pet_data.age == age) {
-                                                    //if gender exists
-                                                    if (userSelections.gender.length > 0) {
-                                                        userSelections.gender.forEach(gender => {
-                                                            //check gender
-                                                            if (doc.data().pet_data.gender == gender)
-
-
-                                                        })
-                                                    }
-                                                    //if gender does not exist
-                                                    else {
-                                                        
-                                                    }
-                                                }
-                                            })
-                                        }
-                                        //if age does not exist
-                                        else {
-
-                                        }
-                                    }
-                                })
-                            } //breed does not exist
-                            else {
-                                //if age exists
-                                if (userSelections.age.length > 0) {
-                                    userSelections.age.forEach(age => {
-                                        //second check age
-                                        if (doc.data().pet_data.age == age) {
-                                            //if gender exists
-                                            if (userSelections.gender.length > 0) {
-                                                userSelections.age.forEach(age => {
-
-                                                })
-                                            }
-                                            //if gender does not exist
-                                            else {
-
-                                            }
-                                        }
-                                    })
-                                }
-                                //if age does not exist
-                                else {
-
-                                }
-                            } 
-                        } */
                     })
                 }).then(() => {setFFListings(listingData);
                     //console.log(listingData)
