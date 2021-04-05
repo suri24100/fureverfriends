@@ -188,7 +188,7 @@ export default function Listings(){
     useEffect( () => {
     }, [userSelections.type]);
     useEffect(() =>{
-        console.log(userSelections);
+        //console.log(userSelections);
     })
 
     const [applyFilter, setApplyFilter] = useState(false);
@@ -223,8 +223,30 @@ export default function Listings(){
     useEffect(() =>{
         if(ffListings && pfListings && (prevFFListings !== ffListings)){
             let newCombinedListings = ffListings.concat(pfListings);
+
+
+
+            //SORTING
+            let sorting = document.getElementById('sort-by');
+            sorting.addEventListener('change', (event) => {
+                console.log( " changed: " + event.target.value);
+
+                //sort alphabetically by pet name
+                if (event.target.value == 1) {
+
+                }
+
+                //sort by creation of listings (newest to oldest)
+                if (event.target.value == 2) {
+
+                }
+            })
+
+
+            //end of sorting
+
             setPetListings(newCombinedListings);
-            //console.log(newCombinedListings)
+            console.log(newCombinedListings);
         }
     }, [ffListings, pfListings]);
 
@@ -295,7 +317,7 @@ export default function Listings(){
 
     useEffect(() => {  modifyFFListings();
     });
-    
+
     //script to add longitude, latitude and distance to pets in firestore
     function modifyFFListings() {
         console.log("modifyFFListings function ran successfully")
@@ -1024,12 +1046,12 @@ export default function Listings(){
             </div>
             <div className="row">
                 <div className="input-field col s3 right">
-                    <select>
-                        <option defaultValue="">Sort By</option>
-                        <option value="1">Newest</option>
-                        <option value="2">Most Viewed</option>
-                        <option value="3">Least Viewed</option>
-                        <option value="3">Distance</option>
+                    <select id="sort-by">
+                        <option defaultValue="0">Sort By</option>
+                        <option value="1">Alphabetical</option>
+                        <option value="2">Newest</option>
+                        <option value="3">Oldest</option>
+                        <option value="4">Distance</option>
                     </select>
                 </div>
             </div>
