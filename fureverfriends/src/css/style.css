@@ -6,7 +6,7 @@
   src: url(https://fonts.gstatic.com/s/grandhotel/v8/7Au7p_IgjDKdCRWuR1azpmQN.ttf) format('truetype');
 }
 body {
-  font-family: 'Calibri', sans-serif;
+  font-family: "Segoe UI", Roboto, 'Calibri', sans-serif;
 }
 a {
   text-decoration: none;

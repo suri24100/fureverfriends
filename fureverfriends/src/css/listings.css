@@ -1,11 +1,11 @@
 .listings-page body {
-  font-family: 'Calibri';
+  font-family: 'Roberto', 'Calibri', sans-serif;
   color: #ffffff;
   background-image: none;
 }
 
 .listings-page .container {
-  margin-top: 30px;
+  margin-top: 60px;
 }
 
 @media only screen and (min-width: 993px) {
@@ -14,6 +14,18 @@
   }
 }
 
+.listings-page .listings-heading{
+  margin-bottom: 3rem;
+  font-size: 1.2em;
+}
+
+.listings-page .listings-heading h4 {
+  color: #379683;
+  text-transform: uppercase;
+  margin-bottom: 30px;
+  font-weight: normal;
+  font-size: 2.28rem!important;
+}
 
 .listings-page .pet-listing-nav {
   margin-bottom:5%;

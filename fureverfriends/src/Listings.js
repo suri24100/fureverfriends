@@ -1012,14 +1012,14 @@ export default function Listings(){
     <div className="listings-page">
         <div className="listings-page-banner-wrap">
             <div className="banner-img-wrap"></div>
-            <div className="heading">
-                <span>Listing your potential new friend</span>
-            </div>
-            <div className="subheading">
-                <span>Filter below for better results!</span>
-            </div>
         </div>
         <div className="container">
+            <div className="listings-heading">
+                <h4 className="center">Listing your potential new friend</h4>
+                <p className="intro-text center">
+                    Use the options below to browse for your purrfect new friend.
+                </p>
+            </div>
             <div className="row">
                 <div className="input-field col s3 right">
                     <select>
