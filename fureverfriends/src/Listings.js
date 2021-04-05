@@ -293,9 +293,11 @@ export default function Listings(){
         return d;
     }
 
-
+    useEffect(() => {  modifyFFListings();
+    });
+    
     //script to add longitude, latitude and distance to pets in firestore
-    window.onload = function modifyFFListings() {
+    function modifyFFListings() {
         console.log("modifyFFListings function ran successfully")
         var zip;
         firestore.collection("PetInfo")
