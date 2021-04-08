@@ -35,7 +35,7 @@ predictions_value_pt = torch.argmax(output_pt[0], dim=-1).item()
 print("Model has predicted an adoption speed of speed of: ")
 print(predictions_value_pt)
 
-ratings = {0: "5 out of 5 stars", 1: "4 out of 5 stars", 2: "3 out of 5 stars", 3: "2 out of 5 stars", 4: "1 out of 4 stars"}
+ratings = {0: "5 out of 5 stars", 1: "4 out of 5 stars", 2: "3 out of 5 stars", 3: "2 out of 5 stars", 4: "1 out of 5 stars"}
 
 print("\n")
 print("Your description has a rating of:")
