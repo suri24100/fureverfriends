@@ -227,11 +227,29 @@ export default function Listings(){
     useEffect(() =>{
         if(ffListings && pfListings && (prevFFListings !== ffListings)){
             let newCombinedListings = ffListings.concat(pfListings);
+            //newCombinedListings.reverse(newCombinedListings.sort((a,b) => (new Date(a.published_at)) - (new Date(b.published_at))))
+            newCombinedListings.sort((a,b) => (new Date(a.published_at)) - (new Date(b.published_at)));
+            newCombinedListings.reverse();
             setPetListings(newCombinedListings);
             console.log(newCombinedListings);
-            /*for (let i = 0 ; i < newCombinedListings.length; i++) {
-                console.log(newCombinedListings[i].pet_data.listing_created);
-            }*/
+            console.log("size: " + newCombinedListings.length)
+            for (let i = 0 ; i < newCombinedListings.length; i++) {
+                let name = ""
+                try {
+                    name = "FF: " + newCombinedListings[i].pet_data.name;
+                } catch (e) {
+                    name = "PF: " + newCombinedListings[i].name;
+                }
+                if (name == "Sniffles" ) {
+                    console.log("****************Sniffles found! and is item# " + i + " ************************ ");
+                    console.log(newCombinedListings[i]);
+                }
+                if (name == "Ginger" ) {
+                    console.log("****************Ginger found! and is item# " + i + " ************************ ");
+                    console.log(newCombinedListings[i]);
+                }
+                console.log(newCombinedListings[i].published_at + " " + name);
+            }
         }
     }, [ffListings, pfListings]);
 

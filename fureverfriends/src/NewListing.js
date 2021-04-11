@@ -136,6 +136,7 @@ export default function NewListing() {
                     lat: geoData.lat,
                     lon: geoData.lon,
                     pet_data: formState,
+                    published_at: new Date().toJSON(),
                     profileFiles: {
                         profilePhoto: {profilePhotoURL},
                         additionalPhotos: {additionalPhotoURLS},
