@@ -1,4 +1,4 @@
-import React, {useEffect, useState, Component} from 'react';
+import React, {useEffect, useState, useLayoutEffect, Component} from 'react';
 import Header from "./Header";
 import './css/style.css';
 import './css/signing.css';
@@ -10,6 +10,10 @@ import {firestore} from "./ffdb";
 
 
 export default function Login(){
+    useLayoutEffect(() => {
+        window.scrollTo(0, 0)
+    });
+    
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');

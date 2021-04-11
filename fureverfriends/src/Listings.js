@@ -1,4 +1,4 @@
-import React, {useEffect, useState, Component, useReducer, useRef} from 'react';
+import React, {useEffect, useLayoutEffect, useState, Component, useReducer, useRef} from 'react';
 import Header from "./Header";
 import './css/style.css';
 import './css/listings.css';
@@ -150,6 +150,10 @@ function PetCard(props){
 
 export default function Listings(){
 
+    useLayoutEffect(() => {
+        window.scrollTo(0, 0)
+    });
+
     function usePrevious(value) {
         const ref = useRef();
         useEffect(() => {
@@ -223,38 +227,29 @@ export default function Listings(){
     useEffect(() =>{
         if(ffListings && pfListings && (prevFFListings !== ffListings)){
             let newCombinedListings = ffListings.concat(pfListings);
-
-
-
-            //SORTING
-            let sorting = document.getElementById('sort-by');
-            sorting.addEventListener('change', (event) => {
-                console.log( " changed: " + event.target.value);
-
-                //sort alphabetically by pet name
-                if (event.target.value == 1) {
-                    //newCombinedListings.sort((a, b) => (a.pet_data.name > b.pet_data.name) ? 1 : -1)
-                   for (let i = 0; i < newCombinedListings.length; i++) {
-                       //console.log(newCombinedListings[i].pet_data.name);
-                       try {
-                         newCombinedListings.sort((a, b) => (a.pet_data.name > b.pet_data.name) ? 1 : -1)
-                       } catch (e) {
-                        console.log("Name does not exist for either ")
-                       }
-                   }
-                }
-
-                //sort by creation of listings (newest to oldest)
-                if (event.target.value == 2) {
-
-                }
-            })
-
-
-            //end of sorting
-
+            //newCombinedListings.reverse(newCombinedListings.sort((a,b) => (new Date(a.published_at)) - (new Date(b.published_at))))
+            newCombinedListings.sort((a,b) => (new Date(a.published_at)) - (new Date(b.published_at)));
+            newCombinedListings.reverse();
             setPetListings(newCombinedListings);
             console.log(newCombinedListings);
+            console.log("size: " + newCombinedListings.length)
+            for (let i = 0 ; i < newCombinedListings.length; i++) {
+                let name = ""
+                try {
+                    name = "FF: " + newCombinedListings[i].pet_data.name;
+                } catch (e) {
+                    name = "PF: " + newCombinedListings[i].name;
+                }
+                if (name == "Sniffles" ) {
+                    console.log("****************Sniffles found! and is item# " + i + " ************************ ");
+                    console.log(newCombinedListings[i]);
+                }
+                if (name == "Ginger" ) {
+                    console.log("****************Ginger found! and is item# " + i + " ************************ ");
+                    console.log(newCombinedListings[i]);
+                }
+                console.log(newCombinedListings[i].published_at + " " + name);
+            }
         }
     }, [ffListings, pfListings]);
 
@@ -327,10 +322,11 @@ export default function Listings(){
     });*/
 
     //script to add longitude, latitude and distance to pets in firestore
+    //OR script to add published_at (for sorting purpose)
     function modifyFFListings() {
         console.log("modifyFFListings function ran successfully")
         var zip;
-        firestore.collection("PetInfo")
+        /*firestore.collection("PetInfo")
         .doc("PublicListings")
         .collection("AdoptionList")
         .doc("PetTypes").collection("cat").get()
@@ -474,44 +470,31 @@ export default function Listings(){
                     });
                 }
             })
-        });
+        });*/
 
         firestore.collection("PetInfo")
         .doc("PublicListings")
         .collection("AdoptionList")
-        .doc("PetTypes").collection("scales_fins_other").get()
+        .doc("PetTypes").collection("small_furry").get()
         .then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
                 zip = doc.data().pet_data.location.zipcode;
-                if (doc.data().lat == null) {
-                    //console.log("missing lat for " + doc.data().pet_data.pet_id)
-
-                    const apikey = '317f5c81a3241fbb45bbf57e335d466d';
-                    fetch(
-                        `http://api.openweathermap.org/data/2.5/forecast?zip=${zip}&units=imperial&appid=${apikey}`
-                    )
-                    .then((res) => res.json())
-                    .then((json) => {
-
-                        //console.log(json.city.coord.lat);
-                        //console.log(doc.data().pet_data.pet_id);
-                        var id = doc.data().pet_data.pet_id;
-                        var pet = firestore.collection("PetInfo")
+                if (doc.data().published_at == null) {
+                    var id = doc.data().pet_data.pet_id;
+                    var date_created = doc.data().pet_data.listing_created;
+                    firestore.collection("PetInfo")
                         .doc("PublicListings")
                         .collection("AdoptionList")
                         .doc("PetTypes")
-                        .collection("scales_fins_other")
+                        .collection("small_furry")
                         .doc(id).set({
-                            lat: json.city.coord.lat,
-                            lon: json.city.coord.lon,
-                            distance: 2000
+                            published_at: date_created
                         }, { merge: true });
-                    });
                 }
             })
         });
 
-        firestore.collection("PetInfo")
+        /*firestore.collection("PetInfo")
         .doc("PublicListings")
         .collection("AdoptionList")
         .doc("PetTypes").collection("small_furry").get()
@@ -544,7 +527,7 @@ export default function Listings(){
                     });
                 }
             })
-        });
+        });*/
 
 
 
@@ -1053,7 +1036,7 @@ export default function Listings(){
                     Use the options below to browse for your purrfect new friend.
                 </p>
             </div>
-            <div className="row">
+            {/*<div className="row">
                 <div className="input-field col s3 right">
                     <select id="sort-by">
                         <option defaultValue="0">Sort By</option>
@@ -1063,11 +1046,10 @@ export default function Listings(){
                         <option value="4">Distance</option>
                     </select>
                 </div>
-            </div>
+            </div>*/}
             
             <div className="row">
                 <div className="col s12 m4 l3">
-                
                     <form>
                         <div className="col s12">
                         <button className="btn-small" type="button" onClick={applyFilters}>

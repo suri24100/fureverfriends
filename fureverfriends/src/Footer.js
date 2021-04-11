@@ -1,5 +1,6 @@
 import React from "react";
 import M from "materialize-css";
+import {Link, useHistory} from "react-router-dom";
 import { Modal, Collapsible } from 'react-materialize';
 
 export default function Footer() {
@@ -8,31 +9,27 @@ export default function Footer() {
         <div>
         <div className="ftr-wrap hide-on-med-and-down">
         <div className="logo container">
-            <h2>Furever Friends</h2>
+            <h2><Link to="/">Furever Friends</Link></h2>
         </div>
         <div className="container">
             <div className="footer-menu row">
                 <div className="pets-menu col m4 l4 x4">
                     <h3>Pets</h3>
-                    <a>Find a Pet</a>
-                    <a>Find a Home</a>
-                    <a>Pet Care</a>
-                    <a>Take the Quiz</a>
-                    <a>Lost and Found</a>
+                    <Link to="/listings"><a>Find a Pet</a></Link>
+                    <Link to="/findahome"><a>Find a Home</a></Link>
+                    <a href="https://www.petfinder.com/pet-care/">Pet Care</a>
                 </div>
                 <div className="info-menu col m4 l4 x4">
                     <h3>Information</h3>
-                    <a>About Us</a>
-                    <a>Contact Us</a>
-                    <a>Terms and Conditions</a>
-                    <a>Privacy Policy</a>
+                    <a href="#" target="_blank">About Us</a>
+                    <a href="#" target="_blank">Contact Us</a>
+                    <a href="#" target="_blank">FAQ/Help</a>
                 </div>
                 <div className="user-xp-menu col m4 l4 x4">
                     <h3>User Experience</h3>
                     <a>Sign Up</a>
                     <a>Log In</a>
-                    <a>Share Your Experience</a>
-                    <a>Newsletters</a>
+                    <a>Take the Quiz</a>
                 </div>
             </div>
         </div>
@@ -44,7 +41,7 @@ export default function Footer() {
     </div>
     <div className="mobile-ftr-wrap hide-on-large-only">
         <div className="logo container">
-            <h2>Furever Friends</h2>
+            <h2><Link to="/">Furever Friends</Link></h2>
         </div>
         <div className="all-accordion hide-on-large-only">
             <ul className="collapsible">
@@ -53,11 +50,9 @@ export default function Footer() {
                   <div className="collapsible-body">
                       <span>
                         <ul>
-                            <li>Find a Pet</li>
-                            <li>Find a Home</li>
-                            <li>Pet Care</li>
-                            <li>Take the Quiz</li>
-                            <li>Lost and Found</li>
+                            <Link to="/listings"><li>Find a Pet</li></Link>
+                            <Link to="/findahome"><li>Find a Home</li></Link>
+                            <li><a href="https://www.petfinder.com/pet-care/" target="_blank">Pet Care</a></li>
                         </ul>
                       </span>
                     </div>
@@ -67,10 +62,9 @@ export default function Footer() {
                   <div className="collapsible-body">
                       <span>
                           <ul>
-                              <li>About Us</li>
-                              <li>Contact Us</li>
-                              <li>Privacy Policy</li>
-                              <li>Terms and Conditions</li>
+                              <li><a href="#" target="_blank">About Us</a></li>
+                              <li><a href="#" target="_blank">Contact Us</a></li>
+                              <li><a href="#" target="_blank">FAQ/Help</a></li>
                           </ul>
                       </span>
                   </div>
@@ -82,8 +76,7 @@ export default function Footer() {
                             <ul>
                                 <li>Sign Up</li>
                                 <li>Log In</li>
-                                <li>Share Your Experience</li>
-                                <li>Newsletters</li>
+                                <li>Take the Quiz</li>
                             </ul>
                         </span>
                     </div>

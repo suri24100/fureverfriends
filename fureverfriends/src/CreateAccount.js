@@ -1,4 +1,4 @@
-import React, {useEffect, useState, Component} from 'react';
+import React, {useEffect, useLayoutEffect, useState, Component} from 'react';
 import Header from "./Header";
 import './css/style.css';
 import './css/signing.css';
@@ -16,6 +16,17 @@ export default function CreateAccount(){
         M.AutoInit();
     })
 
+    useLayoutEffect(() => {
+        window.scrollTo(0, 0)
+    });
+
+    // const [username, setUsername] = useState('');
+    // const [firstName, setFirstName] = useState('');
+    // const [lastName, setLastName] = useState('');
+    // const [email, setEmail] = useState('');
+    // const [phone, setPhone] = useState('');
+    // const [accountType, setAccountType] = useState('');
+    // const [zip, setZip] = useState('');
     const [password, setPassword] = useState('');
     const [passwordConfirm, setPasswordConfirm] = useState('');
     const [error, setError] = useState('');

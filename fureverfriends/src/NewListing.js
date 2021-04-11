@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 import './css/style.css';
 import './css/newListings.css';
 import ReactDOM from 'react-dom';
@@ -15,6 +15,7 @@ import 'firebase/storage';
 import {useAuth} from "./AuthContext";
 import {Link} from "react-router-dom";
 
+var globalZip = "";
 
 /* code from: http://talkerscode.com/webtricks/preview-image-before-upload-using-javascript.php */
 function preview_image(event) {
@@ -31,6 +32,9 @@ function capitalize(word) {
 }
 
 export default function NewListing() {
+    useLayoutEffect(() => {
+        window.scrollTo(0, 0)
+    });
 
     useEffect(() => {
         M.AutoInit();
@@ -88,6 +92,28 @@ export default function NewListing() {
         checkFiles();
     });
 
+    const [geoData, setGeoData] = useState({});
+
+    //FINDING LONG AND LAT FOR ZIP CODE (API STUFF)
+    function getLocationAsync(zip) {
+        const apikey = '317f5c81a3241fbb45bbf57e335d466d';
+        const path = `http://api.openweathermap.org/data/2.5/forecast?zip=${zip}&units=imperial&appid=${apikey}`;
+        
+        return fetch(path)
+        .then((res) => {
+            return res.json()
+        }).then((json) => {
+            //console.log(JSON.stringify(json,null,2))
+            //console.log(json)
+            //console.log(json.city.coord);
+            //getLocation(json.city.coord)
+            setGeoData(json.city.coord);
+            
+        }).catch((err) => {
+            console.log(err.message)
+        })
+    }
+
     function checkFiles(){
         let url_count = 0;
         if(fileState.total_urls > 0){
@@ -103,8 +129,14 @@ export default function NewListing() {
             // correct number received
             if(url_count === fileState.total_urls && !processing){
                 processing = true;
+                getLocationAsync(globalZip);
+                console.log(globalZip);
+                console.log("suri 4/11: " + geoData.lat)
                 let newListing = {
+                    lat: geoData.lat,
+                    lon: geoData.lon,
                     pet_data: formState,
+                    published_at: new Date().toJSON(),
                     profileFiles: {
                         profilePhoto: {profilePhotoURL},
                         additionalPhotos: {additionalPhotoURLS},
@@ -116,7 +148,13 @@ export default function NewListing() {
         } else if (fileState.total_urls === 0 && !processing){
             console.log("No files");
             processing = true;
+            /*getLocationAsync(globalZip);
+            console.log(globalZip);
+            console.log("suri 4/11: " + geoData.lat)*/
             let newListing = {
+                lat: geoData.lat,
+                lon: geoData.lon,
+                published_at: new Date().toJSON(),
                 pet_data: {formState},
                 profileFiles: {
                     profilePhoto: "",
@@ -371,10 +409,12 @@ export default function NewListing() {
             document.getElementById('state').classList.remove('invalid');
         }
         let zip = (document.getElementById('zip')).value;
+        //globalZip = zip;
         if(zip === "") {
             document.getElementById('zip').classList.add('invalid');
             requirementsMet = false;
         } else {
+            getLocationAsync(zip);
             document.getElementById('zip').classList.remove('invalid');
         }
         let contactName = (document.getElementById('contact-name')).value;
