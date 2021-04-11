@@ -313,50 +313,6 @@ export default function Home() {
             </div>
         </div>
     </div>
-    <div className="testimonial-wrap">
-        <div className="testimonial-background">
-            <img className="test-img" src="./images/Group 77.png"/>
-        </div>
-        <div className="testimonial">
-            <div className="quotes">
-                <q>I was very lucky to find Finn, he is a part of our little family now.
-                    Taking the quiz lead me to a variety of choices tailored just for me 
-                    and made the adoption process so much easier.
-                </q>
-            </div>
-            
-            <div className="quotes">
-                <q>Everyday I wake up to my new beloved cat snuggling up to me.
-                    I am so glad I found my furever friend. I will cherish her forever.
-                    Thank you Furever Friends!
-                </q>
-            </div>
-            
-            <div className="quotes">
-                <q>I was a bit skeptical about adopting through a website at first.
-                    I am glad that the Safe Spawts feature exists. It helps me feel safe
-                    about meeting strangers in public, pet friendly places.
-                </q>
-            </div>
-
-            <div className="quotes">
-                <q>I love the recommendations that Furever Friends gives me! They really
-                    know what kind of pets I like! I get both email and account notifications.
-                </q>
-            </div>
-
-            <div className="dot-container">
-                <span className="dot" onClick="currentSlide(1)"/>
-                <span className="dot" onClick="currentSlide(2)"/>
-                <span className="dot" onClick="currentSlide(3)"/>
-                <span className="dot" onClick="currentSlide(4)"/>
-            </div>
-
-        </div>
-        <div className="share-your-xp-btn default">
-            <button className="xp-button"><span>Share your experience</span></button>
-        </div>
-    </div>
     <div className="newsletters-wrap">
         <div className="news-img-wrap">
             {/*<img className="news-img" src="./pexels-jayden-burdick-3397935.png" />*/}
