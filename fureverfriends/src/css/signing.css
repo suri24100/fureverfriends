@@ -6,6 +6,10 @@
     margin-top: -6vw; /*added when nav was moved out to its own div */
     z-index: -99;
 }
+
+.create-account-body h5{
+    padding-bottom: 40px;
+}
 .create-account-body .row{
     margin-bottom: 0;
     padding-bottom: 10% !important;
@@ -17,6 +21,7 @@
     padding: 30px!important;
     text-transform: uppercase;
     background: white;
+    min-width: 400px;
 }
 
 .form-box .logo-wrap{

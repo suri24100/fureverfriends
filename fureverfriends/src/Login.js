@@ -44,6 +44,8 @@ export default function Login(){
 
         try {
             clearErrors();
+            document.getElementById('email').classList.remove("invalid");
+            document.getElementById('pass').classList.remove("invalid");
             setLoading(true);
             await login(email, password);
             await getUser();
@@ -53,10 +55,12 @@ export default function Login(){
             clearErrors();
             setError("Failed to log in");
             if (err.code === "auth/invalid-email" || err.code === "auth/user-disabled" || err.code === "auth/user-not-found") {
-                    setEmailError(err.message);
+                    setEmailError("No account found with this email.");
+                    document.getElementById('email').classList.add("invalid");
                 }
             if (err.code === "auth/wrong-password") {
-                    setPasswordError(err.message);
+                    setPasswordError("Invalid password.");
+                    document.getElementById('pass').classList.add("invalid");
                 }
         }
 
@@ -79,26 +83,23 @@ export default function Login(){
                         <div className="row center">
                             <h3>Log In</h3></div>
 
-                        {error && <Alert variant="danger">{error}</Alert>}
-
                             <form onSubmit={handleLogin} className="center">
-
                                 <h5>Welcome Back!</h5>
-
                                 <div className="input-field col s12">
-                                    <input type="email" id="email" name="email"
+                                    <input type="email" id="email" name="email" className="validate"
                                            value = {email}
                                            onChange ={(e) => setEmail(e.target.value)}/>
                                     <label htmlFor="email">Enter Your Email Address:</label>
-                                    <p className="errorMsg">{emailError}</p>
+                                    <p className="helper-text left-align">{emailError}</p>
                                 </div>
                                 <div className="input-field col s12">
-                                    <input type="password" id="pass" name="pass"
+                                    <input type="password" id="pass" name="pass" className="validate"
                                            value = {password}
                                            onChange ={(e) => setPassword(e.target.value)}/>
                                     <label htmlFor="pass">Enter Your Password</label>
-                                    <p className = "errorMsg"> {passwordError}</p>
+                                    <p className="helper-text left-align"> {passwordError}</p>
                                 </div>
+                                {error && <Alert variant="danger">{error}</Alert>}
                                 <div className="col s12 center">
                                     <button disabled = {loading} className="btn">Log In</button>
                                     <div className="sub-text">
