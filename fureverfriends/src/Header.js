@@ -20,7 +20,6 @@ export default function Header() {
         if(currentUser && USER.username === ""){
             getUser();
         }
-        console.log("Reloaded");
     })
 
 
@@ -49,13 +48,13 @@ export default function Header() {
         <div>
             <div className="hdr-wrap hide-on-med-and-down">
                 <div className="logo">
-                    <h2>Furever Friends</h2>
+                    <Link to="/"><h2>Furever Friends</h2></Link>
                 </div>
                 <div className="primary-menu">
                     <Link to="/">Home</Link>
                     <Link to="/listings">Adopt</Link>
                     <Link to="/findahome">Rehome</Link>
-                    {/*<Link to="/petcare">Pet Care</Link>*/}
+                    <Link to="/quiz">Get Matched</Link>
                     {currentUser ? <Link to="/Home" onClick={handleLogOut}>Log Out</Link> : <Link to="/login">Log In</Link> }
                     <img src={notification_icon} alt="Notifications"/>
                     {currentUser ? <Link disable = {loading} to="/DisplayUserProfile">{USER.username}</Link> : <></>}
@@ -67,7 +66,7 @@ export default function Header() {
                         <a href="#" className="sidenav-trigger" data-target="mobile-links" id="sidebarTrigger"> 
                             <i className="material-icons">menu</i>
                         </a>
-                        <a href="#" className="brand-logo right">Furever Friends</a>
+                        <Link to="/" className="brand-logo right">Furever Friends</Link>
                     </div>
                 </nav>
             </div>
@@ -84,6 +83,7 @@ export default function Header() {
                 <li><Link to="/"><span>Home</span></Link></li>
                 <li><Link to="/listings"><span>Adopt</span></Link></li>
                 <li><Link to="/findahome"><span>Rehome</span></Link></li>
+                <li><Link to="/quiz"><span>Get Matched</span></Link></li>
                 <li>{currentUser ? <Link to="/Home" onClick={handleLogOut}><span>Log Out</span></Link> : <Link to="/login"><span>Log In</span></Link> }</li>
                 <li><Link to="/DisplayUserProfile"><span>My Account</span></Link></li>
                 </div>

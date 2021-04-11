@@ -4,13 +4,14 @@ import './css/quiz.css';
 import {useAuth} from './AuthContext';
 import {firestore} from "./ffdb";
 import M from "materialize-css";
+import {Link} from "react-router-dom";
 
 export default function PurrsonalityQuiz() {
     useEffect(() => {
         M.AutoInit();
     })
 
-    const {USER} = useAuth();
+    const {currentUser, USER} = useAuth();
 
     const question_data = {
         q0: ["dog",
@@ -278,7 +279,7 @@ export default function PurrsonalityQuiz() {
                   </p>
               </div>
               <div className="divider"></div>
-          {infoLoaded ?
+          {infoLoaded && currentUser ?
               <>{previousQuiz ?
                       <div className=" success-page">
                           <h4>Want to Take the Quiz Again?</h4>
@@ -817,7 +818,18 @@ export default function PurrsonalityQuiz() {
                       }</>
               }</>
               :
-              <div></div>
+              <div className="row">
+
+              </div>
+          }
+          {!currentUser &&
+              <div className="row">
+                  <div className="col s12 center quiz-login">
+                      <p>To take the Purrsonality Quiz, please login or create an account.</p>
+                      <Link to="/login" className="btn-large">Login</Link>
+                      <Link to="/CreateAccount" className="btn-large">Create an Account</Link>
+                  </div>
+              </div>
           }
           </div>
       </div>

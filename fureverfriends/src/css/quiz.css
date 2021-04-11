@@ -15,6 +15,10 @@
     background-image: none;
 }
 
+.quiz-page .quiz-login .btn-large {
+    margin: 10px;
+}
+
 .quiz-banner-wrap .heading {
     font-size: 2em;
     text-transform: uppercase;
