@@ -145,6 +145,7 @@ body {
   }
   .search-or-quiz-wrap {
       background-color: #e1e1e1;
+      margin-bottom: -1.35rem;
       .quiz-wrap {
         .q-btn {
             background-color: #379683;
@@ -194,50 +195,6 @@ body {
         }
       }
   }
-
-
-  .testimonial-wrap {
-    position: relative;
-    /* Add a background color to the active dot/circle */
-  }
-  .testimonial-wrap .quotes {
-    display: none;
-    width: 42%;
-    position: absolute;
-    top: 15%;
-    left: 30%;
-    font-size: 1.5vw;
-    text-align: center;
-    color: #379683;
-    font-weight: bold;
-    line-height: 2.5vw;
-  }
-  .testimonial-wrap .dot-container {
-    position: absolute;
-    top: 55%;
-    left: 46%;
-  }
-  .testimonial-wrap .dot {
-    cursor: pointer;
-    height: 1vw;
-    width: 1vw;
-    margin: 0.15vw;
-    background-color: #bbb;
-    border-radius: 50%;
-    display: inline-block;
-    transition: background-color 0.6s ease;
-    left: 38%;
-    top: 70%;
-  }
-  .testimonial-wrap .active,
-  .testimonial-wrap .dot:hover {
-    background-color: #717171;
-  }
-  .testimonial-wrap .share-your-xp-btn {
-    position: absolute;
-    left: 38%;
-    top: 70%;
-  }
   .newsletters-wrap {
     text-align: center;
     color: #ffffff;
@@ -246,21 +203,36 @@ body {
     height: 30vw;
     background-image: url(./newsletters-banner-full.jpg);
     background-size: 100%;
-    background-attachment: fixed;
+    //margin-top: -1.75vw;
+    //background-attachment: fixed;
   }
   .newsletters-wrap .heading {
-    font-size: 2vw;
+    /*font-size: 2vw;
     text-transform: uppercase;
-    font-weight: bold;
+    font-weight: bold; */
     position: absolute;
-    left: 63%;
+    left: 70%;
     top: 30%;
+    .about-us-btn {
+      background-color: transparent;
+      border: solid 2px white;
+      border-radius: 0.25em;
+      padding: 0.5em;
+      color: white;
+      font-size: 2vw;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+    .about-us-btn:hover {
+      text-decoration: underline;
+    }
   }
   .newsletters-wrap .subheading {
     font-size: 1.5vw;
     position: absolute;
     left: 60%;
-    top: 40%;
+    top: 45%;
+    font-weight: bold;
   }
   .newsletters-wrap .newsletter-form {
     position: absolute;

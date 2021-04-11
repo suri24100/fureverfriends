@@ -313,20 +313,6 @@ export default function Home() {
             </div>
         </div>
     </div>
-    <div className="newsletters-wrap">
-        <div className="news-img-wrap">
-            {/*<img className="news-img" src="./pexels-jayden-burdick-3397935.png" />*/}
-        </div>
-        <div className="heading">
-            <p>Sign up for newsletters</p>
-        </div>
-        <div className="subheading">
-            <p>Get information regarding training tips and more!</p>
-        </div>
-        <div className="newsletter-form">
-            <input type="email" className="newsletter-email" placeholder="example@email.com"/>
-        </div>
-    </div>
     <div className="lost-and-found-wrap">
         <div className="lost-and-found-img">
             <img className="ls-img" src="./images/lost-and-found.png"/>
@@ -341,6 +327,17 @@ export default function Home() {
         </div>
         <div className="lost-and-found-button default">
             <button className="ls-btn"><span>Lost and found</span></button>
+        </div>
+    </div>
+    <div className="newsletters-wrap">
+        <div className="news-img-wrap">
+            {/*<img className="news-img" src="./pexels-jayden-burdick-3397935.png" />*/}
+        </div>
+        <div className="heading">
+            <a href="#" className="about-us-btn">About Us</a>
+        </div>
+        <div className="subheading">
+            <p>Learn more about this website and it's creators!</p>
         </div>
     </div>
     </div>

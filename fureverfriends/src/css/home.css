@@ -1,5 +1,5 @@
 body {
-  font-family: 'Roberto', 'Calibri', sans-serif;
+  font-family: 'Calibri';
 }
 img {
   width: 100%;
@@ -62,13 +62,13 @@ img {
 #addPadding {
   margin-bottom: 2vw;
 }
-.home-page [type="radio"]:checked + span:after,
-.home-page [type="radio"].with-gap:checked + span:before,
-.home-page [type="radio"].with-gap:checked + span:after {
+[type="radio"]:checked + span:after,
+[type="radio"].with-gap:checked + span:before,
+[type="radio"].with-gap:checked + span:after {
   border: 2px solid white;
 }
-.home-page [type="radio"]:checked + span:after,
-.home-page [type="radio"].with-gap:checked + span:after {
+[type="radio"]:checked + span:after,
+[type="radio"].with-gap:checked + span:after {
   background-color: white;
 }
 /*.search-or-quiz-wrap {
@@ -141,6 +141,7 @@ form.row {
 }
 .search-or-quiz-wrap {
   background-color: #e1e1e1;
+  margin-bottom: -1.35rem;
 }
 .search-or-quiz-wrap .quiz-wrap .q-btn {
   background-color: #379683;
@@ -187,48 +188,6 @@ form.row {
 .search-or-quiz-wrap .search-wrap .search .search-btn:hover {
   text-decoration: underline;
 }
-.testimonial-wrap {
-  position: relative;
-  /* Add a background color to the active dot/circle */
-}
-.testimonial-wrap .quotes {
-  display: none;
-  width: 42%;
-  position: absolute;
-  top: 15%;
-  left: 30%;
-  font-size: 1.5vw;
-  text-align: center;
-  color: #379683;
-  font-weight: bold;
-  line-height: 2.5vw;
-}
-.testimonial-wrap .dot-container {
-  position: absolute;
-  top: 55%;
-  left: 46%;
-}
-.testimonial-wrap .dot {
-  cursor: pointer;
-  height: 1vw;
-  width: 1vw;
-  margin: 0.15vw;
-  background-color: #bbb;
-  border-radius: 50%;
-  display: inline-block;
-  transition: background-color 0.6s ease;
-  left: 38%;
-  top: 70%;
-}
-.testimonial-wrap .active,
-.testimonial-wrap .dot:hover {
-  background-color: #717171;
-}
-.testimonial-wrap .share-your-xp-btn {
-  position: absolute;
-  left: 38%;
-  top: 70%;
-}
 .newsletters-wrap {
   text-align: center;
   color: #ffffff;
@@ -237,21 +196,34 @@ form.row {
   height: 30vw;
   background-image: url(newsletters-banner-full.jpg);
   background-size: 100%;
-  background-attachment: fixed;
 }
 .newsletters-wrap .heading {
+  /*font-size: 2vw;
+    text-transform: uppercase;
+    font-weight: bold; */
+  position: absolute;
+  left: 70%;
+  top: 30%;
+}
+.newsletters-wrap .heading .about-us-btn {
+  background-color: transparent;
+  border: solid 2px white;
+  border-radius: 0.25em;
+  padding: 0.5em;
+  color: white;
   font-size: 2vw;
   text-transform: uppercase;
   font-weight: bold;
-  position: absolute;
-  left: 63%;
-  top: 30%;
+}
+.newsletters-wrap .heading .about-us-btn:hover {
+  text-decoration: underline;
 }
 .newsletters-wrap .subheading {
   font-size: 1.5vw;
   position: absolute;
   left: 60%;
-  top: 40%;
+  top: 45%;
+  font-weight: bold;
 }
 .newsletters-wrap .newsletter-form {
   position: absolute;
