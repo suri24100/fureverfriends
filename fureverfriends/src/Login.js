@@ -81,10 +81,9 @@ export default function Login(){
                             <img src="paw-green.svg"/>
                         </div>
                         <div className="row center">
-                            <h3 className="col s12">Log In</h3>
+                            <h3 className="col s12">Welcome Back!</h3>
                         </div>
                             <form onSubmit={handleLogin} className="center">
-                                <h5>Welcome Back!</h5>
                                 <div className="input-field col s12">
                                     <input type="email" id="email" name="email" className="validate"
                                            value = {email}
