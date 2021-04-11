@@ -304,10 +304,11 @@ export default function Listings(){
     });*/
 
     //script to add longitude, latitude and distance to pets in firestore
+    //OR script to add published_at (for sorting purpose)
     function modifyFFListings() {
         console.log("modifyFFListings function ran successfully")
         var zip;
-        firestore.collection("PetInfo")
+        /*firestore.collection("PetInfo")
         .doc("PublicListings")
         .collection("AdoptionList")
         .doc("PetTypes").collection("cat").get()
@@ -451,44 +452,31 @@ export default function Listings(){
                     });
                 }
             })
-        });
+        });*/
 
         firestore.collection("PetInfo")
         .doc("PublicListings")
         .collection("AdoptionList")
-        .doc("PetTypes").collection("scales_fins_other").get()
+        .doc("PetTypes").collection("small_furry").get()
         .then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
                 zip = doc.data().pet_data.location.zipcode;
-                if (doc.data().lat == null) {
-                    //console.log("missing lat for " + doc.data().pet_data.pet_id)
-
-                    const apikey = '317f5c81a3241fbb45bbf57e335d466d';
-                    fetch(
-                        `http://api.openweathermap.org/data/2.5/forecast?zip=${zip}&units=imperial&appid=${apikey}`
-                    )
-                    .then((res) => res.json())
-                    .then((json) => {
-
-                        //console.log(json.city.coord.lat);
-                        //console.log(doc.data().pet_data.pet_id);
-                        var id = doc.data().pet_data.pet_id;
-                        var pet = firestore.collection("PetInfo")
+                if (doc.data().published_at == null) {
+                    var id = doc.data().pet_data.pet_id;
+                    var date_created = doc.data().pet_data.listing_created;
+                    firestore.collection("PetInfo")
                         .doc("PublicListings")
                         .collection("AdoptionList")
                         .doc("PetTypes")
-                        .collection("scales_fins_other")
+                        .collection("small_furry")
                         .doc(id).set({
-                            lat: json.city.coord.lat,
-                            lon: json.city.coord.lon,
-                            distance: 2000
+                            published_at: date_created
                         }, { merge: true });
-                    });
                 }
             })
         });
 
-        firestore.collection("PetInfo")
+        /*firestore.collection("PetInfo")
         .doc("PublicListings")
         .collection("AdoptionList")
         .doc("PetTypes").collection("small_furry").get()
@@ -521,7 +509,7 @@ export default function Listings(){
                     });
                 }
             })
-        });
+        });*/
 
 
 
@@ -1043,7 +1031,6 @@ export default function Listings(){
             
             <div className="row">
                 <div className="col s12 m4 l3">
-                
                     <form>
                         <div className="col s12">
                         <button className="btn-small" type="button" onClick={applyFilters}>

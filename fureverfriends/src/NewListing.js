@@ -153,6 +153,7 @@ export default function NewListing() {
             let newListing = {
                 lat: geoData.lat,
                 lon: geoData.lon,
+                published_at: new Date().toJSON(),
                 pet_data: {formState},
                 profileFiles: {
                     profilePhoto: "",
