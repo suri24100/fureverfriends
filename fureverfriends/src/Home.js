@@ -318,15 +318,14 @@ export default function Home() {
             <img className="ls-img" src="./images/lost-and-found.png"/>
         </div>
         <div className="heading">
-            <p>Lost your furever friend?</p>
+            <p>Looking to rehome a friend?</p>
         </div>
         <div className="subheading">
-            <p>Let us help you reunite! Fill out information regarding your pet to file a missing pet or
-                help others by being on a lookout for posted pets
+            <p>Let us help you find their next family! Fill out information regarding your pet to create a listing using the link below! Note that adoptees must have an account with Furever Friends.
             </p>
         </div>
         <div className="lost-and-found-button default">
-            <button className="ls-btn"><span>Lost and found</span></button>
+            <Link to="/findahome"><button className="ls-btn"><span>Rehome Pet</span></button></Link>
         </div>
     </div>
     <div className="newsletters-wrap">
