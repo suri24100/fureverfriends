@@ -229,6 +229,9 @@ export default function Listings(){
             let newCombinedListings = ffListings.concat(pfListings);
             setPetListings(newCombinedListings);
             console.log(newCombinedListings);
+            /*for (let i = 0 ; i < newCombinedListings.length; i++) {
+                console.log(newCombinedListings[i].pet_data.listing_created);
+            }*/
         }
     }, [ffListings, pfListings]);
 
