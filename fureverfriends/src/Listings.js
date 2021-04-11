@@ -188,7 +188,7 @@ export default function Listings(){
     useEffect( () => {
     }, [userSelections.type]);
     useEffect(() =>{
-        console.log(userSelections);
+        //console.log(userSelections);
     })
 
     const [applyFilter, setApplyFilter] = useState(false);
@@ -223,8 +223,38 @@ export default function Listings(){
     useEffect(() =>{
         if(ffListings && pfListings && (prevFFListings !== ffListings)){
             let newCombinedListings = ffListings.concat(pfListings);
+
+
+
+            //SORTING
+            let sorting = document.getElementById('sort-by');
+            sorting.addEventListener('change', (event) => {
+                console.log( " changed: " + event.target.value);
+
+                //sort alphabetically by pet name
+                if (event.target.value == 1) {
+                    //newCombinedListings.sort((a, b) => (a.pet_data.name > b.pet_data.name) ? 1 : -1)
+                   for (let i = 0; i < newCombinedListings.length; i++) {
+                       //console.log(newCombinedListings[i].pet_data.name);
+                       try {
+                         newCombinedListings.sort((a, b) => (a.pet_data.name > b.pet_data.name) ? 1 : -1)
+                       } catch (e) {
+                        console.log("Name does not exist for either ")
+                       }
+                   }
+                }
+
+                //sort by creation of listings (newest to oldest)
+                if (event.target.value == 2) {
+
+                }
+            })
+
+
+            //end of sorting
+
             setPetListings(newCombinedListings);
-            //console.log(newCombinedListings)
+            console.log(newCombinedListings);
         }
     }, [ffListings, pfListings]);
 
@@ -266,7 +296,7 @@ export default function Listings(){
 
     function processLocation() {
         //console.log("got here yay");
-        console.log(geoData);
+        //console.log(geoData);
         userLong = geoData.lon;
         userLat = geoData.lat;
     }
@@ -293,45 +323,247 @@ export default function Listings(){
         return d;
     }
 
+    /*useEffect(() => {  modifyFFListings();
+    });*/
 
     //script to add longitude, latitude and distance to pets in firestore
     function modifyFFListings() {
-                var zip;
-                firestore.collection("PetInfo")
-                .doc("PublicListings")
-                .collection("AdoptionList")
-                .doc("PetTypes").collection("bird").get()
-                .then((querySnapshot) => {
-                    querySnapshot.forEach((doc) => {
-                        zip = doc.data().pet_data.location.zipcode;
-                        //console.log("zip2: " + zip);
-                        const apikey = '317f5c81a3241fbb45bbf57e335d466d';
-                        fetch(
-                            `http://api.openweathermap.org/data/2.5/forecast?zip=${zip}&units=imperial&appid=${apikey}`
-                        )
-                        .then((res) => res.json())
-                        .then((json) => {
+        console.log("modifyFFListings function ran successfully")
+        var zip;
+        firestore.collection("PetInfo")
+        .doc("PublicListings")
+        .collection("AdoptionList")
+        .doc("PetTypes").collection("cat").get()
+        .then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                zip = doc.data().pet_data.location.zipcode;
+                if (doc.data().lat == null) {
+                    //console.log("missing lat for " + doc.data().pet_data.pet_id)
 
-                            //console.log(json.city.coord.lat);
-                            //console.log(doc.data().pet_data.pet_id);
-                            var id = doc.data().pet_data.pet_id;
+                    const apikey = '317f5c81a3241fbb45bbf57e335d466d';
+                    fetch(
+                        `http://api.openweathermap.org/data/2.5/forecast?zip=${zip}&units=imperial&appid=${apikey}`
+                    )
+                    .then((res) => res.json())
+                    .then((json) => {
+
+                        //console.log(json.city.coord.lat);
+                        //console.log(doc.data().pet_data.pet_id);
+                        var id = doc.data().pet_data.pet_id;
+                        var pet = firestore.collection("PetInfo")
+                        .doc("PublicListings")
+                        .collection("AdoptionList")
+                        .doc("PetTypes")
+                        .collection("cat")
+                        .doc(id).set({
+                            lat: json.city.coord.lat,
+                            lon: json.city.coord.lon,
+                            distance: 2000
+                        }, { merge: true });
+                    });
+                }
+            })
+        });
+
+        firestore.collection("PetInfo")
+        .doc("PublicListings")
+        .collection("AdoptionList")
+        .doc("PetTypes").collection("dog").get()
+        .then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                zip = doc.data().pet_data.location.zipcode;
+                //console.log("zip2: " + zip);
+                if (doc.data().lat == null) {
+                    //console.log("missing lat for " + doc.data().pet_data.pet_id)
+
+                    const apikey = '317f5c81a3241fbb45bbf57e335d466d';
+                    fetch(
+                        `http://api.openweathermap.org/data/2.5/forecast?zip=${zip}&units=imperial&appid=${apikey}`
+                    )
+                    .then((res) => res.json())
+                    .then((json) => {
+
+                        //console.log(json.city.coord.lat);
+                        //console.log(doc.data().pet_data.pet_id);
+                        var id = doc.data().pet_data.pet_id;
+                        try {
                             var pet = firestore.collection("PetInfo")
                             .doc("PublicListings")
                             .collection("AdoptionList")
                             .doc("PetTypes")
-                            .collection("bird")
+                            .collection("cat")
                             .doc(id).set({
                                 lat: json.city.coord.lat,
                                 lon: json.city.coord.lon,
                                 distance: 2000
                             }, { merge: true });
-                        });
-                    })
-                });
+                        } catch (e) {
+                            //some error occured
+                        }
+                        //console.log("test: " + json.city)
+                    });
+                }
+            })
+        });
+
+        firestore.collection("PetInfo")
+        .doc("PublicListings")
+        .collection("AdoptionList")
+        .doc("PetTypes").collection("bird").get()
+        .then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                zip = doc.data().pet_data.location.zipcode;
+                if (doc.data().lat == null) {
+                    //console.log("missing lat for " + doc.data().pet_data.pet_id)
+
+                    const apikey = '317f5c81a3241fbb45bbf57e335d466d';
+                    fetch(
+                        `http://api.openweathermap.org/data/2.5/forecast?zip=${zip}&units=imperial&appid=${apikey}`
+                    )
+                    .then((res) => res.json())
+                    .then((json) => {
+
+                        //console.log(json.city.coord.lat);
+                        //console.log(doc.data().pet_data.pet_id);
+                        var id = doc.data().pet_data.pet_id;
+                        var pet = firestore.collection("PetInfo")
+                        .doc("PublicListings")
+                        .collection("AdoptionList")
+                        .doc("PetTypes")
+                        .collection("bird")
+                        .doc(id).set({
+                            lat: json.city.coord.lat,
+                            lon: json.city.coord.lon,
+                            distance: 2000
+                        }, { merge: true });
+                    });
+                }
+            })
+        });
+
+        firestore.collection("PetInfo")
+        .doc("PublicListings")
+        .collection("AdoptionList")
+        .doc("PetTypes").collection("rabbit").get()
+        .then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                zip = doc.data().pet_data.location.zipcode;
+                if (doc.data().lat == null) {
+                    //console.log("missing lat for " + doc.data().pet_data.pet_id)
+
+                    const apikey = '317f5c81a3241fbb45bbf57e335d466d';
+                    fetch(
+                        `http://api.openweathermap.org/data/2.5/forecast?zip=${zip}&units=imperial&appid=${apikey}`
+                    )
+                    .then((res) => res.json())
+                    .then((json) => {
+
+                        //console.log(json.city.coord.lat);
+                        //console.log(doc.data().pet_data.pet_id);
+                        var id = doc.data().pet_data.pet_id;
+                        var pet = firestore.collection("PetInfo")
+                        .doc("PublicListings")
+                        .collection("AdoptionList")
+                        .doc("PetTypes")
+                        .collection("rabbit")
+                        .doc(id).set({
+                            lat: json.city.coord.lat,
+                            lon: json.city.coord.lon,
+                            distance: 2000
+                        }, { merge: true });
+                    });
+                }
+            })
+        });
+
+        firestore.collection("PetInfo")
+        .doc("PublicListings")
+        .collection("AdoptionList")
+        .doc("PetTypes").collection("scales_fins_other").get()
+        .then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                zip = doc.data().pet_data.location.zipcode;
+                if (doc.data().lat == null) {
+                    //console.log("missing lat for " + doc.data().pet_data.pet_id)
+
+                    const apikey = '317f5c81a3241fbb45bbf57e335d466d';
+                    fetch(
+                        `http://api.openweathermap.org/data/2.5/forecast?zip=${zip}&units=imperial&appid=${apikey}`
+                    )
+                    .then((res) => res.json())
+                    .then((json) => {
+
+                        //console.log(json.city.coord.lat);
+                        //console.log(doc.data().pet_data.pet_id);
+                        var id = doc.data().pet_data.pet_id;
+                        var pet = firestore.collection("PetInfo")
+                        .doc("PublicListings")
+                        .collection("AdoptionList")
+                        .doc("PetTypes")
+                        .collection("scales_fins_other")
+                        .doc(id).set({
+                            lat: json.city.coord.lat,
+                            lon: json.city.coord.lon,
+                            distance: 2000
+                        }, { merge: true });
+                    });
+                }
+            })
+        });
+
+        firestore.collection("PetInfo")
+        .doc("PublicListings")
+        .collection("AdoptionList")
+        .doc("PetTypes").collection("small_furry").get()
+        .then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                zip = doc.data().pet_data.location.zipcode;
+                if (doc.data().lat == null) {
+                    //console.log("missing lat for " + doc.data().pet_data.pet_id)
+
+                    const apikey = '317f5c81a3241fbb45bbf57e335d466d';
+                    fetch(
+                        `http://api.openweathermap.org/data/2.5/forecast?zip=${zip}&units=imperial&appid=${apikey}`
+                    )
+                    .then((res) => res.json())
+                    .then((json) => {
+
+                        //console.log(json.city.coord.lat);
+                        //console.log(doc.data().pet_data.pet_id);
+                        var id = doc.data().pet_data.pet_id;
+                        var pet = firestore.collection("PetInfo")
+                        .doc("PublicListings")
+                        .collection("AdoptionList")
+                        .doc("PetTypes")
+                        .collection("small_furry")
+                        .doc(id).set({
+                            lat: json.city.coord.lat,
+                            lon: json.city.coord.lon,
+                            distance: 2000
+                        }, { merge: true });
+                    });
+                }
+            })
+        });
+
 
 
     }
-
+    function filterMoreFF(listingData, argumentType, argument) {
+        let refinedData = [];
+        /*for (let i = 0; i < listingData.length; i++) {
+            console.log(JSON.stringify(listingData[i].pet_data.breed))
+        }*/
+        if (argumentType == "breed") {
+            for (let i = 0; i < listingData.length; i++) {
+                if (listingData[i].pet_data.breed == argument) {
+                    //console.log(listingData[i].pet_data.breed + " and " +  argument)
+                    refinedData.push(listingData[i])
+                }
+            }
+        }
+        return refinedData;
+    }
     async function getFFListings(userSelections, pageNum) {
         let listingData = [];
         if(userSelections.type === "all"){
@@ -345,7 +577,7 @@ export default function Listings(){
                         // doc.data() is never undefined for query doc snapshots
                         if (userSelections.zipcode) {
                             let distance = calculateDistance(userLat, userLong, doc.data().lat, doc.data().lon);
-                            console.log("distance between userinput and " + doc.data().pet_data.name + " of id: " + doc.id + " is " + distance);
+                            //console.log("distance between userinput and " + doc.data().pet_data.name + " of id: " + doc.id + " is " + distance);
                             let filtDistance = userSelections.distance;
                             //console.log(filtDistance);
                             if (distance <= filtDistance) {
@@ -363,7 +595,7 @@ export default function Listings(){
                                 // doc.data() is never undefined for query doc snapshots
                                 if (userSelections.zipcode) {
                                     let distance = calculateDistance(userLat, userLong, doc.data().lat, doc.data().lon);
-                                    console.log("distance between userinput and " + doc.data().pet_data.name + " of id: " + doc.id + " is " + distance);
+                                    //console.log("distance between userinput and " + doc.data().pet_data.name + " of id: " + doc.id + " is " + distance);
                                     let filtDistance = userSelections.distance;
                                     //console.log(filtDistance);
                                     if (distance <= filtDistance) {
@@ -383,13 +615,15 @@ export default function Listings(){
                                 // doc.data() is never undefined for query doc snapshots
                                 if (userSelections.zipcode) {
                                     let distance = calculateDistance(userLat, userLong, doc.data().lat, doc.data().lon);
-                                    console.log("distance between userinput and " + doc.data().pet_data.name + " of id: " + doc.id + " is " + distance);
+                                    //console.log("distance between userinput and " + doc.data().pet_data.name + " of id: " + doc.id + " is " + distance);
                                     let filtDistance = userSelections.distance;
                                     //console.log(filtDistance);
                                     if (distance <= filtDistance) {
                                         listingData.push(doc.data());
                                     }
-                                } else listingData.push(doc.data());
+                                } else {
+                                    listingData.push(doc.data());
+                                }
                                 //console.log(doc.data());
                             })}).then(() => {setFFListings(listingData); //console.log(listingData)
                             });
@@ -403,7 +637,7 @@ export default function Listings(){
                                 // doc.data() is never undefined for query doc snapshots
                                 if (userSelections.zipcode) {
                                     let distance = calculateDistance(userLat, userLong, doc.data().lat, doc.data().lon);
-                                    console.log("distance between userinput and " + doc.data().pet_data.name + " of id: " + doc.id + " is " + distance);
+                                    //console.log("distance between userinput and " + doc.data().pet_data.name + " of id: " + doc.id + " is " + distance);
                                     let filtDistance = userSelections.distance;
                                     //console.log(filtDistance);
                                     if (distance <= filtDistance) {
@@ -423,7 +657,7 @@ export default function Listings(){
                                 // doc.data() is never undefined for query doc snapshots
                                 if (userSelections.zipcode) {
                                     let distance = calculateDistance(userLat, userLong, doc.data().lat, doc.data().lon);
-                                    console.log("distance between userinput and " + doc.data().pet_data.name + " of id: " + doc.id + " is " + distance);
+                                    //console.log("distance between userinput and " + doc.data().pet_data.name + " of id: " + doc.id + " is " + distance);
                                     let filtDistance = userSelections.distance;
                                     //console.log(filtDistance);
                                     if (distance <= filtDistance) {
@@ -443,7 +677,7 @@ export default function Listings(){
                                 // doc.data() is never undefined for query doc snapshots
                                 if (userSelections.zipcode) {
                                     let distance = calculateDistance(userLat, userLong, doc.data().lat, doc.data().lon);
-                                    console.log("distance between userinput and " + doc.data().pet_data.name + " of id: " + doc.id + " is " + distance);
+                                    //console.log("distance between userinput and " + doc.data().pet_data.name + " of id: " + doc.id + " is " + distance);
                                     let filtDistance = userSelections.distance;
                                     //console.log(filtDistance);
                                     if (distance <= filtDistance) {
@@ -455,7 +689,7 @@ export default function Listings(){
                             });
                 })
         } else {
-            console.log("FF " + userSelections.type)
+            //console.log("FF " + userSelections.type)
             let docRef =  firestore.collection("PetInfo")
                 .doc("PublicListings")
                 .collection("AdoptionList")
@@ -475,19 +709,90 @@ export default function Listings(){
                         //console.log("userLat = doc's lat? " + (userLat == doc.data().lat) + " for " + doc.data().pet_data.name);
                         if (userSelections.zipcode) {
                             let distance = calculateDistance(userLat, userLong, doc.data().lat, doc.data().lon);
-                            console.log("distance between userinput and " + doc.data().pet_data.name + " of id: " + doc.id + " is " + distance);
+                            //console.log("distance between userinput and " + doc.data().pet_data.name + " of id: " + doc.id + " is " + distance);
                             let filtDistance = userSelections.distance;
                             //console.log(filtDistance);
                             if (distance <= filtDistance) {
                                 listingData.push(doc.data());
+                                if (userSelections.breed.length > 0) {
+                                    userSelections.breed.forEach(breed => {
+                                        if (doc.data().pet_data.breed != breed) {
+                                            let x = doc.data()
+                                            console.log(x)
+                                            console.log(doc.data().pet_data.breed + " and " +  breed);
+                                            let idx = listingData.indexOf(doc.data())
+                                            console.log("idx not matching " + idx);
+                                        }
+                                    })
+                                }
                             }
-                        } else listingData.push(doc.data());
+                        } else {
+                            listingData.push(doc.data()); }
+                            
+                            if (userSelections.breed.length > 0) {
+                                userSelections.breed.forEach(breed => {
+                                    console.log("age test: " + breed)
+                                    for (let i = 0; i < listingData.length; i++) {
+                                        if (listingData[i].pet_data.breed != breed) {
+                                            listingData.splice(i,1);
+                                        }
+                                    }
+                                })
+                            }
+
+                            if (userSelections.age.length > 0) {
+                                userSelections.age.forEach(age => {
+                                    //console.log("age test: " + age)
+                                    for (let i = 0; i < listingData.length; i++) {
+                                        console.log(listingData[i].pet_data.age + " and " + capitalize(age) + (listingData[i].pet_data.age == capitalize(age)))
+                                        if (listingData[i].pet_data.age != capitalize(age)) {
+                                            listingData.splice(i,1);
+                                        }
+                                    }
+                                })
+                            }
+
+                            if (userSelections.gender.length > 0) {
+                                userSelections.gender.forEach(gender => {
+                                    for (let i = 0; i < listingData.length; i++) {
+                                        if (listingData[i].pet_data.gender != capitalize(gender)) {
+                                            listingData.splice(i,1);
+                                        }
+                                    }
+                                })
+                            }
+
+                            /*console.log(userSelections.coat.legnth + " test length of fur");
+                            if (userSelections.coat.length > 0) {
+                                userSelections.coat.forEach(coat => {
+                                    for (let i = 0; i < listingData.length; i++) {
+                                        console.log(listingData[i].pet_data.fur_length + " and " + capitalize(coat) + (listingData[i].pet_data.fur_length == capitalize(coat)))
+                                        if (listingData[i].pet_data.fur_length != capitalize(coat)) {
+                                            listingData.splice(i,1);
+                                        }
+                                    }
+                                })
+                            }*/
+
+                            if (userSelections.color.length > 0) {
+                                userSelections.color.forEach(color => {
+                                    for (let i = 0; i < listingData.length; i++) {
+                                        if (listingData[i].pet_data.color != capitalize(color)) {
+                                            listingData.splice(i,1);
+                                        }
+                                    }
+                                })
+                            }
                     })
                 }).then(() => {setFFListings(listingData);
-                    console.log(listingData)
+                    //console.log(listingData)
                 });
         }
         
+    }
+
+    function capitalize(word) {
+        return word.charAt(0).toUpperCase() + word.slice(1);
     }
 
     function generateCards(){
@@ -749,18 +1054,19 @@ export default function Listings(){
             </div>
             <div className="row">
                 <div className="input-field col s3 right">
-                    <select>
-                        <option defaultValue="">Sort By</option>
-                        <option value="1">Newest</option>
-                        <option value="2">Most Viewed</option>
-                        <option value="3">Least Viewed</option>
-                        <option value="3">Distance</option>
+                    <select id="sort-by">
+                        <option defaultValue="0">Sort By</option>
+                        <option value="1">Alphabetical</option>
+                        <option value="2">Newest</option>
+                        <option value="3">Oldest</option>
+                        <option value="4">Distance</option>
                     </select>
                 </div>
             </div>
             
             <div className="row">
                 <div className="col s12 m4 l3">
+                
                     <form>
                         <div className="col s12">
                         <button className="btn-small" type="button" onClick={applyFilters}>
@@ -818,7 +1124,7 @@ export default function Listings(){
                                                 <li key={item}>
                                                     <label>
                                                     <input className="filled-in" type="checkbox"
-                                                           value="item" name="age" id={'age-' + item}
+                                                           value={item.toString()} name="age" id={'age-' + item}
                                                            onChange={updateFilters} />
                                                     <span>{item.toString()}</span>
                                                     </label>
@@ -832,7 +1138,7 @@ export default function Listings(){
                                             <li key={item}>
                                                 <label>
                                                     <input className="filled-in" type="checkbox"
-                                                           value="item" name="gender" id={'gender-' + item}
+                                                           value={item.toString()} name="gender" id={'gender-' + item}
                                                            onChange={updateFilters} />
                                                     <span>{item.toString()}</span>
                                                 </label>
@@ -845,7 +1151,7 @@ export default function Listings(){
                                             <li key={item}>
                                                 <label>
                                                     <input className="filled-in" type="checkbox"
-                                                           value="item" name="size" id={'size-' + item}
+                                                           value={item.toString()} name="size" id={'size-' + item}
                                                            onChange={updateFilters} />
                                                     <span>{item.toString()}</span>
                                                 </label>
@@ -860,7 +1166,7 @@ export default function Listings(){
                                             <li key={item}>
                                                 <label>
                                                     <input className="filled-in" type="checkbox"
-                                                           value="item" name="coat" id={'coat-' + item}
+                                                           value={item.toString()} name="coat" id={'coat-' + item}
                                                            onChange={updateFilters} />
                                                     <span>{item.toString()}</span>
                                                 </label>
@@ -875,7 +1181,7 @@ export default function Listings(){
                                             <li key={item}>
                                                 <label>
                                                     <input className="filled-in" type="checkbox"
-                                                           value="item" name="color" id={'color-' + item}
+                                                           value={item.toString()} name="color" id={'color-' + item}
                                                            onChange={updateFilters} />
                                                     <span>{item.toString()}</span>
                                                 </label>
@@ -890,7 +1196,7 @@ export default function Listings(){
                                             <li key={item.name}>
                                                 <label>
                                                     <input className="filled-in" type="checkbox"
-                                                           value="item" name="breed" id={'breed-' + item.name}
+                                                           value={item.name.toString()} name="breed" id={'breed-' + item.name}
                                                            onChange={updateFilters}
                                                     />
                                                     <span>{item.name.toString()}</span>

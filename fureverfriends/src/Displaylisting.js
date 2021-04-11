@@ -5,10 +5,9 @@ import ReactDOM from 'react-dom';
 import './Listings.js';
 import $ from 'jquery';
 import M from "materialize-css";
-
-// test code for creating a listing
 import db, {firestore, storage} from "./ffdb";
-import 'firebase/storage';
+import {getPetProfileFromFB} from "./ffdb"
+
 
 import Listings from "./Listings";
 
@@ -21,13 +20,31 @@ import {useAuth} from "./AuthContext";
 import {PET_PROFILE as petDetails} from "./api-modules/constants";
 
 
-
-
-
 export default function Displaylisting() {
+    useEffect(()=>{
+        if (USER.email.length > 0 && !loading){
+            setLoading(true); //trackinmg when the page loaded
+           // console.log(getPetProfileFromFB(USER.pet_listings[0].id, USER.pet_listings[0].type)) //call to fb is asycn "get" promise will change , not the actual
+            //result
+            listing()
+
+            // USER.pet_listings.map((pets) =>  {listing(pets.id,pets.type)})
+        }
+    })
+
+
+
+    //recc:
     const {USER, setUSER, currentUser} = useAuth();
     const [loading, setLoading] = useState(false);
     const [username, setUsername] = useState('');
+    const [petInfo, setPetinfo] = useState([]);
+//user needed to be auth in order to get the listings
+    useEffect(()=>{
+    console.log(petInfo)}, [petInfo] //call all the {} everytime petinfo changes :state management
+    )
+//race condition : overriding thats why only getting one array at a time
+    //deal with duplicates
 
     useEffect(() => {
         M.AutoInit();
@@ -38,21 +55,34 @@ export default function Displaylisting() {
     })
 
 
-    async function listing(id, type) {
-        let profileData = {};
-        let docRef = firestore.collection("PetInfo")
-            .doc.data("PublicListings")
-            .collection("AdoptionList")
-            .doc.data("PetTypes")
-            .collection(type)
-            .doc.data(id);
+    //if user.email exists then load the listing else nothing
 
+
+
+    async function listing(){
+        let profileData = [];
+        await USER.pet_listings.map((pets) =>  {
+            let docRef = firestore.collection("PetInfo")
+                .doc("PublicListings")
+                .collection("AdoptionList")
+                .doc("PetTypes")
+                .collection(pets.type)
+                .doc(pets.id);
+            docRef.get().then((doc) => {
+                // const petInfoCopy = petInfo.map(pet => pet)
+                // petInfoCopy.push(doc.data())
+                profileData.push(doc.data())
+            });
+        })
+        setPetinfo(profileData)
+     //save profile data in state : put it as perinfo
+//copy of petinfo array , const x = [...array] use slide
         return profileData;
     }
-    console.log(petDetails)
-
+  // console.log(getPetProfileFromFB)
+    // console.log(USER.pet_listings[]) //gets array
+    //console.log(getPetProfileFromFB(USER.pet_listings[0].id, USER.pet_listings[0].type))
     return (
-
     <div className="actionsnav">
         {/*in order for this to work, would need to remove <Header/> in app.js, need to fix the camel cases when user info is displayed*/}
 
@@ -60,15 +90,13 @@ export default function Displaylisting() {
 
         </div>
 
-
-
         <div className = "container">
             <div className="row">
                 <div className="sub-nav col s12 m3" id="side-nav full">
                     <ul className="sub-nav-options collection">
                         <li className="card-content collection-item active card-panel hoverable">
                             {/*<i className="small material-icons prefix"> notifications </i>*/}
-                            <Link to="/">NOTIFICATIONS </Link>
+                            <Link to="/">NOTIFICATIONS</Link>
                         </li>
                         <li className="card-content collection-item card active card-panel hoverable">
                             {/*<i className="small material-icons prefix">list </i>*/}
@@ -88,22 +116,20 @@ export default function Displaylisting() {
                     <div className="collection">
                         <br/>
                         <div className="listing-card col s12 m6 l4">
-                            <div className="card">
-                                <div className="card-image">
-                                    <a className="btn-floating halfway-fab">
-                                        <i className="material-icons">favorite_border</i>
-                                    </a>
+                             {petInfo.map((pets) =>
+                                <div className="card">
+                                    <div className="card-content">
+                                        <span className="name"> {pets.pet_data.name}  </span>
+                                    </div>
                                 </div>
-                                <div className="card-content">
-                                    <span className="name">{}</span>
-                                </div>
-                            </div>
+                             )}
                         </div>
                     </div>
-                    <Link to ="/findahome"  className="waves-effect btn"> Add New Listing </Link>
                 </div>
+                    <Link to ="/findahome"  className="waves-effect btn"> Add New Listing </Link>
+        </div>
             </div>
         </div>
-    </div>
+
     )
 }
