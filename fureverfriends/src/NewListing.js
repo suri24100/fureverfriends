@@ -36,7 +36,7 @@ export default function NewListing() {
         M.AutoInit();
         $(document).ready(function(){
             $('select').select();
-          });
+        });
         if(USER.email.length > 0){
             M.textareaAutoResize($('#about-me'));
             setLoggedIn(true);
@@ -132,6 +132,7 @@ export default function NewListing() {
         console.log(listingData);
         console.log(listingData.pet_data.type);
         console.log(listingData.pet_data.pet_id);
+
         firestore.collection("PetInfo")
             .doc("PublicListings")
             .collection("AdoptionList")
@@ -153,7 +154,7 @@ export default function NewListing() {
             })
             .catch((error) => {
                 console.error("Error adding document: ", error);
-        });
+            });
     }
 
     async function uploadFile(file, metadata, filepath, listingReference){
@@ -563,49 +564,49 @@ export default function NewListing() {
             }
         }
 
-    //console.log(petColorArray.length);
+        //console.log(petColorArray.length);
 
-    let petColorSelect = document.getElementById('color');
-    while (petColorSelect.firstChild) {
-        petColorSelect.removeChild(petColorSelect.firstChild);
-    }
-    for (let i = 0; i < petColorArray.length; i++) {
-        let petOption = document.createElement('option');
-        petOption.innerHTML = capitalize(petColorArray[i]);
-        petOption.value = petColorArray[i];
-        petOption.setAttribute("id", "petTypeOption");
-        petColorSelect.appendChild(petOption);
-    }
-    petColorSelect.disabled = false;
+        let petColorSelect = document.getElementById('color');
+        while (petColorSelect.firstChild) {
+            petColorSelect.removeChild(petColorSelect.firstChild);
+        }
+        for (let i = 0; i < petColorArray.length; i++) {
+            let petOption = document.createElement('option');
+            petOption.innerHTML = capitalize(petColorArray[i]);
+            petOption.value = petColorArray[i];
+            petOption.setAttribute("id", "petTypeOption");
+            petColorSelect.appendChild(petOption);
+        }
+        petColorSelect.disabled = false;
 
-    let petFurSelect = document.getElementById('furLength');
-    while (petFurSelect.firstChild) {
-        petFurSelect.removeChild(petFurSelect.firstChild);
-    }
-    for (let i = 0; i < furLengthArray.length; i++) {
-        let petOption = document.createElement('option');
-        petOption.innerHTML = capitalize(furLengthArray[i]);
-        petOption.value = petColorArray[i];
-        petOption.setAttribute("id", "petTypeOption");
-        petFurSelect.appendChild(petOption);
-    }
-    petFurSelect.disabled = false;
+        let petFurSelect = document.getElementById('furLength');
+        while (petFurSelect.firstChild) {
+            petFurSelect.removeChild(petFurSelect.firstChild);
+        }
+        for (let i = 0; i < furLengthArray.length; i++) {
+            let petOption = document.createElement('option');
+            petOption.innerHTML = capitalize(furLengthArray[i]);
+            petOption.value = petColorArray[i];
+            petOption.setAttribute("id", "petTypeOption");
+            petFurSelect.appendChild(petOption);
+        }
+        petFurSelect.disabled = false;
 
-    let breedSelect = document.getElementById('breed');
-    while (breedSelect.firstChild) {
-        breedSelect.removeChild(breedSelect.firstChild);
-    }
-    for (let i = 0; i < breedArray.length; i++) {
-        let petOption = document.createElement('option');
-        petOption.innerHTML = capitalize(breedArray[i]);
-        petOption.value = breedArray[i];
-        petOption.setAttribute("id", "petTypeOption");
-        breedSelect.appendChild(petOption);
-    }
-    breedSelect.disabled = false;
+        let breedSelect = document.getElementById('breed');
+        while (breedSelect.firstChild) {
+            breedSelect.removeChild(breedSelect.firstChild);
+        }
+        for (let i = 0; i < breedArray.length; i++) {
+            let petOption = document.createElement('option');
+            petOption.innerHTML = capitalize(breedArray[i]);
+            petOption.value = breedArray[i];
+            petOption.setAttribute("id", "petTypeOption");
+            breedSelect.appendChild(petOption);
+        }
+        breedSelect.disabled = false;
 
-    M.AutoInit();
-  }
+        M.AutoInit();
+    }
     const handleDescription = (info) => {
         const userInput = info.target.value;
         setDynamicDescription({
@@ -640,27 +641,27 @@ export default function NewListing() {
             <div className="listings-banner-wrap">
             </div>
             <div className="container">
-            <div className="listings-heading">
-                <h4 className="center">Create a profile for your pet</h4>
-                <p className="intro-text">Profiles are public listings that help your animal find its Furever Friend.
-                    Please include as much information about him or her as possible.
-                    That information will help us find the purrfect match.
-                </p>
-            </div>
+                <div className="listings-heading">
+                    <h4 className="center">Create a profile for your pet</h4>
+                    <p className="intro-text">Profiles are public listings that help your animal find its Furever Friend.
+                        Please include as much information about him or her as possible.
+                        That information will help us find the purrfect match.
+                    </p>
+                </div>
                 {pageLoaded ?
                     <>{loggedIn ?
                         <>
-                        {listingSaved ?
-                            <div className="row">
-                                <div className="col s12 m8 offset-m2 login-required">
-                                    <div className="col s12 center">
-                                        <h5>{petInfo.pet_name}'s profile has been created!</h5>
-                                        <Link className="btn-large" to={petInfo.profile_url}>Check it Out</Link>
+                            {listingSaved ?
+                                <div className="row">
+                                    <div className="col s12 m8 offset-m2 login-required">
+                                        <div className="col s12 center">
+                                            <h5>{petInfo.pet_name}'s profile has been created!</h5>
+                                            <Link className="btn-large" to={petInfo.profile_url}>Check it Out</Link>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            :
-                            <div className="row form-container">
+                                :
+                                <div className="row form-container">
                                     <div className="divider"></div>
                                     <div className="listings-profile-pic-wrap listings-section">
                                         <h5>Set Profile Picture</h5>
@@ -837,20 +838,20 @@ export default function NewListing() {
                                     </div>
                                     <div className="divider"></div>
                                     <div className="listings-about-me listings-section">
-                                            <h5>About Me</h5>
-                                            <p>Just like humans, all animals have their own unique personality, likes, dislikes, and backstory.
-                                                Sharing those details here will help your pet find a human that can give them them the
-                                                kind of life they need and want.
-                                            </p>
-                                            <form className="row">
-                                                <div className="input-field col s12">
+                                        <h5>About Me</h5>
+                                        <p>Just like humans, all animals have their own unique personality, likes, dislikes, and backstory.
+                                            Sharing those details here will help your pet find a human that can give them them the
+                                            kind of life they need and want.
+                                        </p>
+                                        <form className="row">
+                                            <div className="input-field col s12">
                                                 <label htmlFor="about-me">Pet Description</label>
                                                 <textarea id="about-me" className="materialize-textarea validate"
                                                           required="required"
                                                           onChange={handleDescription}></textarea>
                                                 <span className="helper-text" data-error="Required">Required</span>
                                             </div>
-                                                <div className="col s12 description-note">
+                                            <div className="col s12 description-note">
                                                 <span className="match-title">Matchability Rating: </span>
                                                 <span className="match-stars tooltipped" data-position="bottom" data-html="true" data-tooltip={(dynamicDescription.rating + 1) + " out of 5 stars"}>
                                                     <i className={"material-icons " + ((dynamicDescription.rating < 0) ? "" : "filled-star")}>{(dynamicDescription.rating < 0) ? 'star_outline' : 'star' }</i>
@@ -864,9 +865,9 @@ export default function NewListing() {
                                                     <div className="modal-content">
                                                         <h4>What is a Matchability Rating?</h4>
                                                         <p>Research suggests that certain types of profile content can help a pet get adopted more quickly.
-                                                        Using that research, combined with our Artificial Intelligence software, FureverFriends analyzes your pet's About Me description and gives it
-                                                        a rating based on how well it matches other successful adoption profiles. The higher the rating, the better
-                                                        the odds that your pet will find their Furever Friend.</p>
+                                                            Using that research, combined with our Artificial Intelligence software, FureverFriends analyzes your pet's About Me description and gives it
+                                                            a rating based on how well it matches other successful adoption profiles. The higher the rating, the better
+                                                            the odds that your pet will find their Furever Friend.</p>
                                                     </div>
                                                     <div className="modal-footer">
                                                         <a href="#!"
@@ -874,7 +875,7 @@ export default function NewListing() {
                                                     </div>
                                                 </div>
                                             </div>
-                                            </form>
+                                        </form>
                                     </div>
                                     <div className="divider"></div>
                                     <div className="listings-contact-info listings-section ">
@@ -882,34 +883,34 @@ export default function NewListing() {
                                         <p>This contact information will be posted publicly on the profile to allow
                                             potential adopters to contact you with questions and inquiries. </p>
                                         <form className="row">
-                                                <div className="left-filter col s12 m6 l6 x6">
-                                                    <div className="input-field">
-                                                        <i className="material-icons prefix">account_circle</i>
-                                                        <input id="contact-name" type="text" className="validate"/>
-                                                        <label htmlFor="contact-name">Name</label>
-                                                        <span className="helper-text" data-error="Required">Required</span>
-                                                    </div>
-                                                    <div className="input-field">
-                                                        <i className="material-icons prefix">phone</i>
-                                                        <input id="contact-phone" type="text" className="validate"/>
-                                                        <label htmlFor="contact-phone">Phone</label>
-                                                        <span className="helper-text"></span>
-                                                    </div>
+                                            <div className="left-filter col s12 m6 l6 x6">
+                                                <div className="input-field">
+                                                    <i className="material-icons prefix">account_circle</i>
+                                                    <input id="contact-name" type="text" className="validate"/>
+                                                    <label htmlFor="contact-name">Name</label>
+                                                    <span className="helper-text" data-error="Required">Required</span>
                                                 </div>
-                                                <div className="right-filter col s12 m6 l6 x6">
-                                                    <div className="input-field">
-                                                        <i className="material-icons prefix">mail</i>
-                                                        <input id="contact-email" type="text" className="validate"/>
-                                                        <label htmlFor="contact-email">Email</label>
-                                                        <span className="helper-text" data-error="Required">Required</span>
-                                                    </div>
-                                                    <div className="input-field">
-                                                        <i className="material-icons prefix">language</i>
-                                                        <input id="contact-website" type="text" className="validate"/>
-                                                        <label htmlFor="contact-website">Website</label>
-                                                        <span className="helper-text"></span>
-                                                    </div>
+                                                <div className="input-field">
+                                                    <i className="material-icons prefix">phone</i>
+                                                    <input id="contact-phone" type="text" className="validate"/>
+                                                    <label htmlFor="contact-phone">Phone</label>
+                                                    <span className="helper-text"></span>
                                                 </div>
+                                            </div>
+                                            <div className="right-filter col s12 m6 l6 x6">
+                                                <div className="input-field">
+                                                    <i className="material-icons prefix">mail</i>
+                                                    <input id="contact-email" type="text" className="validate"/>
+                                                    <label htmlFor="contact-email">Email</label>
+                                                    <span className="helper-text" data-error="Required">Required</span>
+                                                </div>
+                                                <div className="input-field">
+                                                    <i className="material-icons prefix">language</i>
+                                                    <input id="contact-website" type="text" className="validate"/>
+                                                    <label htmlFor="contact-website">Website</label>
+                                                    <span className="helper-text"></span>
+                                                </div>
+                                            </div>
                                         </form>
                                     </div>
                                     <div className="divider"></div>
@@ -938,7 +939,7 @@ export default function NewListing() {
                                     </div>
                                     <div id="form-error-message" className="row center red-text"></div>
                                 </div>
-                        }</>
+                            }</>
                         :
                         <div className="row">
                             <div className="col s12 m8 offset-m2 login-required">
