@@ -29,6 +29,7 @@ export default function ForgotPassword(){
 
         try {
             clearErrors();
+            document.getElementById('email').classList.remove("invalid");
             setLoading(true);
             await resetPassword(email);
             clearInputs();
@@ -37,7 +38,8 @@ export default function ForgotPassword(){
             clearErrors();
             setError("Failed to reset password");
             if (err.code === "auth/invalid-email" || err.code === "auth/user-disabled" || err.code === "auth/user-not-found") {
-                setEmailError(err.message);
+                setEmailError("Account not found.");
+                document.getElementById('email').classList.add("invalid");
             }
         }
 
@@ -48,33 +50,29 @@ export default function ForgotPassword(){
     return (
         <div className="create-account-body">
             <div className="signing-banner-wrap">
-                <Header/>
             </div>
-            <div className="create-account container">
+            <div className="create-account">
                 <div className="row">
-                    <div className="col s12 m5 offset-m7 form-box">
-                        <div className="row logo-wrap center">
+                    <div className="col s12 m7 l5 form-box right">
+                        <div className="row logo-wrap center valign-wrapper">
                             <img src="paw-green.svg"/>
                             <h3>Furever Friends</h3>
                             <img src="paw-green.svg"/>
                         </div>
                         <div className="row center">
-                            <h3>Password Reset</h3>
+                            <h3 className="col s12">Password Reset</h3>
                         </div>
 
-                        {error && <Alert variant="danger">{error}</Alert>}
-                        {message && <Alert variant="success">{message}</Alert>}
-
                             <form onSubmit={handleResetPassword} className="center">
-                                <h5>Welcome Back!</h5>
-
                                 <div className="input-field col s12">
-                                    <input type="email" id="email" name="email"
+                                    <input type="email" id="email" name="email" className="validate"
                                        value = {email}
                                        onChange ={(e) => setEmail(e.target.value)}/>
                                     <label htmlFor="email">Enter Your Email Address:</label>
-                                    <p className="errorMsg">{emailError}</p>
+                                    <p className="helper-text left-align">{emailError}</p>
                                 </div>
+                                {error && <Alert variant="danger">{error}</Alert>}
+                                {message && <Alert variant="success">{message}</Alert>}
                                 <div className="col s12 center">
                                     <button disabled = {loading} className="btn">Reset Password</button>
                                     <div className="sub-text">
