@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import './css/style.css';
 import './css/home.css';
 import $ from 'jquery';
@@ -7,6 +7,10 @@ import PFdata from "./api-modules/constants.js";
 import {Link} from "react-router-dom";
 
 export default function Home() {
+    useLayoutEffect(() => {
+        window.scrollTo(0, 0)
+    });
+
     useEffect(() => {
         M.AutoInit();
         $(document).ready(function(){

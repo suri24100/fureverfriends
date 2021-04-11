@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 import './css/style.css';
 import './css/newListings.css';
 import ReactDOM from 'react-dom';
@@ -31,6 +31,9 @@ function capitalize(word) {
 }
 
 export default function NewListing() {
+    useLayoutEffect(() => {
+        window.scrollTo(0, 0)
+    });
 
     useEffect(() => {
         M.AutoInit();

@@ -1,4 +1,4 @@
-import React, {useEffect, useState, Component, useReducer, useRef} from 'react';
+import React, {useEffect, useLayoutEffect, useState, Component, useReducer, useRef} from 'react';
 import Header from "./Header";
 import './css/style.css';
 import './css/listings.css';
@@ -149,6 +149,10 @@ function PetCard(props){
 }
 
 export default function Listings(){
+
+    useLayoutEffect(() => {
+        window.scrollTo(0, 0)
+    });
 
     function usePrevious(value) {
         const ref = useRef();
