@@ -62,8 +62,7 @@ export default function ForgotPassword(){
                         <div className="row center">
                             <h3 className="col s12">Password Reset</h3>
                         </div>
-
-                            <form onSubmit={handleResetPassword} className="center">
+                        <form onSubmit={handleResetPassword} className="center">
                                 <div className="input-field col s12">
                                     <input type="email" id="email" name="email" className="validate"
                                        value = {email}

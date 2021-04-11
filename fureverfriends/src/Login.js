@@ -74,15 +74,15 @@ export default function Login(){
             </div>
             <div className="create-account container">
                 <div className="row">
-                    <div className="col s12 m5 offset-m7 form-box">
-                        <div className="row logo-wrap center">
+                    <div className="col s12 m7 l5 form-box right">
+                        <div className="row logo-wrap center valign-wrapper">
                             <img src="paw-green.svg"/>
                             <h3>Furever Friends</h3>
                             <img src="paw-green.svg"/>
                         </div>
                         <div className="row center">
-                            <h3>Log In</h3></div>
-
+                            <h3 className="col s12">Log In</h3>
+                        </div>
                             <form onSubmit={handleLogin} className="center">
                                 <h5>Welcome Back!</h5>
                                 <div className="input-field col s12">
