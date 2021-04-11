@@ -227,36 +227,6 @@ export default function Listings(){
     useEffect(() =>{
         if(ffListings && pfListings && (prevFFListings !== ffListings)){
             let newCombinedListings = ffListings.concat(pfListings);
-
-
-
-            //SORTING
-            let sorting = document.getElementById('sort-by');
-            sorting.addEventListener('change', (event) => {
-                console.log( " changed: " + event.target.value);
-
-                //sort alphabetically by pet name
-                if (event.target.value == 1) {
-                    //newCombinedListings.sort((a, b) => (a.pet_data.name > b.pet_data.name) ? 1 : -1)
-                   for (let i = 0; i < newCombinedListings.length; i++) {
-                       //console.log(newCombinedListings[i].pet_data.name);
-                       try {
-                         newCombinedListings.sort((a, b) => (a.pet_data.name > b.pet_data.name) ? 1 : -1)
-                       } catch (e) {
-                        console.log("Name does not exist for either ")
-                       }
-                   }
-                }
-
-                //sort by creation of listings (newest to oldest)
-                if (event.target.value == 2) {
-
-                }
-            })
-
-
-            //end of sorting
-
             setPetListings(newCombinedListings);
             console.log(newCombinedListings);
         }
@@ -1056,7 +1026,7 @@ export default function Listings(){
                     Use the options below to browse for your purrfect new friend.
                 </p>
             </div>
-            <div className="row">
+            {/*<div className="row">
                 <div className="input-field col s3 right">
                     <select id="sort-by">
                         <option defaultValue="0">Sort By</option>
@@ -1066,7 +1036,7 @@ export default function Listings(){
                         <option value="4">Distance</option>
                     </select>
                 </div>
-            </div>
+            </div>*/}
             
             <div className="row">
                 <div className="col s12 m4 l3">
