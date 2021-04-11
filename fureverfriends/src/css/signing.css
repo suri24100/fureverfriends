@@ -69,6 +69,18 @@
     margin:0;
 }
 
+.create-account-body .btn-large{
+    color: #fff;
+    font-style: normal;
+    text-decoration: none;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.create-account-body .confirmation p{
+    text-transform: none;
+    font-size: 1.2em;
+}
 /*.signing-page body {*/
 /*  font-family: 'Calibri';*/
 /*  color: #ffffff;*/

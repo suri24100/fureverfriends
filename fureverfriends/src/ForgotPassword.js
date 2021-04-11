@@ -73,7 +73,7 @@ export default function ForgotPassword(){
                                 {error && <Alert variant="danger">{error}</Alert>}
                                 {message && <Alert variant="success">{message}</Alert>}
                                 <div className="col s12 center">
-                                    <button disabled = {loading} className="btn">Reset Password</button>
+                                    <button disabled = {loading} className="btn-large">Reset Password</button>
                                     <div className="sub-text">
                                         <Link to="/Login">Login</Link>
                                         <br/>

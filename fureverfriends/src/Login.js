@@ -30,13 +30,9 @@ export default function Login(){
     }
 
     async function getUser(){
-
             const snapshot = await firestore.collection("UserInfo")
                 .where("email", "==", email).get();
         setUSER(snapshot.docs[0].data());
-
-        console.log(USER);
-
     }
 
     async function handleLogin(e) {
@@ -72,7 +68,7 @@ export default function Login(){
         <div className="create-account-body">
             <div className="signing-banner-wrap">
             </div>
-            <div className="create-account container">
+            <div className="create-account">
                 <div className="row">
                     <div className="col s12 m7 l5 form-box right">
                         <div className="row logo-wrap center valign-wrapper">
@@ -100,7 +96,7 @@ export default function Login(){
                                 </div>
                                 {error && <Alert variant="danger">{error}</Alert>}
                                 <div className="col s12 center">
-                                    <button disabled = {loading} className="btn">Log In</button>
+                                    <button disabled={loading} className="btn-large">Log In</button>
                                     <div className="sub-text">
                                         <Link to="/ForgotPassword">Forgot Password?</Link>
                                     </div>
