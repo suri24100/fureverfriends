@@ -797,6 +797,7 @@ export default function Listings(){
 
     function generateCards(){
         let cardList = petListings.filter(pet => (pet.pet_data || pet.id)).map(pet => <PetCard petInfo={pet} />);
+        console.log(cardList)
         return(
             <div>{cardList}</div>
         )

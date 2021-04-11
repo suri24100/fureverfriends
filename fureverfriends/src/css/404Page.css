@@ -1,0 +1,9 @@
+.error-page{
+    background-image: url("../images/404-image.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    margin-top: -6vw; /*added when nav was moved out to its own div */
+    z-index: -99;
+    padding-right: 5%;
+}
