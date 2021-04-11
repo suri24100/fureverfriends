@@ -196,6 +196,8 @@ form.row {
   height: 30vw;
   background-image: url(newsletters-banner-full.jpg);
   background-size: 100%;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
 }
 .newsletters-wrap .heading {
   /*font-size: 2vw;
@@ -203,7 +205,7 @@ form.row {
     font-weight: bold; */
   position: absolute;
   left: 70%;
-  top: 30%;
+  top: 40%;
 }
 .newsletters-wrap .heading .about-us-btn {
   background-color: transparent;
@@ -222,7 +224,7 @@ form.row {
   font-size: 1.5vw;
   position: absolute;
   left: 60%;
-  top: 45%;
+  top: 55%;
   font-weight: bold;
 }
 .newsletters-wrap .newsletter-form {
