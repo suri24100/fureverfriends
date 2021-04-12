@@ -2,9 +2,12 @@ import React from "react";
 import M from "materialize-css";
 import {Link, useHistory} from "react-router-dom";
 import { Modal, Collapsible } from 'react-materialize';
+import {useAuth} from "./AuthContext";
 
 export default function Footer() {
     M.AutoInit();
+    const { currentUser, USER, handleLogOut} = useAuth();
+
     return (
         <div>
         <div className="ftr-wrap hide-on-med-and-down">
@@ -17,7 +20,7 @@ export default function Footer() {
                     <h3>Pets</h3>
                     <Link to="/listings"><a>Find a Pet</a></Link>
                     <Link to="/findahome"><a>Find a Home</a></Link>
-                    <a href="https://www.petfinder.com/pet-care/">Pet Care</a>
+                    <Link to="/quiz">Find Your Match</Link>
                 </div>
                 <div className="info-menu col m4 l4 x4">
                     <h3>Information</h3>
@@ -26,10 +29,14 @@ export default function Footer() {
                     <a href="#" target="_blank">FAQ/Help</a>
                 </div>
                 <div className="user-xp-menu col m4 l4 x4">
-                    <h3>User Experience</h3>
-                    <a>Sign Up</a>
-                    <a>Log In</a>
-                    <a>Take the Quiz</a>
+                    <h3>Your Account</h3>
+                    {currentUser && <Link to="/DisplayUserProfile">My Account</Link>}
+                    {currentUser && <Link to="/Displaylisting">My Pet Listings</Link>}
+                    {currentUser && <Link to="/DisplayFavorites">My Favorites</Link>}
+                    {currentUser ?
+                        <Link to="/Home" onClick={handleLogOut}>Log Out</Link>
+                        : <Link to="/login">Log In</Link> }
+                    {!currentUser && <Link to="/CreateAccount">Create an Account</Link>}
                 </div>
             </div>
         </div>
@@ -50,9 +57,9 @@ export default function Footer() {
                   <div className="collapsible-body">
                       <span>
                         <ul>
-                            <Link to="/listings"><li>Find a Pet</li></Link>
-                            <Link to="/findahome"><li>Find a Home</li></Link>
-                            <li><a href="https://www.petfinder.com/pet-care/" target="_blank">Pet Care</a></li>
+                            <li><Link to="/listings">Find a Pet</Link></li>
+                            <li><Link to="/findahome">Find a Home</Link></li>
+                            <li><Link to="/quiz">Find Your Match</Link></li>
                         </ul>
                       </span>
                     </div>
@@ -70,13 +77,18 @@ export default function Footer() {
                   </div>
                 </li>
                 <li>
-                    <div className="collapsible-header"><i className="material-icons">account_circle</i>User Expereince</div>
+                    <div className="collapsible-header"><i className="material-icons">account_circle</i>Your Account</div>
                     <div className="collapsible-body">
                         <span>
                             <ul>
-                                <li>Sign Up</li>
-                                <li>Log In</li>
-                                <li>Take the Quiz</li>
+                                {currentUser && <li><Link to="/DisplayUserProfile">My Account</Link></li>}
+                                {currentUser && <li><Link to="/Displaylisting">My Pet Listings</Link></li>}
+                                {currentUser && <li><Link to="/DisplayFavorites">My Favorites</Link></li>}
+                                <li>{currentUser ?
+                                    <Link to="/Home" onClick={handleLogOut}>Log Out</Link>
+                                    : <Link to="/login">Log In</Link> }
+                                </li>
+                                {!currentUser && <li><Link to="/CreateAccount">Create an Account</Link></li>}
                             </ul>
                         </span>
                     </div>

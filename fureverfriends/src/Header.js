@@ -42,8 +42,6 @@ export default function Header() {
         setUSER(snapshot.docs[0].data());
     }
 
-
-
     return (
         <div>
             <div className="hdr-wrap hide-on-med-and-down">
@@ -85,7 +83,7 @@ export default function Header() {
                 <li><Link to="/findahome"><span>Rehome</span></Link></li>
                 <li><Link to="/quiz"><span>Get Matched</span></Link></li>
                 <li>{currentUser ? <Link to="/Home" onClick={handleLogOut}><span>Log Out</span></Link> : <Link to="/login"><span>Log In</span></Link> }</li>
-                <li><Link to="/DisplayUserProfile"><span>My Account</span></Link></li>
+                {currentUser && <li><Link to="/DisplayUserProfile"><span>My Account</span></Link></li>}
                 </div>
             </ul>
         </div>
