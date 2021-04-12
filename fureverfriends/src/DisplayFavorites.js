@@ -54,14 +54,10 @@ export default function DisplayFavorites() {
                 .collection(pets.id)
                 .doc(pets.favorites);
             docRef.get().then((doc) => {
-                // const petInfoCopy = petInfo.map(pet => pet)
-                // petInfoCopy.push(doc.data())
                 profileData.push(doc.data())
             });
         })
         setPetinfo(profileData)
-        //save profile data in state : put it as perinfo
-//copy of petinfo array , const x = [...array] use slide
         return profileData;
 console.log(favorites)
         //need to addd petfinder info and delete if petfinder posting is deleted
