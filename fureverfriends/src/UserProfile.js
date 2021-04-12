@@ -23,7 +23,7 @@ export default function UserProfile() {
         if(username === ''){
             setUsername(USER.username);
         }
-        console.log("Reloaded");
+        M.textareaAutoResize(document.getElementById("user_bio"));
     })
 
     const clearErrors = () => {
@@ -86,17 +86,17 @@ export default function UserProfile() {
     }
 
     return (
-        <div className="actionsnav">
+        <div className="actionsnav edit-profile">
 
             <div className="listings-banner-wrap">
 
             </div>
             {/*in order for this to work, would need to remove <Header/> in app.js*/}
             <li><Link to="/"><span>Home</span></Link></li>
-            <div className = "container">
+            <div className="container">
                 <div className="row">
-                    <div className="col s12 m3" id = "sidenav">
-                        <div class = "collection">
+                    <div className="col s12 m3" id="sidenav">
+                        <div class="collection">
                             {/*<Link to="/" class = "collection-item">Messages</Link>*/}
                             <Link to="/" class ="collection-item">Notifications</Link>
                             <Link to="/Displaylisting" class = "collection-item">Your Listings</Link>
@@ -106,14 +106,11 @@ export default function UserProfile() {
                         </div>
                     </div>
 
-
-                    <div className="col s12 m9" href="information">
+                    <div className="col s12 m9">
                         <div>
-                            <div className="userinfoform">
+                            <div className="userinfoform collection">
+                                <h2>Edit Account Information</h2>
                                 <form id="userinfo"  className="col s12">
-                                    {error && <Alert variant="danger">{error}</Alert>}
-                                    {console.log(username)}
-
                                     {/*/!*test*!/*/}
                                     {/*<div className="input-field col s6">*/}
                                     {/*    <i className="material-icons prefix">account_circle</i>*/}
@@ -189,32 +186,21 @@ export default function UserProfile() {
                                                onChange={handleInput}/>
                                         <label className="active" htmlFor="user_zip">Enter Your Zip Code:</label>
                                     </div>
-
-
                                     <div className="input-field col s12">
                                         <i className="material-icons prefix">border_color</i>
                                             <textarea id="user_bio" className="materialize-textarea"
                                                       name="user_message"
                                                       defaultValue={USER.user_bio}
                                                       onChange={handleInput} />
-                                            <label htmlFor="user_bio">About Me: </label>
+                                            <label className="active" htmlFor="user_bio">About Me: </label>
 
                                     </div>
-
-                                    {/*<div id="user_bio">*/}
-                                    {/*    <label htmlFor="user_bio">About Me: </label>*/}
-                                    {/*    <textarea id="user_bio" name="user_message"*/}
-                                    {/*              defaultValue={USER.user_bio}*/}
-                                    {/*              onChange={handleInput}>*/}
-                                    {/*    </textarea>*/}
-                                    {/*</div>*/}
-                                    {/*<br/>*/}
                                 </form>
                                 {/*<button disabled={loading}  onClick={saveUserProfile}> Save Changes</button>*/}
-                                <a disabled={loading}  onClick={saveUserProfile} className="waves-effect btn">Save Chances</a>
-                                <p> </p>
-                                <Link to ="/DisplayUserProfile" className="waves-effect btn" > Cancel </Link>
                             </div>
+                            {error && <Alert variant="danger">{error}</Alert>}
+                            <a disabled={loading}  onClick={saveUserProfile} className="waves-effect btn edit-profile">Save Changes</a>
+                            <Link to ="/DisplayUserProfile" className="waves-effect btn edit-profile" > Cancel </Link>
                 </div>
                 </div>
                 </div>

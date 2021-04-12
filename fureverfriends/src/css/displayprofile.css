@@ -1,0 +1,36 @@
+.actionsnav .profile-details{
+    padding: 10px;
+    padding-bottom: 20px;
+    font-size: 1.1em;
+    margin-bottom: 30px;
+}
+
+.actionsnav .container{
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+.actionsnav .profile-field{
+    margin: 10px 0 10px 0;
+}
+
+.actionsnav .profile-field .title{
+    padding-right: 0.5em;
+    padding-left: 0.5em;
+}
+
+.actionsnav h2{
+    font-size: 1.3em;
+    font-weight: bold;
+    color: #379683;
+    padding-left: 0.5em;
+    margin-top: 20px;
+}
+
+.actionsnav .btn.edit-profile{
+    margin-right: 20px!important;
+}
+
+.actionsnav .userinfoform.collection h2{
+    margin-left: 10px;
+}

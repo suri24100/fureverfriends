@@ -24,15 +24,9 @@ export default function Displaylisting() {
     useEffect(()=>{
         if (USER.email.length > 0 && !loading){
             setLoading(true); //trackinmg when the page loaded
-           // console.log(getPetProfileFromFB(USER.pet_listings[0].id, USER.pet_listings[0].type)) //call to fb is asycn "get" promise will change , not the actual
-            //result
             listing()
-
-            // USER.pet_listings.map((pets) =>  {listing(pets.id,pets.type)})
         }
     })
-
-
 
     //recc:
     const {USER, setUSER, currentUser} = useAuth();
@@ -56,8 +50,6 @@ export default function Displaylisting() {
 
 
     //if user.email exists then load the listing else nothing
-
-
 
     async function listing(){
         let profileData = [];
