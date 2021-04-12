@@ -99,27 +99,13 @@ export default function Displaylisting() {
                         </li>
                         <li className="card-content collection-item active card-panel hoverable">
                             {/*<i className="small material-icons prefix">account_circle </i>*/}
-                            <Link to="/DisplayUserProfile"> ACCOUNT </Link>
+                            <Link to="/account-info"> ACCOUNT </Link>
                         </li>
                         <li className="card-content collection-item active card-panel hoverable">
                             {/*<i className="small material-icons prefix">favorite  </i>*/}
                             <Link to="/DisplayFavorites"> FAVORITES </Link></li>
                     </ul>
                 </div>
-
-                {/*<div className="field col s12 m9" href="information">*/}
-                {/*    <div className="collection">*/}
-                {/*        <br/>*/}
-                {/*             {petInfo.map((pets) =>*/}
-                {/*                <div className="card">*/}
-                {/*                    <div className="card-content">*/}
-                {/*                        <span className="name"> {pets.pet_data.name}  </span>*/}
-                {/*                        <span className="name"> {pets.pet_data.type}  </span>*/}
-                {/*                    </div>*/}
-                {/*                </div>*/}
-                {/*             )}*/}
-                {/*    </div>*/}
-                {/*</div>*/}
 
                 <div className="field col s12 m9" href="information">
                 <div className="listing-card col s12 m9">

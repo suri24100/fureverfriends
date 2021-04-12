@@ -55,7 +55,7 @@ export default function Header() {
                     <Link to="/quiz">Get Matched</Link>
                     {currentUser ? <Link to="/Home" onClick={handleLogOut}>Log Out</Link> : <Link to="/login">Log In</Link> }
                     <img src={notification_icon} alt="Notifications"/>
-                    {currentUser ? <Link disable = {loading} to="/DisplayUserProfile">{USER.username}</Link> : <></>}
+                    {currentUser ? <Link disable = {loading} to="/account-info">{USER.username}</Link> : <></>}
                 </div>
             </div>
             <div className="navbar hide-on-large-only">
@@ -83,7 +83,7 @@ export default function Header() {
                 <li><Link to="/findahome"><span>Rehome</span></Link></li>
                 <li><Link to="/quiz"><span>Get Matched</span></Link></li>
                 <li>{currentUser ? <Link to="/Home" onClick={handleLogOut}><span>Log Out</span></Link> : <Link to="/login"><span>Log In</span></Link> }</li>
-                {currentUser && <li><Link to="/DisplayUserProfile"><span>My Account</span></Link></li>}
+                {currentUser && <li><Link to="/account-info"><span>My Account</span></Link></li>}
                 </div>
             </ul>
         </div>

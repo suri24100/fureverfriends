@@ -3,7 +3,7 @@ import Header from "./Header";
 import './css/displayprofile.css';
 import './css/home.css';
 import Footer from "./Footer";
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import {firestore} from "./ffdb";
 import {useAuth} from "./AuthContext";
 import {Alert} from "react-bootstrap";
@@ -17,6 +17,7 @@ export default function UserProfile() {
     const [usernameError, setUsernameError] = useState('');
     const [emailError, setEmailError] = useState('');
     const [username, setUsername] = useState('');
+    const history = useHistory();
 
     useEffect(() => {
         M.AutoInit();
@@ -36,7 +37,6 @@ export default function UserProfile() {
     const id = e.target.id;
     const value = e.target.value;
     handleSetUSER(id,value);
-    console.log(USER);
     }
 
 //DON'T USE ADD, USE UPDATE - we don't want to add new users, just update them.
@@ -50,7 +50,6 @@ export default function UserProfile() {
             setLoading(false);
             return setUsernameError('Username already taken, please choose another one.');
         }
-//this is a test
         try {
             clearErrors();
             setLoading(true);
@@ -67,43 +66,40 @@ export default function UserProfile() {
                 setEmailError(err.message);
             }
         }
-
         setLoading(false);
     }
 
     function updateUser(){
          firestore.collection('UserInfo').doc(currentUser.email).update(USER)
             .then((docRef) => {
-                console.log("Document written with ID: ", docRef);
+                history.push('/DisplayUserProfile');
             })
             .catch((error) => {
-                console.error("Error adding document: ", error);
+                //
             });
-    }
-
-    function cancelchanges(){
-        window.location.reload(false);
     }
 
     return (
         <div className="actionsnav edit-profile">
-
             <div className="listings-banner-wrap">
-
             </div>
             {/*in order for this to work, would need to remove <Header/> in app.js*/}
-            <li><Link to="/"><span>Home</span></Link></li>
             <div className="container">
                 <div className="row">
                     <div className="col s12 m3" id="sidenav">
-                        <div class="collection">
-                            {/*<Link to="/" class = "collection-item">Messages</Link>*/}
-                            <Link to="/" class ="collection-item">Notifications</Link>
-                            <Link to="/Displaylisting" class = "collection-item">Your Listings</Link>
-                            <Link to="/DisplayUserProfile" class = "collection-item">Account Info</Link>
-                           {/*Link <Link to="/" class= "collection-item">Safe Spawts</Link>*/}
-                            <Link to="/DisplayFavorites" class = "collection-item">Favorites</Link>
-                        </div>
+                            <ul className="sub-nav-options collection">
+                                <li className="card-content collection-item active card-panel">
+                                    <Link to="/">NOTIFICATIONS </Link>
+                                </li>
+                                <li className="card-content collection-item active card-panel">
+                                    <Link to="/Displaylisting"> YOUR LISTINGS </Link>
+                                </li>
+                                <li className="card-content collection-item active card-panel current-page">
+                                    <Link to="/account-info"> ACCOUNT </Link>
+                                </li>
+                                <li className="card-content collection-item active card-panel">
+                                    <Link to="/DisplayFavorites"> FAVORITES </Link></li>
+                            </ul>
                     </div>
 
                     <div className="col s12 m9">
@@ -111,24 +107,6 @@ export default function UserProfile() {
                             <div className="userinfoform collection">
                                 <h2>Edit Account Information</h2>
                                 <form id="userinfo"  className="col s12">
-                                    {/*/!*test*!/*/}
-                                    {/*<div className="input-field col s6">*/}
-                                    {/*    <i className="material-icons prefix">account_circle</i>*/}
-                                    {/*    <input id="icon_prefix" type="text" className="validate" />*/}
-                                    {/*    <label htmlFor="icon_prefix">First Name : </label>*/}
-                                    {/*</div>*/}
-                                    {/*<div className="input-field col s6">*/}
-                                    {/*    /!*<i className="material-icons prefix">account_circle</i>*!/*/}
-                                    {/*    <input className="validate" defaultValue={USER.last_name}*/}
-                                    {/*           onChange={handleInput} id="last_name" type="text" />*/}
-                                    {/*    <label htmlFor="last_name"> Last Name : </label>*/}
-                                    {/*</div>*/}
-
-                                    {/*/!*test end *!/*/}
-
-
-                                    <br/>
-
                                     <div className="input-field inline col s12">
                                         <i className="material-icons prefix">assignment_ind</i>
                                         <label className="active" htmlFor="username"> User Name: </label>
@@ -198,9 +176,9 @@ export default function UserProfile() {
                                 </form>
                                 {/*<button disabled={loading}  onClick={saveUserProfile}> Save Changes</button>*/}
                             </div>
-                            {error && <Alert variant="danger">{error}</Alert>}
+                            {/*{error && <Alert variant="danger">{error}</Alert>}*/}
                             <a disabled={loading}  onClick={saveUserProfile} className="waves-effect btn edit-profile">Save Changes</a>
-                            <Link to ="/DisplayUserProfile" className="waves-effect btn edit-profile" > Cancel </Link>
+                            <Link to ="/account-info" className="waves-effect btn edit-profile" > Cancel </Link>
                 </div>
                 </div>
                 </div>

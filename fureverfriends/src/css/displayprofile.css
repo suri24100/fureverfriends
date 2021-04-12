@@ -34,3 +34,12 @@
 .actionsnav .userinfoform.collection h2{
     margin-left: 10px;
 }
+
+.actionsnav .card-panel:hover{
+    background: #6dc2b1;
+}
+
+.actionsnav .card-panel.current-page{
+    background: #6dc2b1;
+    font-weight: bold;
+}

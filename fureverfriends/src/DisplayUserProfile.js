@@ -48,20 +48,16 @@ export default function DisplayUserProfile() {
                 <div className="row">
                     <div className="sub-nav col s12 m3" id="side-nav full">
                         <ul className="sub-nav-options collection">
-                            <li class="card-content collection-item active card-panel hoverable" >
-                                {/*<i className="small material-icons prefix"> notifications </i>*/}
+                            <li class="card-content collection-item active card-panel" >
                                 <Link to="/" >NOTIFICATIONS </Link>
                                 </li>
-                            <li class="card-content collection-item active card-panel hoverable" >
-                                {/*<i className="small material-icons prefix">list </i>*/}
+                            <li class="card-content collection-item active card-panel" >
                                 <Link to="/Displaylisting"> YOUR LISTINGS </Link>
                                </li>
-                            <li class="card-content collection-item card active card-panel hoverable" >
-                                {/*<i className="small material-icons prefix">account_circle </i>*/}
-                                <Link to="/DisplayUserProfile" > ACCOUNT </Link>
+                            <li class="card-content collection-item active current-page card-panel" >
+                                <Link to="/account-info" > ACCOUNT </Link>
                                 </li>
-                            <li class="card-content collection-item active card-panel hoverable" >
-                                {/*<i className="small material-icons prefix">favorite  </i>*/}
+                            <li class="card-content collection-item active card-panel" >
                                 <Link to="/DisplayFavorites" > FAVORITES </Link> </li>
                         </ul>
                     </div>
@@ -106,7 +102,7 @@ export default function DisplayUserProfile() {
                             </div>
                             }
                         </div>
-                        <Link to ="/userprofile" className="waves-effect btn"> Edit Profile </Link>
+                        <Link to ="/edit-account" className="waves-effect btn"> Edit Profile </Link>
                     </div>
                 </div>
             </div>

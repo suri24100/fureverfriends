@@ -30,7 +30,7 @@ export default function Footer() {
                 </div>
                 <div className="user-xp-menu col m4 l4 x4">
                     <h3>Your Account</h3>
-                    {currentUser && <Link to="/DisplayUserProfile">My Account</Link>}
+                    {currentUser && <Link to="/account-info">My Account</Link>}
                     {currentUser && <Link to="/Displaylisting">My Pet Listings</Link>}
                     {currentUser && <Link to="/DisplayFavorites">My Favorites</Link>}
                     {currentUser ?
@@ -81,7 +81,7 @@ export default function Footer() {
                     <div className="collapsible-body">
                         <span>
                             <ul>
-                                {currentUser && <li><Link to="/DisplayUserProfile">My Account</Link></li>}
+                                {currentUser && <li><Link to="/account-info">My Account</Link></li>}
                                 {currentUser && <li><Link to="/Displaylisting">My Pet Listings</Link></li>}
                                 {currentUser && <li><Link to="/DisplayFavorites">My Favorites</Link></li>}
                                 <li>{currentUser ?

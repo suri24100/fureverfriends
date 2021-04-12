@@ -67,9 +67,6 @@ export default function App() {
                 <Route path="/listings">
                     <Listings />
                 </Route>
-                <Route path="/petcare">
-                    <PetCare />
-                </Route>
                 <Route path="/login">
                     <Login />
                 </Route>
@@ -79,9 +76,9 @@ export default function App() {
                 <Route path="/quiz">
                     <PurrsonalityQuiz />
                 </Route>
-                <PrivateRoute path="/userprofile" component={UserProfile} />
+                <PrivateRoute path="/edit-account" component={UserProfile} />
                 <PrivateRoute path="/Displaylisting" component={Displaylisting} />
-                <PrivateRoute path="/DisplayUserProfile" component={DisplayUserProfile} />
+                <PrivateRoute path="/account-info" component={DisplayUserProfile} />
                 <PrivateRoute path="/DisplayFavorites" component={DisplayFavorites} />
                 <PrivateRoute path="/Notifications" component={Notifications} />
                 <Route path="/download-data-private-for-sarah">
