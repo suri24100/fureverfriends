@@ -13,7 +13,7 @@ from transformers import DistilBertTokenizer, DistilBertForSequenceClassificatio
 from transformers import TFDistilBertForSequenceClassification
 import tensorflow as tf
 import torch
-from flask import Flask
+from flask import Flask, request
 import os
 
 ########################################################
@@ -21,12 +21,14 @@ import os
 ########################################################
 app = Flask(__name__)
 
-@app.route('/description_rating')
-def get_description_rating(test_text):
+@app.route('/description_rating', methods=['POST'])
+def get_description_rating():
     save_directory = "./adoption_model"
     loaded_tokenizer_pt = DistilBertTokenizer.from_pretrained(save_directory)
     loaded_model_pt = DistilBertForSequenceClassification.from_pretrained(save_directory, from_tf=True)
 
+    test_text = request.data.decode('utf-8')
+    print(test_text)
     predict_input_pt = loaded_tokenizer_pt.encode(test_text,
                                      truncation=True,
                                      padding=True,
@@ -44,14 +46,16 @@ def get_description_rating(test_text):
     print("\n")
     print("Your description has a rating of:")
     print(ratings.get(predictions_value_pt))
-    return predictions_value_pt
+    return {'rating' : predictions_value_pt}
 
-@app.route('/attribute_predictor')
-def get_attributes(test_text):
+@app.route('/attribute_predictor', methods=['POST'])
+def get_attributes():
     save_directory1 = "./playful_model"
     loaded_tokenizer_pt1 = DistilBertTokenizer.from_pretrained(save_directory1)
     loaded_model_pt1 = DistilBertForSequenceClassification.from_pretrained(save_directory1, from_tf=True)
 
+    test_text = request.data.decode('utf-8')
+    print(test_text)
     predict_input_pt1 = loaded_tokenizer_pt1.encode(test_text,
                                      truncation=True,
                                      padding=True,
@@ -105,4 +109,4 @@ def get_attributes(test_text):
     print("\n")
     print("Your pet has been viewed as:")
     print(attributes_names)
-    return attributes_names
+    return {'attributes' : attributes_names}
