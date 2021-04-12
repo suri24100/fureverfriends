@@ -24,7 +24,7 @@ export default function Displaylisting() {
     useEffect(()=>{
         if (USER.email.length > 0 && !loading){
             setLoading(true); //trackinmg when the page loaded
-            favorites()
+            listing()
         }
     })
 
@@ -51,7 +51,7 @@ export default function Displaylisting() {
 
     //if user.email exists then load the listing else nothing
 
-    async function favorites(){
+    async function listing(){
         let profileData = [];
         await USER.pet_listings.map((pets) =>  {
             let docRef = firestore.collection("PetInfo")
@@ -70,7 +70,7 @@ export default function Displaylisting() {
      //save profile data in state : put it as perinfo
 //copy of petinfo array , const x = [...array] use slide
         return profileData;
-//need to add tthe petfnder log as well but if the petfinder log is delete the favorites need to be deleted
+
     }
 
 
@@ -91,7 +91,7 @@ export default function Displaylisting() {
                     <ul className="sub-nav-options collection">
                         <li className="card-content collection-item active card-panel hoverable">
                             {/*<i className="small material-icons prefix"> notifications </i>*/}
-                            <Link to="/">NOTIFICATIONS</Link>
+                            <Link to="/Notifications">NOTIFICATIONS</Link>
                         </li>
                         <li className="card-content collection-item card active card-panel hoverable">
                             {/*<i className="small material-icons prefix">list </i>*/}
@@ -114,7 +114,8 @@ export default function Displaylisting() {
                             {petInfo.map((pets) =>
                                 <div className="card">
                                     <div className="card-content col s12 m9">
-                                        <span className="name"> {pets.pet_data.favorites}  </span>
+                                        <span className="name"> {pets.pet_data.name}  </span>
+                                        <span className="name"> {pets.pet_data.type}  </span>
                                     </div>
                                 </div>
                             )}

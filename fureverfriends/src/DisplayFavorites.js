@@ -13,6 +13,7 @@ import {useAuth} from "./AuthContext";
 import {Link} from "react-router-dom";
 import Header from "./Header";
 import Listings from "./Listings";
+import {PET_PROFILE as pets} from "./api-modules/constants";
 
 
 export default function DisplayFavorites() {
@@ -21,23 +22,37 @@ export default function DisplayFavorites() {
     const [username, setUsername] = useState('');
     const [petInfo, setPetinfo] = useState([]);
 
+    useEffect(()=>{
+        if (USER.email.length > 0 && !loading){
+            setLoading(true); //trackinmg when the page loaded
+            favorites()
+        }
+    })
+
+//user needed to be auth in order to get the listings
+    useEffect(()=>{
+        console.log(petInfo)}, [petInfo] //call all the {} everytime petinfo changes :state management
+    )
+//race condition : overriding thats why only getting one array at a time
+    //deal with duplicates
+
     useEffect(() => {
         M.AutoInit();
         if(username === ''){
             setUsername(USER.username);
         }
-        // console.log("Reloaded");
+        console.log("Reloaded");
     })
 
-    async function notifications(){
+    async function favorites(){
         let profileData = [];
         await USER.pet_listings.map((pets) =>  {
             let docRef = firestore.collection("PetInfo")
                 .doc("PublicListings")
                 .collection("AdoptionList")
                 .doc("PetTypes")
-                .collection(pets.type)
-                .doc(pets.id).collection(pets.favorites);
+                .collection(pets.id)
+                .doc(pets.favorites);
             docRef.get().then((doc) => {
                 // const petInfoCopy = petInfo.map(pet => pet)
                 // petInfoCopy.push(doc.data())
@@ -48,7 +63,8 @@ export default function DisplayFavorites() {
         //save profile data in state : put it as perinfo
 //copy of petinfo array , const x = [...array] use slide
         return profileData;
-
+console.log(favorites)
+        //need to addd petfinder info and delete if petfinder posting is deleted
     }
 
     return (
@@ -63,7 +79,7 @@ export default function DisplayFavorites() {
                         <ul className="sub-nav-options collection">
                             <li className="card-content collection-item active card-panel hoverable">
                                 {/*<i className="small material-icons prefix"> notifications </i>*/}
-                                <Link to="/">NOTIFICATIONS </Link>
+                                <Link to="/Notifacations">NOTIFICATIONS </Link>
                             </li>
                             <li className="card-content collection-item active card-panel hoverable">
                                 {/*<i className="small material-icons prefix">list </i>*/}
@@ -87,13 +103,13 @@ export default function DisplayFavorites() {
                             <div className="listing-card col s12 m6 l4">
                                 <div className="card">
                                     <div className="card-content">
-                                        <span className="name">{USER.favorites}</span>
+                                        <span className="name">{pets.pet_data.favorites}</span>
                                     </div>
                                 </div>
                             </div>
 
                         </div>
-                        <Link to ="/userprofile"  className="waves-effect btn"> Edit Profile </Link>
+                        <Link to ="/listings"  className="waves-effect btn"> View More Pets </Link>
                     </div>
                 </div>
             </div>
