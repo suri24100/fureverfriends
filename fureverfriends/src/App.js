@@ -27,7 +27,7 @@ import Displaylisting from "./Displaylisting";
 import DisplayUserProfile from "./DisplayUserProfile";
 import DisplayFavorites from "./DisplayFavorites";
 import AIDataButton from "./api-modules/AIDataButton";
-import ErrorPage from "./ErrorPage";
+import Notifications from "./Notifications";
 
 
 /* This should load the header and footer on each page
@@ -83,14 +83,12 @@ export default function App() {
                 <PrivateRoute path="/Displaylisting" component={Displaylisting} />
                 <PrivateRoute path="/DisplayUserProfile" component={DisplayUserProfile} />
                 <PrivateRoute path="/DisplayFavorites" component={DisplayFavorites} />
+                <PrivateRoute path="/Notifications" component={Notifications} />
                 <Route path="/download-data-private-for-sarah">
                     <AIDataButton />
                 </Route>
-                <Route exact path="/">
+                <Route path="/">
                     <Home />
-                </Route>
-                <Route path="*">
-                    <ErrorPage />
                 </Route>
             </Switch>
             <Footer />

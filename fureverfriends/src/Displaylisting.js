@@ -78,7 +78,10 @@ export default function Displaylisting() {
      //save profile data in state : put it as perinfo
 //copy of petinfo array , const x = [...array] use slide
         return profileData;
+
     }
+
+
   // console.log(getPetProfileFromFB)
     // console.log(USER.pet_listings[]) //gets array
     //console.log(getPetProfileFromFB(USER.pet_listings[0].id, USER.pet_listings[0].type))
@@ -115,15 +118,14 @@ export default function Displaylisting() {
                 <div className="field col s12 m9" href="information">
                     <div className="collection">
                         <br/>
-                        <div className="listing-card col s12 m6 l4">
                              {petInfo.map((pets) =>
                                 <div className="card">
                                     <div className="card-content">
                                         <span className="name"> {pets.pet_data.name}  </span>
+                                        <span className="name"> {pets.pet_data.type}  </span>
                                     </div>
                                 </div>
                              )}
-                        </div>
                     </div>
                 </div>
                     <Link to ="/findahome"  className="waves-effect btn"> Add New Listing </Link>
