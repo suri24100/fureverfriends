@@ -21,21 +21,23 @@ import {PET_PROFILE as petDetails} from "./api-modules/constants";
 
 
 export default function Displaylisting() {
+    const {USER, setUSER, currentUser} = useAuth();
+
     useEffect(()=>{
-        if (USER.email.length > 0 && !loading){
-            setLoading(true); //trackinmg when the page loaded
-            listing()
+        if (currentUser && USER.pet_listings.length > 0 && !loading){
+            setLoading(true); //tracking when the page loaded
+            const p = listing();
         }
     })
 
     //recc:
-    const {USER, setUSER, currentUser} = useAuth();
     const [loading, setLoading] = useState(false);
     const [username, setUsername] = useState('');
     const [petInfo, setPetinfo] = useState([]);
 //user needed to be auth in order to get the listings
-    useEffect(()=>{
-    console.log(petInfo)}, [petInfo] //call all the {} everytime petinfo changes :state management
+    useEffect(() => {
+    console.log(petInfo)
+        } //call all the {} everytime petinfo changes :state management
     )
 //race condition : overriding thats why only getting one array at a time
     //deal with duplicates
@@ -45,32 +47,30 @@ export default function Displaylisting() {
         if(username === ''){
             setUsername(USER.username);
         }
-        console.log("Reloaded");
     })
 
-
     //if user.email exists then load the listing else nothing
-
     async function listing(){
         let profileData = [];
-        await USER.pet_listings.map((pets) =>  {
-            let docRef = firestore.collection("PetInfo")
-                .doc("PublicListings")
-                .collection("AdoptionList")
-                .doc("PetTypes")
-                .collection(pets.type)
-                .doc(pets.id);
-            docRef.get().then((doc) => {
-                // const petInfoCopy = petInfo.map(pet => pet)
-                // petInfoCopy.push(doc.data())
-                profileData.push(doc.data())
-            });
-        })
-        setPetinfo(profileData)
-     //save profile data in state : put it as perinfo
-//copy of petinfo array , const x = [...array] use slide
-        return profileData;
-
+        console.log(USER.pet_listings)
+        // USER.pet_listings.map((pets) =>  {
+        //     let docRef = firestore.collection("PetInfo")
+        //         .doc("PublicListings")
+        //         .collection("AdoptionList")
+        //         .doc("PetTypes")
+        //         .collection(pets.type)
+        //         .doc(pets.id);
+        //     docRef.get().then((doc) => {
+        //         // const petInfoCopy = petInfo.map(pet => pet)
+        //         // petInfoCopy.push(doc.data())
+        //         profileData.push(doc.data())
+        //         console.log(profileData)
+        //     });
+        // })
+        console.log(profileData)
+        await setPetinfo(profileData)
+        //save profile data in state : put it as perinfo
+        //copy of petinfo array , const x = [...array] use slide
     }
 
 

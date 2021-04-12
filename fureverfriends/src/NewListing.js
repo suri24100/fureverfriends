@@ -32,9 +32,6 @@ function capitalize(word) {
 }
 
 export default function NewListing() {
-    // useLayoutEffect(() => {
-    //     window.scrollTo(0, 0)
-    // });
 
     useEffect(() => {
         M.AutoInit();
@@ -64,7 +61,7 @@ export default function NewListing() {
     });
     const [dynamicDescription, setDynamicDescription] = useState({
         content: "",
-        rating: 5,
+        rating: -1,
     });
     useEffect(() => {
         console.log(dynamicDescription.content)
@@ -894,11 +891,11 @@ export default function NewListing() {
                                             <div className="col s12 description-note">
                                                 <span className="match-title">Matchability Rating: </span>
                                                 <span className="match-stars tooltipped" data-position="bottom" data-html="true" data-tooltip={(dynamicDescription.rating + 1) + " out of 5 stars"}>
-                                                    <i className={"material-icons " + ((dynamicDescription.rating < 0) ? "" : "filled-star")}>{(dynamicDescription.rating >= 4) ? 'star_outline' : 'star' }</i>
-                                                    <i className={"material-icons " + ((dynamicDescription.rating < 1) ? "" : "filled-star")}>{(dynamicDescription.rating >= 3) ? 'star_outline' : 'star' }</i>
-                                                    <i className={"material-icons " + ((dynamicDescription.rating < 2) ? "" : "filled-star")}>{(dynamicDescription.rating >= 2) ? 'star_outline' : 'star' }</i>
-                                                    <i className={"material-icons " + ((dynamicDescription.rating < 3) ? "" : "filled-star")}>{(dynamicDescription.rating >= 1) ? 'star_outline' : 'star' }</i>
-                                                    <i className={"material-icons " + ((dynamicDescription.rating < 4) ? "" : "filled-star")}>{(dynamicDescription.rating >= 1) ? 'star_outline' : 'star' }</i>
+                                                    <i className={"material-icons " + (([0,1,2,3,4].includes(dynamicDescription.rating)) ? "filled-star" : "")}>{([0,1,2,3,4].includes(dynamicDescription.rating)) ? 'star' : 'star_outline' }</i>
+                                                    <i className={"material-icons " + (([0,1,2,3].includes(dynamicDescription.rating)) ? "filled-star" : "")}>{([0,1,2,3].includes(dynamicDescription.rating)) ? 'star' : 'star_outline' }</i>
+                                                    <i className={"material-icons " + (([0,1,2].includes(dynamicDescription.rating)) ? "filled-star" : "")}>{([0,1,2].includes(dynamicDescription.rating)) ? 'star' : 'star_outline' }</i>
+                                                    <i className={"material-icons " + (([0,1].includes(dynamicDescription.rating)) ? "filled-star" : "")}>{([0,1].includes(dynamicDescription.rating)) ? 'star' : 'star_outline' }</i>
+                                                    <i className={"material-icons " + (([0].includes(dynamicDescription.rating)) ? "filled-star" : "")}>{([0].includes(dynamicDescription.rating)) ? 'star' : 'star_outline' }</i>
                                                 </span>
                                                 <a className="material-icons right modal-trigger" href="#rating_modal">help_outline</a>
                                                 <div id="rating_modal" className="modal">
