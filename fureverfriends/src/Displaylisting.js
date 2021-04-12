@@ -115,19 +115,38 @@ export default function Displaylisting() {
                     </ul>
                 </div>
 
+                {/*<div className="field col s12 m9" href="information">*/}
+                {/*    <div className="collection">*/}
+                {/*        <br/>*/}
+                {/*             {petInfo.map((pets) =>*/}
+                {/*                <div className="card">*/}
+                {/*                    <div className="card-content">*/}
+                {/*                        <span className="name"> {pets.pet_data.name}  </span>*/}
+                {/*                        <span className="name"> {pets.pet_data.type}  </span>*/}
+                {/*                    </div>*/}
+                {/*                </div>*/}
+                {/*             )}*/}
+                {/*    </div>*/}
+                {/*</div>*/}
+
                 <div className="field col s12 m9" href="information">
-                    <div className="collection">
-                        <br/>
-                             {petInfo.map((pets) =>
+                <div className="listing-card col s12 m9">
+                    <div className="card">
+                        <div className="card-content">
+                            {petInfo.map((pets) =>
                                 <div className="card">
                                     <div className="card-content">
                                         <span className="name"> {pets.pet_data.name}  </span>
                                         <span className="name"> {pets.pet_data.type}  </span>
                                     </div>
                                 </div>
-                             )}
+                            )}
+                        </div>
                     </div>
                 </div>
+                </div>
+
+
                     <Link to ="/findahome"  className="waves-effect btn"> Add New Listing </Link>
         </div>
             </div>
