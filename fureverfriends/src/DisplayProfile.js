@@ -47,12 +47,15 @@ export default function DisplayProfile() {
 
             <div className="listings-banner-wrap">
                 <div className="listings-banner-img-wrap"></div>
+
             </div>
 
 
 
             <div className = "container">
                 <div className="row">
+                    <br/>
+                    <br/>
                     <div className="col s12 m3" id = "sidenav">
                         <div class = "collection">
                             <a href="msg" class = "collection-item">Messages</a>
