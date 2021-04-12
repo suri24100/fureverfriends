@@ -19,37 +19,40 @@ export default function DisplayFavorites() {
     const {USER, setUSER, currentUser} = useAuth();
     const [loading, setLoading] = useState(false);
     const [username, setUsername] = useState('');
+    const [petInfo, setPetinfo] = useState([]);
 
     useEffect(() => {
         M.AutoInit();
         if(username === ''){
             setUsername(USER.username);
         }
-        console.log("Reloaded");
+        // console.log("Reloaded");
     })
 
-    async function Displaylisting(e){
-        e.preventDefault();
+    async function notifications(){
+        let profileData = [];
+        await USER.pet_listings.map((pets) =>  {
+            let docRef = firestore.collection("PetInfo")
+                .doc("PublicListings")
+                .collection("AdoptionList")
+                .doc("PetTypes")
+                .collection(pets.type)
+                .doc(pets.id).collection(pets.favorites);
+            docRef.get().then((doc) => {
+                // const petInfoCopy = petInfo.map(pet => pet)
+                // petInfoCopy.push(doc.data())
+                profileData.push(doc.data())
+            });
+        })
+        setPetinfo(profileData)
+        //save profile data in state : put it as perinfo
+//copy of petinfo array , const x = [...array] use slide
+        return profileData;
 
-        const snapshot = await firestore.collection("UserInfo").where("username", "==", USER.username).get();
-        if(!snapshot.empty && USER.username !== username)
-        {
-            setLoading(false);
-        }
-
-        try {
-            setLoading(true);
-        }catch(err) {
-            setLoading(true);
-        }
-
-        setLoading(false);
     }
-
 
     return (
         <div className="actionsnav">
-            {/*in order for this to work, would need to remove <Header/> in app.js, need to fix the camel cases when user info is displayed*/}
 
             <div className="listings-banner-wrap">
 

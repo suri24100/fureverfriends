@@ -24,7 +24,7 @@ export default function Displaylisting() {
     useEffect(()=>{
         if (USER.email.length > 0 && !loading){
             setLoading(true); //trackinmg when the page loaded
-            listing()
+            favorites()
         }
     })
 
@@ -51,7 +51,7 @@ export default function Displaylisting() {
 
     //if user.email exists then load the listing else nothing
 
-    async function listing(){
+    async function favorites(){
         let profileData = [];
         await USER.pet_listings.map((pets) =>  {
             let docRef = firestore.collection("PetInfo")
@@ -70,7 +70,7 @@ export default function Displaylisting() {
      //save profile data in state : put it as perinfo
 //copy of petinfo array , const x = [...array] use slide
         return profileData;
-
+//need to add tthe petfnder log as well but if the petfinder log is delete the favorites need to be deleted
     }
 
 
@@ -108,14 +108,13 @@ export default function Displaylisting() {
                 </div>
 
                 <div className="field col s12 m9" href="information">
-                <div className="listing-card col s12 m9">
+                <div className="listing-card col s12 m9 24">
                     <div className="card">
                         <div className="card-content">
                             {petInfo.map((pets) =>
                                 <div className="card">
-                                    <div className="card-content">
-                                        <span className="name"> {pets.pet_data.name}  </span>
-                                        <span className="name"> {pets.pet_data.type}  </span>
+                                    <div className="card-content col s12 m9">
+                                        <span className="name"> {pets.pet_data.favorites}  </span>
                                     </div>
                                 </div>
                             )}
