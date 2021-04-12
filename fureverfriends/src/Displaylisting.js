@@ -53,20 +53,20 @@ export default function Displaylisting() {
     async function listing(){
         let profileData = [];
         console.log(USER.pet_listings)
-        // USER.pet_listings.map((pets) =>  {
-        //     let docRef = firestore.collection("PetInfo")
-        //         .doc("PublicListings")
-        //         .collection("AdoptionList")
-        //         .doc("PetTypes")
-        //         .collection(pets.type)
-        //         .doc(pets.id);
-        //     docRef.get().then((doc) => {
-        //         // const petInfoCopy = petInfo.map(pet => pet)
-        //         // petInfoCopy.push(doc.data())
-        //         profileData.push(doc.data())
-        //         console.log(profileData)
-        //     });
-        // })
+        USER.pet_listings.map((pets) =>  {
+            let docRef = firestore.collection("PetInfo")
+                .doc("PublicListings")
+                .collection("AdoptionList")
+                .doc("PetTypes")
+                .collection(pets.type)
+                .doc(pets.id);
+            docRef.get().then((doc) => {
+                // const petInfoCopy = petInfo.map(pet => pet)
+                // petInfoCopy.push(doc.data())
+                profileData.push(doc.data())
+                console.log(profileData)
+            });
+        })
         console.log(profileData)
         await setPetinfo(profileData)
         //save profile data in state : put it as perinfo
@@ -75,7 +75,7 @@ export default function Displaylisting() {
 
 
   // console.log(getPetProfileFromFB)
-    // console.log(USER.pet_listings[]) //gets array
+     console.log(USER.pet_listings) //gets array
     //console.log(getPetProfileFromFB(USER.pet_listings[0].id, USER.pet_listings[0].type))
     return (
     <div className="actionsnav">

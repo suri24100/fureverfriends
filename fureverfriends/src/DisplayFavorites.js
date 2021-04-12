@@ -41,7 +41,7 @@ export default function DisplayFavorites() {
         if(username === ''){
             setUsername(USER.username);
         }
-        console.log("Reloaded");
+     console.log("Reloaded");
     })
 
     async function favorites(){
@@ -59,8 +59,15 @@ export default function DisplayFavorites() {
         })
         setPetinfo(profileData)
         return profileData;
-console.log(favorites)
+   console.log(favorites)
         //need to addd petfinder info and delete if petfinder posting is deleted
+    }
+
+    async function petfinderfavs(){
+        let petfinderfavs = [];
+        await USER.favorites.map((pets) => {
+            let docRef = firestore.collection("")
+        })
     }
 
     return (
@@ -83,7 +90,7 @@ console.log(favorites)
                             </li>
                             <li className="card-content collection-item active card-panel hoverable">
                                 {/*<i className="small material-icons prefix">account_circle </i>*/}
-                                <Link to="/DisplayUserProfile"> ACCOUNT </Link>
+                                <Link to="/account-info"> ACCOUNT </Link>
                             </li>
                             <li className="card-content collection-item card active card-panel hoverable">
                                 {/*<i className="small material-icons prefix">account_circle </i>*/}
@@ -99,7 +106,7 @@ console.log(favorites)
                             <div className="listing-card col s12 m6 l4">
                                 <div className="card">
                                     <div className="card-content">
-                                        <span className="name">{pets.pet_data.favorites}</span>
+                                        <span className="name">{USER.favorites}</span>
                                     </div>
                                 </div>
                             </div>
