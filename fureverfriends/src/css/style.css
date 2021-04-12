@@ -15,8 +15,8 @@ a {
 .hdr-wrap {
   display: flex;
   justify-content: space-between;
-  margin-left: 6vw;
-  margin-right: 2vw;
+  margin-left: 5%;
+  margin-right: 2%;
   background: transparent;
   /*position: absolute;
     top: 30%;*/
@@ -24,7 +24,7 @@ a {
 .hdr-wrap .logo h2 {
   font-family: 'Grand Hotel', cursive;
   font-style: italic;
-  font-size: 3vw;
+  font-size: 2.2rem;
   text-align: center;
   margin: 1vw 0vw 0.25vw -1vw;
   color: #ffffff;
@@ -35,7 +35,7 @@ a {
 .hdr-wrap .primary-menu a,
 .hdr-wrap .primary-menu img {
   margin: 0 1vw 0 1vw;
-  font-size: 1.5vw;
+  font-size: 1.1rem;
   text-transform: uppercase;
   font-weight: bold;
   margin-top: 2vw;

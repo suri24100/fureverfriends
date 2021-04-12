@@ -150,10 +150,6 @@ function PetCard(props){
 
 export default function Listings(){
 
-    useLayoutEffect(() => {
-        window.scrollTo(0, 0)
-    });
-
     function usePrevious(value) {
         const ref = useRef();
         useEffect(() => {

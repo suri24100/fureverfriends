@@ -18,9 +18,9 @@ export default function Footer() {
             <div className="footer-menu row">
                 <div className="pets-menu col m4 l4 x4">
                     <h3>Pets</h3>
-                    <Link to="/listings"><a>Find a Pet</a></Link>
-                    <Link to="/findahome"><a>Find a Home</a></Link>
-                    <Link to="/quiz">Find Your Match</Link>
+                    <Link to="/listings" onClick={() => window.scrollTo(0, 0)}><a>Find a Pet</a></Link>
+                    <Link to="/findahome" onClick={() => window.scrollTo(0, 0)}><a>Find a Home</a></Link>
+                    <Link to="/quiz" onClick={() => window.scrollTo(0, 0)}>Find Your Match</Link>
                 </div>
                 <div className="info-menu col m4 l4 x4">
                     <h3>Information</h3>
@@ -30,13 +30,13 @@ export default function Footer() {
                 </div>
                 <div className="user-xp-menu col m4 l4 x4">
                     <h3>Your Account</h3>
-                    {currentUser && <Link to="/account-info">My Account</Link>}
-                    {currentUser && <Link to="/Displaylisting">My Pet Listings</Link>}
-                    {currentUser && <Link to="/DisplayFavorites">My Favorites</Link>}
+                    {currentUser && <Link to="/account-info" onClick={() => window.scrollTo(0, 0)}>My Account</Link>}
+                    {currentUser && <Link to="/Displaylisting" onClick={() => window.scrollTo(0, 0)}>My Pet Listings</Link>}
+                    {currentUser && <Link to="/DisplayFavorites" onClick={() => window.scrollTo(0, 0)}>My Favorites</Link>}
                     {currentUser ?
                         <Link to="/Home" onClick={handleLogOut}>Log Out</Link>
                         : <Link to="/login">Log In</Link> }
-                    {!currentUser && <Link to="/CreateAccount">Create an Account</Link>}
+                    {!currentUser && <Link to="/CreateAccount" onClick={() => window.scrollTo(0, 0)}>Create an Account</Link>}
                 </div>
             </div>
         </div>
@@ -57,9 +57,9 @@ export default function Footer() {
                   <div className="collapsible-body">
                       <span>
                         <ul>
-                            <li><Link to="/listings">Find a Pet</Link></li>
-                            <li><Link to="/findahome">Find a Home</Link></li>
-                            <li><Link to="/quiz">Find Your Match</Link></li>
+                            <li><Link to="/listings" onClick={() => window.scrollTo(0, 0)}>Find a Pet</Link></li>
+                            <li><Link to="/findahome" onClick={() => window.scrollTo(0, 0)}>Find a Home</Link></li>
+                            <li><Link to="/quiz" onClick={() => window.scrollTo(0, 0)}>Find Your Match</Link></li>
                         </ul>
                       </span>
                     </div>
@@ -81,14 +81,14 @@ export default function Footer() {
                     <div className="collapsible-body">
                         <span>
                             <ul>
-                                {currentUser && <li><Link to="/account-info">My Account</Link></li>}
-                                {currentUser && <li><Link to="/Displaylisting">My Pet Listings</Link></li>}
-                                {currentUser && <li><Link to="/DisplayFavorites">My Favorites</Link></li>}
+                                {currentUser && <li><Link to="/account-info" onClick={() => window.scrollTo(0, 0)}>My Account</Link></li>}
+                                {currentUser && <li><Link to="/Displaylisting" onClick={() => window.scrollTo(0, 0)}>My Pet Listings</Link></li>}
+                                {currentUser && <li><Link to="/DisplayFavorites" onClick={() => window.scrollTo(0, 0)}>My Favorites</Link></li>}
                                 <li>{currentUser ?
                                     <Link to="/Home" onClick={handleLogOut}>Log Out</Link>
                                     : <Link to="/login">Log In</Link> }
                                 </li>
-                                {!currentUser && <li><Link to="/CreateAccount">Create an Account</Link></li>}
+                                {!currentUser && <li><Link to="/CreateAccount" onClick={() => window.scrollTo(0, 0)}>Create an Account</Link></li>}
                             </ul>
                         </span>
                     </div>

@@ -49,7 +49,6 @@ export default function Header() {
                     <Link to="/"><h2>Furever Friends</h2></Link>
                 </div>
                 <div className="primary-menu">
-                    <Link to="/">Home</Link>
                     <Link to="/listings">Adopt</Link>
                     <Link to="/findahome">Rehome</Link>
                     <Link to="/quiz">Get Matched</Link>

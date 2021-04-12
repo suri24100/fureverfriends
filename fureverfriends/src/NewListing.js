@@ -32,9 +32,9 @@ function capitalize(word) {
 }
 
 export default function NewListing() {
-    useLayoutEffect(() => {
-        window.scrollTo(0, 0)
-    });
+    // useLayoutEffect(() => {
+    //     window.scrollTo(0, 0)
+    // });
 
     useEffect(() => {
         M.AutoInit();
@@ -64,7 +64,7 @@ export default function NewListing() {
     });
     const [dynamicDescription, setDynamicDescription] = useState({
         content: "",
-        rating: -1,
+        rating: 5,
     });
     useEffect(() => {
         console.log(dynamicDescription.content)
@@ -656,19 +656,19 @@ export default function NewListing() {
         // DEMO ONLY, setting the ratings by length
         let tempRating = -1;
         if(userInput.length > 100){
-            tempRating = 4;
+            tempRating = 0;
         }
         else if(userInput.length > 75){
-            tempRating = 3;
+            tempRating = 1;
         }
         else if(userInput.length > 50){
             tempRating = 2;
         }
         else if(userInput.length > 25){
-            tempRating = 1;
+            tempRating = 3;
         }
         else if(userInput.length > 10){
-            tempRating = 0;
+            tempRating = 4;
         }
         setDynamicDescription({
             ...dynamicDescription,
@@ -894,11 +894,11 @@ export default function NewListing() {
                                             <div className="col s12 description-note">
                                                 <span className="match-title">Matchability Rating: </span>
                                                 <span className="match-stars tooltipped" data-position="bottom" data-html="true" data-tooltip={(dynamicDescription.rating + 1) + " out of 5 stars"}>
-                                                    <i className={"material-icons " + ((dynamicDescription.rating < 0) ? "" : "filled-star")}>{(dynamicDescription.rating < 0) ? 'star_outline' : 'star' }</i>
-                                                    <i className={"material-icons " + ((dynamicDescription.rating < 1) ? "" : "filled-star")}>{(dynamicDescription.rating < 1) ? 'star_outline' : 'star' }</i>
-                                                    <i className={"material-icons " + ((dynamicDescription.rating < 2) ? "" : "filled-star")}>{(dynamicDescription.rating < 2) ? 'star_outline' : 'star' }</i>
-                                                    <i className={"material-icons " + ((dynamicDescription.rating < 3) ? "" : "filled-star")}>{(dynamicDescription.rating < 3) ? 'star_outline' : 'star' }</i>
-                                                    <i className={"material-icons " + ((dynamicDescription.rating < 4) ? "" : "filled-star")}>{(dynamicDescription.rating < 4) ? 'star_outline' : 'star' }</i>
+                                                    <i className={"material-icons " + ((dynamicDescription.rating < 0) ? "" : "filled-star")}>{(dynamicDescription.rating >= 4) ? 'star_outline' : 'star' }</i>
+                                                    <i className={"material-icons " + ((dynamicDescription.rating < 1) ? "" : "filled-star")}>{(dynamicDescription.rating >= 3) ? 'star_outline' : 'star' }</i>
+                                                    <i className={"material-icons " + ((dynamicDescription.rating < 2) ? "" : "filled-star")}>{(dynamicDescription.rating >= 2) ? 'star_outline' : 'star' }</i>
+                                                    <i className={"material-icons " + ((dynamicDescription.rating < 3) ? "" : "filled-star")}>{(dynamicDescription.rating >= 1) ? 'star_outline' : 'star' }</i>
+                                                    <i className={"material-icons " + ((dynamicDescription.rating < 4) ? "" : "filled-star")}>{(dynamicDescription.rating >= 1) ? 'star_outline' : 'star' }</i>
                                                 </span>
                                                 <a className="material-icons right modal-trigger" href="#rating_modal">help_outline</a>
                                                 <div id="rating_modal" className="modal">
