@@ -681,6 +681,7 @@ export default function NewListing() {
         });
 
         //Getting rating from AI model
+        //TODO - switch to array
         let tempRating = {}
         await fetch("/description_rating",{
             method: "POST",
