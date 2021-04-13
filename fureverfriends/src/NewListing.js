@@ -644,34 +644,62 @@ export default function NewListing() {
 
         M.AutoInit();
     }
-    const handleDescription = (info) => {
+    // const handleDescription = (info) => {
+    //     const userInput = info.target.value;
+    //     setDynamicDescription({
+    //         ...dynamicDescription,
+    //         content: userInput
+    //     });
+    //     // DEMO ONLY, setting the ratings by length
+    //     let tempRating = -1;
+    //     if(userInput.length > 100){
+    //         tempRating = 4;
+    //     }
+    //     else if(userInput.length > 75){
+    //         tempRating = 3;
+    //     }
+    //     else if(userInput.length > 50){
+    //         tempRating = 2;
+    //     }
+    //     else if(userInput.length > 25){
+    //         tempRating = 1;
+    //     }
+    //     else if(userInput.length > 10){
+    //         tempRating = 0;
+    //     }
+    //     setDynamicDescription({
+    //         ...dynamicDescription,
+    //         rating: tempRating
+    //     });
+    // }
+
+    async function handleDescription(info){
         const userInput = info.target.value;
         setDynamicDescription({
             ...dynamicDescription,
             content: userInput
         });
-        // DEMO ONLY, setting the ratings by length
-        let tempRating = -1;
-        if(userInput.length > 100){
-            tempRating = 0;
-        }
-        else if(userInput.length > 75){
-            tempRating = 1;
-        }
-        else if(userInput.length > 50){
-            tempRating = 2;
-        }
-        else if(userInput.length > 25){
-            tempRating = 3;
-        }
-        else if(userInput.length > 10){
-            tempRating = 4;
-        }
+
+        //Getting rating from AI model
+        let tempRating = {}
+        await fetch("/description_rating",{
+            method: "POST",
+            header: {
+                "Content-Type": "app/text"
+            },
+            body: userInput
+        }).then(response => response.json().then(data =>{
+            tempRating = data
+        }))
+        console.log(tempRating)
+
         setDynamicDescription({
             ...dynamicDescription,
-            rating: tempRating
+            rating: tempRating["rating"]
         });
     }
+
+
 
     return (
         <div className="create-profile">
@@ -885,7 +913,7 @@ export default function NewListing() {
                                                 <label htmlFor="about-me">Pet Description</label>
                                                 <textarea id="about-me" className="materialize-textarea validate"
                                                           required="required"
-                                                          onChange={handleDescription}></textarea>
+                                                          onBlur={handleDescription}></textarea>
                                                 <span className="helper-text" data-error="Required">Required</span>
                                             </div>
                                             <div className="col s12 description-note">

@@ -32,7 +32,7 @@ export default function CreateAccountConfirmation(){
                                 your account, click on the My Account button below
                             </p>
                             <div className="center">
-                                <Link className="btn-large" to="/UserProfile">My Account</Link>
+                                <Link className="btn-large" to="/account-info">My Account</Link>
                             </div>
                         </div>
                     </div>
