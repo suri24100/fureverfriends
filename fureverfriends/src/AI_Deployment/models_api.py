@@ -37,7 +37,7 @@ loaded_model_pt3 = DistilBertForSequenceClassification.from_pretrained(save_dire
 
 app = Flask(__name__)
 
-@app.route('/description_rating', methods=['POST'])
+@app.route('/ai/description_rating', methods=['POST'])
 def get_description_rating():
     test_text = request.data.decode('utf-8')
     print(test_text)
@@ -60,7 +60,7 @@ def get_description_rating():
     print(ratings.get(predictions_value_pt))
     return {'rating' : predictions_value_pt}
 
-@app.route('/attribute_predictor', methods=['POST'])
+@app.route('/ai/attribute_predictor', methods=['POST'])
 def get_attributes():
     test_text = request.data.decode('utf-8')
     print(test_text)
