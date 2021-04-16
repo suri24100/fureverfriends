@@ -7,66 +7,47 @@ import $ from 'jquery';
 import M from "materialize-css";
 
 // test code for creating a listing
-import db, {firestore, storage} from "./ffdb";
+import db, {firestore, getfavs, getPetProfileFromFB, storage} from "./ffdb";
 import 'firebase/storage';
 import {useAuth} from "./AuthContext";
 import {Link} from "react-router-dom";
 import Header from "./Header";
-import Listings from "./Listings";
-import {PET_PROFILE as pets} from "./api-modules/constants";
 
 
 export default function DisplayFavorites() {
     const {USER, setUSER, currentUser} = useAuth();
     const [loading, setLoading] = useState(false);
     const [username, setUsername] = useState('');
-    const [petInfo, setPetinfo] = useState([]);
+    const [petInfo, setPetinfo] = useState({
+        pets: [],
+        hasPets: false
+    });
 
     useEffect(()=>{
         if (USER.email.length > 0 && !loading){
-            setLoading(true); //trackinmg when the page loaded
-            favorites()
+            setLoading(true);
+            favorite()
         }
     })
 
-//user needed to be auth in order to get the listings
-    useEffect(()=>{
-        console.log(petInfo)}, [petInfo] //call all the {} everytime petinfo changes :state management
-    )
-//race condition : overriding thats why only getting one array at a time
-    //deal with duplicates
-
-    useEffect(() => {
-        M.AutoInit();
-        if(username === ''){
-            setUsername(USER.username);
-        }
-     console.log("Reloaded");
-    })
-
-    async function favorites(){
-        let profileData = [];
-        await USER.pet_listings.map((pets) =>  {
-            let docRef = firestore.collection("PetInfo")
-                .doc("PublicListings")
-                .collection("AdoptionList")
-                .doc("PetTypes")
-                .collection(pets.id)
-                .doc(pets.favorites);
-            docRef.get().then((doc) => {
-                profileData.push(doc.data())
-            });
+    function favorite(){
+        let promises = USER.favorites.map(pet => {
+            return getfavs(pet.id, pet.type);
         })
-        setPetinfo(profileData)
-        return profileData;
-   console.log(favorites)
-        //need to addd petfinder info and delete if petfinder posting is deleted
+        Promise.all(promises)
+            .then(results => {
+                setPetinfo({
+                    pets: results,
+                    hasPets: true
+                })
+            })
+            .catch(e => {
+                console.log(e);
+            });
     }
-
     async function petfinderfavs(){
         let petfinderfavs = [];
-        await USER.favorites.map((pets) => {
-            let docRef = firestore.collection("")
+        await USER.favorites.map((pet) => {
         })
     }
 
@@ -106,7 +87,13 @@ export default function DisplayFavorites() {
                             <div className="listing-card col s12 m6 l4">
                                 <div className="card">
                                     <div className="card-content">
-                                        <span className="name">{USER.favorites}</span>
+                                        {petInfo.pets.map((pet) =>
+                                            <div className="card">
+                                                <div className="card-content">
+                                                    <span className="name">{pet.pet_data.favorites}</span>
+                                                </div>
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
                             </div>
