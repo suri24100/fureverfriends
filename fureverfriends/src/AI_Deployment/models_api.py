@@ -108,4 +108,4 @@ def get_attributes():
     print("\n")
     print("Your pet has been viewed as:")
     print(attributes_names)
-    return {'attributes' : attributes_names}
+    return {'attributes' : attributes}
