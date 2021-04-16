@@ -20,13 +20,6 @@ export default function CreateAccount(){
         window.scrollTo(0, 0)
     });
 
-    // const [username, setUsername] = useState('');
-    // const [firstName, setFirstName] = useState('');
-    // const [lastName, setLastName] = useState('');
-    // const [email, setEmail] = useState('');
-    // const [phone, setPhone] = useState('');
-    // const [accountType, setAccountType] = useState('');
-    // const [zip, setZip] = useState('');
     const [password, setPassword] = useState('');
     const [passwordConfirm, setPasswordConfirm] = useState('');
     const [error, setError] = useState('');
