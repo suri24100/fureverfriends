@@ -683,7 +683,7 @@ export default function NewListing() {
         //Getting rating from AI model
         //TODO - switch to array
         let tempRating = {}
-        await fetch("/description_rating",{
+        await fetch("/ai/description_rating",{
             method: "POST",
             header: {
                 "Content-Type": "app/text"
