@@ -19,7 +19,6 @@ export default function CreateAccount(){
     useLayoutEffect(() => {
         window.scrollTo(0, 0)
     });
-
     const [password, setPassword] = useState('');
     const [passwordConfirm, setPasswordConfirm] = useState('');
     const [error, setError] = useState('');
