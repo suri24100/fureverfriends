@@ -28,23 +28,28 @@ a {
   text-align: center;
   margin: 1.5vw 0vw 0.25vw -1vw;
   color: #ffffff;
+  text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
 }
 .hdr-wrap .primary-menu {
   margin-left: 15vw;
-  margin-top: 2vw;
+  margin-top:1vw;
+  text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
 }
+.hdr-wrap .primary-menu i{
+  text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+}
+
 .hdr-wrap .primary-menu a,
 .hdr-wrap .primary-menu img {
-  margin: 2vw 1vw 0 1vw;
+  margin: 1vw 1vw 0 1vw;
   font-size: 1.1rem;
   text-transform: uppercase;
   font-weight: bold;
-  margin-top: 2vw;
   color: white;
 }
 .hdr-wrap .primary-menu img {
   width: 1.25vw;
-  margin-top: 2vw;
+  margin-top: 1vw;
 }
 .hdr-wrap .primary-menu a:hover,
 .hdr-wrap .primary-menu a:active {

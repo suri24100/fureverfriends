@@ -132,7 +132,7 @@ function PetCard(props){
             <div className="listing-card col s12 m6 l4">
                 <div className="card">
                     <div className="card-image">
-                        <Link to={newURL} className="profile-link-overlay">
+                        <Link to={newURL} onClick={() => window.scrollTo(0, 0)} className="profile-link-overlay">
                             <img src={petDetails.profileFiles.profilePhoto} />
                         </Link>
                         <a className="btn-floating halfway-fab" onClick={changeFavorite}>

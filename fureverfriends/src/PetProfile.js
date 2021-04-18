@@ -36,7 +36,7 @@ export default function PetProfile(){
                location: {
                    zipcode: initialData.pet_data.location.zipcode,
                    city: initialData.pet_data.location.city,
-                   state: initialData.pet_data.state
+                   state: initialData.pet_data.location.state
                },
                cared_by: initialData.pet_data.cared_by,
                contact: {
@@ -78,6 +78,7 @@ export default function PetProfile(){
         if(profileFound === "loading"){
             getPetData();
         }
+        console.log(petDetails)
     });
 
     async function getFFProfileInfo(id, type) {
@@ -135,7 +136,7 @@ export default function PetProfile(){
                         phone: petData.contact.phone,
                         website: petData.url
                     },
-                    personality: (petData.tags.length > 0) ? petData.tags : "No traits given.",
+                    personality: (petData.tags.length > 0) ? petData.tags : [],
                     good_with_cats: (petData.environment.cats) ? "Yes" :
                         (((petData.environment.cats) === null) ? "Unknown" : "No"),
                     good_with_dogs: (petData.environment.dogs) ? "Yes" :
@@ -186,7 +187,7 @@ export default function PetProfile(){
                     <h3>Info</h3>
                     <ul>
                         <li><span className="title">Vaccinated:</span> {petDetails.vaccinated}</li>
-                        <li><span className="title">Spayed/Neutered:</span> {petDetails.neutered}</li>
+                        <li><span className="title">Spayed/Neutered:</span> {petDetails.spayed_neutered}</li>
                         <li><span className="title">Special Needs:</span> {petDetails.special_needs}</li>
                         <li><span className="title">Good with Cats:</span> {petDetails.good_with_cats}</li>
                         <li><span className="title">Good with Dogs:</span> {petDetails.good_with_dogs}</li>
@@ -207,9 +208,8 @@ export default function PetProfile(){
                         <li><span className="title">Gender:</span> {petDetails.gender}</li>
                         <li><span className="title">Breed:</span> {petDetails.breed}</li>
                         <li><span className="title">Fur Length:</span> {petDetails.fur_length}</li>
-                        <li><span className="title">Currently Cared for By:</span> {petDetails.good_with_pets}</li>
-                        <li><span className="title">Personality:</span> {petDetails.personality}</li>
-                        <li><span className="title">Adoption Fee:</span> Unknown</li>
+                        <li><span className="title">Personality:</span> {(petDetails.personality && petDetails.personality.length > 0) ? petDetails.personality.map(trait => <span className="personality">{trait}</span>) : "No traits given."}</li>
+                        <li><span className="title">Adoption Fee:</span> {petDetails.adoption_fee.length > 0 ? "$" + petDetails.adoption_fee : "Not listed."}</li>
                     </ul>
                     <h3>About Me</h3>
                     <p>{petDetails.description} {(prefix === "PF") && <a className="text-link" target="_blank" href={petDetails.profile_url}>[read more on PetFinder]</a>}</p>
@@ -265,7 +265,25 @@ export default function PetProfile(){
     function ProfileSlider(){
         return(
             <div className="image-slider">
-                {petDetails ? <img src={petDetails.profileFiles.profilePhoto} /> : <img src={placeholder_image} />}
+                {prefix === "PF" ?
+                    petDetails ?
+                        petDetails.profileFiles.additionalPhotos.length > 0 ?
+                                petDetails.profileFiles.additionalPhotos.map(photo =>
+                                    <img src={photo.full} />
+                                )
+                                :
+                                <img src={petDetails.profileFiles.profilePhoto} />
+
+                        :
+                        <img src={placeholder_image} />
+
+                    :
+                    petDetails ?
+                        <img src={petDetails.profileFiles.profilePhoto} />
+                        :
+                        <img src={placeholder_image}/>
+                }
+
             </div>
         )
     }
@@ -283,7 +301,7 @@ export default function PetProfile(){
 
     return(
         <div className="profile-page">
-            <div className="header-bg"></div>
+            <div className="gradient hide-on-med-and-down"></div>
             <div className="banner-wrap">
                 <ProfileSlider />
             </div>
