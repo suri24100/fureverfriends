@@ -95,7 +95,7 @@ export default function Displaylisting() {
                                                          <img src={pet.profileFiles.profilePhoto.profilePhotoURL} />
                                                     </div>
                                                     <div class="card-action">
-                                                        <Link to={"/listings/" + pet.pet_data.type + "/profile/FF-" + pet.pet_data.pet_id}><i className="material-icons right">arrow_forward</i>{pet.pet_data.name}'s PROFILE</Link>
+                                                        <Link onClick={() => window.scrollTo(0, 0)} to={"/listings/" + pet.pet_data.type + "/profile/FF-" + pet.pet_data.pet_id}><i className="material-icons right">arrow_forward</i>{pet.pet_data.name}'s PROFILE</Link>
                                                     </div>
                                                 </div>
                                             </div>
