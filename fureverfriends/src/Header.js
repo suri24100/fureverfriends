@@ -53,8 +53,9 @@ export default function Header() {
                     <Link to="/findahome">Rehome</Link>
                     <Link to="/quiz">Get Matched</Link>
                     {currentUser ? <Link to="/Home" onClick={handleLogOut}>Log Out</Link> : <Link to="/login">Log In</Link> }
-                    <img src={notification_icon} alt="Notifications"/>
-                    {currentUser ? <Link disable = {loading} to="/account-info">{USER.username}</Link> : <></>}
+                    {!currentUser ? <Link to="/CreateAccount">Sign Up</Link> : <></> }
+                    {currentUser ? <img src={notification_icon} alt="Notifications"/> : <></>}
+                    {currentUser ? <Link to="/account-info">{USER.username}</Link> : <></>}
                 </div>
             </div>
             <div className="navbar hide-on-large-only">
