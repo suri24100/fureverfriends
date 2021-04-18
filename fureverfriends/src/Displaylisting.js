@@ -24,7 +24,6 @@ export default function Displaylisting() {
     })
 
     const [loading, setLoading] = useState(0);
-    const [testCount, setTestCount] = useState(0);
     const [username, setUsername] = useState('');
     const [petInfo, setPetinfo] = useState({
         pets: [],
@@ -87,13 +86,17 @@ export default function Displaylisting() {
                                         </div>
                                     </div>
                                     :
-                                    <div className="card-content">
+                                    <div>
                                         {petInfo.pets.map((pet) =>
-                                            <div className="card">
-                                                 <div className="card-content">
-                                                     <span className="name">{pet.pet_data.name}</span> {" "}
-                                                     <span className="name">{pet.pet_data.type}</span>
-                                                 </div>
+                                            <div className="col s12 m12 l6 listing-card">
+                                                <div className="card" key={pet.pet_data.pet_id}>
+                                                    <div className="card-image">
+                                                         <img src={pet.profileFiles.profilePhoto.profilePhotoURL} />
+                                                    </div>
+                                                    <div class="card-action">
+                                                        <Link onClick={() => window.scrollTo(0, 0)} to={"/listings/" + pet.pet_data.type + "/profile/FF-" + pet.pet_data.pet_id}><i className="material-icons right">arrow_forward</i>{pet.pet_data.name}'s PROFILE</Link>
+                                                    </div>
+                                                </div>
                                             </div>
                                         )}
                                     </div>

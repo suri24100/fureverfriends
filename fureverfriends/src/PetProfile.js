@@ -5,9 +5,12 @@ import {useParams} from "react-router-dom";
 import {getProfileInfo, getTypeListing} from "./api-modules/PetfinderAPI";
 import placeholder_image from "./images/petProfiles/default-placeholder-image.png";
 import {firestore} from "./ffdb";
+import {useAuth} from "./AuthContext";
 
 
 export default function PetProfile(){
+    const {USER, currentUser} = useAuth();
+
     let { id } = useParams();
     let { prefix } = useParams();
     let { type } = useParams();
@@ -16,7 +19,6 @@ export default function PetProfile(){
 
     useEffect(() => {
        if(initialData && profileFound === "loading"){
-           console.log("Pet Data: " + initialData)
            const newPetDetails = {
                petfinder_listing: false,
                pet_id: initialData.pet_data.pet_id,
@@ -36,7 +38,7 @@ export default function PetProfile(){
                location: {
                    zipcode: initialData.pet_data.location.zipcode,
                    city: initialData.pet_data.location.city,
-                   state: initialData.pet_data.state
+                   state: initialData.pet_data.location.state
                },
                cared_by: initialData.pet_data.cared_by,
                contact: {
@@ -65,19 +67,33 @@ export default function PetProfile(){
                }
            }
            setPetDetails(newPetDetails);
-           console.log(initialData);
            setProfileFound("success");
        }
     });
 
     const [petDetails, setPetDetails] = useState(null);
-    const [isFavorite, setIsFavorite] = useState(false);
+    const [isFavorite, setIsFavorite] = useState("loading");
     const [profileFound, setProfileFound] = useState("loading");
 
     useEffect(() => {
         if(profileFound === "loading"){
             getPetData();
         }
+        if(isFavorite === "loading"){
+            console.log(USER.favorites);
+            if(currentUser){
+                let checkFav = false;
+                if(USER.favorites.length > 0){
+                    USER.favorites.map(pet => {
+                        if(pet.id === id && pet.type === type && pet.prefix === prefix) {
+                            checkFav = true;
+                        }
+                    })
+                }
+                setIsFavorite(checkFav);
+            }
+        }
+        console.log(petDetails)
     });
 
     async function getFFProfileInfo(id, type) {
@@ -91,7 +107,6 @@ export default function PetProfile(){
 
         docRef.get().then((doc) => {
             if (doc.exists) {
-                console.log("Document data:", doc.data());
                 setInitialData(doc.data());
             } else {
                 // doc.data() will be undefined in this case
@@ -101,6 +116,21 @@ export default function PetProfile(){
             console.log("Error getting document:", error);
         });
         return profileData;
+    }
+
+    const getFavs = (petID, petType) =>{
+        const favs = []
+        firestore.collection("PetInfo")
+            .doc("PublicListings")
+            .collection("AdoptionList")
+            .doc("PetTypes")
+            .collection(petType)
+            .doc(petID).get().then(querySnapshot => {
+            querySnapshot(doc => {
+                favs.push(doc.data(petID), doc.data(petType))
+            })
+        })
+        return favs;
     }
 
     async function getPetData(){
@@ -132,10 +162,10 @@ export default function PetProfile(){
                     contact: {
                         name: "",
                         email: petData.contact.email,
-                        phone: petData.contact.phone,
+                        phone: petData.contact.phone ? petData.contact.phone : "Not provided.",
                         website: petData.url
                     },
-                    personality: (petData.tags.length > 0) ? petData.tags : "No traits given.",
+                    personality: (petData.tags.length > 0) ? petData.tags : [],
                     good_with_cats: (petData.environment.cats) ? "Yes" :
                         (((petData.environment.cats) === null) ? "Unknown" : "No"),
                     good_with_dogs: (petData.environment.dogs) ? "Yes" :
@@ -158,7 +188,6 @@ export default function PetProfile(){
                         applicationForm: ""
                     }
                 });
-                console.log(petData)
                 setProfileFound("success");
             } else {
                 setProfileFound("failed");
@@ -173,33 +202,56 @@ export default function PetProfile(){
     }
 
     function favoritePet(){
-        setIsFavorite(!isFavorite);
+        if(currentUser){
+            // copy of user's favorites list
+            const newFavoritesArr = USER.favorites.map(pet => pet);
+            // data to push to or remove from favorites array
+            const petInfo = {id: petDetails.pet_id, type: petDetails.type, source: prefix};
+            // check if pet already in favorites, add or remove accordingly
+            if(newFavoritesArr.includes(petInfo, 0)){
+                if(isFavorite) newFavoritesArr.remove(petInfo)
+            } else {
+                if(!isFavorite) newFavoritesArr.push(petInfo);
+            }
+            // update state to change button
+            setIsFavorite(!isFavorite);
+            // save update to database
+            let dbUserInfo = firestore.collection("UserInfo")
+                .doc(USER.email)
+                .update({favorites: newFavoritesArr})
+                .then(() => console.log('Changed!'))
+                .catch((error) => console.log('Error changing favorites!'));
+        }
     }
 
     function ProfileContents(){
         return (
             <div className="row">
-                <div className="col s12 m4 side-info">
+                <div className="col s12 m4 l4 side-info">
                     <div className="main-photo hide-on-small-only"
                          style={{backgroundImage: `url(` + petDetails.profileFiles.profilePhoto + `)`}}>
                     </div>
                     <h3>Info</h3>
                     <ul>
                         <li><span className="title">Vaccinated:</span> {petDetails.vaccinated}</li>
-                        <li><span className="title">Spayed/Neutered:</span> {petDetails.neutered}</li>
+                        <li><span className="title">Spayed/Neutered:</span> {petDetails.spayed_neutered}</li>
                         <li><span className="title">Special Needs:</span> {petDetails.special_needs}</li>
                         <li><span className="title">Good with Cats:</span> {petDetails.good_with_cats}</li>
                         <li><span className="title">Good with Dogs:</span> {petDetails.good_with_dogs}</li>
                         <li><span className="title">Kid-Friendly:</span> {petDetails.kid_friendly}</li>
                     </ul>
-                    <a className="waves-effect waves-light btn-large" onClick={favoritePet}>
-                        <i className="material-icons left">
-                            {isFavorite ? "favorite" : "favorite_outline"}
-                        </i>
-                        {isFavorite ? "Unfavorite" : "Favorite"}
-                    </a>
+                    {isFavorite !== "loading" ?
+                        <a className="waves-effect waves-light btn-large" onClick={favoritePet}>
+                            <i className="material-icons left">
+                                {isFavorite ? "favorite" : "favorite_outline"}
+                            </i>
+                            {isFavorite ? "Unfavorite" : "Favorite"}
+                        </a>
+                        :
+                        <></>
+                    }
                 </div>
-                <div className="col s12 m8">
+                <div className="col s12 m7 l4">
                     <h3>Meet {petDetails.name}!</h3>
                     <ul>
                         <li><span className="title">Location:</span> {petDetails.location.city}, {petDetails.location.state}</li>
@@ -207,9 +259,8 @@ export default function PetProfile(){
                         <li><span className="title">Gender:</span> {petDetails.gender}</li>
                         <li><span className="title">Breed:</span> {petDetails.breed}</li>
                         <li><span className="title">Fur Length:</span> {petDetails.fur_length}</li>
-                        <li><span className="title">Currently Cared for By:</span> {petDetails.good_with_pets}</li>
-                        <li><span className="title">Personality:</span> {petDetails.personality}</li>
-                        <li><span className="title">Adoption Fee:</span> Unknown</li>
+                        <li><span className="title">Personality:</span> {(petDetails.personality && petDetails.personality.length > 0) ? petDetails.personality.map(trait => <span className="personality">{trait}</span>) : "No traits given."}</li>
+                        <li><span className="title">Adoption Fee:</span> {petDetails.adoption_fee.length > 0 ? "$" + petDetails.adoption_fee : "Not listed."}</li>
                     </ul>
                     <h3>About Me</h3>
                     <p>{petDetails.description} {(prefix === "PF") && <a className="text-link" target="_blank" href={petDetails.profile_url}>[read more on PetFinder]</a>}</p>
@@ -241,14 +292,6 @@ export default function PetProfile(){
                                                placeholder="Upload file"/>
                                     </div>
                                 </div>
-                                <div className="col s12 valign-wrapper">
-                                    <h5 className="left">Or Scan Document Directly: </h5>
-                                    <a className="scan-button waves-effect waves-light btn" onClick={favoritePet}>
-                                        <i className="material-icons">
-                                            camera_alt
-                                        </i>
-                                    </a>
-                                </div>
                             </form>
                             <div className="col s12 submit-button">
                                 <a className="waves-effect waves-light btn-large col s12" onClick={favoritePet}>
@@ -273,7 +316,25 @@ export default function PetProfile(){
     function ProfileSlider(){
         return(
             <div className="image-slider">
-                {petDetails ? <img src={petDetails.profileFiles.profilePhoto} /> : <img src={placeholder_image} />}
+                {prefix === "PF" ?
+                    petDetails ?
+                        petDetails.profileFiles.additionalPhotos.length > 0 ?
+                                petDetails.profileFiles.additionalPhotos.map(photo =>
+                                    <img src={photo.full} />
+                                )
+                                :
+                                <img src={petDetails.profileFiles.profilePhoto} />
+
+                        :
+                        <img src={placeholder_image} />
+
+                    :
+                    petDetails ?
+                        <img src={petDetails.profileFiles.profilePhoto} />
+                        :
+                        <img src={placeholder_image}/>
+                }
+
             </div>
         )
     }
@@ -291,7 +352,7 @@ export default function PetProfile(){
 
     return(
         <div className="profile-page">
-            <div className="header-bg"></div>
+            <div className="gradient hide-on-med-and-down"></div>
             <div className="banner-wrap">
                 <ProfileSlider />
             </div>
