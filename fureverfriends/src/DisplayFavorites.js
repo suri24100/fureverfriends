@@ -57,7 +57,7 @@ export default function DisplayFavorites() {
         });
         Promise.all(promises)
             .then(results => {
-                console.log("Sree", results);
+                console.log( results);
                 setPetinfo({
                     pets: results,
                     hasPets: true
