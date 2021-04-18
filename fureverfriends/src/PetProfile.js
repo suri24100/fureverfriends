@@ -9,7 +9,7 @@ import {useAuth} from "./AuthContext";
 
 
 export default function PetProfile(){
-    const {USER, currentUser} = useAuth();
+    const {USER, handleSetUSER, currentUser} = useAuth();
 
     let { id } = useParams();
     let { prefix } = useParams();
@@ -79,22 +79,21 @@ export default function PetProfile(){
         if(profileFound === "loading"){
             getPetData();
         }
-        if(isFavorite === "loading"){
-            console.log(USER.favorites);
-            if(currentUser){
-                let checkFav = false;
-                if(USER.favorites.length > 0){
-                    USER.favorites.map(pet => {
-                        if(pet.id === id && pet.type === type && pet.prefix === prefix) {
-                            checkFav = true;
-                        }
-                    })
-                }
-                setIsFavorite(checkFav);
+        if(currentUser && USER.favorites){
+            let checkFav = false;
+            if(USER.favorites.length > 0){
+                USER.favorites.map(pet => {
+                    if(pet.id === id && pet.source === prefix) {
+                        checkFav = true;
+                        console.log("here")
+                    }
+                    console.log("out here")
+                })
             }
+            setIsFavorite(checkFav);
         }
-        console.log(petDetails)
-    });
+        console.log(petDetails, isFavorite, USER.favorites)
+    }, [petDetails, isFavorite, USER]);
 
     async function getFFProfileInfo(id, type) {
         let profileData = {};
@@ -221,6 +220,8 @@ export default function PetProfile(){
                 .update({favorites: newFavoritesArr})
                 .then(() => console.log('Changed!'))
                 .catch((error) => console.log('Error changing favorites!'));
+            // update local USER copy to match
+            handleSetUSER(USER.email, newFavoritesArr);
         }
     }
 

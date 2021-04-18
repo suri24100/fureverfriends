@@ -82,7 +82,7 @@ export default function Header() {
                 <li><Link to="/listings"><span>Adopt</span></Link></li>
                 <li><Link to="/findahome"><span>Rehome</span></Link></li>
                 <li><Link to="/quiz"><span>Get Matched</span></Link></li>
-                <li>{currentUser ? <Link to="/Home" onClick={handleLogOut}><span>Log Out</span></Link> : <Link to="/login"><span>Log In</span></Link> }</li>
+                <li>{currentUser ? <Link to="/" onClick={handleLogOut}><span>Log Out</span></Link> : <Link to="/login"><span>Log In</span></Link> }</li>
                 {currentUser && <li><Link to="/account-info"><span>My Account</span></Link></li>}
                 </div>
             </ul>
