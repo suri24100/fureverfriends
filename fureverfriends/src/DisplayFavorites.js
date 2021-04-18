@@ -48,9 +48,16 @@ export default function DisplayFavorites() {
     async function petfinderfavs(){
         let petfinderfavs = [];
         await USER.favorites.map((pet) => {
+            pet_name: []
         })
     }
 
+    try {
+
+    }
+catch (e) {
+
+}
     return (
         <div className="actionsnav">
 
