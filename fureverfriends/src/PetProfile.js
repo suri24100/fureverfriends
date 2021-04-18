@@ -202,7 +202,22 @@ export default function PetProfile(){
     }
 
     function favoritePet(){
-        setIsFavorite(!isFavorite);
+        if(currentUser){
+            // copy of user's favorites list
+            const newFavoritesArr = USER.favorites.map(pet => pet);
+            const petInfo = {id: petDetails.pet_id, type: petDetails.type, source: prefix};
+            if(newFavoritesArr.includes(petInfo, 0)){
+                if(isFavorite) newFavoritesArr.remove(petInfo)
+            } else {
+                if(!isFavorite) newFavoritesArr.push(petInfo);
+            }
+            setIsFavorite(!isFavorite);
+            let dbUserInfo = firestore.collection("UserInfo")
+                .doc(USER.email)
+                .update({favorites: newFavoritesArr})
+                .then(() => console.log('Changed!'))
+                .catch((error) => console.log('Error changing favorites!'));
+        }
     }
 
     function ProfileContents(){
