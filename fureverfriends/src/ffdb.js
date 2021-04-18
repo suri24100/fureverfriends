@@ -33,7 +33,18 @@ export async function getPetProfileFromFB(petID, petType){
         .then((doc) => {return doc.data()});
     return profileData;
 }
-
+export async function getfavs(petID, petType){
+    let favData = {};
+    let docRef = firestore.collection("PetInfo")
+        .doc("PublicListings")
+        .collection("AdoptionList")
+        .doc("PetTypes")
+        .collection(petType)
+        .doc(petID);
+    favData = await docRef.get()
+        .then((doc) => {return doc.data()});
+    return favData;
+}
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 export const analytics = firebase.analytics();

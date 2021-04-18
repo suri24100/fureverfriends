@@ -7,7 +7,7 @@ import $ from 'jquery';
 import M from "materialize-css";
 
 // test code for creating a listing
-import db, {firestore, getfavs, getPetProfileFromFB, storage} from "./ffdb";
+import db, {firestore, getfavs, storage} from "./ffdb";
 import 'firebase/storage';
 import {useAuth} from "./AuthContext";
 import {Link} from "react-router-dom";
