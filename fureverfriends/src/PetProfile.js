@@ -176,6 +176,34 @@ export default function PetProfile(){
         setIsFavorite(!isFavorite);
     }
 
+//     async function favs(petID, petType){
+//         let favsData = {};
+//             firestore.collection("PetInfo")
+//             .doc("PublicListings")
+//             .collection("AdoptionList")
+//             .doc("PetTypes")
+//             .collection(petType)
+//             .doc(petID).get()
+//             .then((doc) => {favsData.push(doc.data(petID))});
+// console.log()
+//     }
+
+    const getFavs = (petID, petType) =>{
+        const favs = []
+        firestore.collection("PetInfo")
+            .doc("PublicListings")
+            .collection("AdoptionList")
+            .doc("PetTypes")
+            .collection(petType)
+            .doc(petID).get().then(querySnapshot => {
+            querySnapshot(doc => {
+                favs.push(doc.data(petID), doc.data(petType))
+            })
+        })
+        return favs;
+    }
+
+
     function ProfileContents(){
         return (
             <div className="row">
