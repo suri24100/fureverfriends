@@ -205,13 +205,17 @@ export default function PetProfile(){
         if(currentUser){
             // copy of user's favorites list
             const newFavoritesArr = USER.favorites.map(pet => pet);
+            // data to push to or remove from favorites array
             const petInfo = {id: petDetails.pet_id, type: petDetails.type, source: prefix};
+            // check if pet already in favorites, add or remove accordingly
             if(newFavoritesArr.includes(petInfo, 0)){
                 if(isFavorite) newFavoritesArr.remove(petInfo)
             } else {
                 if(!isFavorite) newFavoritesArr.push(petInfo);
             }
+            // update state to change button
             setIsFavorite(!isFavorite);
+            // save update to database
             let dbUserInfo = firestore.collection("UserInfo")
                 .doc(USER.email)
                 .update({favorites: newFavoritesArr})
