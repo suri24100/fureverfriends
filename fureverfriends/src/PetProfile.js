@@ -133,7 +133,7 @@ export default function PetProfile(){
                     contact: {
                         name: "",
                         email: petData.contact.email,
-                        phone: petData.contact.phone,
+                        phone: petData.contact.phone ? petData.contact.phone : "Not provided.",
                         website: petData.url
                     },
                     personality: (petData.tags.length > 0) ? petData.tags : [],
@@ -180,7 +180,7 @@ export default function PetProfile(){
     function ProfileContents(){
         return (
             <div className="row">
-                <div className="col s12 m4 side-info">
+                <div className="col s12 m4 l4 side-info">
                     <div className="main-photo hide-on-small-only"
                          style={{backgroundImage: `url(` + petDetails.profileFiles.profilePhoto + `)`}}>
                     </div>
@@ -200,7 +200,7 @@ export default function PetProfile(){
                         {isFavorite ? "Unfavorite" : "Favorite"}
                     </a>
                 </div>
-                <div className="col s12 m8">
+                <div className="col s12 m7 l4">
                     <h3>Meet {petDetails.name}!</h3>
                     <ul>
                         <li><span className="title">Location:</span> {petDetails.location.city}, {petDetails.location.state}</li>
