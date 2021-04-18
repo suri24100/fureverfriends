@@ -149,7 +149,6 @@ export default function Home() {
         }
 
         console.log(newSearchFilter);
-        console.log(geoData);
     }
 
       //FINDING LONG AND LAT FOR ZIP CODE (API STUFF)
@@ -165,7 +164,8 @@ export default function Home() {
             //console.log(json)
             //console.log(json.city.coord);
             //getLocation(json.city.coord)
-            setGeoData(json.city.coord);
+            var x = {zip: zip, lat: json.city.coord.lat, lon: json.city.coord.lon};
+            setGeoData(x);
             
         }).catch((err) => {
             console.log(err.message)
