@@ -50,7 +50,7 @@ export default function Login(){
             await login(email, password);
             await getUser();
             clearInputs();
-            history.push("/Home")
+            history.push("/account-info")
         }catch(err) {
             clearErrors();
             setError("Failed to log in");

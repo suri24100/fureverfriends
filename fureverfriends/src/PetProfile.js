@@ -241,14 +241,6 @@ export default function PetProfile(){
                                                placeholder="Upload file"/>
                                     </div>
                                 </div>
-                                <div className="col s12 valign-wrapper">
-                                    <h5 className="left">Or Scan Document Directly: </h5>
-                                    <a className="scan-button waves-effect waves-light btn" onClick={favoritePet}>
-                                        <i className="material-icons">
-                                            camera_alt
-                                        </i>
-                                    </a>
-                                </div>
                             </form>
                             <div className="col s12 submit-button">
                                 <a className="waves-effect waves-light btn-large col s12" onClick={favoritePet}>

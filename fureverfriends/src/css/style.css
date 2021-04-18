@@ -26,15 +26,16 @@ a {
   font-style: italic;
   font-size: 2.2rem;
   text-align: center;
-  margin: 1vw 0vw 0.25vw -1vw;
+  margin: 1.5vw 0vw 0.25vw -1vw;
   color: #ffffff;
 }
 .hdr-wrap .primary-menu {
   margin-left: 15vw;
+  margin-top: 2vw;
 }
 .hdr-wrap .primary-menu a,
 .hdr-wrap .primary-menu img {
-  margin: 0 1vw 0 1vw;
+  margin: 2vw 1vw 0 1vw;
   font-size: 1.1rem;
   text-transform: uppercase;
   font-weight: bold;
