@@ -4,7 +4,7 @@ import './css/style.css';
 import './css/listings.css';
 import {getFilteredListings, getTypeListing, doLocationStuff} from "./api-modules/PetfinderAPI";
 import {forEach} from "react-bootstrap/ElementChildren";
-import {Link, useRouteMatch} from "react-router-dom";
+import {Link, useRouteMatch, useParams} from "react-router-dom";
 import PFdata from "./api-modules/constants.js";
 import M from "materialize-css";
 import placeholder_image from "./images/petProfiles/default-placeholder-image.png";
@@ -150,6 +150,7 @@ function PetCard(props){
 
 export default function Listings(){
 
+    let { type } = useParams(); //this is besides the colon in home.js
     function usePrevious(value) {
         const ref = useRef();
         useEffect(() => {
@@ -172,10 +173,12 @@ export default function Listings(){
         if(prevGeoData !== geoData){
             processLocation();
         }
+        console.log(type);
       })
-
+    
     const [userSelections, setFilters] = useState({
-        type: "all",
+        //type: "all",
+        type: type ? type : "all",
         zipcode: "",
         distance: 25,
         age: [],

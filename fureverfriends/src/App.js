@@ -65,6 +65,10 @@ export default function App() {
                 <Route path="/listings/:type/profile/:prefix-:id">
                     <PetProfile />
                 </Route>
+                <Route path="/listings/:type">
+                    <Listings />
+                </Route>
+
                 <Route path="/listings">
                     <Listings />
                 </Route>

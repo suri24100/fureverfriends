@@ -4,9 +4,11 @@ import './css/home.css';
 import $ from 'jquery';
 import M from "materialize-css";
 import PFdata from "./api-modules/constants.js";
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 
 export default function Home() {
+    const history = useHistory();
+
     useLayoutEffect(() => {
         window.scrollTo(0, 0)
     });
@@ -29,7 +31,7 @@ export default function Home() {
       const prevGeoData = usePrevious(geoData);
 
       useEffect(() => {
-        if(prevGeoData !== geoData){
+        if(prevGeoData !== geoData && geoData.lat){
             processFormContents();
         }
       })
@@ -149,6 +151,12 @@ export default function Home() {
         }
 
         console.log(newSearchFilter);
+        if (type) {
+
+        }
+        /*history.push("/listings/" + PFdata.TYPES[pettype] + "-" + age + "-" + breed + "-" + location + "-" + geoData.zip + "-" + geoData.lon + "-" + geoData.lat);*/
+
+        history.push("/listings/" + PFdata.TYPES[pettype]);
     }
 
       //FINDING LONG AND LAT FOR ZIP CODE (API STUFF)
@@ -173,6 +181,7 @@ export default function Home() {
     }
 
     function getLocation() {
+        console.log("Suri Test")
         if (enableZipRadio) {
             let location = document.getElementById("location").value;
             getLocationAsync(location);
@@ -180,6 +189,7 @@ export default function Home() {
         else if (enableCurrentRadio) {
             if (navigator.geolocation) { //check if geolocation is available
                 navigator.geolocation.getCurrentPosition(function(position){
+                    console.log(position)
                     currentLocation = {
                         lat: position.coords.latitude,
                         lon: position.coords.longitude
