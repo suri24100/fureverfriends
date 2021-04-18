@@ -91,8 +91,13 @@ export default function Displaylisting() {
                                         {petInfo.pets.map((pet) =>
                                             <div className="card">
                                                  <div className="card-content">
-                                                     <span className="name">{pet.pet_data.name}</span> {" "}
-                                                     <span className="name">{pet.pet_data.type}</span>
+                                                     {/*<span className="name">{pet.pet_data.name}</span> {" "}*/}
+                                                     {/*<span className="name">{pet.pet_data.type}</span>*/}
+                                                     <Link style={{color: "black"}} to={"/listings/"+pet.pet_data.type+"/profile/FF-"+pet.pet_data.pet_id}>
+                                                         <span className="name">
+                                                             {pet.pet_data.name} {" "} {pet.pet_data.type}
+                                                         </span>
+                                                     </Link>
                                                  </div>
                                             </div>
                                         )}
