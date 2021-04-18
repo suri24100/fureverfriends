@@ -79,21 +79,21 @@ export default function PetProfile(){
         if(profileFound === "loading"){
             getPetData();
         }
-        if(currentUser && USER.favorites){
+        if(currentUser && USER.email && USER.email.length > 0 && USER.favorites && isFavorite === "loading"){
             let checkFav = false;
             if(USER.favorites.length > 0){
                 USER.favorites.map(pet => {
                     if(pet.id === id && pet.source === prefix) {
                         checkFav = true;
-                        console.log("here")
                     }
-                    console.log("out here")
                 })
             }
             setIsFavorite(checkFav);
         }
-        console.log(petDetails, isFavorite, USER.favorites)
-    }, [petDetails, isFavorite, USER]);
+        if(!currentUser){
+            setIsFavorite(false);
+        }
+    }, [USER]);
 
     async function getFFProfileInfo(id, type) {
         let profileData = {};
@@ -201,19 +201,27 @@ export default function PetProfile(){
     }
 
     function favoritePet(){
-        if(currentUser){
+        if(currentUser && USER.favorites){
             // copy of user's favorites list
-            const newFavoritesArr = USER.favorites.map(pet => pet);
+            let newFavoritesArr = USER.favorites.map(pet => pet);
             // data to push to or remove from favorites array
             const petInfo = {id: petDetails.pet_id, type: petDetails.type, source: prefix};
             // check if pet already in favorites, add or remove accordingly
-            if(newFavoritesArr.includes(petInfo, 0)){
-                if(isFavorite) newFavoritesArr.remove(petInfo)
+            if(newFavoritesArr.some(pet => pet.id === id)){
+                if(isFavorite) {
+                    //newFavoritesArr = newFavoritesArr.splice(newFavoritesArr.indexOf(petInfo), 1)
+                    newFavoritesArr = newFavoritesArr.filter(pet => {
+                        return !( pet.id === petInfo.id && pet.type === petInfo.type && pet.source === petInfo.source)
+                    });
+                    setIsFavorite(false);
+                }
             } else {
-                if(!isFavorite) newFavoritesArr.push(petInfo);
+                if(!isFavorite){
+                    newFavoritesArr.push(petInfo);
+                    setIsFavorite(true);
+                }
             }
             // update state to change button
-            setIsFavorite(!isFavorite);
             // save update to database
             let dbUserInfo = firestore.collection("UserInfo")
                 .doc(USER.email)
@@ -221,7 +229,7 @@ export default function PetProfile(){
                 .then(() => console.log('Changed!'))
                 .catch((error) => console.log('Error changing favorites!'));
             // update local USER copy to match
-            handleSetUSER(USER.email, newFavoritesArr);
+            handleSetUSER("favorites", newFavoritesArr);
         }
     }
 
@@ -295,7 +303,7 @@ export default function PetProfile(){
                                 </div>
                             </form>
                             <div className="col s12 submit-button">
-                                <a className="waves-effect waves-light btn-large col s12" onClick={favoritePet}>
+                                <a className="waves-effect waves-light btn-large col s12">
                                     Submit Application
                                 </a>
                             </div>
