@@ -20,55 +20,68 @@ export default function DisplayFavorites() {
     const {USER, setUSER, currentUser} = useAuth();
     const [loading, setLoading] = useState(false);
     const [username, setUsername] = useState('');
-    const [petInfo, setPetinfo] = useState([]);
+    const [petInfo, setPetinfo] = useState({
+        pets: [],
+        hasPets: false
+    });
 
     useEffect(()=>{
         if (USER.email.length > 0 && !loading){
-            setLoading(true); //trackinmg when the page loaded
-            favorites()
+            setLoading(true);
+            favorite()
         }
     })
 
-//user needed to be auth in order to get the listings
-    useEffect(()=>{
-        console.log(petInfo)}, [petInfo] //call all the {} everytime petinfo changes :state management
-    )
-//race condition : overriding thats why only getting one array at a time
-    //deal with duplicates
-
-    useEffect(() => {
-        M.AutoInit();
-        if(username === ''){
-            setUsername(USER.username);
-        }
-     console.log("Reloaded");
-    })
-
-    async function favorites(){
-        let profileData = [];
-        await USER.pet_listings.map((pets) =>  {
+    /*
+         if there is  pet in the db with petid return the petDets
+          */
+    async function getfavs(petID, petType){
+        let favData = {};
+        if (typeof petID === 'number') {
+            // TODO pull pet from petfinder API (petfinder's petID is number rather than string we use in the DB.
+        } else {
             let docRef = firestore.collection("PetInfo")
                 .doc("PublicListings")
                 .collection("AdoptionList")
                 .doc("PetTypes")
-                .collection(pets.id)
-                .doc(pets.favorites);
-            docRef.get().then((doc) => {
-                profileData.push(doc.data())
-            });
-        })
-        setPetinfo(profileData)
-        return profileData;
-   console.log(favorites)
-        //need to addd petfinder info and delete if petfinder posting is deleted
+                .collection(petType)
+                .doc(petID.toString());
+            favData = await docRef.get()
+                .then((doc) => {return doc.data()});
+        }
+        return favData;
     }
 
-    async function petfinderfavs(){
-        let petfinderfavs = [];
-        await USER.favorites.map((pets) => {
-            let docRef = firestore.collection("")
-        })
+    function favorite(){
+        let promises = USER.favorites.map(pet => {
+            return getfavs(pet.id, pet.type);
+        });
+        Promise.all(promises)
+            .then(results => {
+                console.log( results);
+                setPetinfo({
+                    pets: results,
+                    hasPets: true
+                })
+            })
+            .catch(e => {
+                console.log(e);
+            });
     }
+    /*
+    check for both db and PF
+    if it pet exists in db and is favorited then return
+    if pet exists in PF and is favorited then return but if it doesnt then do nothing
+     */
+    // useEffect(() =>{
+    //     if(ffListings && pfListings && (prevFFListings !== ffListings)){
+    //             try {
+    //                 name = "FF: " ;
+    //             } catch (e) {
+    //                 name = "PF: ";
+    //             }
+    //         }
+    //     }
 
     return (
         <div className="actionsnav">
@@ -106,7 +119,21 @@ export default function DisplayFavorites() {
                             <div className="listing-card col s12 m6 l4">
                                 <div className="card">
                                     <div className="card-content">
-                                        <span className="name">{USER.favorites}</span>
+                                        {petInfo.pets.map((pet) =>
+                                            <div className="card">
+                                                {Object.keys(pet).length === 0 ? (
+                                                    <div className="card-content">
+                                                        <span className="name">Pet from PetFinder API</span>
+                                                    </div>
+                                                ) : (
+                                                    <div className="card-content">
+                                                        <Link style={{color: "black"}} to={"/listings/"+pet.pet_data.type+"/profile/FF-"+pet.pet_data.pet_id}>
+                                                            <span className="name">{pet.pet_data.name}</span>
+                                                        </Link>
+                                                    </div>
+                                                )}
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
                             </div>
