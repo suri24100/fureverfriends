@@ -21,7 +21,6 @@ export default function Displaylisting() {
             setLoading(1); //tracking when the page loaded
             listing();
         }
-        console.log(petInfo)
     })
 
     const [loading, setLoading] = useState(0);

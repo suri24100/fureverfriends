@@ -5,9 +5,12 @@ import {useParams} from "react-router-dom";
 import {getProfileInfo, getTypeListing} from "./api-modules/PetfinderAPI";
 import placeholder_image from "./images/petProfiles/default-placeholder-image.png";
 import {firestore} from "./ffdb";
+import {useAuth} from "./AuthContext";
 
 
 export default function PetProfile(){
+    const {USER, currentUser} = useAuth();
+
     let { id } = useParams();
     let { prefix } = useParams();
     let { type } = useParams();
@@ -16,7 +19,6 @@ export default function PetProfile(){
 
     useEffect(() => {
        if(initialData && profileFound === "loading"){
-           console.log("Pet Data: " + initialData)
            const newPetDetails = {
                petfinder_listing: false,
                pet_id: initialData.pet_data.pet_id,
@@ -65,18 +67,31 @@ export default function PetProfile(){
                }
            }
            setPetDetails(newPetDetails);
-           console.log(initialData);
            setProfileFound("success");
        }
     });
 
     const [petDetails, setPetDetails] = useState(null);
-    const [isFavorite, setIsFavorite] = useState(false);
+    const [isFavorite, setIsFavorite] = useState("loading");
     const [profileFound, setProfileFound] = useState("loading");
 
     useEffect(() => {
         if(profileFound === "loading"){
             getPetData();
+        }
+        if(isFavorite === "loading"){
+            console.log(USER.favorites);
+            if(currentUser){
+                let checkFav = false;
+                if(USER.favorites.length > 0){
+                    USER.favorites.map(pet => {
+                        if(pet.id === id && pet.type === type && pet.prefix === prefix) {
+                            checkFav = true;
+                        }
+                    })
+                }
+                setIsFavorite(checkFav);
+            }
         }
         console.log(petDetails)
     });
@@ -92,7 +107,6 @@ export default function PetProfile(){
 
         docRef.get().then((doc) => {
             if (doc.exists) {
-                console.log("Document data:", doc.data());
                 setInitialData(doc.data());
             } else {
                 // doc.data() will be undefined in this case
@@ -102,6 +116,21 @@ export default function PetProfile(){
             console.log("Error getting document:", error);
         });
         return profileData;
+    }
+
+    const getFavs = (petID, petType) =>{
+        const favs = []
+        firestore.collection("PetInfo")
+            .doc("PublicListings")
+            .collection("AdoptionList")
+            .doc("PetTypes")
+            .collection(petType)
+            .doc(petID).get().then(querySnapshot => {
+            querySnapshot(doc => {
+                favs.push(doc.data(petID), doc.data(petType))
+            })
+        })
+        return favs;
     }
 
     async function getPetData(){
@@ -159,7 +188,6 @@ export default function PetProfile(){
                         applicationForm: ""
                     }
                 });
-                console.log(petData)
                 setProfileFound("success");
             } else {
                 setProfileFound("failed");
@@ -193,12 +221,16 @@ export default function PetProfile(){
                         <li><span className="title">Good with Dogs:</span> {petDetails.good_with_dogs}</li>
                         <li><span className="title">Kid-Friendly:</span> {petDetails.kid_friendly}</li>
                     </ul>
-                    <a className="waves-effect waves-light btn-large" onClick={favoritePet}>
-                        <i className="material-icons left">
-                            {isFavorite ? "favorite" : "favorite_outline"}
-                        </i>
-                        {isFavorite ? "Unfavorite" : "Favorite"}
-                    </a>
+                    {isFavorite !== "loading" ?
+                        <a className="waves-effect waves-light btn-large" onClick={favoritePet}>
+                            <i className="material-icons left">
+                                {isFavorite ? "favorite" : "favorite_outline"}
+                            </i>
+                            {isFavorite ? "Unfavorite" : "Favorite"}
+                        </a>
+                        :
+                        <></>
+                    }
                 </div>
                 <div className="col s12 m7 l4">
                     <h3>Meet {petDetails.name}!</h3>
