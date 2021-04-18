@@ -4,8 +4,7 @@ import './css/pet-profile.css';
 import {useParams} from "react-router-dom";
 import {getProfileInfo, getTypeListing} from "./api-modules/PetfinderAPI";
 import placeholder_image from "./images/petProfiles/default-placeholder-image.png";
-import {firestore, getfavs} from "./ffdb";
-import {useAuth} from './AuthContext';
+import {firestore} from "./ffdb";
 
 
 export default function PetProfile(){
@@ -14,7 +13,6 @@ export default function PetProfile(){
     let { type } = useParams();
 
     const [initialData, setInitialData] = useState(null);
-    const { currentUser } = useAuth();
 
     useEffect(() => {
        if(initialData && profileFound === "loading"){
@@ -178,30 +176,33 @@ export default function PetProfile(){
         setIsFavorite(!isFavorite);
     }
 
+//     async function favs(petID, petType){
+//         let favsData = {};
+//             firestore.collection("PetInfo")
+//             .doc("PublicListings")
+//             .collection("AdoptionList")
+//             .doc("PetTypes")
+//             .collection(petType)
+//             .doc(petID).get()
+//             .then((doc) => {favsData.push(doc.data(petID))});
+// console.log()
+//     }
 
-    /*
-    push an object of ID and type, source FF or PF
-    would it be if else
-
-     */
-    async function setFav() {
-        firestore.collection("UserInfo").doc(currentUser.email).get().then((user) => {
-            const favs = user.data().favorites;
-            let petExists = false;
-            favs.forEach((petMap) => {
-                petExists = petMap.id === petDetails.pet_id && petMap.type === petDetails.type;
+    const getFavs = (petID, petType) =>{
+        const favs = []
+        firestore.collection("PetInfo")
+            .doc("PublicListings")
+            .collection("AdoptionList")
+            .doc("PetTypes")
+            .collection(petType)
+            .doc(petID).get().then(querySnapshot => {
+            querySnapshot(doc => {
+                favs.push(doc.data(petID), doc.data(petType))
             })
-            if (!petExists) favs.push({id: petDetails.pet_id, type: petDetails.type});
-            firestore.collection("UserInfo").doc(currentUser.email).update({
-                favorites: favs
-            }).then((doc) => {
-                console.log("Added to favorite");
-            }).catch((error) => {
-                console.log("Error adding favorite:", error);
-            });
         })
-
+        return favs;
     }
+
 
     function ProfileContents(){
         return (
@@ -219,7 +220,7 @@ export default function PetProfile(){
                         <li><span className="title">Good with Dogs:</span> {petDetails.good_with_dogs}</li>
                         <li><span className="title">Kid-Friendly:</span> {petDetails.kid_friendly}</li>
                     </ul>
-                    <a className="waves-effect waves-light btn-large" onClick={setFav}>
+                    <a className="waves-effect waves-light btn-large" onClick={favoritePet}>
                         <i className="material-icons left">
                             {isFavorite ? "favorite" : "favorite_outline"}
                         </i>
