@@ -68,4 +68,11 @@
     color: #fff!important;
 }
 
+.actionsnav .noPets{
+    font-size: 12pt;
+    font-weight: normal;
+    padding: 0 15px;
+    height: 30vh;
+}
+
 

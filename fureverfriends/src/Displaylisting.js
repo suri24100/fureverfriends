@@ -69,6 +69,7 @@ export default function Displaylisting() {
                     </div>
                     <div className="field col s12 m9">
                         <div className="collection profile-details">
+                            <h2>Your Pet Listings</h2>
                                 {!petInfo.hasPets ?
                                     <div className="center">
                                         <div className="preloader-wrapper small active center">
