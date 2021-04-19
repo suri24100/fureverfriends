@@ -80,9 +80,9 @@ export default function DisplayFavorites() {
                     const tempData = {
                         id: ffDataFull.pet_data.pet_id,
                         name: ffDataFull.pet_data.name,
-                        type: ffDataFull.pet_data.pet_id.type,
+                        type: ffDataFull.pet_data.type,
                         photo: ffDataFull.profileFiles.profilePhoto ? ffDataFull.profileFiles.profilePhoto.profilePhotoURL : placeholder_image,
-                        source: "PF"
+                        source: "FF"
                     };
                     return tempData;
                 });
@@ -161,7 +161,7 @@ export default function DisplayFavorites() {
                                                             </div>
                                                             <div className="card-action">
                                                                 <Link onClick={() => window.scrollTo(0, 0)}
-                                                                      to={"/listings/" + pet.type + "/profile/FF-" + pet.id}><i
+                                                                      to={"/listings/" + pet.type + "/profile/" + pet.source + "-" + pet.id}><i
                                                                     className="material-icons right">arrow_forward</i>{pet.name}'s
                                                                     PROFILE</Link>
                                                             </div>
