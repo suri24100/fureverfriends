@@ -286,8 +286,7 @@ export default function Home() {
                 <div className="listings-form-row">
                     <label for="age">Age</label>
                     <select id="age" name="age">
-                        <option disabled selected></option>
-                        <option value="Young">Young</option>
+                        <option value="Baby">Young</option>
                         <option value="Teen">Teen</option>
                         <option value="Adult">Adult</option>
                         <option value="NoPreference">No Preference</option>

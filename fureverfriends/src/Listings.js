@@ -24,7 +24,6 @@ function PetCard(props){
     let formattedPetInfo = {};
     // FF pet listing
     if(petInfo.pet_data){
-        //console.log(petInfo);
         formattedPetInfo = {
             petfinder_listing: false,
             pet_id: petInfo.pet_data.pet_id,
@@ -174,7 +173,6 @@ export default function Listings(){
         if(prevGeoData !== geoData){
             processLocation();
         }
-        console.log(breed);
       })
     
     const [userSelections, setFilters] = useState({
@@ -192,7 +190,6 @@ export default function Listings(){
     useEffect( () => {
     }, [userSelections.type]);
     useEffect(() =>{
-        //console.log(userSelections);
     })
 
     const [applyFilter, setApplyFilter] = useState(false);
@@ -231,8 +228,7 @@ export default function Listings(){
             newCombinedListings.sort((a,b) => (new Date(a.published_at)) - (new Date(b.published_at)));
             newCombinedListings.reverse();
             setPetListings(newCombinedListings);
-            console.log(newCombinedListings);
-            console.log("size: " + newCombinedListings.length)
+            //console.log(newCombinedListings);
             for (let i = 0 ; i < newCombinedListings.length; i++) {
                 let name = ""
                 try {
@@ -240,15 +236,6 @@ export default function Listings(){
                 } catch (e) {
                     name = "PF: " + newCombinedListings[i].name;
                 }
-                if (name == "Sniffles" ) {
-                    console.log("****************Sniffles found! and is item# " + i + " ************************ ");
-                    console.log(newCombinedListings[i]);
-                }
-                if (name == "Ginger" ) {
-                    console.log("****************Ginger found! and is item# " + i + " ************************ ");
-                    console.log(newCombinedListings[i]);
-                }
-                console.log(newCombinedListings[i].published_at + " " + name);
             }
         }
     }, [ffListings, pfListings]);
@@ -272,16 +259,12 @@ export default function Listings(){
             .then((res) => {
                 return res.json()
             }).then((json) => {
-                //console.log(JSON.stringify(json,null,2))
-                //console.log(json)
-                //console.log(json.city.coord);
-                //getLocation(json.city.coord)
                 setGeoData(json.city.coord);
                 
             }).catch((err) => {
                 console.log(err.message)
             })
-        } else console.log("blank zip");
+        }
     }
 
     function getLocation() {
@@ -290,8 +273,6 @@ export default function Listings(){
     }
 
     function processLocation() {
-        //console.log("got here yay");
-        //console.log(geoData);
         userLong = geoData.lon;
         userLat = geoData.lat;
     }
@@ -550,7 +531,6 @@ export default function Listings(){
     async function getFFListings(userSelections, pageNum) {
         let listingData = [];
         if(userSelections.type === "all"){
-            console.log("FF all")
             firestore.collection("PetInfo")
                 .doc("PublicListings")
                 .collection("AdoptionList")
@@ -701,10 +681,7 @@ export default function Listings(){
                                     userSelections.breed.forEach(breed => {
                                         if (doc.data().pet_data.breed != breed) {
                                             let x = doc.data()
-                                            console.log(x)
-                                            console.log(doc.data().pet_data.breed + " and " +  breed);
                                             let idx = listingData.indexOf(doc.data())
-                                            console.log("idx not matching " + idx);
                                         }
                                     })
                                 }
@@ -712,7 +689,6 @@ export default function Listings(){
                         } else {
                             listingData.push(doc.data()); }
                             if (typeof userSelections.breed == 'string') {
-                                console.log("got here!! 123 :" + userSelections.breed);
                                 for (let i = 0; i < listingData.length; i++) {
                                     if (listingData[i].pet_data.breed != breed) {
                                         listingData.splice(i,1);
@@ -721,7 +697,6 @@ export default function Listings(){
                             } else {
                                 if (userSelections.breed.length > 0) {
                                     userSelections.breed.forEach(breed => {
-                                        console.log("age test: " + breed)
                                         for (let i = 0; i < listingData.length; i++) {
                                             if (listingData[i].pet_data.breed != breed) {
                                                 listingData.splice(i,1);
@@ -735,7 +710,7 @@ export default function Listings(){
                                 userSelections.age.forEach(age => {
                                     //console.log("age test: " + age)
                                     for (let i = 0; i < listingData.length; i++) {
-                                        console.log(listingData[i].pet_data.age + " and " + capitalize(age) + (listingData[i].pet_data.age == capitalize(age)))
+                                        /*console.log(listingData[i].pet_data.age + " and " + capitalize(age) + (listingData[i].pet_data.age == capitalize(age)))*/
                                         if (listingData[i].pet_data.age != capitalize(age)) {
                                             listingData.splice(i,1);
                                         }
@@ -788,7 +763,7 @@ export default function Listings(){
 
     function generateCards(){
         let cardList = petListings.filter(pet => (pet.pet_data || pet.id)).map(pet => <PetCard petInfo={pet} />);
-        console.log(cardList)
+        //console.log(cardList)
         return(
             <div>{cardList}</div>
         )
