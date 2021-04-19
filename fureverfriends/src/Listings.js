@@ -151,6 +151,7 @@ function PetCard(props){
 export default function Listings(){
 
     let { type } = useParams(); //this is besides the colon in home.js
+    let { breed } = useParams(); //this is besides the colon in home.js
     function usePrevious(value) {
         const ref = useRef();
         useEffect(() => {
@@ -173,7 +174,7 @@ export default function Listings(){
         if(prevGeoData !== geoData){
             processLocation();
         }
-        console.log(type);
+        console.log(breed);
       })
     
     const [userSelections, setFilters] = useState({
@@ -186,7 +187,7 @@ export default function Listings(){
         size: [],
         coat: [],
         color: [],
-        breed: []
+        breed: breed ? breed: []
     });
     useEffect( () => {
     }, [userSelections.type]);
@@ -710,16 +711,24 @@ export default function Listings(){
                             }
                         } else {
                             listingData.push(doc.data()); }
-                            
-                            if (userSelections.breed.length > 0) {
-                                userSelections.breed.forEach(breed => {
-                                    console.log("age test: " + breed)
-                                    for (let i = 0; i < listingData.length; i++) {
-                                        if (listingData[i].pet_data.breed != breed) {
-                                            listingData.splice(i,1);
-                                        }
+                            if (typeof userSelections.breed == 'string') {
+                                console.log("got here!! 123 :" + userSelections.breed);
+                                for (let i = 0; i < listingData.length; i++) {
+                                    if (listingData[i].pet_data.breed != breed) {
+                                        listingData.splice(i,1);
                                     }
-                                })
+                                }
+                            } else {
+                                if (userSelections.breed.length > 0) {
+                                    userSelections.breed.forEach(breed => {
+                                        console.log("age test: " + breed)
+                                        for (let i = 0; i < listingData.length; i++) {
+                                            if (listingData[i].pet_data.breed != breed) {
+                                                listingData.splice(i,1);
+                                            }
+                                        }
+                                    })
+                                }
                             }
 
                             if (userSelections.age.length > 0) {
