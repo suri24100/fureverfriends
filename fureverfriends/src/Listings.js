@@ -151,6 +151,7 @@ function PetCard(props){
 export default function Listings(){
 
     let { type } = useParams(); //this is besides the colon in home.js
+    let { age } = useParams(); //this is besides the colon in home.js
     function usePrevious(value) {
         const ref = useRef();
         useEffect(() => {
@@ -173,7 +174,7 @@ export default function Listings(){
         if(prevGeoData !== geoData){
             processLocation();
         }
-        console.log(type);
+        console.log(age);
       })
     
     const [userSelections, setFilters] = useState({
@@ -181,6 +182,7 @@ export default function Listings(){
         type: type ? type : "all",
         zipcode: "",
         distance: 25,
+        //age: [age] ? age: [],
         age: [],
         gender: [],
         size: [],

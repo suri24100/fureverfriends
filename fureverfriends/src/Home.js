@@ -152,11 +152,9 @@ export default function Home() {
 
         console.log(newSearchFilter);
         if (type) {
-
+            history.push("/listings/" + PFdata.TYPES[pettype] + "-" + age);
         }
         /*history.push("/listings/" + PFdata.TYPES[pettype] + "-" + age + "-" + breed + "-" + location + "-" + geoData.zip + "-" + geoData.lon + "-" + geoData.lat);*/
-
-        history.push("/listings/" + PFdata.TYPES[pettype]);
     }
 
       //FINDING LONG AND LAT FOR ZIP CODE (API STUFF)
@@ -288,11 +286,10 @@ export default function Home() {
                 <div className="listings-form-row">
                     <label for="age">Age</label>
                     <select id="age" name="age">
-                        <option disabled selected></option>
-                        <option value="Young">Young</option>
-                        <option value="Teen">Teen</option>
-                        <option value="Adult">Adult</option>
-                        <option value="NoPreference">No Preference</option>
+                        <option value="baby">Baby</option>
+                        <option value="young">Young</option>
+                        <option value="adult">Adult</option>
+                        <option value="senior">Senior</option>
                     </select>
                 </div>
             </div>
