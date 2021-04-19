@@ -31,12 +31,12 @@ export default function Footer() {
                 <div className="user-xp-menu col m4 l4 x4">
                     <h3>Your Account</h3>
                     {currentUser && <Link to="/account-info" onClick={() => window.scrollTo(0, 0)}>My Account</Link>}
-                    {currentUser && <Link to="/Displaylisting" onClick={() => window.scrollTo(0, 0)}>My Pet Listings</Link>}
-                    {currentUser && <Link to="/DisplayFavorites" onClick={() => window.scrollTo(0, 0)}>My Favorites</Link>}
+                    {currentUser && <Link to="/my-listings" onClick={() => window.scrollTo(0, 0)}>My Pet Listings</Link>}
+                    {currentUser && <Link to="/my-favorites" onClick={() => window.scrollTo(0, 0)}>My Favorites</Link>}
                     {currentUser ?
-                        <Link to="/Home" onClick={handleLogOut}>Log Out</Link>
+                        <Link to="/" onClick={handleLogOut}>Log Out</Link>
                         : <Link to="/login">Log In</Link> }
-                    {!currentUser && <Link to="/CreateAccount" onClick={() => window.scrollTo(0, 0)}>Create an Account</Link>}
+                    {!currentUser && <Link to="/create-account" onClick={() => window.scrollTo(0, 0)}>Create an Account</Link>}
                 </div>
             </div>
         </div>
@@ -82,13 +82,13 @@ export default function Footer() {
                         <span>
                             <ul>
                                 {currentUser && <li><Link to="/account-info" onClick={() => window.scrollTo(0, 0)}>My Account</Link></li>}
-                                {currentUser && <li><Link to="/Displaylisting" onClick={() => window.scrollTo(0, 0)}>My Pet Listings</Link></li>}
-                                {currentUser && <li><Link to="/DisplayFavorites" onClick={() => window.scrollTo(0, 0)}>My Favorites</Link></li>}
+                                {currentUser && <li><Link to="/my-listings" onClick={() => window.scrollTo(0, 0)}>My Pet Listings</Link></li>}
+                                {currentUser && <li><Link to="/my-favorites" onClick={() => window.scrollTo(0, 0)}>My Favorites</Link></li>}
                                 <li>{currentUser ?
-                                    <Link to="/Home" onClick={handleLogOut}>Log Out</Link>
+                                    <Link to="/" onClick={handleLogOut}>Log Out</Link>
                                     : <Link to="/login">Log In</Link> }
                                 </li>
-                                {!currentUser && <li><Link to="/CreateAccount" onClick={() => window.scrollTo(0, 0)}>Create an Account</Link></li>}
+                                {!currentUser && <li><Link to="/create-account" onClick={() => window.scrollTo(0, 0)}>Create an Account</Link></li>}
                             </ul>
                         </span>
                     </div>

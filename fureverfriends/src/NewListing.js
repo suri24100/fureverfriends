@@ -683,6 +683,7 @@ export default function NewListing() {
         //Getting rating from AI model
         //TODO - switch to array
         let tempRating = {}
+        let rating = 0;
         await fetch("/ai/description_rating",{
             method: "POST",
             header: {
@@ -690,13 +691,17 @@ export default function NewListing() {
             },
             body: userInput
         }).then(response => response.json().then(data =>{
-            tempRating = data
+            tempRating = data["rating"];
+            if(tempRating === 4) rating = 0;
+            else if(tempRating === 3) rating = 1;
+            else if(tempRating === 2) rating = 2;
+            else if(tempRating === 1) rating = 3;
+            else if(tempRating === 0) rating = 4;
         }))
-        console.log(tempRating)
-
+        console.log(rating)
         setDynamicDescription({
             ...dynamicDescription,
-            rating: tempRating["rating"]
+            rating: rating
         });
     }
 
@@ -810,7 +815,7 @@ export default function NewListing() {
                                                 </div>
 
                                                 <div className="input-field">
-                                                    <label idhtmlFor="breed" className="active">Breed</label>
+                                                    <label htmlFor="breed" className="active">Breed</label>
                                                     <select id="breed" name="breed" disabled="disabled">
                                                     </select>
                                                     <span className="helper-text"></span>
@@ -920,11 +925,11 @@ export default function NewListing() {
                                             <div className="col s12 description-note">
                                                 <span className="match-title">Matchability Rating: </span>
                                                 <span className="match-stars tooltipped" data-position="bottom" data-html="true" data-tooltip={(dynamicDescription.rating + 1) + " out of 5 stars"}>
-                                                    <i className={"material-icons " + (([0,1,2,3,4].includes(dynamicDescription.rating)) ? "filled-star" : "")}>{([0,1,2,3,4].includes(dynamicDescription.rating)) ? 'star' : 'star_outline' }</i>
-                                                    <i className={"material-icons " + (([0,1,2,3].includes(dynamicDescription.rating)) ? "filled-star" : "")}>{([0,1,2,3].includes(dynamicDescription.rating)) ? 'star' : 'star_outline' }</i>
-                                                    <i className={"material-icons " + (([0,1,2].includes(dynamicDescription.rating)) ? "filled-star" : "")}>{([0,1,2].includes(dynamicDescription.rating)) ? 'star' : 'star_outline' }</i>
-                                                    <i className={"material-icons " + (([0,1].includes(dynamicDescription.rating)) ? "filled-star" : "")}>{([0,1].includes(dynamicDescription.rating)) ? 'star' : 'star_outline' }</i>
-                                                    <i className={"material-icons " + (([0].includes(dynamicDescription.rating)) ? "filled-star" : "")}>{([0].includes(dynamicDescription.rating)) ? 'star' : 'star_outline' }</i>
+                                                    <i className={"material-icons " + ((dynamicDescription.rating < 0) ? "" : "filled-star")}>{(dynamicDescription.rating >= 4) ? 'star_outline' : 'star' }</i>
+                                                    <i className={"material-icons " + ((dynamicDescription.rating < 1) ? "" : "filled-star")}>{(dynamicDescription.rating >= 3) ? 'star_outline' : 'star' }</i>
+                                                    <i className={"material-icons " + ((dynamicDescription.rating < 2) ? "" : "filled-star")}>{(dynamicDescription.rating >= 2) ? 'star_outline' : 'star' }</i>
+                                                    <i className={"material-icons " + ((dynamicDescription.rating < 3) ? "" : "filled-star")}>{(dynamicDescription.rating >= 1) ? 'star_outline' : 'star' }</i>
+                                                    <i className={"material-icons " + ((dynamicDescription.rating < 4) ? "" : "filled-star")}>{(dynamicDescription.rating >= 1) ? 'star_outline' : 'star' }</i>
                                                 </span>
                                                 <a className="material-icons right modal-trigger" href="#rating_modal">help_outline</a>
                                                 <div id="rating_modal" className="modal">

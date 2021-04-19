@@ -32,7 +32,7 @@ a {
 }
 .hdr-wrap .primary-menu {
   margin-left: 15vw;
-  margin-top:1vw;
+  margin-top:1.4vw;
   text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
 }
 .hdr-wrap .primary-menu i{
@@ -46,11 +46,31 @@ a {
   text-transform: uppercase;
   font-weight: bold;
   color: white;
+  line-height: 2rem;
+}
+.hdr-wrap .primary-menu a.header-icon{
+  border: none!important;
+  padding: 0!important;
+}
+
+.hdr-wrap .primary-menu i{
+  font-size: 1.3rem;
+  line-height: 2rem;
+  top: 2px;
+  position: relative;
 }
 .hdr-wrap .primary-menu img {
   width: 1.25vw;
   margin-top: 1vw;
 }
+.hdr-wrap .primary-menu .new.badge{
+  margin-top: 0.5vw;
+  font-weight: bold;
+  margin-left: 0;
+  text-shadow: none;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.5);;
+}
+
 .hdr-wrap .primary-menu a:hover,
 .hdr-wrap .primary-menu a:active {
   border: 0.2vw solid #ffffff;

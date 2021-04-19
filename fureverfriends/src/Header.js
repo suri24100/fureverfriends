@@ -52,10 +52,14 @@ export default function Header() {
                     <Link to="/listings">Adopt</Link>
                     <Link to="/findahome">Rehome</Link>
                     <Link to="/quiz">Get Matched</Link>
-                    {currentUser ? <Link to="/Home" onClick={handleLogOut}>Log Out</Link> : <Link to="/login">Log In</Link> }
-                    {!currentUser ? <Link to="/CreateAccount">Sign Up</Link> : <></> }
-                    {currentUser ? <img src={notification_icon} alt="Notifications"/> : <></>}
+                    {currentUser ? <Link to="/" onClick={handleLogOut}>Log Out</Link> : <Link to="/login">Log In</Link> }
+                    {!currentUser ? <Link to="/create-account">Sign Up</Link> : <></> }
                     {currentUser ? <Link to="/account-info">{USER.username}</Link> : <></>}
+                    {currentUser ? <Link className="header-icon" to="/notifications">
+                        <i className="material-icons">favorite</i>
+                        {USER.new_notifications ? <span className="new badge">{USER.new_notifications.length}</span> : ""}
+                    </Link>
+                        : <></>}
                 </div>
             </div>
             <div className="navbar hide-on-large-only">
@@ -83,6 +87,7 @@ export default function Header() {
                 <li><Link to="/findahome"><span>Rehome</span></Link></li>
                 <li><Link to="/quiz"><span>Get Matched</span></Link></li>
                 <li>{currentUser ? <Link to="/" onClick={handleLogOut}><span>Log Out</span></Link> : <Link to="/login"><span>Log In</span></Link> }</li>
+                {!currentUser ? <li><Link to="/create-account">Sign Up</Link></li> : <></> }
                 {currentUser && <li><Link to="/account-info"><span>My Account</span></Link></li>}
                 </div>
             </ul>

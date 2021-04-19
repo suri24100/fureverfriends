@@ -79,11 +79,13 @@ export default function PetProfile(){
         if(profileFound === "loading"){
             getPetData();
         }
-        if(currentUser && USER.email && USER.email.length > 0 && USER.favorites && isFavorite === "loading"){
+        console.log(USER);
+        if(currentUser && USER.email && USER.email.length > 0 && USER.favorites && USER.favorites.length > 0 && isFavorite === "loading"){
             let checkFav = false;
+            console.log("here")
             if(USER.favorites.length > 0){
                 USER.favorites.map(pet => {
-                    if(pet.id === id && pet.source === prefix) {
+                    if(pet.id == id && pet.source === prefix) {
                         checkFav = true;
                     }
                 })
@@ -205,13 +207,13 @@ export default function PetProfile(){
             // copy of user's favorites list
             let newFavoritesArr = USER.favorites.map(pet => pet);
             // data to push to or remove from favorites array
-            const petInfo = {id: petDetails.pet_id, type: petDetails.type, source: prefix};
+            const petInfo = {id: id, type: type, source: prefix};
             // check if pet already in favorites, add or remove accordingly
-            if(newFavoritesArr.some(pet => pet.id === id)){
+            if(newFavoritesArr.some(pet => pet.id == id)){
                 if(isFavorite) {
                     //newFavoritesArr = newFavoritesArr.splice(newFavoritesArr.indexOf(petInfo), 1)
                     newFavoritesArr = newFavoritesArr.filter(pet => {
-                        return !( pet.id === petInfo.id && pet.type === petInfo.type && pet.source === petInfo.source)
+                        return !( pet.id == id && pet.type === type && pet.source === prefix)
                     });
                     setIsFavorite(false);
                 }
@@ -221,6 +223,7 @@ export default function PetProfile(){
                     setIsFavorite(true);
                 }
             }
+            console.log(newFavoritesArr);
             // update state to change button
             // save update to database
             let dbUserInfo = firestore.collection("UserInfo")

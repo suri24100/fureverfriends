@@ -105,7 +105,7 @@ export default function Login(){
                                         <Link to="/ForgotPassword">Forgot Password?</Link>
                                     </div>
                                     <div className="sub-text">
-                                        <span>Need to create an account? <Link to="/CreateAccount">Sign Up</Link>
+                                        <span>Need to create an account? <Link to="/create-account">Sign Up</Link>
                                         </span>
                                     </div>
                                 </div>

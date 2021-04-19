@@ -55,11 +55,8 @@ export default function App() {
                 <Route path ="/ForgotPassword">
                     <ForgotPassword/>
                 </Route>
-                <Route path ="/CreatePetProfile">
-                    <NewListing/>
-                </Route>
                 <PrivateRoute path="/CreateAccountConfirmation" component={CreateAccountConfirmation} />
-                <Route path ="/CreateAccount">
+                <Route path ="/create-account">
                     <CreateAccount />
                 </Route>
                 <Route path="/listings/:type/profile/:prefix-:id">
@@ -82,10 +79,10 @@ export default function App() {
                     <PurrsonalityQuiz />
                 </Route>
                 <PrivateRoute path="/edit-account" component={UserProfile} />
-                <PrivateRoute path="/Displaylisting" component={Displaylisting} />
+                <PrivateRoute path="/my-listings" component={Displaylisting} />
                 <PrivateRoute path="/account-info" component={DisplayUserProfile} />
-                <PrivateRoute path="/DisplayFavorites" component={DisplayFavorites} />
-                <PrivateRoute path="/Notifications" component={Notifications} />
+                <PrivateRoute path="/my-favorites" component={DisplayFavorites} />
+                <PrivateRoute path="/notifications" component={Notifications} />
                 <Route path="/download-data-private-for-sarah">
                     <AIDataButton />
                 </Route>
