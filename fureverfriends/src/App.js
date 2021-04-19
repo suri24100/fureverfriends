@@ -62,7 +62,7 @@ export default function App() {
                 <Route path="/listings/:type/profile/:prefix-:id">
                     <PetProfile />
                 </Route>
-                <Route path="/listings/:type-:age-:breed-:zip">
+                <Route path="/listings/:type-:breed-:zip">
                     <Listings />
                 </Route>
 

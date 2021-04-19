@@ -171,7 +171,7 @@ export async function getFilteredListings(filters, numListings, pageNum){
             });
             typeURL = typeURL.slice(0, -1);
         }
-        if (typeof filters.age == 'string') {
+        /*if (typeof filters.age == 'string') {
             typeURL += "&age=" + filters.age + ",";
         } else {
             if(filters.age.length > 0){
@@ -181,6 +181,13 @@ export async function getFilteredListings(filters, numListings, pageNum){
                 });
                 typeURL = typeURL.slice(0, -1);
             }
+        }*/
+        if(filters.age.length > 0){
+            typeURL += "&age="
+            filters.age.forEach(age => {
+                typeURL += age + ",";
+            });
+            typeURL = typeURL.slice(0, -1);
         }
         if(filters.coat.length > 0){
             typeURL += "&coat="

@@ -174,17 +174,18 @@ export default function Listings(){
       useEffect(() => {
         if(prevGeoData !== geoData){
             processLocation();
+            console.log(age);
             console.log(zip);
         }
       })
 
     const [userSelections, setFilters] = useState({
         //type: "all",
-        type: type ? type : "all",
-        //zipcode: zip ? zipcode : "",
+        type: type ? type: "all",
+        //zipcode: zip ? zip: "",
         zipcode: "",
         distance: 25,
-        //age: [age] ? age: [],
+        //age: age ? age: [],
         age: [],
         gender: [],
         size: [],
@@ -714,7 +715,7 @@ export default function Listings(){
                                     })
                                 }
                             }
-                            if (typeof userSelections.age == 'string') {
+                            /*if (typeof userSelections.age == 'string') {
                                 for (let i = 0; i < listingData.length; i++) {
                                     if (listingData[i].pet_data.age != capitalize(age)) {
                                         listingData.splice(i,1);
@@ -725,7 +726,7 @@ export default function Listings(){
                                     userSelections.age.forEach(age => {
                                         //console.log("age test: " + age)
                                         for (let i = 0; i < listingData.length; i++) {
-                                            /*console.log(listingData[i].pet_data.age + " and " + capitalize(age) + (listingData[i].pet_data.age == capitalize(age)))*/
+                                            /*console.log(listingData[i].pet_data.age + " and " + capitalize(age) + (listingData[i].pet_data.age == capitalize(age)))
                                             if (listingData[i].pet_data.age != capitalize(age)) {
                                                 listingData.splice(i,1);
                                             }
@@ -733,6 +734,17 @@ export default function Listings(){
                                     })
                                 }
     
+                            }*/
+                            if (userSelections.age.length > 0) {
+                                userSelections.age.forEach(age => {
+                                    //console.log("age test: " + age)
+                                    for (let i = 0; i < listingData.length; i++) {
+                                        /*console.log(listingData[i].pet_data.age + " and " + capitalize(age) + (listingData[i].pet_data.age == capitalize(age)))*/
+                                        if (listingData[i].pet_data.age != capitalize(age)) {
+                                            listingData.splice(i,1);
+                                        }
+                                    }
+                                })
                             }
                             
                             if (userSelections.gender.length > 0) {
