@@ -152,7 +152,7 @@ export default function Home() {
 
         console.log(newSearchFilter);
         if (type) {
-            history.push("/listings/" + PFdata.TYPES[pettype] + "-" + age + "-" + breed);
+            history.push("/listings/" + PFdata.TYPES[pettype] + "-" + age + "-" + breed + "-" + geoData.zip);
         }
         /*history.push("/listings/" + PFdata.TYPES[pettype] + "-" + age + "-" + breed + "-" + location + "-" + geoData.zip + "-" + geoData.lon + "-" + geoData.lat);*/
     }

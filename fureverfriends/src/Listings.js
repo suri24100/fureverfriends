@@ -152,6 +152,7 @@ export default function Listings(){
     let { type } = useParams(); //this is besides the colon in home.js
     let { breed } = useParams(); //this is besides the colon in home.js
     let { age } = useParams(); //this is besides the colon in home.js
+    let { zip } = useParams(); //this is besides the colon in home.js
     function usePrevious(value) {
         const ref = useRef();
         useEffect(() => {
@@ -173,13 +174,14 @@ export default function Listings(){
       useEffect(() => {
         if(prevGeoData !== geoData){
             processLocation();
-            console.log(age);
+            console.log(zip);
         }
       })
-    
+
     const [userSelections, setFilters] = useState({
         //type: "all",
         type: type ? type : "all",
+        //zipcode: zip ? zipcode : "",
         zipcode: "",
         distance: 25,
         //age: [age] ? age: [],
@@ -271,8 +273,12 @@ export default function Listings(){
     }
 
     function getLocation() {
-        let location = document.getElementById("filter-zipcode").value;
-        getLocationAsync(location);
+        if (zip) {
+            getLocationAsync(zip);
+        } else {
+            let location = document.getElementById("filter-zipcode").value;
+            getLocationAsync(location);
+        }
     }
 
     function processLocation() {
