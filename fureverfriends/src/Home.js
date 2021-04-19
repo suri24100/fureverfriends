@@ -4,9 +4,11 @@ import './css/home.css';
 import $ from 'jquery';
 import M from "materialize-css";
 import PFdata from "./api-modules/constants.js";
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 
 export default function Home() {
+    const history = useHistory();
+
     useLayoutEffect(() => {
         window.scrollTo(0, 0)
     });
@@ -29,7 +31,7 @@ export default function Home() {
       const prevGeoData = usePrevious(geoData);
 
       useEffect(() => {
-        if(prevGeoData !== geoData){
+        if(prevGeoData !== geoData && geoData.lat){
             processFormContents();
         }
       })
@@ -149,7 +151,10 @@ export default function Home() {
         }
 
         console.log(newSearchFilter);
-        console.log(geoData);
+        if (type) {
+            history.push("/listings/" + PFdata.TYPES[pettype] + "-" + age + "-" + breed + "-" + geoData.zip);
+        }
+        /*history.push("/listings/" + PFdata.TYPES[pettype] + "-" + age + "-" + breed + "-" + location + "-" + geoData.zip + "-" + geoData.lon + "-" + geoData.lat);*/
     }
 
       //FINDING LONG AND LAT FOR ZIP CODE (API STUFF)
@@ -165,7 +170,8 @@ export default function Home() {
             //console.log(json)
             //console.log(json.city.coord);
             //getLocation(json.city.coord)
-            setGeoData(json.city.coord);
+            var x = {zip: zip, lat: json.city.coord.lat, lon: json.city.coord.lon};
+            setGeoData(x);
             
         }).catch((err) => {
             console.log(err.message)
@@ -173,6 +179,7 @@ export default function Home() {
     }
 
     function getLocation() {
+        console.log("Suri Test")
         if (enableZipRadio) {
             let location = document.getElementById("location").value;
             getLocationAsync(location);
@@ -180,6 +187,7 @@ export default function Home() {
         else if (enableCurrentRadio) {
             if (navigator.geolocation) { //check if geolocation is available
                 navigator.geolocation.getCurrentPosition(function(position){
+                    console.log(position)
                     currentLocation = {
                         lat: position.coords.latitude,
                         lon: position.coords.longitude
@@ -222,11 +230,10 @@ export default function Home() {
                     <div className="listings-form-row">
                         <label for="age">Age</label>
                         <select id="age" name="age">
-                            <option disabled selected></option>
-                            <option value="Young">Young</option>
-                            <option value="Teen">Teen</option>
-                            <option value="Adult">Adult</option>
-                            <option value="NoPreference">No Preference</option>
+                            <option value="baby">Baby</option>
+                            <option value="young">Young</option>
+                            <option value="adult">Adult</option>
+                            <option value="senior">Senior</option>
                         </select>
                     </div>
 
@@ -278,11 +285,10 @@ export default function Home() {
                 <div className="listings-form-row">
                     <label for="age">Age</label>
                     <select id="age" name="age">
-                        <option disabled selected></option>
-                        <option value="Young">Young</option>
-                        <option value="Teen">Teen</option>
-                        <option value="Adult">Adult</option>
-                        <option value="NoPreference">No Preference</option>
+                        <option value="baby">Baby</option>
+                        <option value="young">Young</option>
+                        <option value="adult">Adult</option>
+                        <option value="senior">Senior</option>
                     </select>
                 </div>
             </div>

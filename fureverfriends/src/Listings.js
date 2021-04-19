@@ -4,7 +4,7 @@ import './css/style.css';
 import './css/listings.css';
 import {getFilteredListings, getTypeListing, doLocationStuff} from "./api-modules/PetfinderAPI";
 import {forEach} from "react-bootstrap/ElementChildren";
-import {Link, useRouteMatch} from "react-router-dom";
+import {Link, useRouteMatch, useParams} from "react-router-dom";
 import PFdata from "./api-modules/constants.js";
 import M from "materialize-css";
 import placeholder_image from "./images/petProfiles/default-placeholder-image.png";
@@ -24,7 +24,6 @@ function PetCard(props){
     let formattedPetInfo = {};
     // FF pet listing
     if(petInfo.pet_data){
-        //console.log(petInfo);
         formattedPetInfo = {
             petfinder_listing: false,
             pet_id: petInfo.pet_data.pet_id,
@@ -150,6 +149,10 @@ function PetCard(props){
 
 export default function Listings(){
 
+    let { type } = useParams(); //this is besides the colon in home.js
+    let { breed } = useParams(); //this is besides the colon in home.js
+    let { age } = useParams(); //this is besides the colon in home.js
+    let { zip } = useParams(); //this is besides the colon in home.js
     function usePrevious(value) {
         const ref = useRef();
         useEffect(() => {
@@ -171,24 +174,27 @@ export default function Listings(){
       useEffect(() => {
         if(prevGeoData !== geoData){
             processLocation();
+            console.log(zip);
         }
       })
 
     const [userSelections, setFilters] = useState({
-        type: "all",
+        //type: "all",
+        type: type ? type : "all",
+        //zipcode: zip ? zipcode : "",
         zipcode: "",
         distance: 25,
+        //age: [age] ? age: [],
         age: [],
         gender: [],
         size: [],
         coat: [],
         color: [],
-        breed: []
+        breed: breed ? breed: []
     });
     useEffect( () => {
     }, [userSelections.type]);
     useEffect(() =>{
-        //console.log(userSelections);
     })
 
     const [applyFilter, setApplyFilter] = useState(false);
@@ -227,8 +233,7 @@ export default function Listings(){
             newCombinedListings.sort((a,b) => (new Date(a.published_at)) - (new Date(b.published_at)));
             newCombinedListings.reverse();
             setPetListings(newCombinedListings);
-            console.log(newCombinedListings);
-            console.log("size: " + newCombinedListings.length)
+            //console.log(newCombinedListings);
             for (let i = 0 ; i < newCombinedListings.length; i++) {
                 let name = ""
                 try {
@@ -236,15 +241,6 @@ export default function Listings(){
                 } catch (e) {
                     name = "PF: " + newCombinedListings[i].name;
                 }
-                if (name == "Sniffles" ) {
-                    console.log("****************Sniffles found! and is item# " + i + " ************************ ");
-                    console.log(newCombinedListings[i]);
-                }
-                if (name == "Ginger" ) {
-                    console.log("****************Ginger found! and is item# " + i + " ************************ ");
-                    console.log(newCombinedListings[i]);
-                }
-                console.log(newCombinedListings[i].published_at + " " + name);
             }
         }
     }, [ffListings, pfListings]);
@@ -268,26 +264,24 @@ export default function Listings(){
             .then((res) => {
                 return res.json()
             }).then((json) => {
-                //console.log(JSON.stringify(json,null,2))
-                //console.log(json)
-                //console.log(json.city.coord);
-                //getLocation(json.city.coord)
                 setGeoData(json.city.coord);
                 
             }).catch((err) => {
                 console.log(err.message)
             })
-        } else console.log("blank zip");
+        }
     }
 
     function getLocation() {
-        let location = document.getElementById("filter-zipcode").value;
-        getLocationAsync(location);
+        if (zip) {
+            getLocationAsync(zip);
+        } else {
+            let location = document.getElementById("filter-zipcode").value;
+            getLocationAsync(location);
+        }
     }
 
     function processLocation() {
-        //console.log("got here yay");
-        //console.log(geoData);
         userLong = geoData.lon;
         userLat = geoData.lat;
     }
@@ -546,7 +540,6 @@ export default function Listings(){
     async function getFFListings(userSelections, pageNum) {
         let listingData = [];
         if(userSelections.type === "all"){
-            console.log("FF all")
             firestore.collection("PetInfo")
                 .doc("PublicListings")
                 .collection("AdoptionList")
@@ -697,40 +690,51 @@ export default function Listings(){
                                     userSelections.breed.forEach(breed => {
                                         if (doc.data().pet_data.breed != breed) {
                                             let x = doc.data()
-                                            console.log(x)
-                                            console.log(doc.data().pet_data.breed + " and " +  breed);
                                             let idx = listingData.indexOf(doc.data())
-                                            console.log("idx not matching " + idx);
                                         }
                                     })
                                 }
                             }
                         } else {
                             listingData.push(doc.data()); }
+                            if (typeof userSelections.breed == 'string') {
+                                for (let i = 0; i < listingData.length; i++) {
+                                    if (listingData[i].pet_data.breed != breed) {
+                                        listingData.splice(i,1);
+                                    }
+                                }
+                            } else {
+                                if (userSelections.breed.length > 0) {
+                                    userSelections.breed.forEach(breed => {
+                                        for (let i = 0; i < listingData.length; i++) {
+                                            if (listingData[i].pet_data.breed != breed) {
+                                                listingData.splice(i,1);
+                                            }
+                                        }
+                                    })
+                                }
+                            }
+                            if (typeof userSelections.age == 'string') {
+                                for (let i = 0; i < listingData.length; i++) {
+                                    if (listingData[i].pet_data.age != capitalize(age)) {
+                                        listingData.splice(i,1);
+                                    }
+                                }
+                            } else {
+                                if (userSelections.age.length > 0) {
+                                    userSelections.age.forEach(age => {
+                                        //console.log("age test: " + age)
+                                        for (let i = 0; i < listingData.length; i++) {
+                                            /*console.log(listingData[i].pet_data.age + " and " + capitalize(age) + (listingData[i].pet_data.age == capitalize(age)))*/
+                                            if (listingData[i].pet_data.age != capitalize(age)) {
+                                                listingData.splice(i,1);
+                                            }
+                                        }
+                                    })
+                                }
+    
+                            }
                             
-                            if (userSelections.breed.length > 0) {
-                                userSelections.breed.forEach(breed => {
-                                    console.log("age test: " + breed)
-                                    for (let i = 0; i < listingData.length; i++) {
-                                        if (listingData[i].pet_data.breed != breed) {
-                                            listingData.splice(i,1);
-                                        }
-                                    }
-                                })
-                            }
-
-                            if (userSelections.age.length > 0) {
-                                userSelections.age.forEach(age => {
-                                    //console.log("age test: " + age)
-                                    for (let i = 0; i < listingData.length; i++) {
-                                        console.log(listingData[i].pet_data.age + " and " + capitalize(age) + (listingData[i].pet_data.age == capitalize(age)))
-                                        if (listingData[i].pet_data.age != capitalize(age)) {
-                                            listingData.splice(i,1);
-                                        }
-                                    }
-                                })
-                            }
-
                             if (userSelections.gender.length > 0) {
                                 userSelections.gender.forEach(gender => {
                                     for (let i = 0; i < listingData.length; i++) {
@@ -776,7 +780,7 @@ export default function Listings(){
 
     function generateCards(){
         let cardList = petListings.filter(pet => (pet.pet_data || pet.id)).map(pet => <PetCard petInfo={pet} />);
-        console.log(cardList)
+        //console.log(cardList)
         return(
             <div>{cardList}</div>
         )
