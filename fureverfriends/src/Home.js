@@ -152,11 +152,9 @@ export default function Home() {
 
         console.log(newSearchFilter);
         if (type) {
-
+            history.push("/listings/" + PFdata.TYPES[pettype] + "-" + breed);
         }
         /*history.push("/listings/" + PFdata.TYPES[pettype] + "-" + age + "-" + breed + "-" + location + "-" + geoData.zip + "-" + geoData.lon + "-" + geoData.lat);*/
-
-        history.push("/listings/" + PFdata.TYPES[pettype]);
     }
 
       //FINDING LONG AND LAT FOR ZIP CODE (API STUFF)
