@@ -143,7 +143,7 @@ export default function Home() {
         }
         const newSearchFilter = {
             type: PFdata.TYPES[pettype],
-            age: age.toLowerCase(),
+            age: age,
             breed: breed,
             location: location,
             geoData: geoData
@@ -152,7 +152,7 @@ export default function Home() {
 
         console.log(newSearchFilter);
         if (type) {
-            history.push("/listings/" + PFdata.TYPES[pettype] + "-" + breed + "-" + age);
+            history.push("/listings/" + PFdata.TYPES[pettype] + "-" + age + "-" + breed);
         }
         /*history.push("/listings/" + PFdata.TYPES[pettype] + "-" + age + "-" + breed + "-" + location + "-" + geoData.zip + "-" + geoData.lon + "-" + geoData.lat);*/
     }
