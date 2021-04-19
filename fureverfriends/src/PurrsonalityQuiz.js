@@ -33,15 +33,15 @@ export default function PurrsonalityQuiz() {
             "Working. What is a day off?"
         ],
         q2: ["playful",
-            "talkative",
-            "adventurous",
             "affectionate",
-            "independent",
+            "social",
             "energetic",
             "calm",
-            "protective",
             "quiet",
-            "social"
+            "protective",
+            "independent",
+            "adventurous",
+            "talkative"
         ],
         q3: ["Sparkly and shiny! Dust is no match for me.",
             "Relatively tidy, enough to be comfortable and lived-in.",
@@ -74,6 +74,8 @@ export default function PurrsonalityQuiz() {
     const [submitSuccess, setSubmitSuccess] = useState(false);
     const [previousQuiz, setPreviousQuiz] = useState(false);
     const [infoLoaded, setInfoLoaded] = useState(false);
+    // note: ai array is
+    // [playful, affectionate, social, energetic, calm, quiet, protective, independent, adventurous, talkative]
     const [quizData, setQuizData] = useState({
         user_email: "",
         username: "",
@@ -94,6 +96,7 @@ export default function PurrsonalityQuiz() {
         allergies: [],
         other_allergies: "",
         ai_data: [],
+        ai_results: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     });
     useEffect(() => {
         if((quizData.user_email === "") && USER.email !== ""){
@@ -206,7 +209,8 @@ export default function PurrsonalityQuiz() {
                 yard: quizData.yard,
                 allergies: quizData.allergies,
                 other_allergies: quizData.other_allergies,
-                ai_data: newAIData
+                ai_data: newAIData,
+                ai_results: quizData.ai_results
             }
 
             // save to ffdb
@@ -235,8 +239,24 @@ export default function PurrsonalityQuiz() {
         const q_index = data.target.value;
         const field_name = data.target.name;
         let value = question_data[q_id][q_index];
-        if (data.target.type === "checkbox"){
-            const curr_array = quizData[field_name];
+        if(data.target.type === "checkbox" && field_name === "ideal_pet"){
+            let curr_array = quizData[field_name];
+            const tempArr = quizData.ai_results.map(item => item);
+            if(!curr_array.includes(value) && data.target.checked){
+                curr_array.push(value);
+                tempArr[q_index] = 1;
+            } else if(curr_array.includes(value) && !data.target.checked) {
+                curr_array.pop(value);
+                tempArr[q_index] = 0;
+            }
+            setQuizData({
+                ...quizData,
+                [field_name]: curr_array,
+                ai_results: tempArr
+            })
+        }
+        else if (data.target.type === "checkbox"){
+            let curr_array = quizData[field_name];
             if(!curr_array.includes(value) && data.target.checked){
                 curr_array.push(value);
             } else if(curr_array.includes(value) && !data.target.checked) {
@@ -441,63 +461,63 @@ export default function PurrsonalityQuiz() {
                                               <label>
                                                   <input id="q2-2" name="ideal_pet" type="checkbox" value="1"
                                                          onChange={handleChange}/>
-                                                  <span>Talkative</span>
+                                                  <span>Affectionate</span>
                                               </label>
                                           </li>
                                           <li>
                                               <label>
                                                   <input id="q2-3" name="ideal_pet" type="checkbox" value="2"
                                                          onChange={handleChange}/>
-                                                  <span>Adventurous</span>
+                                                  <span>Social</span>
                                               </label>
                                           </li>
                                           <li>
                                               <label>
                                                   <input id="q2-4" name="ideal_pet" type="checkbox" value="3"
                                                          onChange={handleChange}/>
-                                                  <span>Affectionate</span>
+                                                  <span>Energetic</span>
                                               </label>
                                           </li>
                                           <li>
                                               <label>
                                                   <input id="q2-5" name="ideal_pet" type="checkbox" value="4"
                                                          onChange={handleChange}/>
-                                                  <span>Independent</span>
+                                                  <span>Calm</span>
                                               </label>
                                           </li>
                                           <li>
                                               <label>
                                                   <input id="q2-6" name="ideal_pet" v type="checkbox" value="5"
                                                          onChange={handleChange}/>
-                                                  <span>Energetic</span>
+                                                  <span>Quiet</span>
                                               </label>
                                           </li>
                                           <li>
                                               <label>
                                                   <input id="q2-7" name="ideal_pet" type="checkbox" value="6"
                                                          onChange={handleChange}/>
-                                                  <span>Calm</span>
+                                                  <span>Protective</span>
                                               </label>
                                           </li>
                                           <li>
                                               <label>
                                                   <input id="q2-8" name="ideal_pet" type="checkbox" value="7"
                                                          onChange={handleChange}/>
-                                                  <span>Quiet</span>
+                                                  <span>Independent</span>
                                               </label>
                                           </li>
                                           <li>
                                               <label>
                                                   <input id="q2-9" name="ideal_pet" type="checkbox" value="8"
                                                          onChange={handleChange}/>
-                                                  <span>Protective</span>
+                                                  <span>Adventurous</span>
                                               </label>
                                           </li>
                                           <li>
                                               <label>
                                                   <input id="q2-10" name="ideal_pet" type="checkbox" value="9"
                                                          onChange={handleChange}/>
-                                                  <span>Social</span>
+                                                  <span>Talkative</span>
                                               </label>
                                           </li>
                                       </ul>
