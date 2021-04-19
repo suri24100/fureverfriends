@@ -56,10 +56,20 @@ export default function AIDataButton(){
                 let ai_results = finalData.map(pet => {
                     return getAttr(pet['type'], pet['id'], pet['description']);
                 });
-                Promise.all(ai_results).then(finalResults => {
 
-                    }
-                );
+                Promise.all(ai_results)
+                    .then(finalResults => {
+                        finalResults.forEach((finalPet) => {
+                            setType(finalPet['petType']);
+                            setId(finalPet['petId']);
+                            setDescription(finalPet['petDescription']);
+                            setAttributes(finalPet['petAttr']);
+                            addArrayToFireStore(finalPet['petType'], finalPet['petId'], finalPet['petDescription'], finalPet['petAttr'])
+                        });
+                    })
+                    .catch(e => {
+                        console.log(e);
+                    });
             })
             .catch(e => {
                 console.log(e);
@@ -78,7 +88,6 @@ export default function AIDataButton(){
         }).then(response => response.json().then(data =>{
             let tempResults = data["attributes"];
             tempResults = tempResults.concat([0,0,0,0,0,0,0]);
-            setAttributes(tempResults);
             return {petType: type, petId: id, petDescription: description, petAttr: tempResults}
         }));
     }
