@@ -180,6 +180,7 @@ export default function Listings(){
         type: type ? type : "all",
         zipcode: "",
         distance: 25,
+        //age: [age] ? age: [],
         age: [],
         gender: [],
         size: [],

@@ -143,7 +143,7 @@ export default function Home() {
         }
         const newSearchFilter = {
             type: PFdata.TYPES[pettype],
-            age: age,
+            age: age.toLowerCase(),
             breed: breed,
             location: location,
             geoData: geoData
@@ -230,11 +230,10 @@ export default function Home() {
                     <div className="listings-form-row">
                         <label for="age">Age</label>
                         <select id="age" name="age">
-                            <option disabled selected></option>
-                            <option value="Young">Young</option>
-                            <option value="Teen">Teen</option>
-                            <option value="Adult">Adult</option>
-                            <option value="NoPreference">No Preference</option>
+                            <option value="baby">Baby</option>
+                            <option value="young">Young</option>
+                            <option value="adult">Adult</option>
+                            <option value="senior">Senior</option>
                         </select>
                     </div>
 
