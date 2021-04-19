@@ -145,12 +145,17 @@ export async function getFilteredListings(filters, numListings, pageNum){
         } else {
             typeURL += "&type=" + filters.type;
         }
-        if(filters.breed.length > 0){
-            typeURL += "&breed="
-            filters.breed.forEach(breed => {
-                typeURL += breed + ",";
-            });
-            typeURL = typeURL.slice(0, -1);
+        if (typeof filters.breed == 'string') {
+            console.log("got here from api: " + filters.breed);
+            typeURL += "&breed=" + filters.breed + ",";
+        } else {
+            if(filters.breed.length > 0){
+                typeURL += "&breed="
+                filters.breed.forEach(breed => {
+                    typeURL += breed + ",";
+                });
+                typeURL = typeURL.slice(0, -1);
+            }
         }
         if(filters.size.length > 0){
             typeURL += "&size="
@@ -166,12 +171,16 @@ export async function getFilteredListings(filters, numListings, pageNum){
             });
             typeURL = typeURL.slice(0, -1);
         }
-        if(filters.age.length > 0){
-            typeURL += "&age="
-            filters.age.forEach(age => {
-                typeURL += age + ",";
-            });
-            typeURL = typeURL.slice(0, -1);
+        if (typeof filters.age == 'string') {
+            typeURL += "&age=" + filters.age + ",";
+        } else {
+            if(filters.age.length > 0){
+                typeURL += "&age="
+                filters.age.forEach(age => {
+                    typeURL += age + ",";
+                });
+                typeURL = typeURL.slice(0, -1);
+            }
         }
         if(filters.coat.length > 0){
             typeURL += "&coat="
