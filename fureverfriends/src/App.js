@@ -83,7 +83,7 @@ export default function App() {
                 <PrivateRoute path="/account-info" component={DisplayUserProfile} />
                 <PrivateRoute path="/my-favorites" component={DisplayFavorites} />
                 <PrivateRoute path="/notifications" component={Notifications} />
-                <Route path="/download-data-private-for-sarah">
+                <Route path="/backend-ai-demo">
                     <AIDataButton />
                 </Route>
                 <Route exact path="/">

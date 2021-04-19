@@ -125,7 +125,7 @@ function PetCard(props){
 
     let match = useRouteMatch();
     let prefix = petDetails.petfinder_listing ? "PF-" : "FF-";
-    let newURL = `${match.url}/` + petDetails.type + "/profile/" + prefix + petDetails.pet_id;
+    let newURL = "/listings/" + petDetails.type + "/profile/" + prefix + petDetails.pet_id;
 
     return (
             <div className="listing-card col s12 m6 l4">

@@ -62,13 +62,13 @@ img {
 #addPadding {
   margin-bottom: 2vw;
 }
-[type="radio"]:checked + span:after,
-[type="radio"].with-gap:checked + span:before,
-[type="radio"].with-gap:checked + span:after {
+.home-page [type="radio"]:checked + span:after,
+.home-page [type="radio"].with-gap:checked + span:before,
+.home-page [type="radio"].with-gap:checked + span:after {
   border: 2px solid white;
 }
-[type="radio"]:checked + span:after,
-[type="radio"].with-gap:checked + span:after {
+.home-page [type="radio"]:checked + span:after,
+.home-page [type="radio"].with-gap:checked + span:after {
   background-color: white;
 }
 /*.search-or-quiz-wrap {
