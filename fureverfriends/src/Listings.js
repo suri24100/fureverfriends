@@ -151,6 +151,7 @@ export default function Listings(){
 
     let { type } = useParams(); //this is besides the colon in home.js
     let { breed } = useParams(); //this is besides the colon in home.js
+    let { age } = useParams(); //this is besides the colon in home.js
     function usePrevious(value) {
         const ref = useRef();
         useEffect(() => {
@@ -172,6 +173,7 @@ export default function Listings(){
       useEffect(() => {
         if(prevGeoData !== geoData){
             processLocation();
+            console.log(age);
         }
       })
     
