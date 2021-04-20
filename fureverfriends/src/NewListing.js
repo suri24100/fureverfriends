@@ -929,7 +929,7 @@ export default function NewListing() {
                                                     <i className={"material-icons " + ((dynamicDescription.rating < 1) ? "" : "filled-star")}>{(dynamicDescription.rating >= 3) ? 'star_outline' : 'star' }</i>
                                                     <i className={"material-icons " + ((dynamicDescription.rating < 2) ? "" : "filled-star")}>{(dynamicDescription.rating >= 2) ? 'star_outline' : 'star' }</i>
                                                     <i className={"material-icons " + ((dynamicDescription.rating < 3) ? "" : "filled-star")}>{(dynamicDescription.rating >= 1) ? 'star_outline' : 'star' }</i>
-                                                    <i className={"material-icons " + ((dynamicDescription.rating < 4) ? "" : "filled-star")}>{(dynamicDescription.rating >= 1) ? 'star_outline' : 'star' }</i>
+                                                    <i className={"material-icons " + ((dynamicDescription.rating < 4) ? "" : "filled-star")}>{(dynamicDescription.rating >= 0) ? 'star_outline' : 'star' }</i>
                                                 </span>
                                                 <a className="material-icons right modal-trigger" href="#rating_modal">help_outline</a>
                                                 <div id="rating_modal" className="modal">

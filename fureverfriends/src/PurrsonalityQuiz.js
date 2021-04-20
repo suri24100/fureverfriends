@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import './css/style.css';
 import './css/quiz.css';
 import {useAuth} from './AuthContext';
-import {firestore} from "./ffdb";
+import {firestore, checkForMatches} from "./ffdb";
 import M from "materialize-css";
 import {Link} from "react-router-dom";
 
@@ -219,6 +219,7 @@ export default function PurrsonalityQuiz() {
                 .then(() => {
                     console.log("Document saved");
                     setSubmitSuccess(true);
+                    checkForMatches(quizData.user_email, quizData.ai_results);
                 });
         }
         else if(quizData.user_email === ""){

@@ -1,7 +1,8 @@
 import React, {useContext, useEffect, useState, Component} from 'react';
 import './css/style.css';
 import './css/signing.css';
-import db, { auth } from "./ffdb"
+import db, {auth, firestore} from "./ffdb"
+import firebase from "firebase";
 
 const AuthContext = React.createContext();
 
@@ -24,7 +25,9 @@ export function AuthProvider({ children }) {
         pet_listings: [],
         favorites: [],
         longitude: "",
-        latitude : ""
+        latitude : "",
+        matches: [],
+        new_notifications: []
     })
 
     function handleSetUSER(id, value){
@@ -45,7 +48,9 @@ export function AuthProvider({ children }) {
             pet_listings: [],
             favorites: [],
             longitude: "",
-            latitude : ""
+            latitude : "",
+            matches: [],
+            new_notifications: []
         });
     }
 
