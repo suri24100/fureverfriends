@@ -150,6 +150,7 @@ function PetCard(props){
 export default function Listings(){
 
     let { type } = useParams(); //this is besides the colon in home.js
+    let { age } = useParams(); //this is besides the colon in home.js
     let { breed } = useParams(); //this is besides the colon in home.js
 
     function usePrevious(value) {
@@ -180,7 +181,7 @@ export default function Listings(){
         type: type ? type: "all",
         zipcode: "",
         distance: 25,
-        age: [],
+        age: age ? age: [],
         gender: [],
         size: [],
         coat: [],
@@ -699,17 +700,33 @@ export default function Listings(){
                                     })
                                 }
                             }
-                            if (userSelections.age.length > 0) {
+                            if (typeof userSelections.age == 'string') {
+                                for (let i = 0; i < listingData.length; i++) {
+                                    if (listingData[i].pet_data.age != capitalize(age)) {
+                                        listingData.splice(i,1);
+                                    }
+                                }
+                            } else {
+                                if (userSelections.age.length > 0) {
+                                    userSelections.age.forEach(age => {
+                                        for (let i = 0; i < listingData.length; i++) {
+                                            if (listingData[i].pet_data.age != capitalize(age)) {
+                                                listingData.splice(i,1);
+                                            }
+                                        }
+                                    })
+                                }
+                            }
+                            /*if (userSelections.age.length > 0) {
                                 userSelections.age.forEach(age => {
                                     //console.log("age test: " + age)
                                     for (let i = 0; i < listingData.length; i++) {
-                                        /*console.log(listingData[i].pet_data.age + " and " + capitalize(age) + (listingData[i].pet_data.age == capitalize(age)))*/
                                         if (listingData[i].pet_data.age != capitalize(age)) {
                                             listingData.splice(i,1);
                                         }
                                     }
                                 })
-                            }
+                            }*/
                             
                             if (userSelections.gender.length > 0) {
                                 userSelections.gender.forEach(gender => {

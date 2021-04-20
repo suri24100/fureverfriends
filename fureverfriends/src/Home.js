@@ -132,7 +132,7 @@ export default function Home() {
     //called from the "find my furever friend" button
     function processFormContents() {
         let pettype = (document.getElementById('type-of-pet')).value;
-        //let age = (document.getElementById('age')).value;
+        let age = (document.getElementById('age')).value;
         let breed = (document.getElementById('breed')).value;
         let location = "";
         if (enableCurrentRadio) {
@@ -143,7 +143,7 @@ export default function Home() {
         }
         const newSearchFilter = {
             type: PFdata.TYPES[pettype],
-            //age: age,
+            age: age,
             breed: breed,
             location: location,
             geoData: geoData
@@ -153,7 +153,7 @@ export default function Home() {
         console.log(newSearchFilter);
         if (type) {
             //history.push("/listings/" + PFdata.TYPES[pettype] + "-" + age + "-" + breed + "-" + geoData.zip);
-            history.push("/listings/" + PFdata.TYPES[pettype] + "-" + breed);
+            history.push("/listings/" + PFdata.TYPES[pettype] + "-" + age + "-" + breed);
         }
         /*history.push("/listings/" + PFdata.TYPES[pettype] + "-" + age + "-" + breed + "-" + location + "-" + geoData.zip + "-" + geoData.lon + "-" + geoData.lat);*/
     }
@@ -229,7 +229,7 @@ export default function Home() {
                         </select>
                     </div>
 
-                    {/*<div className="listings-form-row">
+                    <div className="listings-form-row">
                         <label for="age">Age</label>
                         <select id="age" name="age">
                             <option value="baby">Baby</option>
@@ -237,7 +237,7 @@ export default function Home() {
                             <option value="adult">Adult</option>
                             <option value="senior">Senior</option>
                         </select>
-                    </div>*/}
+                    </div>
 
                     <div className="listings-form-row">
                         <label for="breed">Breed</label>
