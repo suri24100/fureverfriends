@@ -72,7 +72,7 @@ export default function UserProfile() {
     function updateUser(){
          firestore.collection('UserInfo').doc(currentUser.email).update(USER)
             .then((docRef) => {
-                history.push('/DisplayUserProfile');
+                history.push('/account-info');
             })
             .catch((error) => {
                 //
