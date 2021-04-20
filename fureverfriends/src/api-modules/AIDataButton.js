@@ -109,6 +109,27 @@ export default function AIDataButton(){
         <div className="ai-button">
             <div className="listings-banner-wrap"></div>
             <div className="container">
+
+                <h1 id='title'>AI Predictions</h1>
+                <table id='pets'>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>TYPE</th>
+                            <th>DESCRIPTION</th>
+                            <th>ATTRIBUTES</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <tr key={id}>
+                        <td>{id}</td>
+                        <td>{type}</td>
+                        <td>{description}</td>
+                        <td>{attributes}</td>
+                    </tr>
+                    </tbody>
+                </table>
+
                 <div className="row">
                     <div className="col s12">
                         <button type="button" disabled={loading} onClick={getAllPetDescriptions}>Get Data from All Furever Friends Profiles</button>
