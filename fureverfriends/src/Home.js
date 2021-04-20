@@ -153,7 +153,7 @@ export default function Home() {
         console.log(newSearchFilter);
         if (type) {
             //history.push("/listings/" + PFdata.TYPES[pettype] + "-" + age + "-" + breed + "-" + geoData.zip);
-            history.push("/listings/" + PFdata.TYPES[pettype] + "-" + breed + "-" + geoData.zip);
+            history.push("/listings/" + PFdata.TYPES[pettype] + "-" + breed);
         }
         /*history.push("/listings/" + PFdata.TYPES[pettype] + "-" + age + "-" + breed + "-" + location + "-" + geoData.zip + "-" + geoData.lon + "-" + geoData.lat);*/
     }
@@ -197,6 +197,7 @@ export default function Home() {
                 });   
             }
         }
+        processFormContents();
     }
 
     return (
@@ -245,7 +246,7 @@ export default function Home() {
                         </select>
                     </div>
 
-                    <div className="listings-form-row">
+                    {/*<div className="listings-form-row">
                         <label>Location: </label>
                         <p>
                             <label>
@@ -258,7 +259,7 @@ export default function Home() {
                             <span className="lc" id="addPadding">Enter Zip Code</span>
                         </label>
                         <input type="number" name="location" id="location" className="locationInput"/> 
-                    </div>
+                </div>*/}
 
                     <div className="search-btn-wrap container">
                     <button className="search-btn" type="button" name="action" onClick={() => getLocation()}>Find My Furever Friend!</button>
