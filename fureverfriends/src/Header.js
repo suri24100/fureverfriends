@@ -57,7 +57,7 @@ export default function Header() {
                     {currentUser ? <Link to="/account-info">{USER.username}</Link> : <></>}
                     {currentUser ? <Link className="header-icon" to="/my-matches">
                         <i className="material-icons">favorite</i>
-                        {USER.new_notifications ? <span className="new badge">{USER.new_notifications.length}</span> : ""}
+                        {USER.new_notifications && USER.new_notifications.length > 0 ? <span className="new badge">{USER.new_notifications.length}</span> : ""}
                     </Link>
                         : <></>}
                 </div>

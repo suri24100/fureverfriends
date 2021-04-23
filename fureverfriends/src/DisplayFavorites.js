@@ -19,7 +19,7 @@ import {getProfileInfo} from "./api-modules/PetfinderAPI";
 
 
 export default function DisplayFavorites() {
-    const {USER, setUSER, currentUser} = useAuth();
+    const {USER, update, currentUser} = useAuth();
     const [loading, setLoading] = useState(false);
     const [username, setUsername] = useState('');
     const [petInfo, setPetinfo] = useState({
@@ -29,7 +29,7 @@ export default function DisplayFavorites() {
     });
 
     useEffect(()=>{
-        if (USER.email.length > 0 && !loading){
+        if (USER.email && USER.email.length > 0 && !loading){
             setLoading(true);
             // check if user has favorites
             if(USER.favorites && USER.favorites.length > 0){

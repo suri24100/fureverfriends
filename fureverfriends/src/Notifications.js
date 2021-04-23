@@ -7,9 +7,10 @@ import {Alert} from "react-bootstrap";
 import './App'
 import {getProfileInfo} from "./api-modules/PetfinderAPI";
 import placeholder_image from "./images/petProfiles/default-placeholder-image.png";
+import firebase from "firebase";
 
 export default function Notifications() {
-    const {USER, setUSER, currentUser} = useAuth();
+    const {USER, handleSetUSER, currentUser} = useAuth();
     const [loading, setLoading] = useState(false);
     const [username, setUsername] = useState('');
     const [petInfo, setPetinfo] = useState({
@@ -26,7 +27,7 @@ export default function Notifications() {
     })
 
     useEffect(()=>{
-        if (USER.email.length > 0 && !loading){
+        if (USER.email && USER.email.length > 0 && !loading){
             setLoading(true);
             // check if user has favorites
             if(USER.matches && USER.matches.length > 0){
@@ -48,7 +49,11 @@ export default function Notifications() {
                     hasPets: true,
                     petsLoading: false
                 })
-                console.log(results);
+                handleSetUSER("new_notifications", []);
+                const docRef = firestore.collection("UserInfo").doc(USER.email);
+                const promise = docRef.update({
+                    new_notifications: []
+                })
             })
             .catch(e => {
                 console.log(e);
