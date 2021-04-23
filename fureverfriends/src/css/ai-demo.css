@@ -76,14 +76,17 @@
     padding-left:60px!important;
     font-size: 15pt;
     font-weight: bold;
-    text-align: right;
-    padding-right: 30px;
+    padding-right: 60px;
 }
 
 .ai-button .calculations .title{
-    width: 300px;
     text-align: left;
     display: inline-block;
+}
+
+.ai-button .calculations .number{
+    float: right;
+    text-align: right;
 }
 
 .ai-button .introInfo button{

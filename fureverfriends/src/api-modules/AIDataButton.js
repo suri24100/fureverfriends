@@ -73,10 +73,10 @@ export default function AIDataButton(){
                                 attributes: finalPet.petAttr.slice(0,3)
                             }
                             tempArray.push(newResult);
-                            setNumCalculated(prev => prev + 1);
-                            if(finalPet.petAttr[0] === 1) {setNumPlayful(prev => prev + 1);}
-                            if(finalPet.petAttr[1] === 1) {setNumAffectionate(prev => prev + 1);}
-                            if(finalPet.petAttr[2] === 1) {setNumSocial(prev => prev + 1);}
+                            // setNumCalculated(prev => prev + 1);
+                            // if(finalPet.petAttr[0] === 1) {setNumPlayful(prev => prev + 1);}
+                            // if(finalPet.petAttr[1] === 1) {setNumAffectionate(prev => prev + 1);}
+                            // if(finalPet.petAttr[2] === 1) {setNumSocial(prev => prev + 1);}
                             //addArrayToFireStore(finalPet['petType'], finalPet['petId'], finalPet['petDescription'], finalPet['petAttr'])
                         });
                         setResultInfo(prev => tempArray);
@@ -103,6 +103,10 @@ export default function AIDataButton(){
         }).then(response => response.json().then(data =>{
             let tempResults = data["attributes"];
             tempResults = tempResults.concat([0,0,0,0,0,0,0]);
+            setNumCalculated(prev => prev + 1);
+            if(tempResults[0] === 1) {setNumPlayful(prev => prev + 1);}
+            if(tempResults[1] === 1) {setNumAffectionate(prev => prev + 1);}
+            if(tempResults[2] === 1) {setNumSocial(prev => prev + 1);}
             return {petType: type, petId: id, petDescription: description, petName: name, petAttr: tempResults}
         }));
     }
@@ -140,10 +144,10 @@ export default function AIDataButton(){
                     <div className="col s4 calculations">
                         <div className="row">
                             <ul>
-                                <li><span className={"title"}>Profiles Calculated: </span> {numCalculated}</li>
-                                <li><span className={"title"}>Playful Pets: </span> {numPlayful}</li>
-                                <li><span className={"title"}>Affectionate Pets: </span> {numAffectionate}</li>
-                                <li><span className={"title"}>Social Pets: </span> {numSocial}</li>
+                                <li><span className={"title"}>Profiles Calculated: </span> <span className={"number"}>{numCalculated}</span></li>
+                                <li><span className={"title"}>Playful Pets: </span> <span className={"number"}>{numPlayful}</span></li>
+                                <li><span className={"title"}>Affectionate Pets: </span> <span className={"number"}>{numAffectionate}</span></li>
+                                <li><span className={"title"}>Social Pets: </span> <span className={"number"}>{numSocial}</span></li>
                             </ul>
                         </div>
 
@@ -164,11 +168,11 @@ export default function AIDataButton(){
                         {resultInfo.map(record =>
                             <tr key={record.id}>
                                 <td className="pet-info">
-                                    <span className="petName">{record.name}</span><br/>
+                                    <span className="petName">{record.name.replace(/[^A-Za-z 0-9 \.,\?'"!@#\$%\^&\*\(\)-_=\+;:<>\/\\\|\}\{\[\]`~]*/g, '').replace(/&amp;/g, '&')}</span><br/>
                                     <span className={"title"}>ID:</span> {record.id}<br/>
                                     <span className={"title"}>Type:</span> {record.type}
                                 </td>
-                                <td className="description">{record.description.replace(/[^A-Za-z 0-9 \.,\?""!@#\$%\^&\*\(\)-_=\+;:<>\/\\\|\}\{\[\]`~]*/g, '')}</td>
+                                <td className="description">{record.description.replace(/[^A-Za-z 0-9 \.,\?'"!@#\$%\^&\*\(\)-_=\+;:<>\/\\\|\}\{\[\]`~]*/g, '').replace(/&amp;/g, '&')}</td>
                                 <td className={"attribute " + ((record.attributes[0] === 0) ? "red-text" : "green-text darken-4")}>{record.attributes[0]}</td>
                                 <td className={"attribute " + ((record.attributes[1] === 0) ? "red-text" : "green-text darken-4")}>{record.attributes[1]}</td>
                                 <td className={"attribute " + ((record.attributes[2] === 0) ? "red-text" : "green-text darken-4")}>{record.attributes[2]}</td>

@@ -27,7 +27,7 @@ export default function PetProfile(){
                    email: ""
                },
                listing_type: initialData.pet_data.listing_type,
-               name: initialData.pet_data.name,
+               name: initialData.pet_data.name.replace(/[^A-Za-z 0-9 \.,\?'"!@#\$%\^&\*\(\)-_=\+;:<>\/\\\|\}\{\[\]`~]*/g, '').replace(/&amp;/g, '&'),
                type: initialData.pet_data.type,
                age: initialData.pet_data.age,
                breed: initialData.pet_data.breed,
@@ -58,7 +58,7 @@ export default function PetProfile(){
                special_needs: (initialData.pet_data.special_needs) ? "Yes" : "No",
                adoption_fee: initialData.pet_data.adoption_fee,
                tags: initialData.pet_data.tags,
-               description: initialData.pet_data.description,
+               description: initialData.pet_data.description.replace(/[^A-Za-z 0-9 \.,\?'"!@#\$%\^&\*\(\)-_=\+;:<>\/\\\|\}\{\[\]`~]*/g, '').replace(/&amp;/g, '&'),
                listing_created: initialData.pet_data.listing_created,     // new Date().toJSON()
                profileFiles: {
                    profilePhoto: (initialData.profileFiles.profilePhoto.profilePhotoURL) ? initialData.profileFiles.profilePhoto.profilePhotoURL : placeholder_image,
@@ -146,7 +146,7 @@ export default function PetProfile(){
                         email: ""
                     },
                     listing_type: "AdoptionList",
-                    name: petData.name,
+                    name: petData.name.replace(/[^A-Za-z 0-9 \.,\?'"!@#\$%\^&\*\(\)-_=\+;:<>\/\\\|\}\{\[\]`~]*/g, '').replace(/&amp;/g, '&'),
                     type: petData.type,
                     age: petData.age,
                     breed: petData.breeds.primary,
@@ -180,7 +180,7 @@ export default function PetProfile(){
                     special_needs: (petData.attributes.special_needs) ? "Yes" : "No",
                     adoption_fee: "",
                     tags: [],
-                    description: petData.description,
+                    description: petData.description.replace(/[^A-Za-z 0-9 \.,\?'"!@#\$%\^&\*\(\)-_=\+;:<>\/\\\|\}\{\[\]`~]*/g, '').replace(/&amp;/g, '&'),
                     applicationForm: "",
                     listing_created: petData.published_at,
                     profileFiles: {

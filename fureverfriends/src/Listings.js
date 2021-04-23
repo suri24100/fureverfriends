@@ -146,7 +146,7 @@ function PetCard(props){
                         </a>
                     </div>
                     <div className="card-content">
-                        <span className="name truncate">{petDetails.name.replace(/[^A-Za-z 0-9 \.,\?""!@#\$%\^&\*\(\)-_=\+;:<>\/\\\|\}\{\[\]`~]*/g, '')}</span>
+                        <span className="name truncate">{petDetails.name.replace(/[^A-Za-z 0-9 \.,\?'"!@#\$%\^&\*\(\)-_=\+;:<>\/\\\|\}\{\[\]`~]*/g, '').replace(/&amp;/g, '&')}</span>
                         <span className="location">{petDetails.location.city}, {petDetails.location.state}</span>
                     </div>
                 </div>
