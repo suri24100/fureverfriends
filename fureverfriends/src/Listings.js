@@ -1095,7 +1095,7 @@ export default function Listings(){
                                 </li>
                             </ul>
                         </div>
-                        <div className="col s12">
+                        <div className="col s12 filters-column">
                             <h6>Characteristics</h6>
                             {(userSelections.type === "all") ?
                                 <p>Select a pet type to choose characteristics.</p>

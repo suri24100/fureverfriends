@@ -37,6 +37,11 @@
   margin-bottom:5%;
 }
 
+.listings-page .filters-column ul{
+  max-height: 500px;
+  overflow: auto;
+}
+
 .listings-page .pet-listing-nav button{
   margin-right: 1rem;
   margin-left: 1rem;

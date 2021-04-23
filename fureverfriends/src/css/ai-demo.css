@@ -1,0 +1,95 @@
+.ai-button .container{
+    width: 90%;
+    margin-top: 60px;
+    margin-bottom: 60px;
+    position: relative;
+}
+
+.ai-button h1{
+
+}
+
+.ai-button p{
+    font-size: 13pt;
+}
+
+.ai-button table{
+    margin-top: 60px;
+    margin-bottom: 60px;
+    max-width: 100% !important;
+    table-layout: fixed;
+}
+
+.ai-button th{
+    position: relative;
+    text-align: left;
+    font-size: 14pt;
+    text-transform: uppercase;
+}
+
+.ai-button td{
+    vertical-align: top;
+}
+
+.ai-button td .title{
+    font-weight: bold;
+    width:50px;
+    display: inline-block;
+}
+
+.ai-button td .petName{
+    font-weight: bold;
+    color: forestgreen;
+    margin-bottom: 10px;
+    font-size: 12pt;
+    display: inline-block;
+}
+
+.ai-button th.pet-info,
+.ai-button td.pet-info{
+    width: 15%;
+}
+.ai-button th.description,
+.ai-button td.description{
+    width: 55%;
+}
+.ai-button th.attribute,
+.ai-button td.attribute{
+    width: 10%;
+}
+
+.ai-button th.attribute{
+    text-align: center;
+}
+
+.ai-button td.attribute{
+    font-weight: bold!important;
+    font-size: 16pt;
+    text-align: center;
+}
+
+.ai-button .introInfo{
+    padding-right: 30px!important;
+}
+
+.ai-button .calculations{
+    padding-left:60px!important;
+    font-size: 15pt;
+    font-weight: bold;
+    text-align: right;
+    padding-right: 30px;
+}
+
+.ai-button .calculations .title{
+    width: 300px;
+    text-align: left;
+    display: inline-block;
+}
+
+.ai-button .introInfo button{
+    margin-top: 20px;
+}
+
+.ai-button tbody tr:hover{
+    background-color: rgba(0,0,0, 0.03);
+}
