@@ -94,7 +94,7 @@ export default function AIDataButton(){
     }
 
     async function getAttr(type, id, description, name){
-        return await fetch("http://brian-desktop.lan.tekempire.net:5000/ai/attribute_predictor",{
+        return await fetch("/ai/attribute_predictor",{
             method: "POST",
             header: {
                 "Content-Type": "app/text"
