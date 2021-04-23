@@ -20,6 +20,13 @@ function PetCard(props){
         setUserFavorite(!userFavorite);
     }
 
+    function convertUnicode(input) {
+        return input.replace(/\\u[0-9a-fA-F]{4}/g,function(a,b) {
+            let charcode = parseInt(b,16);
+            return String.fromCharCode(charcode);
+        });
+    }
+
     const petInfo = props.petInfo;
     let formattedPetInfo = {};
     // FF pet listing
@@ -73,7 +80,8 @@ function PetCard(props){
         }
     }
     // petfinder listing
-    else if (petInfo.id) {formattedPetInfo = {
+    else if (petInfo.id) {
+        formattedPetInfo = {
             petfinder_listing: true,
             pet_id: petInfo.id,
             account_info: {
@@ -138,7 +146,7 @@ function PetCard(props){
                         </a>
                     </div>
                     <div className="card-content">
-                        <span className="name truncate">{petDetails.name}</span>
+                        <span className="name truncate">{petDetails.name.replace(/[^A-Za-z 0-9 \.,\?""!@#\$%\^&\*\(\)-_=\+;:<>\/\\\|\}\{\[\]`~]*/g, '')}</span>
                         <span className="location">{petDetails.location.city}, {petDetails.location.state}</span>
                     </div>
                 </div>

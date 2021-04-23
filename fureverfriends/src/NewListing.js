@@ -95,7 +95,7 @@ export default function NewListing() {
     function getLocationAsync(zip) {
         const apikey = '317f5c81a3241fbb45bbf57e335d466d';
         const path = `http://api.openweathermap.org/data/2.5/forecast?zip=${zip}&units=imperial&appid=${apikey}`;
-        
+
         return fetch(path)
         .then((res) => {
             return res.json()
@@ -105,7 +105,7 @@ export default function NewListing() {
             //console.log(json.city.coord);
             //getLocation(json.city.coord)
             setGeoData(json.city.coord);
-            
+
         }).catch((err) => {
             console.log(err.message)
         })
@@ -164,10 +164,6 @@ export default function NewListing() {
     }
 
     function createPetListing(listingData){
-        console.log(listingData);
-        console.log(listingData.pet_data.type);
-        console.log(listingData.pet_data.pet_id);
-
         firestore.collection("PetInfo")
             .doc("PublicListings")
             .collection("AdoptionList")
@@ -795,6 +791,7 @@ export default function NewListing() {
                                                     <label htmlFor="age" className="active">Age</label>
                                                     <select id="age" name="age">
                                                         <option value="" disabled selected></option>
+                                                        <option value="Baby">Baby</option>
                                                         <option value="Young">Young</option>
                                                         <option value="Teen">Teen</option>
                                                         <option value="Adult">Adult</option>
