@@ -40,11 +40,6 @@ export default function Footer() {
                 </div>
             </div>
         </div>
-        <div className="social-wrap">
-            <img src="./images/svg/facebook.svg"></img>
-            <img src="./images/svg/instagram_test.svg"></img>
-            <img src="/images/svg/twitter.svg"></img>
-        </div>
     </div>
     <div className="mobile-ftr-wrap hide-on-large-only">
         <div className="logo container">

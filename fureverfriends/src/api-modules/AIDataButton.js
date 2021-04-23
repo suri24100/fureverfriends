@@ -63,7 +63,7 @@ export default function AIDataButton(){
                             setType(finalPet['petType']);
                             setId(finalPet['petId']);
                             setDescription(finalPet['petDescription']);
-                            setAttributes(finalPet['petAttr']);
+                            setAttributes(finalPet['petAttr'].slice(0,3));
                             addArrayToFireStore(finalPet['petType'], finalPet['petId'], finalPet['petDescription'], finalPet['petAttr'])
                         });
                     })

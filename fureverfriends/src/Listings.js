@@ -150,9 +150,9 @@ function PetCard(props){
 export default function Listings(){
 
     let { type } = useParams(); //this is besides the colon in home.js
-    let { breed } = useParams(); //this is besides the colon in home.js
     let { age } = useParams(); //this is besides the colon in home.js
-    let { zip } = useParams(); //this is besides the colon in home.js
+    let { breed } = useParams(); //this is besides the colon in home.js
+
     function usePrevious(value) {
         const ref = useRef();
         useEffect(() => {
@@ -174,18 +174,14 @@ export default function Listings(){
       useEffect(() => {
         if(prevGeoData !== geoData){
             processLocation();
-            console.log(zip);
         }
       })
 
     const [userSelections, setFilters] = useState({
-        //type: "all",
-        type: type ? type : "all",
-        //zipcode: zip ? zipcode : "",
+        type: type ? type: "all",
         zipcode: "",
         distance: 25,
-        //age: [age] ? age: [],
-        age: [],
+        age: age ? age: [],
         gender: [],
         size: [],
         coat: [],
@@ -221,19 +217,13 @@ export default function Listings(){
         else if(prevListings !== petListings){
             setApplyFilter(false);
         }
-        // if(prevFFListings !== ffListings || prevpfListings !== pfListings){
-        //     let newCombinedListings = ffListings.concat(pfListings);
-        //     setPetListings(newCombinedListings);
-        // }
     }, [pageLoaded, pageNumber, petListings]);
     useEffect(() =>{
         if(ffListings && pfListings && (prevFFListings !== ffListings)){
             let newCombinedListings = ffListings.concat(pfListings);
-            //newCombinedListings.reverse(newCombinedListings.sort((a,b) => (new Date(a.published_at)) - (new Date(b.published_at))))
             newCombinedListings.sort((a,b) => (new Date(a.published_at)) - (new Date(b.published_at)));
             newCombinedListings.reverse();
             setPetListings(newCombinedListings);
-            //console.log(newCombinedListings);
             for (let i = 0 ; i < newCombinedListings.length; i++) {
                 let name = ""
                 try {
@@ -273,12 +263,8 @@ export default function Listings(){
     }
 
     function getLocation() {
-        if (zip) {
-            getLocationAsync(zip);
-        } else {
-            let location = document.getElementById("filter-zipcode").value;
-            getLocationAsync(location);
-        }
+        let location = document.getElementById("filter-zipcode").value;
+        getLocationAsync(location);
     }
 
     function processLocation() {
@@ -723,17 +709,24 @@ export default function Listings(){
                             } else {
                                 if (userSelections.age.length > 0) {
                                     userSelections.age.forEach(age => {
-                                        //console.log("age test: " + age)
                                         for (let i = 0; i < listingData.length; i++) {
-                                            /*console.log(listingData[i].pet_data.age + " and " + capitalize(age) + (listingData[i].pet_data.age == capitalize(age)))*/
                                             if (listingData[i].pet_data.age != capitalize(age)) {
                                                 listingData.splice(i,1);
                                             }
                                         }
                                     })
                                 }
-    
                             }
+                            /*if (userSelections.age.length > 0) {
+                                userSelections.age.forEach(age => {
+                                    //console.log("age test: " + age)
+                                    for (let i = 0; i < listingData.length; i++) {
+                                        if (listingData[i].pet_data.age != capitalize(age)) {
+                                            listingData.splice(i,1);
+                                        }
+                                    }
+                                })
+                            }*/
                             
                             if (userSelections.gender.length > 0) {
                                 userSelections.gender.forEach(gender => {
