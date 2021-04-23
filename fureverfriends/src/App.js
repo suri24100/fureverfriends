@@ -1,19 +1,16 @@
-import React, {useEffect} from "react";
+import React from "react";
 // React router components
-import {Switch, Route, Link, useRouteMatch, useParams} from "react-router-dom";
+import {Switch, Route, useRouteMatch} from "react-router-dom";
 
 //Materialize
 import 'materialize-css/dist/css/materialize.min.css';
-import M from "materialize-css";
 
 // our components
 import Header from "./Header";
 import Footer from "./Footer";
 import Home from "./Home";
-import FindHome from "./FindHome";
 import Listings from "./Listings";
 import Login from "./Login";
-import PetCare from "./PetCare";
 import NewListing from "./NewListing";
 import PetProfile from "./PetProfile";
 import CreateAccountConfirmation from "./CreateAccountConfirmation";
