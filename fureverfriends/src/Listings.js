@@ -123,7 +123,6 @@ function PetCard(props){
     }
     const [petDetails, setPetDetails] = useState(formattedPetInfo);
 
-    let match = useRouteMatch();
     let prefix = petDetails.petfinder_listing ? "PF-" : "FF-";
     let newURL = "/listings/" + petDetails.type + "/profile/" + prefix + petDetails.pet_id;
 
@@ -249,13 +248,13 @@ export default function Listings(){
         if (zip) {
             const apikey = '317f5c81a3241fbb45bbf57e335d466d';
             const path = `http://api.openweathermap.org/data/2.5/forecast?zip=${zip}&units=imperial&appid=${apikey}`;
-        
+
             return fetch(path)
             .then((res) => {
                 return res.json()
             }).then((json) => {
                 setGeoData(json.city.coord);
-                
+
             }).catch((err) => {
                 console.log(err.message)
             })
@@ -727,7 +726,7 @@ export default function Listings(){
                                     }
                                 })
                             }*/
-                            
+
                             if (userSelections.gender.length > 0) {
                                 userSelections.gender.forEach(gender => {
                                     for (let i = 0; i < listingData.length; i++) {
@@ -764,7 +763,7 @@ export default function Listings(){
                     //console.log(listingData)
                 });
         }
-        
+
     }
 
     function capitalize(word) {
@@ -1040,7 +1039,7 @@ export default function Listings(){
                     </select>
                 </div>
             </div>*/}
-            
+
             <div className="row">
                 <div className="col s12 m4 l3">
                     <form>

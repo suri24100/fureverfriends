@@ -49,11 +49,13 @@ export default function Notifications() {
                     hasPets: true,
                     petsLoading: false
                 })
-                handleSetUSER("new_notifications", []);
-                const docRef = firestore.collection("UserInfo").doc(USER.email);
-                const promise = docRef.update({
-                    new_notifications: []
-                })
+                if(USER.new_notifications && USER.new_notifications.length > 0){
+                    handleSetUSER("new_notifications", []);
+                    const docRef = firestore.collection("UserInfo").doc(USER.email);
+                    const promise = docRef.update({
+                        new_notifications: []
+                    })
+                }
             })
             .catch(e => {
                 console.log(e);
@@ -139,7 +141,7 @@ export default function Notifications() {
                                                     <img src={pet.photo} />
                                                 </div>
                                                 <div class="card-action">
-                                                    <Link onClick={() => window.scrollTo(0, 0)} to={"/listings/" + pet.type + "/profile/FF-" + pet.id}><i className="material-icons right">arrow_forward</i>{pet.name}'s PROFILE</Link>
+                                                    <Link className="truncate" onClick={() => window.scrollTo(0, 0)} to={"/listings/" + pet.type + "/profile/FF-" + pet.id}><i className="material-icons right">arrow_forward</i>{pet.name}'s PROFILE</Link>
                                                 </div>
                                             </div>
                                         </div>

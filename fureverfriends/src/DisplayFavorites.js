@@ -160,7 +160,7 @@ export default function DisplayFavorites() {
                                                                 <img src={pet.photo}/>
                                                             </div>
                                                             <div className="card-action">
-                                                                <Link onClick={() => window.scrollTo(0, 0)}
+                                                                <Link className="truncate" onClick={() => window.scrollTo(0, 0)}
                                                                       to={"/listings/" + pet.type + "/profile/" + pet.source + "-" + pet.id}><i
                                                                     className="material-icons right">arrow_forward</i>{pet.name}'s
                                                                     PROFILE</Link>
