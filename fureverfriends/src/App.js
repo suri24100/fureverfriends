@@ -79,7 +79,7 @@ export default function App() {
                 <PrivateRoute path="/my-listings" component={Displaylisting} />
                 <PrivateRoute path="/account-info" component={DisplayUserProfile} />
                 <PrivateRoute path="/my-favorites" component={DisplayFavorites} />
-                <PrivateRoute path="/notifications" component={Notifications} />
+                <PrivateRoute path="/my-matches" component={Notifications} />
                 <Route path="/backend-ai-demo">
                     <AIDataButton />
                 </Route>

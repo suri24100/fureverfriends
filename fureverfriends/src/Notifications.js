@@ -1,23 +1,82 @@
 import React, {Component, useEffect, useState} from 'react';
 import {useAuth} from "./AuthContext";
 import M from "materialize-css";
-import getPetProfileFromFB from "./ffdb";
+import getPetProfileFromFB, {firestore} from "./ffdb";
 import {Link} from "react-router-dom";
 import {Alert} from "react-bootstrap";
 import './App'
+import {getProfileInfo} from "./api-modules/PetfinderAPI";
+import placeholder_image from "./images/petProfiles/default-placeholder-image.png";
 
 export default function Notifications() {
     const {USER, setUSER, currentUser} = useAuth();
     const [loading, setLoading] = useState(false);
     const [username, setUsername] = useState('');
-    const [isOpen, setIsOpen] = useState(false)
+    const [petInfo, setPetinfo] = useState({
+        pets: [],
+        hasPets: false,
+        petsLoading: true
+    });
     useEffect(() => {
         M.AutoInit();
         if(username === ''){
             setUsername(USER.username);
         }
-        console.log("Reloaded");
+        console.log(USER);
     })
+
+    useEffect(()=>{
+        if (USER.email.length > 0 && !loading){
+            setLoading(true);
+            // check if user has favorites
+            if(USER.matches && USER.matches.length > 0){
+                matches();
+            } else {
+                setPetinfo({...petInfo, petsLoading: false})
+            }
+        }
+    })
+
+    function matches(){
+        let promises = USER.matches.map(pet => {
+            return getMatches(pet.id, pet.type, pet.source);
+        });
+        Promise.all(promises)
+            .then(results => {
+                setPetinfo({
+                    pets: results,
+                    hasPets: true,
+                    petsLoading: false
+                })
+                console.log(results);
+            })
+            .catch(e => {
+                console.log(e);
+            });
+    }
+
+    async function getMatches(petID, petType, source){
+        let favData = {};
+        let docRef = firestore.collection("PetInfo")
+            .doc("PublicListings")
+            .collection("AdoptionList")
+            .doc("PetTypes")
+            .collection(petType)
+            .doc(petID.toString());
+        favData = await docRef.get()
+            .then((doc) => {
+                const ffDataFull = doc.data();
+                const tempData = {
+                    id: ffDataFull.pet_data.pet_id,
+                    name: ffDataFull.pet_data.name,
+                    type: ffDataFull.pet_data.type,
+                    photo: ffDataFull.profileFiles.profilePhoto ? ffDataFull.profileFiles.profilePhoto.profilePhotoURL : placeholder_image,
+                    source: "FF"
+                };
+                return tempData;
+            });
+        return favData;
+    }
 
 
 
@@ -34,7 +93,7 @@ export default function Notifications() {
                     <div className="sub-nav col s12 m3" id="side-nav full">
                         <ul className="sub-nav-options collection">
                             <li className="card-content collection-item active current-page card-panel">
-                                <Link to="/notifications">NOTIFICATIONS </Link>
+                                <Link to="/my-matches">MATCHES </Link>
                             </li>
                             <li className="card-content collection-item active card-panel">
                                 <Link to="/my-listings"> YOUR LISTINGS </Link>
@@ -49,18 +108,39 @@ export default function Notifications() {
 
                     <div className="field col s12 m9" href="information">
                         <div className="collection profile-details">
-                            <h2>Your Notifications</h2>
-                            <br/>
-                            <div className="listing-card col s12 m6 l4">
-                                <Alert> We have found you a new match! </Alert>
-                                <div  onClick={() => console.log('clicked')}>
-                                    <button onClick={() => setIsOpen(true)}>View Matches</button>
-
-
+                            <h2>Your Matches</h2>
+                            {!petInfo.hasPets ?
+                                <div className="center">
+                                    <div className="preloader-wrapper small active center">
+                                        <div className="spinner-layer spinner-green-only">
+                                            <div className="circle-clipper left">
+                                                <div className="circle"></div>
+                                            </div>
+                                            <div className="gap-patch">
+                                                <div className="circle"></div>
+                                            </div>
+                                            <div className="circle-clipper right">
+                                                <div className="circle"></div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-
-
-                            </div>
+                                :
+                                <div>
+                                    {petInfo.pets.map((pet) =>
+                                        <div className="col s12 m12 l6 listing-card">
+                                            <div className="card" key={pet.id}>
+                                                <div className="card-image">
+                                                    <img src={pet.photo} />
+                                                </div>
+                                                <div class="card-action">
+                                                    <Link onClick={() => window.scrollTo(0, 0)} to={"/listings/" + pet.type + "/profile/FF-" + pet.id}><i className="material-icons right">arrow_forward</i>{pet.name}'s PROFILE</Link>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+                            }
                         </div>
                     </div>
                 </div>

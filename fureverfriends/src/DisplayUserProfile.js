@@ -49,7 +49,7 @@ export default function DisplayUserProfile() {
                     <div className="sub-nav col s12 m3" id="side-nav full">
                         <ul className="sub-nav-options collection">
                             <li class="card-content collection-item active card-panel" >
-                                <Link to="/notifications" >NOTIFICATIONS </Link>
+                                <Link to="/notifications" >MATCHES </Link>
                                 </li>
                             <li class="card-content collection-item active card-panel" >
                                 <Link to="/my-listings"> YOUR LISTINGS </Link>

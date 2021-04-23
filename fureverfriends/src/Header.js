@@ -55,7 +55,7 @@ export default function Header() {
                     {currentUser ? <Link to="/" onClick={handleLogOut}>Log Out</Link> : <Link to="/login">Log In</Link> }
                     {!currentUser ? <Link to="/create-account">Sign Up</Link> : <></> }
                     {currentUser ? <Link to="/account-info">{USER.username}</Link> : <></>}
-                    {currentUser ? <Link className="header-icon" to="/notifications">
+                    {currentUser ? <Link className="header-icon" to="/my-matches">
                         <i className="material-icons">favorite</i>
                         {USER.new_notifications ? <span className="new badge">{USER.new_notifications.length}</span> : ""}
                     </Link>
@@ -65,14 +65,14 @@ export default function Header() {
             <div className="navbar hide-on-large-only">
                 <nav className="mobile-menu-wrapper nav-wrapper">
                     <div className="container">
-                        <a href="#" className="sidenav-trigger" data-target="mobile-links" id="sidebarTrigger"> 
+                        <a href="#" className="sidenav-trigger" data-target="mobile-links" id="sidebarTrigger">
                             <i className="material-icons">menu</i>
                         </a>
                         <Link to="/" className="brand-logo right">Furever Friends</Link>
                     </div>
                 </nav>
             </div>
-    
+
             <ul className="mobile-menu sidenav hide-on-large-only" id="mobile-links">
                 <div className="container">
                     <li className="side-logo">

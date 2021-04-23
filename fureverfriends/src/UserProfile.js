@@ -89,16 +89,16 @@ export default function UserProfile() {
                     <div className="col s12 m3" id="sidenav">
                             <ul className="sub-nav-options collection">
                                 <li className="card-content collection-item active card-panel">
-                                    <Link to="/">NOTIFICATIONS </Link>
+                                    <Link to="/my-matches">MATCHES </Link>
                                 </li>
                                 <li className="card-content collection-item active card-panel">
-                                    <Link to="/Displaylisting"> YOUR LISTINGS </Link>
+                                    <Link to="/my-listings"> YOUR LISTINGS </Link>
                                 </li>
                                 <li className="card-content collection-item active card-panel current-page">
                                     <Link to="/account-info"> ACCOUNT </Link>
                                 </li>
                                 <li className="card-content collection-item active card-panel">
-                                    <Link to="/DisplayFavorites"> FAVORITES </Link></li>
+                                    <Link to="/my-favorites"> FAVORITES </Link></li>
                             </ul>
                     </div>
 

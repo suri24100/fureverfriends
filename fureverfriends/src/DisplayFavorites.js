@@ -119,7 +119,7 @@ export default function DisplayFavorites() {
                     <div className="sub-nav col s12 m3" id="side-nav full">
                         <ul className="sub-nav-options collection">
                             <li className="card-content collection-item active card-panel">
-                                <Link to="/notifications">NOTIFICATIONS </Link>
+                                <Link to="/my-matches">MATCHES </Link>
                             </li>
                             <li className="card-content collection-item active card-panel">
                                 <Link to="/my-listings"> YOUR LISTINGS </Link>
