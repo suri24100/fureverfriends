@@ -5,6 +5,7 @@ import getPetProfileFromFB, {firestore} from "./ffdb";
 import {Link} from "react-router-dom";
 import {Alert} from "react-bootstrap";
 import './App'
+import './css/signing.css';
 import {getProfileInfo} from "./api-modules/PetfinderAPI";
 import placeholder_image from "./images/petProfiles/default-placeholder-image.png";
 import firebase from "firebase";
@@ -117,21 +118,28 @@ export default function Notifications() {
                         <div className="collection profile-details">
                             <h2>Your Matches</h2>
                             {!petInfo.hasPets ?
-                                <div className="center">
-                                    <div className="preloader-wrapper small active center">
-                                        <div className="spinner-layer spinner-green-only">
-                                            <div className="circle-clipper left">
-                                                <div className="circle"></div>
-                                            </div>
-                                            <div className="gap-patch">
-                                                <div className="circle"></div>
-                                            </div>
-                                            <div className="circle-clipper right">
-                                                <div className="circle"></div>
+                                !petInfo.petsLoading ?
+                                    <div className="center noMatches">
+                                        <p>You have no current matches.</p>
+                                        <Link to="/quiz"> Take our Purrsonality Quiz to find yours!</Link>
+                                    </div>
+                                    :
+                                    <div className="center">
+                                        <div className="preloader-wrapper small active center">
+                                            <div className="spinner-layer spinner-green-only">
+                                                <div className="circle-clipper left">
+                                                    <div className="circle"></div>
+                                                </div>
+                                                <div className="gap-patch">
+                                                    <div className="circle"></div>
+                                                </div>
+                                                <div className="circle-clipper right">
+                                                    <div className="circle"></div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+
                                 :
                                 <div>
                                     {petInfo.pets.map((pet) =>
