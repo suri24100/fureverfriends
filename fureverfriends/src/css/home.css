@@ -148,7 +148,7 @@ img {
   margin-bottom: -1.35rem;
 }
 .home-page .search-or-quiz-wrap{
-  width: 100%;
+  min-width: 100%!important;
 }
 .home-page .search-or-quiz-wrap .search{
   padding-right: 90px;
