@@ -418,7 +418,7 @@ export default function PurrsonalityQuiz() {
                                               <label>
                                                   <input id="q0-5" name="interested_pet_types" type="checkbox" value="4"
                                                          onChange={handleChange}/>
-                                                  <span>Hores</span>
+                                                  <span>Horses</span>
                                               </label>
                                           </li>
                                           <li>
