@@ -92,7 +92,7 @@ export default function PetProfile(){
             }
             setIsFavorite(checkFav);
         }
-        if(!currentUser){
+        if(!currentUser || USER.favorites && USER.favorites.length === 0){
             setIsFavorite(false);
         }
     }, [USER]);
@@ -263,7 +263,7 @@ export default function PetProfile(){
                         <></>
                     }
                 </div>
-                <div className="col s12 m7 l4">
+                <div className="col s12 m7 l8">
                     <h3>Meet {petDetails.name}!</h3>
                     <ul>
                         <li><span className="title">Location:</span> {petDetails.location.city}, {petDetails.location.state}</li>
