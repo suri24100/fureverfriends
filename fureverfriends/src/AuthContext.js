@@ -35,6 +35,14 @@ export function AuthProvider({ children }) {
             [id]:value});
     }
 
+    function handleSetUSERMatches(matchArray){
+        setUSER({
+            ...USER,
+            matches: matchArray,
+            new_notifications: matchArray
+        });
+    }
+
     function handleClearUSER(){
         setUSER({
             username: "",
@@ -103,7 +111,8 @@ export function AuthProvider({ children }) {
         USER,
         handleSetUSER,
         handleClearUSER,
-        setUSER
+        setUSER,
+        handleSetUSERMatches
     }
 
     return (

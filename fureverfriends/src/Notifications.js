@@ -1,4 +1,4 @@
-import React, {Component, useEffect, useState} from 'react';
+import React, {Component, useEffect, useRef, useState} from 'react';
 import {useAuth} from "./AuthContext";
 import M from "materialize-css";
 import getPetProfileFromFB, {firestore} from "./ffdb";
@@ -28,10 +28,11 @@ export default function Notifications() {
     })
 
     useEffect(()=>{
-        if (USER.email && USER.email.length > 0 && !loading){
+        if (USER.email && USER.email.length > 0 && !loading) {
+            console.log(USER);
             setLoading(true);
             // check if user has favorites
-            if(USER.matches && USER.matches.length > 0){
+            if (USER.matches && USER.matches.length > 0) {
                 matches();
             } else {
                 setPetinfo({...petInfo, petsLoading: false})
@@ -46,7 +47,7 @@ export default function Notifications() {
         Promise.all(promises)
             .then(results => {
                 setPetinfo({
-                    pets: results,
+                    pets: results.filter(res => res.id),
                     hasPets: true,
                     petsLoading: false
                 })
@@ -73,6 +74,7 @@ export default function Notifications() {
             .doc(petID.toString());
         favData = await docRef.get()
             .then((doc) => {
+                console.log(petID, petType)
                 const ffDataFull = doc.data();
                 const tempData = {
                     id: ffDataFull.pet_data.pet_id,
@@ -82,8 +84,10 @@ export default function Notifications() {
                     source: "FF"
                 };
                 return tempData;
+            }).catch((error) => {
+                console.log("Error getting documents: ", error);
             });
-        return favData;
+        return favData ? favData : {};
     }
 
 

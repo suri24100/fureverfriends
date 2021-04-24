@@ -12,7 +12,7 @@ export default function PurrsonalityQuiz() {
         M.AutoInit();
     })
 
-    const {currentUser, USER, handleSetUSER} = useAuth();
+    const {currentUser, USER, handleSetUSERMatches} = useAuth();
 
     const question_data = {
         q0: ["dog",
@@ -319,8 +319,7 @@ export default function PurrsonalityQuiz() {
                         userNotifications.push({id: petData.id, type: petData.type, score: score, source: "FF"});
                     }
                 });
-                handleSetUSER("matches", userMatches);
-                handleSetUSER("new_notifications", userNotifications);
+                handleSetUSERMatches(userMatches);
                 console.log(querySnapshot);
             }).then(() => {
                 console.log(promise);
