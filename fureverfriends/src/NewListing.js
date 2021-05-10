@@ -679,7 +679,7 @@ export default function NewListing() {
         //Getting rating from AI model
         let tempRating = {}
         let rating = 0;
-        await fetch("/ai/description_rating",{
+        await fetch("http://brian-desktop.lan.tekempire.net:5000/ai/description_rating",{
             method: "POST",
             header: {
                 "Content-Type": "app/text"
