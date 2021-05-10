@@ -11,5 +11,5 @@ This application is built as a capstone project for Team FF at Penn State Harris
 1. Clone repository
 2. If node is not installed, follow instructions here: https://nodejs.org/en/download/
 3. Once node is installed, navigate to the app folder <code>FureverFriends/fureverfriends</code>
-4. Run <code>npm install react-router-dom</code> to install react-router
+4. Run <code>npm install</code> to install dependencies.
 4. Once done, run <code>npm start</code> to start app/server and launch browser preview at <code>localhost:3000</code>
